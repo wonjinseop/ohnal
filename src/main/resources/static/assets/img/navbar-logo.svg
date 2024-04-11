@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301.62 105.41">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: ArchivoBlack-Regular, 'Archivo Black';
+        font-size: 85.91px;
+        isolation: isolate;
+        letter-spacing: -.05em;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #12e6fc;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(0 82.47)"><tspan x="0" y="0">Oh-nal.</tspan></text>
+  <g>
+    <circle class="cls-2" cx="32.4" cy="12.7" r="5.2"/>
+    <circle class="cls-2" cx="26.6" cy="10" r="3.6"/>
+    <circle class="cls-2" cx="31.4" cy="6.4" r="4"/>
+    <circle class="cls-2" cx="41.5" cy="6.4" r="3.9"/>
+    <circle class="cls-2" cx="45.2" cy="9.7" r="3.7"/>
+    <circle class="cls-2" cx="36.3" cy="4.4" r="4.4"/>
+    <circle class="cls-2" cx="39.8" cy="12.7" r="4.5"/>
+    <circle class="cls-2" cx="36.3" cy="9.5" r="3.9"/>
+  </g>
+</svg>
