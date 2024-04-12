@@ -12,7 +12,13 @@ public class ControllerExample {
     @GetMapping("/index")
     private String veiwIndex() {
 
-        return "/chap/index";
+        return "chap/index";
+    }
+
+    @GetMapping("/login")
+    private String viewLogin() {
+
+        return "chap/login";
     }
 
 }
