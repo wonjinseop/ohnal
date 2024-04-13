@@ -3,7 +3,7 @@
 <!-- 푸터 영역  -->
 <footer>
     <div class="inner">
-        <h2 class="ft-logo"><img src="./assets/img/navbar-logo.svg" alt="ft-logo"></h2>
+        <h2 class="ft-logo"><img src="/assets/img/navbar-logo.svg" alt="ft-logo"></h2>
         <p class="copyright"> &#x00A9; 2024 Copyright Team Oh-nal. All Rights Reserved.</p>
         <ul class="list">
             <li>
