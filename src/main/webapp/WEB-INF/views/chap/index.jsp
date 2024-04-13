@@ -4,6 +4,10 @@
 <head>
     <title>Today weather, oh-nal</title>
     <%@include file="../include/static-head.jsp"%>
+    <!-- page css -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- weather search event js -->
+    <script src="/assets/js/weather-search.js" defer></script>
 </head>
 <body>
     <%@include file="../include/header.jsp"%>

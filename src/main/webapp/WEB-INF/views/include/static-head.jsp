@@ -24,13 +24,8 @@
 <!-- side menu event js -->
 <script src="/assets/js/side-menu.js" defer></script>
 
-<!-- weather search event js -->
-<script src="/assets/js/weather-search.js" defer></script>
-
 
 <!-- header & footer css -->
 <link rel="stylesheet" href="/assets/css/header.css">
 <link rel="stylesheet" href="/assets/css/footer.css">
 
-<!-- page css -->
-<link rel="stylesheet" href="/assets/css/main.css">
