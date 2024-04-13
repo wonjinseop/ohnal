@@ -1,3 +1,7 @@
+
+
+
+
 //날씨 검색 이벤트 생성
 document.getElementById('sendBtn').onclick = () => {
     const $area1 = document.querySelector('select[name=h_area1]');
@@ -10,7 +14,9 @@ document.getElementById('sendBtn').onclick = () => {
     console.log(value1);
     console.log(value2);
 
-    fetch(`/weather/api-req/\${value1}/\${value2}`); // 문자열 리터럴 템플릿 사용
+    // fetch(`/weather/\${value1}/\${value2}`);
+    // 문자열 리터럴 템플릿 사용
+    fetch('/weather/'+ value1 +'/' + value2);
 }
 
 var cat1_num = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);

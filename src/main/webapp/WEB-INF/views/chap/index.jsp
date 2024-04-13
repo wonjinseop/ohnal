@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Today's weather, oh-nal</title>
+    <title>Today weather, oh-nal</title>
     <%@include file="../include/static-head.jsp"%>
 </head>
 <body>
@@ -36,22 +36,22 @@
             <form action="#">
                 <select name="h_area1" onChange="cat1_change(this.value,h_area2)" class="h_area1">
                     <option>&nbsp 시, 도를 선택하세요</option>
-                    <option value='1'>&nbsp서울특별시</option>
-                    <option value='2'>&nbsp부산광역시</option>
-                    <option value='3'>&nbsp대구광역시</option>
-                    <option value='4'>&nbsp인천광역시</option>
-                    <option value='5'>&nbsp광주광역시</option>
-                    <option value='6'>&nbsp대전광역시</option>
-                    <option value='7'>&nbsp울산광역시</option>
-                    <option value='8'>&nbsp강원특별자치도</option>
-                    <option value='9'>&nbsp경기도</option>
-                    <option value='10'>&nbsp경상남도</option>
-                    <option value='11'>&nbsp경상북도</option>
-                    <option value='12'>&nbsp전라남도</option>
-                    <option value='13'>&nbsp전라북도</option>
-                    <option value='14'>&nbsp제주특별자치도</option>
-                    <option value='15'>&nbsp충청남도</option>
-                    <option value='16'>&nbsp충청북도</option>
+                    <option value='1'>서울특별시</option>
+                    <option value='2'>부산광역시</option>
+                    <option value='3'>대구광역시</option>
+                    <option value='4'>인천광역시</option>
+                    <option value='5'>광주광역시</option>
+                    <option value='6'>대전광역시</option>
+                    <option value='7'>울산광역시</option>
+                    <option value='8'>강원특별자치도</option>
+                    <option value='9'>경기도</option>
+                    <option value='10'>경상남도</option>
+                    <option value='11'>경상북도</option>
+                    <option value='12'>전라남도</option>
+                    <option value='13'>전라북도</option>
+                    <option value='14'>제주특별자치도</option>
+                    <option value='15'>충청남도</option>
+                    <option value='16'>충청북도</option>
                 </select>
                 <select name="h_area2">
                     <option>&nbsp시,군,구를 선택하세요</option>
@@ -150,7 +150,7 @@
                         <div class="profile-box">
                             <img src="/assets/img/anonymous.jpg" alt="프사">
                         </div>
-                        <span class="card-account">test3</span>
+                        <span c lass="card-account">test3</span>
                     </div>
 
                     <div class="card-picture">
