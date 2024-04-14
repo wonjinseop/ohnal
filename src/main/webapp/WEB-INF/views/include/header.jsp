@@ -5,7 +5,7 @@
     <header>
         <div class="inner-header">
             <h1 class="logo">
-                <a href="#">
+                <a href="/index">
                     <img src="/assets/img/navbar-logo.svg" alt="로고이미지">
                 </a>
             </h1>
