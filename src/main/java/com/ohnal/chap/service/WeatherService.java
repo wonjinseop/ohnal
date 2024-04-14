@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -28,9 +29,16 @@ public class WeatherService {
 
         LocalDateTime now = LocalDateTime.now();
         String baseDate = DateTimeFormatter.ofPattern("yyyyMMdd").format(now);
+
+        // 요청 시간을 기준으로 날씨를 받아오기 위해 요청 시간 얻기, 분 단위는 절삭
+        String presentTime = DateTimeFormatter.ofPattern("HH00").format(now);
+
         double tmx = 0; // 최고기온
         double tmn = 0; // 최저기온
-        log.info("baseDate: {}", baseDate);
+        int tmp = 0; // 현재기온
+        int pty = 0; // 현재 강수 형태
+        int sky = 0; // 현재 하늘 상태
+
 
         // nx(map의 키가 컬럼값) nx의 value가 map의 value다.
         Map<String, Integer> map = mapper.getCode(area1, area2);
@@ -90,7 +98,7 @@ public class WeatherService {
 
             // body에서 items를 꺼내세요.
             JSONObject items = (JSONObject) body.get("items");
-//            log.info("items: {}", items);
+            log.info("items: {}", items);
 
             // item이라는 키를 가진 JSON 데이터를 가져올건데,
             // item 데이터는 여러 값이기 때문에 배열의 문법을 제공하는 객체로 받습니다.
@@ -114,9 +122,23 @@ public class WeatherService {
                     log.info("최저기온 = " + fcstValue);
                     tmn =  Double.parseDouble(fcstValue);
                 }
+
+                if (item.get("baseDate").equals(baseDate) && item.get("fcstTime").equals(presentTime)) {
+                    if (category.equals("TMP")) {
+                        tmp = Integer.parseInt(fcstValue);
+                        log.info(String.valueOf(tmp));
+                    } else if (category.equals("SKY")) {
+                        sky = Integer.parseInt(fcstValue);
+                        log.info(String.valueOf(sky));
+                    } else if (category.equals("PTY")) {
+                        pty = Integer.parseInt(fcstValue);
+                        log.info(String.valueOf(pty));
+                    }
+                }
             }
 
             String clothesInfo = mapClothes(tmx, tmn); // 옷 정보 담기
+            String weatherIcon = mapIcon(sky, pty, now); // sky(현재 하늘 상태), pty(현재 강수 형태) 기반으로 Icon 담기
             if(area2.length() >= 5) { // area2 지역명 띄어쓰기가 필요한 경우 공백 삽입하기 예) 청주시 상당구
                 area2 = area2.substring(0,3) + " " + area2.substring(3);
             }
@@ -128,12 +150,55 @@ public class WeatherService {
                     .maxTemperature(tmx)
                     .minTemperature(tmn)
                     .styleImage("이미지경로")
+                    .presentTemperature(tmp)
+                    .weatherIcon(weatherIcon)
                     .build();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String mapIcon(int sky, int pty, LocalDateTime present) {
+
+        log.info(String.valueOf(present.getHour()));
+        String weatherIcon = "";
+        if (present.getHour() >= 6 && present.getHour() <= 18) { // day(태양 그림 6~18시 노출)
+            if (sky == 1 && pty == 0) {
+                weatherIcon = "sunny-day";
+            } else if (sky == 3 && pty == 0) {
+                weatherIcon = "sunny-cloudy-day";
+            } else if (sky == 3 && (pty == 1 || pty == 4)) {
+                weatherIcon = "sunny-cloudy-rainy-day";
+            } else if (sky == 3 && pty == 3) {
+                weatherIcon = "sunny-cloudy-snowy-day";
+            } else if (sky == 4 && pty == 0) {
+                weatherIcon = "only-cloudy";
+            } else if (sky == 4 && (pty == 1 || pty == 4)) {
+                weatherIcon = "only-cloudy-rainy";
+            } else if (sky == 4 && pty == 3) {
+                weatherIcon = "only-cloudy-snowy";
+            } 
+        } else { // night(달, 혹은 태양 그림 없이 노출)
+            if (sky == 1 && pty == 0) {
+                weatherIcon = "sunny-night";
+            } else if (sky == 3 && pty == 0) {
+                weatherIcon = "sunny-cloudy-night";
+            } else if (sky == 3 && (pty == 1 || pty == 4)) {
+                weatherIcon = "only-cloudy-rainy";
+            } else if (sky == 3 && pty == 3) {
+                weatherIcon = "sunny-cloudy-snowy";
+            } else if (sky == 4 && pty == 0) {
+                weatherIcon = "only-cloudy";
+            } else if (sky == 4 && (pty == 1 || pty == 4)) {
+                weatherIcon = "only-cloudy-rainy";
+            } else if (sky == 4 && pty == 3) {
+                weatherIcon = "only-cloudy-snowy";
+            } 
+        }
+        return weatherIcon + ".svg"; // 파일 확장자 붙임
+
     }
 
     private String mapClothes(double tmx, double tmn) {

@@ -28,6 +28,7 @@ document.getElementById('send-btn').onclick = () => {
             area2,
             maxTemperature,
             minTemperature,
+            presentTemperature,
             comment,
             styleImage,
             weatherIcon
@@ -37,12 +38,21 @@ document.getElementById('send-btn').onclick = () => {
 
         let tag = '';
 
-        tag += `
+        tag += `    
+                <div class="left-top">
+                    <img class="weather-icon" src="/assets/img/weather-icon/${weatherIcon}" alt="weather">
+                </div>
+                <div class="left-middle">
+                    <p>현재 기온<span>${presentTemperature}°</span></p>
+                </div>
+                <div class="left-down">
                     <h2>오늘 ${area1} ${area2}의 기온은</h2>
                     <h2>최저 ${minTemperature}도, 최고 ${maxTemperature}도입니다</h2>
+                </div>
+                    
                 `;
 
-        document.querySelector('.left-down').innerHTML = tag;
+        document.querySelector('.left-section').innerHTML = tag;
     }
 }
 

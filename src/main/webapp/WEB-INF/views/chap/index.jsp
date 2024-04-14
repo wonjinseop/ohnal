@@ -16,12 +16,16 @@
         <div class="top-section">
             <div class="left-section">
                 <div class="left-top">
-                    <img class="weather-icon" src="./assets/img/test1.png" alt="weather">
+                    <img class="weather-icon" src="/assets/img/weather-icon/${dto.weatherIcon}" alt="weather">
+                </div>
+                <div class="left-middle">
+                    <p>현재 기온<span>${dto.presentTemperature}°</span></p>
                 </div>
                 <div class="left-down">
-                    <h2>오늘 ${area1} ${area2}의 기온은</h2>
-                    <h2>최저 ${minTemp}도, 최고 ${maxTemp}도입니다</h2>
+                    <h2>오늘 ${dto.area1} ${dto.area2}의 기온은</h2>
+                    <h2>최저 ${dto.minTemperature}도, 최고 ${dto.maxTemperature}도입니다</h2>
                 </div>
+
             </div>
             <div class="right-section">
                 <div class="right-top">

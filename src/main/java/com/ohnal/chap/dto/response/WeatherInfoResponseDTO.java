@@ -11,6 +11,7 @@ public class WeatherInfoResponseDTO {
     private String area2;
     private double maxTemperature;
     private double minTemperature;
+    private int presentTemperature; // 현재기온
     private String comment;
     private String styleImage;
     private String weatherIcon;

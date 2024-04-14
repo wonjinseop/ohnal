@@ -12,18 +12,51 @@
 
 
 .top-section .right-section {
+  width: 40%;
   margin-top: 50px;
   text-align: center;
 }
 
 .top-section .left-section {
-  margin-top: 200px;
+  width: 40%;
+  margin-top: 50px;
   text-align: center;
+  position: relative;
+}
+
+.top-section .left-top {
+  /*background: #12e6fc;*/
+  height: 320px;
+}
+
+.top-section .left-top .weather-icon {
+  transform: scale(5);
+  margin-top: 100px;
+  padding-top: 10px;
+}
+
+.top-section .left-middle {
+  position: absolute;
+  z-index: 999;
+  right: 30%;
+  top: 30%;
+  font-weight: 700;
+}
+
+.top-section .left-middle p {
+  font-size: 15px;
+  color: #0a0064;
+}
+
+
+.top-section .left-middle p span {
+  font-size: 60px;
 }
 
 .top-section .left-down {
-  margin-top: 100px;
+  margin-top: 10px;
   text-align: center;
+  /*background: tomato;*/
 }
 
 /* 날씨 검색 영역 */
