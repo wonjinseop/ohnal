@@ -57,9 +57,10 @@
 
 
 
-.board-section .add-btn {
+.board-section #add-btn {
   width: fit-content;
   padding: 8px 16px;
+  font-weight: 700;
   background: rgb(231, 231, 231);
   border-radius: 5px;
   color: #000000;
@@ -69,9 +70,10 @@
   top: 0;
   cursor: pointer;
 }
-.board-section .add-btn:hover {
-  color: rgb(0, 0, 0);
-  background: #12e6fc;;
+.board-section #add-btn:hover {
+  font-weight: 700;
+  color: #12e6fc;
+  background: #000000;
 }
 
 

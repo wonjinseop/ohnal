@@ -19,8 +19,8 @@
                     <img class="weather-icon" src="./assets/img/test1.png" alt="weather">
                 </div>
                 <div class="left-down">
-                    <h2>오늘 서울시 마포구의 기온은</h2>
-                    <h2>최저 10도, 최고 20도입니다</h2>
+                    <h2>오늘 ${area1} ${area2}의 기온은</h2>
+                    <h2>최저 ${minTemp}도, 최고 ${maxTemp}도입니다</h2>
                 </div>
             </div>
             <div class="right-section">
@@ -58,9 +58,9 @@
                     <option value='16'>충청북도</option>
                 </select>
                 <select name="h_area2">
-                    <option>&nbsp시,군,구를 선택하세요</option>
+                    <option>시,군,구를 선택하세요</option>
                 </select>
-                <button id="sendBtn" class="btn btn-primary" type="button">
+                <button id="send-btn" class="btn btn-primary" type="button">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
@@ -68,7 +68,7 @@
 
         <div class="board-section">
             <h2 class="main-title">BEST OOTD</h2>
-            <button class="add-btn">더 보기</button>
+            <button id="add-btn">더 보기</button>
         </div>
 
 
@@ -221,5 +221,6 @@
     </div>
 
     <%@include file="../include/footer.jsp"%>
+
 </body>
 </html>

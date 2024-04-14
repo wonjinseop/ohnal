@@ -1,5 +1,6 @@
 package com.ohnal.chap.service;
 
+import com.ohnal.chap.dto.response.WeatherInfoResponseDTO;
 import com.ohnal.chap.mapper.WeatherMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +24,12 @@ import java.util.Map;
 public class WeatherService {
     private final WeatherMapper mapper;
 
-    public void getShortTermForecast(String area1, String area2) {
+    public WeatherInfoResponseDTO getShortTermForecast(String area1, String area2) {
 
         LocalDateTime now = LocalDateTime.now();
         String baseDate = DateTimeFormatter.ofPattern("yyyyMMdd").format(now);
+        double tmx = 0; // 최고기온
+        double tmn = 0; // 최저기온
         log.info("baseDate: {}", baseDate);
 
         // nx(map의 키가 컬럼값) nx의 value가 map의 value다.
@@ -54,6 +57,7 @@ public class WeatherService {
             System.out.println("Response code: " + conn.getResponseCode());
 
             BufferedReader rd;
+            // 서비스 코드가 정상이면 200~300사이의 숫자가 나온다. - conn을 이용해 데이터 읽고 쓰기
             if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
                 rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             } else {
@@ -86,6 +90,7 @@ public class WeatherService {
 
             // body에서 items를 꺼내세요.
             JSONObject items = (JSONObject) body.get("items");
+            log.info("items: {}", items);
 
             // item이라는 키를 가진 JSON 데이터를 가져올건데,
             // item 데이터는 여러 값이기 때문에 배열의 문법을 제공하는 객체로 받습니다.
@@ -101,15 +106,79 @@ public class WeatherService {
                 // "fcstValue" 키에 해당하는 단일 값을 가져옵니다.
                 String fcstValue = (String) item.get("fcstValue");
 
-                if (category.equals("TMX") || category.equals("TMN")) {
-                    log.info("category: {}, value: {}", category, fcstValue);
+                // TMX - 최고 기온, TMN - 최저 기온, PTY - 강수형태, SKY - 하늘 상태
+                if (category.equals("TMX")) {
+                    log.info("최고기온 = " + fcstValue);
+                    tmx = Double.parseDouble(fcstValue);
+                } else if (category.equals("TMN")) {
+                    log.info("최저기온 = " + fcstValue);
+                    tmn =  Double.parseDouble(fcstValue);
                 }
-
             }
 
+            String clothesInfo = mapClothes(tmx, tmn); // 옷 정보 담기
+            if(area2.length() >= 5) { // area2 지역명 띄어쓰기가 필요한 경우 공백 삽입하기 예) 청주시 상당구
+                area2 = area2.substring(0,3) + " " + area2.substring(3);
+            }
+
+            return WeatherInfoResponseDTO.builder()
+                    .area1(area1)
+                    .area2(area2)
+                    .comment(clothesInfo)
+                    .maxTemperature(tmx)
+                    .minTemperature(tmn)
+                    .codyImage("이미지경로")
+                    .build();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    private String mapClothes(double tmx, double tmn) {
+        // 일교차가 10 이상이면 따로 구성 필요
+//        double temparatureDiff = tmx - tmn;
+//        log.info("일교차: {}", temparatureDiff);
+
+        String clothesInfo = ""; // 옷 정보 담는 변수
+
+        // 평균 기온 구해서 반올림 적용
+        int averageTemperature = (int) Math.round((tmx + tmn) / 2);
+        log.info("average temparature: {}", averageTemperature);
+
+        // 기온에 따라 옷 맵핑하기
+        if (averageTemperature >= 28) {
+            log.info("민소매, 반팔, 반바지, 치마");
+            clothesInfo = "민소매, 반팔, 반바지, 치마";
+        } else if (averageTemperature >= 23) {
+            log.info("반팔, 얇은 셔츠, 반바지, 면바지");
+            clothesInfo = "반팔, 얇은 셔츠, 반바지, 면바지";
+        } else if (averageTemperature >= 20) {
+            log.info("얇은 가디건, 긴팔티, 면바지, 청바지");
+            clothesInfo = "얇은 가디건, 긴팔티, 면바지, 청바지";
+        } else if (averageTemperature >= 17) {
+            log.info("얇은 니트, 가디건, 맨투맨, 얇은 재킷, 면바지, 청바지");
+            clothesInfo = "얇은 니트, 가디건, 맨투맨, 얇은 재킷, 면바지, 청바지";
+        } else if (averageTemperature >= 12) {
+            log.info("재킷, 가디건, 야상, 맨투맨, 니트, 스타킹, 청바지, 면바지");
+            clothesInfo = "재킷, 가디건, 야상, 맨투맨, 니트, 스타킹, 청바지, 면바지";
+        } else if (averageTemperature >= 9) {
+            log.info("재킷, 트렌치코드, 야상, 니트, 스타킹, 청바지, 면바지, 겉옷 안에 가디건 필수");
+            clothesInfo = "재킷, 트렌치코드, 야상, 니트, 스타킹, 청바지, 면바지, 겉옷 안에 가디건 필수";
+        } else if (averageTemperature >= 5) {
+            log.info("코트, 히트텍, 니트, 청바지, 레깅스, 반드시 겹쳐 입을 것");
+            clothesInfo = "코트, 히트텍, 니트, 청바지, 레깅스, 반드시 겹쳐 입을 것";
+        } else if (averageTemperature >= 0) {
+            log.info("패딩, 두꺼운 코트, 목도리, 기모제품, 최대한 많이 껴입자");
+            clothesInfo = "패딩, 두꺼운 코트, 목도리, 기모제품, 최대한 많이 껴입자";
+        } else if (averageTemperature >= -5) {
+            log.info("모자 달린 두꺼운 패딩, 안에는 스웨터, 귀마개, 부츠 등 방한 제품");
+            clothesInfo = "모자 달린 두꺼운 패딩, 안에는 스웨터, 귀마개, 부츠 등 방한 제품";
+        } else {
+            log.info("파카 코트 등 방한 아웃도어 제품");
+            clothesInfo = "파카 코트 등 방한 아웃도어 제품";
+        }
+        return clothesInfo;
     }
 }
