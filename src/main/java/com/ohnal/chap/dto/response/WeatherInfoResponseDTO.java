@@ -12,6 +12,6 @@ public class WeatherInfoResponseDTO {
     private double maxTemperature;
     private double minTemperature;
     private String comment;
-    private String codyImage;
+    private String styleImage;
     private String weatherIcon;
 }

@@ -29,7 +29,7 @@ document.getElementById('send-btn').onclick = () => {
             maxTemperature,
             minTemperature,
             comment,
-            codyImage,
+            styleImage,
             weatherIcon
         } = weatherInfo;
         console.log(area1);
