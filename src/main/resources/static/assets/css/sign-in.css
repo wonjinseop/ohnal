@@ -1,0 +1,97 @@
+
+
+.container {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+
+    padding: 20px;
+    width: 300px;
+    margin-top: 100px;
+    padding-top: 180px;
+    height : 820px;
+
+
+}
+
+.logintextlogin{
+    padding-bottom: 5px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+
+
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+
+
+}
+
+.input-group {
+    margin-bottom: 10px;
+    width:400px;
+}
+
+input[type="submit"] {
+    width: 300px;
+    padding: 10px;
+    background-color:black;
+    border: none;
+    color: white;
+
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: #12e6fc;
+
+
+}
+
+input[type="submit"]:hover {
+    background-color: #002254;
+}
+
+.signup-link,
+.forgot-link {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bolder;
+    margin-left : 47px;
+}
+
+.signup-btn {
+    display: block;
+    background-color: black;
+    color: #12e6fc;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+
+    margin-bottom: 15px;
+
+}
+
+.signup-btn:hover {
+    background-color: #002254;
+}
+
+.kakaologinlogo {
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(253, 228, 0, 0.938);
+    width: 300px;
+    height: 45px;
+
+}
