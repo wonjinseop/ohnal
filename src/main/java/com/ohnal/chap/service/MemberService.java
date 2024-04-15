@@ -29,11 +29,12 @@ public class MemberService {
         String realPassword = foundMember.getPassword();
 
         if (!encoder.matches(inputPassword,realPassword)) {
-            return  LoginResult.NO_PW; 
+             return  LoginResult.NO_PW;
         }
+
     
         
-        return  null ;  //  삭제하기
+          return LoginResult.SUCCESS;
     }
     
 
