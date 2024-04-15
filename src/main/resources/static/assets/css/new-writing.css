@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  text-decoration-line: none;
+}
+
+.new-writing-wrapper {
+  margin: 150px auto 30px;
+  border: 1px solid lightgray;
+  max-width: 1200px;
+  width: 1200px; height: 650px;
+  display: flex;
+  
+}
+
+.new-writing-wrapper .cody-load {
+  border-right: 1px solid lightgray;
+  width: 50%; height: 100%;
+}
+.new-writing-wrapper .cody-load img {
+  width: 80%; height: 24%;
+  margin: 250px 50px 50px 150px;
+}
+
+.new-writing-wrapper .user-info {
+  border-bottom: 1px solid lightgray;
+  
+  width: 50%; height: 120px;
+}
+
+.new-writing-wrapper .user-info .profile-name {
+  width: 100%; height: 70px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+}
+
+.new-writing-wrapper .user-info .profile-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.new-writing-wrapper .user-info .profile-box img {
+  width: 100%;
+}
+
+.new-writing-wrapper .user-info .user-name {
+  margin: 10px;
+  font-size: 25px;
+}
+
+.new-writing-wrapper .user-info .hash {
+  width: 100%; height: 50px;
+  
+  padding: 10px 20px;
+}
+
+.new-writing-wrapper .user-info .write-content1 {
+  width: 100%; height: 530px;
+  
+}
+
+.write-input {
+  width: 100%; height: 490px;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  
+}
+.write-send {
+  width: 100%; height: 37px;
+  
+  /* background: none; */
+  /* border: 1px solid lightgray; */
+}

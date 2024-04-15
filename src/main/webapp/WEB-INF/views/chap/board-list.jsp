@@ -19,6 +19,13 @@
     <!-- 카드 시작 -->
     <div class="card-container" id="container1">
 
+        <div class="new-upload-wrapper">
+            <a href="/board/write" class="upload-btn">새 글쓰기</a>
+        </div>
+
+
+
+
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
             <div class="card-wrapper">
@@ -110,7 +117,7 @@
 
 
     <!-- 모달 열기 버튼 -->
-    <button id="modalBtn">모달 열기</button>
+    <button id="modalBtn">모달 글 확대</button>
 
     <!-- 모달 컨테이너 -->
     <div id="myModal" class="modal">
@@ -166,17 +173,19 @@
                                 </div>
 
                             </div>
-                            
+
                             <div class="content-wrapper">
 
 
                                 <div class="wrapper-comments">
-                                    <div class="content-wrapper-comments"><p class="content-comments"><span class="card-account">test3</span>
-                                         일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p><button style="background: none;">X</button>
+                                    <div class="content-wrapper-comments">
+                                        <p class="content-comments"><span class="card-account">test3</span>
+                                            일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p><button style="background: none;">X</button>
                                         <span style="margin-left: 10px;">시간영역</span>
-                                        <button id="comments-modify" style="margin-left: 10px; background: none;">수정</button>
+                                        <button id="comments-modify"
+                                            style="margin-left: 10px; background: none;">수정</button>
                                     </div>
-                                    
+
 
                                 </div>
                             </div>
@@ -187,8 +196,6 @@
                                 <div><a class="write-send" href="#">입력</a></div>
                             </div>
                         </div>
-
-
 
                     </div>
 
