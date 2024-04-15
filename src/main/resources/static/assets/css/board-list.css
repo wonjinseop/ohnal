@@ -1,5 +1,22 @@
 
 
+.new-upload-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+    /* border: 1px solid gray; */
+    
+}
+
+.new-upload-wrapper .upload-btn {
+    
+    margin-left: 25px;
+    margin-bottom: 10px;
+    background-color: lightgray;
+    padding: 10px;
+
+}
+
+
 .card-container {
     display: flex;
     justify-content: space-around;

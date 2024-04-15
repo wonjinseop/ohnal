@@ -43,7 +43,7 @@ public class BoardContoller {
     // 게시글 작성 페이지 이동
     @GetMapping("/write")
     public String write() {
-        return "chap/write";
+        return "chap/new-writing";
     }
     
     // 게시글 등록
