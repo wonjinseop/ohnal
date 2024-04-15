@@ -14,7 +14,6 @@ public interface MemberMapper {
 
     boolean isDuplicate(@Param("type")String type,@Param("keyword")String keyword);
 
-    void saveAutoLogin(AutoLoginDTO build);
 
     Member findMemberByCookie(String sessionId);
 

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @EqualsAndHashCode
 public class BoardListResponseDTO {
     
-    private int board_no;
+    private int boardNo;
     private String nickname;
     private String content;
     private String image;
@@ -23,7 +23,7 @@ public class BoardListResponseDTO {
     private String regDate;
     
     public BoardListResponseDTO(Board board) {
-        this.board_no = board.getBoard_no();
+        this.boardNo = board.getBoardNo();
         this.nickname = board.getNickname();
         this.content = board.getContent();
         this.image = board.getImage();
