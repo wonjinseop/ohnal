@@ -1,5 +1,6 @@
 package com.ohnal.chap.mapper;
 
+import com.ohnal.chap.dto.request.AutoLoginDTO;
 import com.ohnal.chap.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
