@@ -17,8 +17,4 @@ public class MemberController {
     private String rootPath;
 
     private final MemberService memberService;
-    private final MailSenderService mailSenderService;
-
-
-
 }
