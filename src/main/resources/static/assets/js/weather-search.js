@@ -1,9 +1,5 @@
-
-
-
-
 //날씨 검색 이벤트 생성
-document.getElementById('sendBtn').onclick = () => {
+document.getElementById('send-btn').onclick = () => {
     const $area1 = document.querySelector('select[name=h_area1]');
     const $area2 = document.querySelector('select[name=h_area2]');
 
@@ -15,8 +11,49 @@ document.getElementById('sendBtn').onclick = () => {
     console.log(value2);
 
     // fetch(`/weather/\${value1}/\${value2}`);
-    // 문자열 리터럴 템플릿 사용
-    fetch('/weather/'+ value1 +'/' + value2);
+    fetch('/weather/'+ value1 +'/' + value2)
+        .then(res => res.json())
+        .then(weatherInfo => {
+            console.log(weatherInfo);
+            renderWeatherInfo(weatherInfo);
+        });
+
+    // 화면에 날씨 유관 정보를 렌더링하는 함수
+    function renderWeatherInfo(weatherInfo) {
+        // weatherInfo 객체에 담긴 정보: area1, area2, maxTemperature, minTemperature, comment, image;
+
+        // 객체 디스트럭처링
+        const {
+            area1,
+            area2,
+            maxTemperature,
+            minTemperature,
+            presentTemperature,
+            comment,
+            styleImage,
+            weatherIcon
+        } = weatherInfo;
+        console.log(area1);
+        console.log(area2);
+
+        let tag = '';
+
+        tag += `    
+                <div class="left-top">
+                    <img class="weather-icon" src="/assets/img/weather-icon/${weatherIcon}" alt="weather">
+                </div>
+                <div class="left-middle">
+                    <p>현재 기온<span>${presentTemperature}°</span></p>
+                </div>
+                <div class="left-down">
+                    <h2>오늘 ${area1} ${area2}의 기온은</h2>
+                    <h2>최저 ${minTemperature}도, 최고 ${maxTemperature}도입니다</h2>
+                </div>
+                    
+                `;
+
+        document.querySelector('.left-section').innerHTML = tag;
+    }
 }
 
 var cat1_num = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
@@ -84,4 +121,9 @@ function cat1_change(key, sel) {
     for (i = 0; i < name.length; i++) {
         sel.options[i + 1] = new Option(name[i], val[i]);
     }
+}
+
+// BEST OOTD 게시판에서 '더보기' 버튼 클릭 시 board/list로 이동하는 이벤트 생성
+document.getElementById('add-btn').onclick = () => {
+    window.location.href = '/board/list';
 }
