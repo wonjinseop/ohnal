@@ -1,6 +1,7 @@
 package com.ohnal.chap.service;
 
 import com.ohnal.chap.dto.LoginRequestDTO;
+import com.ohnal.chap.entity.Member;
 import com.ohnal.chap.mapper.MemberMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -18,7 +19,22 @@ public class MemberService {
 
     public LoginResult authenticate(LoginRequestDTO dto,
                                     HttpSession session , HttpServletResponse response) {
-        return null;
+
+
+        Member foundMember = memberMapper.findMember(dto.getAddress());
+        if (foundMember == null) {
+            return LoginResult.NO_ACC;
+        }
+        String inputPassword = dto.getPassword();
+        String realPassword = foundMember.getPassword();
+
+        if (!encoder.matches(inputPassword,realPassword)) {
+            return  LoginResult.NO_PW; 
+        }
+    
+        
+        return  null ;  //  삭제하기
     }
+    
 
 }

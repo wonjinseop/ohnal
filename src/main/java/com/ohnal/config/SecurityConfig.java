@@ -22,10 +22,4 @@ public class SecurityConfig {
         // 모든 요청에 대해 Security 인증을 요구하지 않겠다. 모든 요청을 허용하겠다.
         return http.build();
     }
-
-    // 비밀번호 암호화 객체를 빈 등록
-//    @Bean
-//    public PasswordEncoder encoder() {
-//        return new BCryptPasswordEncoder(); // 비밀번호 암호화에 핵심적인 객체
-//    }
 }

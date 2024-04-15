@@ -1,7 +1,14 @@
 package com.ohnal.chap.entity;
 
+import lombok.*;
+
 import java.time.LocalDateTime;
 
+@Getter @Setter @ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Member {
 
     private String email;

@@ -20,7 +20,7 @@
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->
     <mappers>
-        <!-- 예시: <mapper resource="mapper/BoardMapper.xml" />-->
+        <mapper resource="mapper/WeatherMapper.xml" />
     </mappers>
 
 </configuration>

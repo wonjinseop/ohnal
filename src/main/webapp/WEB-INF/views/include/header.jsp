@@ -5,7 +5,7 @@
     <header>
         <div class="inner-header">
             <h1 class="logo">
-                <a href="#">
+                <a href="/index">
                     <img src="/assets/img/navbar-logo.svg" alt="로고이미지">
                 </a>
             </h1>
@@ -20,7 +20,7 @@
                 <span class="lnr lnr-cross"></span>
             </a>
             <ul>
-                <li><a href="/">OOTD 게시판</a></li>
+                <li><a href="/board/list">OOTD 게시판</a></li>
                 <li><a href="/members/sign-up">Sign Up</a></li>
                 <li><a href="/members/sign-in">Sign In</a></li>
             </ul>
