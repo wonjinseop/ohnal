@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class MemberService {
     private final MemberMapper memberMapper;
-    private final PasswordEncoder encoder;
+//    private final PasswordEncoder encoder;
 
 }

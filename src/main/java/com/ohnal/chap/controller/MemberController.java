@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class MemberController {
 
-    @Value("${file.ipload.root-path}")
+    @Value("${file.upload.root-path}")
     private String rootPath;
 
     private final MemberService memberService;
