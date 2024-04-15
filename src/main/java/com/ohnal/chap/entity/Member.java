@@ -1,18 +1,19 @@
 package com.ohnal.chap.entity;
+
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Setter @Getter @ToString
+@Getter @Setter @ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Builder
 public class Member {
 
     private String email;
-    private  String password;
-    private  String name;
+    private String password;
+    private String name;
     private LocalDateTime regDate;
 
     private LocalDateTime limitTime;
