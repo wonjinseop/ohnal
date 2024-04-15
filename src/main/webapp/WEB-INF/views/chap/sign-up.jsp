@@ -21,27 +21,26 @@
               프로필사진
             </label>
           </div>
-          <input type="file" id="selectFile" name="selectFile" accept="image/*" onchange="loadFile(this)">
+          <input type="file" id="selectFile" name="selectFile" accept="image/*">
         </form>
       </div>
       <div class="form-selection">
         <div class="form-list">
           <div class="form-nick" id="fnick">
             <p class="font"><strong>닉네임을 입력해주세요</strong>&nbsp;&nbsp;&nbsp;
-              <input type="text" id="nick" name="ncik" placeholder="필수입력란입니다." class="input">
+              <input type="text" id="nick" name="nick" placeholder="필수입력란입니다." required="required" aria-required="true" maxlength="8" class="input">
               <span id="nickChk"></span>
           </div>
           <div class="form-pw" id="fpw">
             <p class="font"><strong>비밀번호를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;
-              <input type="password" id="pw" name="pw" placeholder="영문과 특수문자를 포함한 8자를 입력해주세요" class="input">
+              <input type="password" id="pw" name="pw" placeholder="영문과 특수문자를 포함한 8자를 입력해주세요" maxlength="20" required="required" aria-required="true" class="input">
               <span id="pwChk"></span>
           </div>
           <div class="form-pw2" id="fpw2">
             <p class="font"><strong>비밀번호를 재확인해주세요</strong>&nbsp;&nbsp;&nbsp;
-              <input type="password" id="pw2" name="pw2" placeholder="입력하신 비밀번호와 동일하게 입력해주세요" class="input">
+              <input type="password" id="pw2" name="pw2" placeholder="입력하신 비밀번호와 동일하게 입력해주세요" maxlength="20" required="required" aria-required="true" class="input">
           </div>
         </div>
-
         <div class="address">
           <input type="text" id="sample4_postcode" placeholder="우편번호">
           <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
@@ -51,33 +50,30 @@
           <input type="text" id="sample4_detailAddress" placeholder="상세주소">
           <input type="text" id="sample4_extraAddress" placeholder="참고항목">
         </div>
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
         <div class="form-list">
           <div class="form-name" id="fname">
             <p class="font"><strong>이름을 입력해주세요</strong>&nbsp;&nbsp;&nbsp;
-              <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" class="input">
+              <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required="required" aria-required="true" maxlength="6" class="input">
           </div>
           <div class="form-birth" id="fbirth">
             <p class="font"><strong>생년월일 8자리를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;
-              <input type="text" id="bitrhdayInput" placeholder="생년월일 8자리를 입력해주세요" class="input">
+              <input type="text" id="birthdayInput" placeholder="생년월일 8자리를 입력해주세요" required="required" aria-required="true" maxlength="8" class="input">
           </div>
           <div class="form-email" id="femail">
             <p class="font"><strong>이메일을 입력해주세요</strong>&nbsp;&nbsp;&nbsp;
-              <input type="text" id="email" name="email" placeholder="이메일주소를 입력해주세요." class="input">
+              <input type="email" id="email" name="email" placeholder="ex) on-nal@gmail.com" required="required" aria-required="true" class="input">
           </div>
         </div>
         <div class="gender" id="divgender">
           <button type="button" class="btn_gender" name="gender" value="M" class="blind">남자</button>
           <button type="button" class="btn_gender" name="gender2" value="F" class="blind">여자</button>
         </div>
-
         <div class="btn_submit">
           <button type="button" class="btn_submit_button">회원가입</button>
         </div>
       </div>
     </div>
-
+  </div>
 
 
     <%@include file="../include/footer.jsp"%>
