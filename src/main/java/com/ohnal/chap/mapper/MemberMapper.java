@@ -1,17 +1,19 @@
 package com.ohnal.chap.mapper;
 
 import com.ohnal.chap.entity.Member;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface MemberMapper {
 
-    Member findMember(String account);
+    void save(Member member);
+
+    Member findMember(String email);
+
+    boolean isDuplicate(@Param("type")String type,@Param("keyword")String keyword);
 
 
-    //중복체크
-    boolean inDuplicate(@Param("type") String type , @Param("keyword") String keyword);
-
-
-
+    Member findMemberByCookie(String sessionId);
 
 }

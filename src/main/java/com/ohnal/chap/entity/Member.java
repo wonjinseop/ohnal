@@ -18,10 +18,10 @@ public class Member {
 
     private LocalDateTime limitTime;
     private String profileImage;
-    private LoginMethod loginMethod;
+    private  LoginMethod loginMethod;
 
-
-    private class LoginMethod {
-
+    public enum LoginMethod{
+        COMMON,KAKAO
     }
+
 }
