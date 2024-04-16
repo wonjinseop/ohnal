@@ -34,27 +34,33 @@ document.getElementById('send-btn').onclick = () => {
             weatherIcon
         } = weatherInfo;
 
-        // console.log(area1);
-        // console.log(area2);
-        // console.log(presentTemperature);
 
         let tag = '';
 
         tag += `    
-                <div class="left-top">
-                    <img class="weather-icon" src="/assets/img/weather-icon/${weatherIcon}" alt="weather">
+                <div class="left-section">
+                    <div class="left-top">
+                        <img class="weather-icon" src="/assets/img/weather-icon/${weatherIcon}" alt="weather">
+                    </div>
+                    <div class="left-middle">
+                        <p>현재 기온<span>${presentTemperature}°</span></p>
+                    </div>
+                    <div class="left-down">
+                        <h2>오늘 ${area1} ${area2}의 기온은</h2>
+                        <h2>최저 ${minTemperature}도, 최고 ${maxTemperature}도입니다</h2>
+                    </div>
+               </div>
+                <div class="right-section">
+                    <div class="right-top">
+                        <h2>오늘의 패션 예보</h2>
+                    </div>
+                    <div class="right-down">
+                        <img id="clothes-img" src="/assets/img/clothes-image/range_code_${styleImage}/${styleImage}-0-male.png" alt="clothes">
+                    </div>
                 </div>
-                <div class="left-middle">
-                    <p>현재 기온<span>${presentTemperature}°</span></p>
-                </div>
-                <div class="left-down">
-                    <h2>오늘 ${area1} ${area2}의 기온은</h2>
-                    <h2>최저 ${minTemperature}도, 최고 ${maxTemperature}도입니다</h2>
-                </div>
-                    
                 `;
 
-        document.querySelector('.left-section').innerHTML = tag;
+        document.querySelector('.top-section').innerHTML = tag;
     }
 }
 

@@ -32,8 +32,10 @@
                     <h2>오늘의 패션 예보</h2>
                 </div>
                 <div class="right-down">
-                    <img src="./assets/img/cody.png" alt="test">
+<%--                    <img src="/assets/img/clothes-image/${dto.styleImage}" alt="clothes">--%>
+                        <img id = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
                 </div>
+
             </div>
         </div>
 
@@ -227,17 +229,5 @@
 
     <%@include file="../include/footer.jsp"%>
 
-    <script>
-        // 사용자의 위치를 (자동으로) 가져오기
-        
-        // 사용자의 위치(위도, 경도)를 가져올 변수 선언 및 초기화
-        
-
-
-
-
-
-
-    </script>
 </body>
 </html>

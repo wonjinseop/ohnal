@@ -97,7 +97,7 @@ public class WeatherService {
 
             // body에서 items를 꺼내세요.
             JSONObject items = (JSONObject) body.get("items");
-            log.info("items: {}", items);
+//            log.info("items: {}", items);
 
             // item이라는 키를 가진 JSON 데이터를 가져올건데,
             // item 데이터는 여러 값이기 때문에 배열의 문법을 제공하는 객체로 받습니다.
@@ -149,7 +149,7 @@ public class WeatherService {
                     .comment(clothesInfo)
                     .maxTemperature(tmx)
                     .minTemperature(tmn)
-                    .styleImage("이미지경로")
+                    .styleImage(clothesInfo)
                     .presentTemperature(tmp)
                     .weatherIcon(weatherIcon)
                     .build();
@@ -207,6 +207,7 @@ public class WeatherService {
 //        log.info("일교차: {}", temparatureDiff);
 
         String clothesInfo = ""; // 옷 정보 담는 변수
+        String clothesCode = ""; // 코드 번호 담는 변수
 
         // 평균 기온 구해서 반올림 적용
         int averageTemperature = (int) Math.round((tmx + tmn) / 2);
@@ -215,35 +216,36 @@ public class WeatherService {
         // 기온에 따라 옷 맵핑하기
         if (averageTemperature >= 28) {
             log.info("민소매, 반팔, 반바지, 치마");
-            clothesInfo = "민소매, 반팔, 반바지, 치마";
+            clothesCode= "9";
         } else if (averageTemperature >= 23) {
             log.info("반팔, 얇은 셔츠, 반바지, 면바지");
-            clothesInfo = "반팔, 얇은 셔츠, 반바지, 면바지";
+            clothesCode= "8";
         } else if (averageTemperature >= 20) {
             log.info("얇은 가디건, 긴팔티, 면바지, 청바지");
-            clothesInfo = "얇은 가디건, 긴팔티, 면바지, 청바지";
+            clothesCode= "7";
         } else if (averageTemperature >= 17) {
             log.info("얇은 니트, 가디건, 맨투맨, 얇은 재킷, 면바지, 청바지");
-            clothesInfo = "얇은 니트, 가디건, 맨투맨, 얇은 재킷, 면바지, 청바지";
+            clothesCode= "6";
         } else if (averageTemperature >= 12) {
             log.info("재킷, 가디건, 야상, 맨투맨, 니트, 스타킹, 청바지, 면바지");
-            clothesInfo = "재킷, 가디건, 야상, 맨투맨, 니트, 스타킹, 청바지, 면바지";
+            clothesCode= "5";
         } else if (averageTemperature >= 9) {
             log.info("재킷, 트렌치코드, 야상, 니트, 스타킹, 청바지, 면바지, 겉옷 안에 가디건 필수");
-            clothesInfo = "재킷, 트렌치코드, 야상, 니트, 스타킹, 청바지, 면바지, 겉옷 안에 가디건 필수";
+            clothesCode= "4";
         } else if (averageTemperature >= 5) {
             log.info("코트, 히트텍, 니트, 청바지, 레깅스, 반드시 겹쳐 입을 것");
-            clothesInfo = "코트, 히트텍, 니트, 청바지, 레깅스, 반드시 겹쳐 입을 것";
+            clothesCode= "3";
         } else if (averageTemperature >= 0) {
             log.info("패딩, 두꺼운 코트, 목도리, 기모제품, 최대한 많이 껴입자");
-            clothesInfo = "패딩, 두꺼운 코트, 목도리, 기모제품, 최대한 많이 껴입자";
+            clothesCode= "2";
         } else if (averageTemperature >= -5) {
             log.info("모자 달린 두꺼운 패딩, 안에는 스웨터, 귀마개, 부츠 등 방한 제품");
-            clothesInfo = "모자 달린 두꺼운 패딩, 안에는 스웨터, 귀마개, 부츠 등 방한 제품";
+            clothesCode= "1";
         } else {
             log.info("파카 코트 등 방한 아웃도어 제품");
-            clothesInfo = "파카 코트 등 방한 아웃도어 제품";
+            clothesCode= "0";
         }
-        return clothesInfo;
+            return clothesCode;
+
     }
 }
