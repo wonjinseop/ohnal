@@ -66,9 +66,10 @@
   font-size: 20px;
   border: none;
   border-bottom: 1px solid lightgray;
+  text-align: left;
   
 }
-.write-send {
+.content {
   width: 100%; height: 37px;
   
   /* background: none; */
