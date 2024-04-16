@@ -17,7 +17,7 @@
 
 
     <!-- 카드 시작 -->
-    <div class="card-container" id="container1">
+    <div class="card-container">
 
         <div class="new-upload-wrapper">
             <a href="/board/write" class="upload-btn">새 글쓰기</a>
@@ -29,7 +29,7 @@
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
             <div class="card-wrapper">
-                <section class="card" data-bno="${b.boardNo}">
+                <section class="card select-card" data-bno="${b.boardNo}" id="modalBtn">
                     <div class="card-title-wrapper">
                         <div class="profile-box">
                             <img src="/assets/img/anonymous.jpg" alt="프사">
@@ -45,16 +45,22 @@
                         <div class="like-icon">
                             <span class="lnr lnr-heart"></span>
                         </div>
-                        <span class="hashtag">#서울시강남구</span>
-                        <span class="hashtag">#최저12최고25</span>
+                        <span class="hashtag">${b.locationTag}</span>
+                        <span class="hashtag">${b.weatherTag}</span>
                         <div class="reply-icon">
-                            <!-- <span class="lnr lnr-bubble"></span> -->
+
                         </div>
                     </div>
                     <hr>
                     <div class="content-wrapper">
-                        <p><span>좋아요 598개</span>&nbsp&nbsp&nbsp<span>댓글 30개</span></p>
-                        <p><span class="card-account">test3</span> 일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p>
+                        <p>
+                            <span>좋아요 ${b.likeCount}개</span>
+                            &nbsp&nbsp&nbsp
+                            <span>댓글 ${b.replyCount}개</span>
+                            &nbsp&nbsp&nbsp
+                            <span>조회수 0회</span>
+                        </p>
+                        <p><span class="card-account">${b.nickname}</span> ${b.content}</p>
                         <a href="#">
                             <p>... 더 보기</p>
                         </a>
@@ -63,7 +69,7 @@
             </div>
         </c:forEach>
         <!-- 카드 복사 끝 -->
-    <!-- 카드 끝 -->
+        <!-- 카드 끝 -->
 
 
 
@@ -135,7 +141,7 @@
                     <div class="modal-wrapper-card" style="display: flex;">
 
                         <div class="card-picture modal-wrapper-card-1">
-                            <img src="/assets/img/cody.png" alt="sample">
+                            <img src="/assets/img/cody.png" alt="sample" class="content-img">
                         </div>
 
 
@@ -148,9 +154,8 @@
                                 <div class="profile-box">
                                     <img src="/assets/img/anonymous.jpg" alt="프사">
                                 </div>
-                                <span class="card-account">
-                                    <p>test3</p>
-                                </span>
+                                <span class="card-account card-account1">test3</span>
+                                <span class="time-stamp"></span>
                                 <!-- 모달 닫기 버튼 -->
                                 <span class="close" id="closeBtn">&times;</span>
                             </div>
@@ -165,39 +170,52 @@
                             <div class="li-ha">
 
                                 <div class="like-icon">
+                                    <p class="content-comments content"><span class="card-account card-account2"></span></p>
+
                                     <span class="lnr lnr-heart"></span>
-                                    <span class="hashtag">#서울시강남구</span>
-                                    <span class="hashtag">#최저12최고25</span>
-                                    <div class="like-comment"><span>좋아요 598개</span>&nbsp&nbsp&nbsp<span>댓글30개</span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="content-wrapper">
-
-
-                                <div class="wrapper-comments">
-                                    <div class="content-wrapper-comments">
-                                        <p class="content-comments"><span class="card-account">test3</span>
-                                            일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p><button style="background: none;">X</button>
-                                        <span style="margin-left: 10px;">시간영역</span>
-                                        <button id="comments-modify"
-                                            style="margin-left: 10px; background: none;">수정</button>
+                                    <div class="hashtag-wrapper">
+                                        <span class="hashtag location"></span>
+                                        <span class="hashtag weather"></span>
                                     </div>
 
+                                    <span class="like-count">좋아요 ${b.likeCount}개</span>
+                                    &nbsp&nbsp&nbsp
+                                    <span class="reply-count">댓글 ${b.replyCount}개</span>
+                                    &nbsp&nbsp&nbsp
+                                    <span class="view-count">조회수 0회</span>
+                                </div>
 
+                            </div>
+
+                            <div class="replys">
+
+
+
+                                <div class="reply-wrapper">
+                                    <p class="reply"><span class="card-account">test3</span>
+                                        일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아
+                                        dsafdsafdsafsdafdsafdsafdsafdsafffffffffffffffffffffffff
+                                    </p>
+                                    <button style="border-style: none;">X</button>
+
+
+                                    <span style="margin-left: 10px;">시간영역</span>
+                                    <button id="comments-modify"
+                                        style="margin-left: 10px; background: none;">수정</button>
+                                </div>
+
+
+
+
+                                <div class="write-reply">
+                                    <div class="write-wrapper"><input class="write-input"
+                                            placeholder="여기는 댓글 입력창입니다."></input>
+                                    </div>
+                                    <div><a class="write-send" href="#">입력</a></div>
                                 </div>
                             </div>
-                            <div class="write-content">
-                                <div class="write-wrapper"><input class="write-input"
-                                        placeholder="여기는 댓글 입력창입니다."></input>
-                                </div>
-                                <div><a class="write-send" href="#">입력</a></div>
-                            </div>
+
                         </div>
-
-                    </div>
 
                 </section>
             </div>

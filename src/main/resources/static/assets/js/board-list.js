@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var modal = document.getElementById("myModal");
   var closeBtn = document.getElementById("closeBtn");
 
+  
   // functions
   function toggleModal() {
     modal.classList.toggle("show");
@@ -23,29 +24,37 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// card-container /card-wrapper/ data-bno="${b.boardNo}
 
-document.addEventListener("DOMContentLoaded", function () {
-  // elements
-  var modalBtn1 = document.getElementById("modalBtn-1");
-  var modal1 = document.getElementById("myModal-1");
-  var closeBtn1 = document.getElementById("closeBtn-1");
+const $cardContainer = document.querySelector('.card-container');
+const URL1 = '/board/detail';
 
-  // functions
-  function toggleModal() {
-    modal1.classList.toggle("show");
+$cardContainer.onclick = e => {
+  const $card = e.target.closest('.select-card');
+  if ($card) {
+    const bno = $card.dataset.bno;
+    console.log(bno);
+    fetch(URL1 + '/' + bno)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        document.querySelector('.modal .card').dataset.bno = bno;
+        document.querySelector('.modal .card-account1').value = data.nickname;
+        document.querySelector('.modal .card-account2').value = data.nickname;
+        document.querySelector('.modal .content').value = data.content;
+        document.querySelector('.modal .content-img').setAttribute('src', data.image);
+        document.querySelector('.modal .like-count').value = data.likeCount;
+        document.querySelector('.modal .reply-count').value = data.replyCount;
+        document.querySelector('.modal .view-count').value = data.viewCount;
+        document.querySelector('.modal .location').value = data.locationTag;
+        document.querySelector('.modal .weather').value = data.weatherTag;
+        document.querySelector('.modal .time-stamp').value = data.regDate;
+      })
   }
+  
+};
 
-  // events
-  modalBtn1.addEventListener("click", toggleModal);
-  closeBtn1.addEventListener("click", toggleModal);
 
-  window.addEventListener("click", function (event) {
-    // 모달의 검은색 배경 부분이 클릭된 경우 닫히도록 하는 코드
-    if (event.target === modal1) {
-      toggleModal();
-    }
-  });
-});
 
 
 
