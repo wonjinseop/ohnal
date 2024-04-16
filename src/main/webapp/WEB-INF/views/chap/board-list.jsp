@@ -29,7 +29,7 @@
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
             <div class="card-wrapper">
-                <section class="card select-card" data-bno="${b.boardNo}" id="modalBtn">
+                <section class="card select-card" data-bno="${b.boardNo}">
                     <div class="card-title-wrapper">
                         <div class="profile-box">
                             <img src="/assets/img/anonymous.jpg" alt="프사">
@@ -123,7 +123,7 @@
 
 
     <!-- 모달 열기 버튼 -->
-    <button id="modalBtn">모달 글 확대</button>
+    <button id="modalBtn" hidden>모달 글 확대</button>
 
     <!-- 모달 컨테이너 -->
     <div id="myModal" class="modal">

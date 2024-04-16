@@ -308,6 +308,8 @@ footer .lnr-envelope {
     /* 모달이 열렸을 때 보여지게 하는 코드 */
     opacity: 1;
     pointer-events: auto;
+
+    margin-left: 0;
 }
 
 .modal.show .modal-content {
@@ -368,6 +370,8 @@ footer .lnr-envelope {
     display: flex;
     justify-content: start;
     align-items: center;
+
+    margin-left: 20000px;
 }
 
 .modal .card-title-wrapper {

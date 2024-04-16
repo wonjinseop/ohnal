@@ -17,9 +17,10 @@ public class Board {
     private String nickname;
     private String content;
     private String image;
+    private int viewCount;
     private int likeCount;
     private int replyCount;
-    private int viewCount;
+//    private int viewCount;
     private String locationTag;
     private String weatherTag;
     private LocalDateTime regDate;
