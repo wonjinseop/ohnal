@@ -231,7 +231,6 @@
 
     <%@include file="../include/footer.jsp"%>
 
-<<<<<<< HEAD
     <script>
         // 사용자의 위치를 (자동으로) 가져오기
         
@@ -244,8 +243,18 @@
         } else {
             console.log(fail);
         }
+
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            console.log(pos);
+            var latitude = pos.coords.latitude;
+            var longitude = pos.coords.longitude;
+            console.log("현재 위치는 : " + latitude + ", "+ longitude);
+        });
+
+
+
+
+
     </script>
-=======
->>>>>>> f7fa5220e2c48e555f4abdc2d8bbfee8660ed264
 </body>
 </html>
