@@ -39,22 +39,28 @@ $cardContainer.onclick = e => {
       .then(data => {
         console.log(data);
         document.querySelector('.modal .card').dataset.bno = bno;
-        document.querySelector('.modal .card-account1').value = data.nickname;
-        document.querySelector('.modal .card-account2').value = data.nickname;
-        document.querySelector('.modal .content').value = data.content;
+        document.querySelector('.modal .card-account1').textContent = data.nickname;
+        document.querySelector('.modal .card-account2').textContent = data.nickname;
+        document.querySelector('.modal .content').textContent = data.content;
         document.querySelector('.modal .content-img').setAttribute('src', data.image);
-        document.querySelector('.modal .like-count').value = data.likeCount;
-        document.querySelector('.modal .reply-count').value = data.replyCount;
-        document.querySelector('.modal .view-count').value = data.viewCount;
-        document.querySelector('.modal .location').value = data.locationTag;
-        document.querySelector('.modal .weather').value = data.weatherTag;
-        document.querySelector('.modal .time-stamp').value = data.regDate;
+        document.querySelector('.modal .like-count').textContent = '좋아요 '+ data.likeCount + '개';
+        document.querySelector('.modal .reply-count').textContent = '댓글 ' + data.replyCount + '개';
+        document.querySelector('.modal .view-count').textContent = '조회수 ' + data.viewCount+ '회';
+        document.querySelector('.modal .location').textContent = data.locationTag;
+        document.querySelector('.modal .weather').textContent = data.weatherTag;
+        document.querySelector('.modal .time-stamp').textContent = data.regDate;
       })
 
     document.getElementById('modalBtn').click();
   }
   
 };
+
+// var btn = document.getElementById("like")
+
+//   btn.addEventListener('click',function(){
+//             btn.classList.toggle('active')
+//     })
 
 
 
