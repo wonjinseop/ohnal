@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+
 <head>
     <title>Today weather, oh-nal</title>
     <%@include file="../include/static-head.jsp"%>
@@ -9,6 +10,7 @@
     <!-- weather search event js -->
     <script src="/assets/js/weather-search.js" defer></script>
 </head>
+
 <body>
     <%@include file="../include/header.jsp"%>
 
@@ -231,13 +233,14 @@
         // 사용자의 위치를 (자동으로) 가져오기
         
         // 사용자의 위치(위도, 경도)를 가져올 변수 선언 및 초기화
-        
-
-
-
-
-
-
+        // navigator.geolocation 객체 사용 가능 여부 확인
+        if("geolocation" in navigator) {
+            // 브라우저가 지원한다면
+            console.log('success');
+            // 콘솔창에 success 출력되어 navigator.geolocation 객체를 사용해서 사용자의 위치를 가져오겠습니다.
+        } else {
+            console.log(fail);
+        }
     </script>
 </body>
 </html>
