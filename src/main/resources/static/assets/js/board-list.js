@@ -50,6 +50,8 @@ $cardContainer.onclick = e => {
         document.querySelector('.modal .weather').value = data.weatherTag;
         document.querySelector('.modal .time-stamp').value = data.regDate;
       })
+
+    document.getElementById('modalBtn').click();
   }
   
 };

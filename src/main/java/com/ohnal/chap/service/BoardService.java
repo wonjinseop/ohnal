@@ -38,12 +38,16 @@ public class BoardService {
         
         board.setEmail(LoginUtils.getLoginUserEmail(session));
         
-        mapper.save(dto);
+        mapper.save(board);
         
     }
     
     // 페이징
     public int getCount(Search page) {
         return mapper.getCount(page);
+    }
+    
+    public Board findOne(int bno) {
+        return mapper.findOne(bno);
     }
 }

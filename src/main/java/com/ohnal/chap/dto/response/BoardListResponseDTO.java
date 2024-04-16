@@ -50,13 +50,13 @@ public class BoardListResponseDTO {
         return result;
     }
     
-    public static String makePrettierReplyCount(int likeCount) {
+    public static String makePrettierReplyCount(int replyCount) {
         String result;
-        if (likeCount >= 1000) {
-            double count = likeCount * 0.001;
+        if (replyCount >= 1000) {
+            double count = replyCount * 0.001;
             result = String.valueOf(Math.floor(count * 10)/10);
         } else {
-            result = String.valueOf(likeCount);
+            result = String.valueOf(replyCount);
         }
         return result;
     }
