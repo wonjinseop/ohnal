@@ -8,7 +8,7 @@
         <ul class="list">
             <li>
                 <span>Mail us, stay updated</span>
-                <a href="mailto:" ohnal@naver.com><span class="lnr lnr-envelope"></span></a>
+                <a href="mailto:" ohnal2024@gmail.com><span class="lnr lnr-envelope"></span></a>
             </li>
         </ul>
     </div>
