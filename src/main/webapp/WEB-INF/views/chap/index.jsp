@@ -23,9 +23,9 @@
                 </div>
                 <div class="left-down">
                     <h2>오늘 ${dto.area1} ${dto.area2}의 기온은</h2>
-                    <h2>최저 ${dto.minTemperature}도, 최고 ${dto.maxTemperature}도입니다</h2>
-                </div>
+                    <h2>최저 ${minInt}도, 최고 ${maxInt}도입니다</h2>
 
+                </div>
             </div>
             <div class="right-section">
                 <div class="right-top">
@@ -43,7 +43,7 @@
 
             <form action="#">
                 <select name="h_area1" onChange="cat1_change(this.value,h_area2)" class="h_area1">
-                    <option>&nbsp 시, 도를 선택하세요</option>
+                    <option>시, 도를 선택하세요</option>
                     <option value='1'>서울특별시</option>
                     <option value='2'>부산광역시</option>
                     <option value='3'>대구광역시</option>
@@ -224,7 +224,20 @@
         </div>
     </div>
 
+
     <%@include file="../include/footer.jsp"%>
 
+    <script>
+        // 사용자의 위치를 (자동으로) 가져오기
+        
+        // 사용자의 위치(위도, 경도)를 가져올 변수 선언 및 초기화
+        
+
+
+
+
+
+
+    </script>
 </body>
 </html>

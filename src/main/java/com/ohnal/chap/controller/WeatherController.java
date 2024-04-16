@@ -31,7 +31,13 @@ public class WeatherController {
 
         WeatherInfoResponseDTO dto = weatherService.getShortTermForecast(area1.trim(), area2.replaceAll(" ", ""));
 
+        int maxInt = (int)dto.getMaxTemperature();
+        int minInt = (int)dto.getMinTemperature();
+
         model.addAttribute("dto", dto);
+        model.addAttribute("maxInt", maxInt);
+        model.addAttribute("minInt", minInt);
+
         return "chap/index";
     }
 
