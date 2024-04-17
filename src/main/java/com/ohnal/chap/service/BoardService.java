@@ -36,7 +36,7 @@ public class BoardService {
     public void save(BoardWriteRequestDTO dto, HttpSession session) {
         Board board = new Board(dto);
         
-        board.setEmail(LoginUtils.getLoginUserEmail(session));
+        board.setEmail(LoginUtils.getCurrentLoginMemberEmail(session));
         
         mapper.save(board);
         
