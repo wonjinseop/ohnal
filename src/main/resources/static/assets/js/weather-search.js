@@ -47,15 +47,55 @@ document.getElementById('send-btn').onclick = () => {
                     <div class="right-top">
                         <h2>오늘의 패션 예보</h2>
                     </div>
-                    <div class="right-down">
-                        <img id="clothes-img" src="/assets/img/clothes-image/range_code_${styleImage}/${styleImage}-0-male.png" alt="clothes">
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                    <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${styleImage}/${styleImage}-0-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${styleImage}/${styleImage}-1-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${styleImage}/${styleImage}-2-male.png">
+                            </div>
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
                 `;
 
-                       document.querySelector('.top-section').innerHTML = tag;
-                    }
-                }
+        document.querySelector('.top-section').innerHTML = tag;
+
+
+        // swiper 작동
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+        swiper.autoplay.start();
+    }
+}
+
+
 
 var cat1_num = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 var cat1_name = new Array('서울', '부산', '대구', '인천', '광주', '대전', '울산', '강원', '경기', '경남', '경북', '전남', '전북', '제주',

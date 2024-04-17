@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <!-- weather search event js -->
     <script src="/assets/js/weather-search.js" defer></script>
+
+    <%-- swiper.js --%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 <body>
@@ -33,9 +37,21 @@
                 <div class="right-top">
                     <h2>오늘의 패션 예보</h2>
                 </div>
-                <div class="right-down">
-<%--                    <img src="/assets/img/clothes-image/${dto.styleImage}" alt="clothes">--%>
-                        <img id = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                        </div>
+                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
+                        </div>
+                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
+                        </div>
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination"></div>
                 </div>
 
             </div>
@@ -250,6 +266,30 @@
             var longitude = pos.coords.longitude;
             console.log("현재 위치는 : " + latitude + ", "+ longitude);
         });
+
+        // swiper 함수
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+        swiper.autoplay.start();
 
 
 
