@@ -116,4 +116,10 @@ public class MemberController {
             return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
         }
     }
+
+    @GetMapping("/my-history")
+    public String myHistory() {
+        return "chap/my-history";
+    }
+
 }
