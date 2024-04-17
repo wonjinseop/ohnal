@@ -28,3 +28,6 @@
 <!-- header & footer css -->
 <link rel="stylesheet" href="/assets/css/header.css">
 <link rel="stylesheet" href="/assets/css/footer.css">
+
+<!-- favicon-->
+<link rel="shortcut icon" href="/assets/img/ohnal_favicon.png">

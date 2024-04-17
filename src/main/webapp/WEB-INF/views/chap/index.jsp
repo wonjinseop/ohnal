@@ -3,10 +3,12 @@
 <html>
 
 <head>
-    <title>Today weather, oh-nal</title>
+    <title>Today's weather, oh-nal</title>
     <%@include file="../include/static-head.jsp"%>
-    <!-- page css -->
+
+    <!-- index page css -->
     <link rel="stylesheet" href="/assets/css/main.css">
+
     <!-- weather search event js -->
     <script src="/assets/js/weather-search.js" defer></script>
 
@@ -44,10 +46,19 @@
                                 <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
                         </div>
                         <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
+                        </div>
+                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
                             <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
                         </div>
                         <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
+                        </div>
+                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
                             <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
+                        </div>
+                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
                         </div>
                     </div>
                     <!-- If we need pagination -->
@@ -265,10 +276,7 @@
             var latitude = permitPosition.coords.latitude; // 위도
             var longitude = permitPosition.coords.longitude; // 경도
             console.log("현재 위치는 : " + latitude + ", "+ longitude);
-        }, function(rejectPosition) {});
-
-
-        
+        });
 
         // swiper 함수
         const swiper = new Swiper('.swiper', {
