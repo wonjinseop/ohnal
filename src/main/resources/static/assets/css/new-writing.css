@@ -17,8 +17,11 @@
   width: 50%; height: 100%;
 }
 .new-writing-wrapper .cody-load img {
-  width: 80%; height: 24%;
-  margin: 250px 50px 50px 150px;
+  width: 100%; height: 100%;
+}
+#imagePreview{
+  width: 598px; height: 648px;
+  border: 5px solid lightgray;
 }
 
 .new-writing-wrapper .user-info {

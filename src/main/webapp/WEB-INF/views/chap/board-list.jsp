@@ -173,7 +173,7 @@
                             <div class="li-ha">
 
                                 <div class="like-icon">
-                                    <p class="content-comments content"><span class="card-account card-account2"></span>
+                                    <p class="content-comments content">
                                     </p>
 
                                     <span class="lnr lnr-heart"></span>
@@ -297,12 +297,12 @@
 
 
 
-                            <div class="write-reply">
-                                <div class="write-wrapper"><input class="write-input"
-                                        placeholder="여기는 댓글 입력창입니다."></input>
+                            <form id="commentFrm" class="write-reply">
+                                <div class="write-wrapper">
+                                    <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                    <button class="write-send" type="button">등록</button>
                                 </div>
-                                <div><a class="write-send" href="#">입력</a></div>
-                            </div>
+                            </form>
 
 
                         </div>

@@ -6,7 +6,8 @@
   <title>Today's weather, oh-nal</title>
   <%@include file="../include/static-head.jsp"%>
   <link rel="stylesheet" href="/assets/css/new-writing.css">
-  <!-- <script type="text/javascript" src="/assets/js/board-list.js" defer></script> -->
+  <script src="/assets/js/new-writing.js" defer></script>
+  
 
 </head>
 
@@ -16,13 +17,21 @@
   <div class="new-writing-wrapper">
 
 
-    <form class="cody-load">
-      <label for="ex_file"><img src="/assets/img/upload1.png" alt="">
-        <input type="file" id="ex_file" name="filename" multiple hidden>
+    <!-- <form class="cody-load btn_image">
+      <label for="ex_file"><img class="imagePreview" src="/assets/img/upload1.png" alt="">
+        <input type="file" id="ex_file selectFile" name="filename" multiple hidden>
       </label>
 
-    </form>
+    </form> -->
 
+    <div class="image_container cody-load">
+      <div class="btn_image">
+        <label for="selectFile">
+          <img id="imagePreview" src="/assets/img/upload.png" alt="이미지 미리보기">
+        </label>
+      </div>
+      <input type="file" id="selectFile" name="selectFile" accept="image/*" style="display: none;">
+    </div>
 
     <div class="user-info">
       <div>
