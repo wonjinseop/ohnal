@@ -13,7 +13,7 @@
 
 .top-section .right-section {
   width: 40%;
-  margin-top: 50px;
+  margin-top: 30px;
   text-align: center;
 }
 
@@ -22,6 +22,10 @@
   width: 450px;
 }
 
+.swiper {
+  width: 100%;
+  height: 500px;
+}
 
 .top-section .left-section {
   width: 40%;
