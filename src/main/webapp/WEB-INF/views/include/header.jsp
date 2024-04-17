@@ -21,8 +21,8 @@
             </a>
             <ul>
                 <li><a href="/board/list">OOTD 게시판</a></li>
-                <li><a href="/sign-up">Sign Up</a></li>
-                <li><a href="/sign-in">Sign In</a></li>
+                <li><a href="/members/sign-up">Sign Up</a></li>
+                <li><a href="/members/sign-in">Sign In</a></li>
             </ul>
         </nav>
 

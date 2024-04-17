@@ -267,7 +267,6 @@
             console.log("현재 위치는 : " + latitude + ", "+ longitude);
         }, function(rejectPosition) {});
 
-        // 사용자의 위치가 거절되는 3가지 경우
 
         
 

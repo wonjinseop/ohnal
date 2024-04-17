@@ -21,7 +21,7 @@
                 <input type="submit" value="로그인">
             </form>
             <a href="/sign-up" class="signup-btn">회원가입</a>
-            <a href="#" class="kakaologinlogo"><img src="./assets/img/kakaologo.png" alt="카카오톡로그인로고"></a>
+            <a href="#" class="kakaologinlogo"><img src="/assets/img/kakaologo.png" alt="카카오톡로그인로고"></a>
             <div class="forgot-link">
                 <a href="#">이메일찾기</a> | <a href="#">비밀번호찾기</a>
             </div>
