@@ -244,12 +244,16 @@
             console.log(fail);
         }
 
-        navigator.geolocation.getCurrentPosition(function(pos) {
-            console.log(pos);
-            var latitude = pos.coords.latitude;
-            var longitude = pos.coords.longitude;
+        navigator.geolocation.getCurrentPosition(function(permitPosition) {
+            console.log(permit);
+            var latitude = permitPosition.coords.latitude; // 위도
+            var longitude = permitPosition.coords.longitude; // 경도
             console.log("현재 위치는 : " + latitude + ", "+ longitude);
-        });
+        }, function(rejectPosition) {});
+
+        // 사용자의 위치가 거절되는 3가지 경우
+
+        
 
 
 
