@@ -251,7 +251,7 @@ footer .lnr-envelope {
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
     box-sizing: content-box;
-    
+
 }
 
 .modal.show {
@@ -353,8 +353,8 @@ footer .lnr-envelope {
 
 
 .modal-content .card-picture img {
-    width: 100%; height: 100%;
-    
+    width: 100%;
+    height: 100%;
 }
 .modal-content .card-wrapper .card-title-wrapper .profile-box {
     width: 50px;
@@ -384,9 +384,7 @@ footer .lnr-envelope {
 /* 프로필사진 영역 */
 .modal-content .card-wrapper .card-title-wrapper .profile-box img {
     width: 100%;
-    padding-top: 7px;
-
-
+    padding-top: 5px;
 }
 
 .modal-content .card-account {
@@ -461,33 +459,39 @@ footer .lnr-envelope {
 
 .modal .modal-wrapper-card-2 .replys .reply-wrapper {
     width: 100%;
+    margin-top: 7px;
     /* border: 1px dashed blue; */
     display: flex;
+    flex-wrap: wrap;
     box-sizing: content-box;
 }
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account {
     text-align: center;
     width: 15%;
+    margin-left: 0px;
 }
+
+.modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account .profile-img {
+    width: 30px;
+    margin-right: 7px;
+}
+
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .reply {
-    width: 80%;
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 5px;
     margin-bottom: 0;
 }
 .modal .modal-wrapper-card-2 .replys .reply-data {
     width: 100%;
     /* border: 1px dashed purple; */
-    margin-bottom: 15px;
+    margin-bottom: 7px;
 }
 .modal .modal-wrapper-card-2 .replys .reply-data *{
     font-size: 13px; color: gray;
     margin-left: 10px;
     background: none;
 }
-
-.modal .modal-wrapper-card-2 .replys .reply-data span {
-    margin-left: 95px;
-}
-
  /* 댓글 입력 버튼창 */
 .modal-content .write-reply {
     border: 1px solid lightgray;

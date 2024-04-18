@@ -1,8 +1,11 @@
 package com.ohnal.chap.service;
 import com.ohnal.chap.common.Search;
+import com.ohnal.chap.controller.ReplyPostRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
+import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
 import com.ohnal.chap.entity.Board;
+import com.ohnal.chap.entity.Reply;
 import com.ohnal.chap.mapper.BoardMapper;
 import com.ohnal.util.LoginUtils;
 import jakarta.servlet.http.HttpSession;
@@ -48,6 +51,28 @@ public class BoardService {
     }
     
     public Board findOne(int bno) {
+        mapper.updateViewCount(bno);
         return mapper.findOne(bno);
+    }
+    
+    public List<BoardReplyResponseDTO> getReplyList(int bno) {
+        List<BoardReplyResponseDTO> dtoList = new ArrayList<>();
+        List<Reply> replyList = mapper.replyList(bno);
+        
+        for (Reply reply : replyList) {
+            BoardReplyResponseDTO dto = new BoardReplyResponseDTO(reply);
+            dtoList.add(dto);
+        }
+        
+        return dtoList;
+    }
+    
+    public void writeReply(ReplyPostRequestDTO dto, String email, String nickname) {
+        
+        Reply reply = dto.toEntity(nickname);
+        
+        reply.setEmail(email);
+        
+        mapper.replySave(reply);
     }
 }

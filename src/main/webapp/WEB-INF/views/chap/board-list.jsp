@@ -156,7 +156,7 @@
                                 <div class="profile-box">
                                     <img src="/assets/img/anonymous.jpg" alt="프사">
                                 </div>
-                                <span class="card-account card-account1">test3</span>
+                                <span class="card-account"></span>
                                 <span class="time-stamp"></span>
                                 <!-- 모달 닫기 버튼 -->
                                 <span class="close" id="closeBtn">&times;</span>
@@ -173,8 +173,7 @@
                             <div class="li-ha">
 
                                 <div class="like-icon">
-                                    <p class="content-comments content">
-                                    </p>
+                                    <p class="content-comments content"></p>
 
                                     <span class="lnr lnr-heart"></span>
                                     <div class="hashtag-wrapper">
@@ -194,105 +193,9 @@
 
 
                             <div class="replys">
+                                <div class='reply-wrapper'>
 
-
-
-
-
-                                <div class="reply-wrapper">
-                                    <span class="card-account">test3</span>
-                                    <p class="reply">
-                                        일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
-                                        좋아일교차가 클일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를
-                                    </p>
-                                    <!-- <input type="text" hidden> -->
                                 </div>
-
-                                <div class="reply-data">
-                                    <span>시간영역</span>
-                                    <button id="comments-modify">수정
-                                    </button>
-                                    <button>삭제</button>
-                                </div>
-                                <div class="reply-wrapper">
-                                    <span class="card-account">test3</span>
-                                    <p class="reply">
-                                        일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
-                                        좋아일교차가 클일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를
-                                    </p>
-                                    <!-- <input type="text" hidden> -->
-                                </div>
-
-                                <div class="reply-data">
-                                    <span>시간영역</span>
-                                    <button id="comments-modify">수정
-                                    </button>
-                                    <button>삭제</button>
-                                </div>
-                                
-                                <div class="reply-wrapper">
-                                    <span class="card-account">test3</span>
-                                    <p class="reply">
-                                        일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
-                                        좋아일교차가 클일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를
-                                    </p>
-                                    <!-- <input type="text" hidden> -->
-                                </div>
-
-                                <div class="reply-data">
-                                    <span>시간영역</span>
-                                    <button id="comments-modify">수정
-                                    </button>
-                                    <button>삭제</button>
-                                </div>
-
-                                <div class="reply-wrapper">
-                                    <span class="card-account">test3</span>
-                                    <p class="reply">
-                                    걸치는 게 좋아일교차가 클 땐 아우터를
-                                    </p>
-                                    <!-- <input type="text" hidden> -->
-                                </div>
-
-                                <div class="reply-data">
-                                    <span>시간영역</span>
-                                    <button id="comments-modify">수정
-                                    </button>
-                                    <button>삭제</button>
-                                </div>
-
-                                <div class="reply-wrapper">
-                                    <span class="card-account">test3</span>
-                                    <p class="reply">
-                                        일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
-                                        좋아일교차가 클일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를
-                                    </p>
-                                    <!-- <input type="text" hidden> -->
-                                </div>
-
-                                <div class="reply-data">
-                                    <span>시간영역</span>
-                                    <button id="comments-modify">수정
-                                    </button>
-                                    <button>삭제</button>
-                                </div>
-
-                                <div class="reply-wrapper">
-                                    <span class="card-account">test3</span>
-                                    <p class="reply">
-                                        일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
-                                    </p>
-                                    <!-- <input type="text" hidden> -->
-                                </div>
-
-                                <div class="reply-data">
-                                    <span>시간영역</span>
-                                    <button id="comments-modify">수정
-                                    </button>
-                                    <button>삭제</button>
-                                </div>
-
-
                             </div>
 
 

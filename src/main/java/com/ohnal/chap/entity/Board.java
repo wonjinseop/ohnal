@@ -20,7 +20,6 @@ public class Board {
     private int viewCount;
     private int likeCount;
     private int replyCount;
-//    private int viewCount;
     private String locationTag;
     private String weatherTag;
     private LocalDateTime regDate;

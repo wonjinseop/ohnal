@@ -17,6 +17,7 @@
         <!-- 엔터티 클래스 별칭 붙이기 -->
         <!-- 예시: <typeAlias type="com.spring.mvc.chap05.entity.Board" alias="board" /> -->
         <typeAlias type="com.ohnal.chap.entity.Board" alias="board" />
+        <typeAlias type="com.ohnal.chap.entity.Reply" alias="reply" />
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->

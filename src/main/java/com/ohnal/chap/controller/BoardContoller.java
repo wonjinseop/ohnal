@@ -4,6 +4,7 @@ import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
+import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.service.BoardService;
 import jakarta.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +37,6 @@ public class BoardContoller {
         
         model.addAttribute("bList", dtoList);
         model.addAttribute("maker", pageMaker);
-        log.info("model: {}", model);
         
         return "chap/board-list";
     }
@@ -58,13 +60,43 @@ public class BoardContoller {
     
     @GetMapping("/detail/{bno}")
     @ResponseBody
-    public ResponseEntity<Board> detail(@PathVariable int bno) {
-        log.info(String.valueOf(bno));
+    public ResponseEntity<?> detail(@PathVariable int bno) {
+        
         Board board = boardService.findOne(bno);
+        BoardListResponseDTO dto = new BoardListResponseDTO(board);
         
-        log.info(board.toString());
-        
-        return ResponseEntity.ok().body(board);
+        return ResponseEntity.ok().body(dto);
     }
+    
+    @GetMapping("/reply/{bno}")
+    @ResponseBody
+    public ResponseEntity<?> reply(@PathVariable int bno) {
+        
+        List<BoardReplyResponseDTO> replyList = boardService.getReplyList(bno);
+        
+        return ResponseEntity.ok().body(replyList);
+    }
+    
+    @PostMapping("/reply")
+    public ResponseEntity<?> writeReply(@Validated @RequestBody ReplyPostRequestDTO dto,
+                                        BindingResult result) {
+        
+        String email = "user123@naver.com";
+        String nickname = "user";
+        
+        if (result.hasErrors()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(result.toString());
+        }
+        
+        log.info("/board/reply/write: POST");
+        
+        boardService.writeReply(dto, email, nickname);
+        
+        return ResponseEntity.ok().body("success");
+    }
+    
+    
     
 }

@@ -23,19 +23,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 // card-container /card-wrapper/ data-bno="${b.boardNo}
 //게시물 클릭시 modal창 열리는 이벤트 발생, 클릭한 게시물 내용 모달창에 넣는 기능
 
 const $cardContainer = document.querySelector('.card-container');
-const URL1 = '/board/detail/';
 
 $cardContainer.onclick = e => {
+  const URL = '/board/detail/';
   const $card = e.target.closest('.select-card');
   if ($card) {
     const bno = $card.dataset.bno;
+    boardNo = bno;
     console.log(bno);
-    fetch(URL1 + bno)
+    fetch(URL + bno)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -84,9 +84,8 @@ $cardContainer.onclick = e => {
 
 function fetchGetReplies(bno) {
   console.log('응답');
-  const $replys = document.querySelector('.replys')
-  const URL1 = '/board/reply/';
-  fetch(URL1 + bno)
+  const URL = '/board/reply/';
+  fetch(URL + bno)
     .then(res => res.json())
     .then(replyList => {
       console.log(replyList);
@@ -96,29 +95,30 @@ function fetchGetReplies(bno) {
 };
 
 function renderReplies(replyList) {
-  
+  const $replyWrapper = document.querySelector('.reply-wrapper')
   let tag = '';
 
   if (replyList !== null && replyList.length > 0) {
     
     for (let reply of replyList) {
 
+      console.log(reply);
+
       const {replyNo, email, content, profileImage, nickname, time} = reply
 
       tag += `
-      <div class="reply-wrapper">
-      <span class="card-account" data-email="\${email}"><img src="\${profileImage}">\${nickname}</span>
-        <p class="reply" data-no="\${replyNo}">
-            \${content}
+        <span class='card-account' data-email='${email}'><img src='${profileImage}' class='profile-img'>${nickname}</span>
+        <p class='reply' data-no='${replyNo}'>
+            ${content}
         </p>
-      <!-- <input type="text" hidden> -->
-      </div>
+        <!-- <input type='text' hidden> -->
+      
 
-      <div class="reply-data">
-        <span>\${time}</span>
-        <button id="comments-modify">수정</button>
-        <button>삭제</button>
-      </div>
+        <div class='reply-data'>
+          <span>${time}</span>
+          <button id="comments-modify">수정</button>
+          <button>삭제</button>
+        </div>
       `
 
     }
@@ -133,29 +133,74 @@ function renderReplies(replyList) {
 //             btn.classList.toggle('active')
 //     })
 
-  $replys.innerHTML = tag;
+  $replyWrapper.innerHTML = tag;
 
-}
-
-
+};
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  // 버튼 요소 선택
-  var submitButton = document.querySelector('.write-send');
 
-  // 버튼 클릭 이벤트 핸들러 등록
-  submitButton.addEventListener('click', function() {
-      // 입력 필드 선택
-      var inputField = document.querySelector('.write-input');
 
-      console.log(inputField.value);
+
+// 버튼 요소 선택
+var submitButton = document.querySelector('.write-send');
+
+// 버튼 클릭 이벤트 핸들러 등록
+submitButton.addEventListener('click', function() {
+  const boardNo = document.querySelector('.modal .card').dataset.bno;
+
+  // 입력 필드 선택
+  const inputField = document.querySelector('.write-input');
+  const content = inputField.value.trim();
+  const URL = '/board/reply'
+
+  console.log(boardNo);
+  console.log(inputField.value);
+
+  // 사용자 입력자 검증
+  if (content === '') {
+    alert('댓글 내용은 필수값입니다!!');
+    return;
+  };
+
+  const payLoad = {
+    text: content,
+    bno: boardNo
+  };
+
+  // 요청 방식 및 데이터를 전달할 정보 객체 만들기 (POST)
+  const requestInfo = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(payLoad) // js 객체를 JSON으로 변환해서 body에 추가
+  };
+
+  // 서버에 POST 요청 보내기
+  fetch(URL, requestInfo)
+    .then(res => {
+      console.log(res.status);
+
+      if (res.status === 200) {
+        alert('댓글이 정상 등록되었습니다.');
+        return res.text();
+      } else {
+        alert('입력값에 문제가 있습니다! 입력값을 다시 확인해 보세요!');
+        return res.text();
+      }
+      
+    })
+    .then(data => {
+      console.log('응답 성공! ', data);
 
       // 입력 필드의 값 비우기
       inputField.value = '';
-  });
-});
 
+      // 댓글 목록 비동기 요청
+      fetchGetReplies(boardNo);
+    });
+
+});
 
 
