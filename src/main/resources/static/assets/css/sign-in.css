@@ -52,6 +52,7 @@ input[type="submit"] {
     cursor: pointer;
     margin-bottom: 10px;
     color: #12e6fc;
+    margin-top:10px;
 
 
 }
@@ -93,5 +94,26 @@ input[type="submit"]:hover {
     background-color: rgba(253, 228, 0, 0.938);
     width: 300px;
     height: 45px;
+    margin-top:10px;
 
 }
+.autologinbox {
+pointer:cursor;
+}
+
+#naverlogo {
+    height: 51px;
+    vertical-align: middle;
+    width: 192px;
+}
+
+.naverlogobackground {
+    background-color: #03c75a;
+    text-align:center;
+    display: block;
+    margin-top: 10px;
+    width: 300px;
+    border-radius: 5px;
+    height:51px;
+    }
+

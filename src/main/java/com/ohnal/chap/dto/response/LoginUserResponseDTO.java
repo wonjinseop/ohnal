@@ -1,18 +1,15 @@
 package com.ohnal.chap.dto.response;
+
 import lombok.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Getter @Setter @ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 @Builder
 public class LoginUserResponseDTO {
-
-    private String email;
-    private  String name;
-    private String profile;
-    private String loginMethod;
-
+   private String account;
+   private String name;
+   private String email;
+   private String auth;
+   private String profile;
+   private String loginMethod;
 }
-
