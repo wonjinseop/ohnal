@@ -4,6 +4,13 @@
 
 <mapper namespace="com.ohnal.chap.mapper.BoardMapper">
 
+    <select id="findAllMyPosts" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE email = "user123@naver.com"
+        ORDER BY board_no DESC
+        LIMIT #{pageStart}, #{amount}
+    </select>
+
     <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
 
