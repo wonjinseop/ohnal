@@ -117,6 +117,7 @@ public class MemberController {
         }
     }
 
+    // my-page로 이동하는 메서드
     @GetMapping("/my-history")
     public String myHistory() {
         return "chap/my-history";
