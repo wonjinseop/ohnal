@@ -19,11 +19,11 @@
     <!-- 카드 시작 -->
     <div class="card-container">
 
-        <c:if test="${login != null}">
-            <div class="new-upload-wrapper">
+        <div class="new-upload-wrapper">
+            <c:if test="${login != null}">
                 <a href="/board/write" class="upload-btn">새 글쓰기</a>
-            </div>
-        </c:if>
+            </c:if>
+        </div>
 
 
         <!-- 카드 복사 -->

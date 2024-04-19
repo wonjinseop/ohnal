@@ -58,7 +58,12 @@ public class MemberController {
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto) {
         log.info("/members/sign-up: POST");
-        String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPath);
+        
+        if (!rootPath.contains("/profile")) {
+            rootPath = rootPath + "/profile";
+        }
+        
+        String savePath = "/profile" + FileUtils.uploadFile(dto.getProfileImage(), rootPath);
         log.info("save-path: {}", savePath);
 
         // 일반 방식(우리사이트를 통해)으로 회원가입

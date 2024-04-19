@@ -30,7 +30,7 @@
 
         <div class="profile-name">
           <div class="profile-box">
-            <img src="/assets/img/anonymous.jpg" alt="프사">
+            <img src="/display${login.profile}" alt="프사">
           </div>
           <input type="text" id="nickname" name="nickname" value="user" readonly>
         </div>
