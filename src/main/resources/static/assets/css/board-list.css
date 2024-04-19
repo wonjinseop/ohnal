@@ -325,6 +325,7 @@ footer .lnr-envelope {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .close:hover {
@@ -384,7 +385,12 @@ footer .lnr-envelope {
 /* 프로필사진 영역 */
 .modal-content .card-wrapper .card-title-wrapper .profile-box img {
     width: 100%;
-    padding-top: 5px;
+    align-content: center;
+}
+
+.modal .card-title-wrapper .time-stamp {
+    width: 70px;
+    align-content: center;
 }
 
 .modal-content .card-account {

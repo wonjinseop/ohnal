@@ -1,10 +1,11 @@
-const $image = document.getElementById('imagePreview');
+const $img = document.getElementById('img');
+const $image = document.getElementById('image');
 const $profile_btn = document.querySelector('.btn_image')
 const $fileInput = document.getElementById('selectFile');
 
 $profile_btn.onclick = e => {
   $fileInput.click();
-}
+};
 
 $fileInput.onchange = e => {
   const fileData = $fileInput.files[0];
@@ -13,6 +14,7 @@ $fileInput.onchange = e => {
   reader.readAsDataURL(fileData);
 
   reader.onloadend = () => {
-    $image.setAttribute('src', reader.result);
-  }
-}
+    $img.setAttribute('src', reader.result);
+    $image.setAttribute('value', reader.result);
+  };
+};

@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 @Getter @ToString
 @EqualsAndHashCode
@@ -37,6 +38,7 @@ public class BoardListResponseDTO {
         this.viewCount = makePrettierViewCount(board.getViewCount());
     }
     
+    // 뷰카운트 표시방식 변경
     private String makePrettierViewCount(int viewCount) {
         String result;
         if (viewCount > 1000) {
@@ -51,6 +53,7 @@ public class BoardListResponseDTO {
         return result;
     }
     
+    // 시간 표시 방식 변경
     public static String makePrettierDateString(LocalDateTime regDate) {
         
         // 현재 시간
@@ -58,13 +61,27 @@ public class BoardListResponseDTO {
         
         // 두 시간 사이의 차이 계산
         Duration duration = Duration.between(regDate, currentTime);
-        String hoursDifference = String.valueOf(duration.toHours()); // 시간 단위로 차이 계산
+        long seconds = duration.toSeconds();
+        long minutes = duration.toMinutes();
+        long hoursDifference = duration.toHours();
         
-        String time = hoursDifference;
+        String time = "";
+        if (seconds < 60) {
+            time = seconds + "초 전";
+        } else if (minutes < 60) {
+            time = minutes + "분 전";
+        } else if (hoursDifference < 24) {
+            time = hoursDifference + "시간 전";
+        } else if (hoursDifference < 168) {
+            time = duration.toDays() + "일 전";
+        } else {
+            time = ChronoUnit.WEEKS.between(regDate, currentTime) + "주 전";
+        }
         
-        return time + "시간 전";
+        return time;
     }
     
+    // likeCount 표시방식 변경
     public static String makePrettierLikeCount(int likeCount) {
         String result;
         if (likeCount == 1000) {
