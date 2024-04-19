@@ -111,7 +111,5 @@ public class BoardContoller {
         
         return ResponseEntity.ok().body("success");
     }
-    
-    
-    
+
 }

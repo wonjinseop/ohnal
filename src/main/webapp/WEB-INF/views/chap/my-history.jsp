@@ -28,60 +28,69 @@
             </div>
         </div>
 
-        <c:choose>
 
+        <c:choose>
+            <c:when test="${empty bList}">
+                <!-- 게시글 목록 조회 결과가 비어있다면 -->
+                <tr>
+                    <th colspan="5">게시글이 존재하지 않습니다.</th>
+                </tr>
+            </c:when>
+
+            <c:otherwise>
+                <!-- 게시글 목록 조회 결과가 비어있지 않다면 -->
+                <!-- 카드 복사 -->
+                <c:forEach var="b" items="${bList}">
+                    <!-- 인스타 형식의 카드(글)들 전체를 감싸는 컨테이너
+                이 컨테이너 안에 회원이 쓴 글, 댓글, 좋아요한 글들이 배치된다.-->
+                    <div class="card-wrapper">
+                        <section class="card select-card" data-bno="${b.boardNo}">
+                            <div class="card-title-wrapper">
+                                <div class="profile-box">
+                                    <img src="/assets/img/anonymous.jpg" alt="프사">
+                                </div>
+                                <span class="card-account">test3</span>
+                            </div>
+
+                            <div class="card-picture">
+                                <img src="/assets/img/cody.png" alt="sample">
+                            </div>
+
+                            <div class="icon-wrapper">
+                                <div class="like-icon">
+                                    <span class="lnr lnr-heart"></span>
+                                </div>
+                                <span class="hashtag">${b.locationTag}</span>
+                                <span class="hashtag">${b.weatherTag}</span>
+                                <div class="reply-icon">
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="content-wrapper">
+                                <p>
+                                    <span>좋아요 ${b.likeCount}개</span>
+                                    &nbsp&nbsp&nbsp
+                                    <span>댓글 ${b.replyCount}개</span>
+                                    &nbsp&nbsp&nbsp
+                                    <span>조회수 회</span>
+                                </p>
+                                <p><span class="card-account">${b.nickname}</span> ${b.content}</p>
+                                <a href="#">
+                                    <p>... 더 보기</p>
+                                </a>
+                            </div>
+                        </section>
+                    </div>
+                </c:forEach>
+                <!-- 카드 복사 끝 -->
+                <!-- 카드 끝 -->
+                </div>
+
+
+            </c:otherwise>
         </c:choose>
 
-
-
-        
-        <!-- 카드 복사 -->
-        <c:forEach var="b" items="${bList}">
-            <!-- 인스타 형식의 카드(글)들 전체를 감싸는 컨테이너
-            이 컨테이너 안에 회원이 쓴 글, 댓글, 좋아요한 글들이 배치된다.-->
-            <div class="card-wrapper">
-                <section class="card select-card" data-bno="${b.boardNo}">
-                    <div class="card-title-wrapper">
-                        <div class="profile-box">
-                            <img src="/assets/img/anonymous.jpg" alt="프사">
-                        </div>
-                        <span class="card-account">test3</span>
-                    </div>
-
-                    <div class="card-picture">
-                        <img src="/assets/img/cody.png" alt="sample">
-                    </div>
-
-                    <div class="icon-wrapper">
-                        <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
-                        </div>
-                        <span class="hashtag">${b.locationTag}</span>
-                        <span class="hashtag">${b.weatherTag}</span>
-                        <div class="reply-icon">
-
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-wrapper">
-                        <p>
-                            <span>좋아요 ${b.likeCount}개</span>
-                            &nbsp&nbsp&nbsp
-                            <span>댓글 ${b.replyCount}개</span>
-                            &nbsp&nbsp&nbsp
-                            <span>조회수 회</span>
-                        </p>
-                        <p><span class="card-account">${b.nickname}</span> ${b.content}</p>
-                        <a href="#">
-                            <p>... 더 보기</p>
-                        </a>
-                    </div>
-                </section>
-            </div>
-        </c:forEach>
-        <!-- 카드 복사 끝 -->
-        <!-- 카드 끝 -->
-        </div>
 
         <!-- 게시글 목록 하단 영역 -->
         <div class="bottom-section">
@@ -122,6 +131,8 @@
 
                 </ul>
             </nav>
+
+
 
         </div>
 
