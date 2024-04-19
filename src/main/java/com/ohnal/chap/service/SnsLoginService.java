@@ -37,7 +37,7 @@ public class SnsLoginService {
                     SignUpRequestDTO.builder()
                             .email(email)
                             .password("0000")
-                            .name(kakaoUserDTO.getProperties().getNickname())
+                            .nickname(kakaoUserDTO.getProperties().getNickname())
                             .loginMethod(Member.LoginMethod.KAKAO)
                             .build(),
                     kakaoUserDTO.getProperties().getProfileImage()

@@ -26,6 +26,8 @@ public class MailSenderService {
 
     public String joinEmail(String email){
         int authNum= makeRandomNumber();
+        log.info("메일인증번호: {}",String.valueOf(authNum));
+
         String setFrom="ohnal2024@gmail.com";
         String toMail=email;
         String title="oh-nal 회원 가입 인증 이메일 입니다.";
@@ -47,6 +49,9 @@ public class MailSenderService {
             helper.setSubject(title);
             // true -> html 형식으로 전송, 값을 안주면 단순 텍스트로만 전달.
             helper.setText(content, true);
+
+
+            log.info(String.valueOf(helper));
 
             mailSender.send(message);
 

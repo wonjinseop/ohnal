@@ -28,6 +28,7 @@ p.font {
 .address {
   border: 1px solid lightgray;
   border-radius: 10px;
+  margin-top:5px;
 }
 
 .gender {

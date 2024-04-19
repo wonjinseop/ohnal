@@ -1,0 +1,41 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohnal.chap.mapper.MemberMapper">
+<insert id="save">
+    INSERT INTO tbl_member
+    (email,password,nickname,address,gender,profile_image,login_method)
+    VALUES
+    (#{email},#{password},#{nickname},#{address},#{gender},#{profileImage},#{loginMethod})
+</insert>
+
+    <select id="findMember" resultType="member">
+        SELECT * FROM tbl_member
+        WHERE email=#{email}
+    </select>
+
+<select id="isDuplicate" resultType="boolean">
+    SELECT COUNT(*)
+    FROM tbl_member
+    <if test="type =='email'">
+        WHERE email = #{keyword}
+    </if>
+    <if test="type =='nickname'">
+        WHERE nickname=#{keyword}
+    </if>
+</select>
+
+    <update id="saveAutoLogin">
+        UPDATE tbl_member
+        SET session_id= ${sessionId},limit_time = #{limitTime}
+        WHERE email = #{email}
+    </update>
+
+    <select id="findMemberByCookie" resultType="member">
+        SELECT
+        email,nickname, limit_time
+        FROM tbl_member
+        WHERE session_id = #{sessionId}
+    </select>
+</mapper>

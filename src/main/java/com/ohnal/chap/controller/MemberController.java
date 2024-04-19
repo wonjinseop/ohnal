@@ -2,11 +2,9 @@ package com.ohnal.chap.controller;
 
 import com.ohnal.chap.dto.request.LoginRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
-import com.ohnal.chap.dto.response.BoardListResponseDTO;
-import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Member;
-import com.ohnal.chap.service.BoardService;
 import com.ohnal.chap.service.LoginResult;
+import com.ohnal.chap.service.MailSenderService;
 import com.ohnal.chap.service.MemberService;
 import com.ohnal.util.FileUtils;
 import com.ohnal.chap.service.MailSenderService;
@@ -15,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.tags.shaded.org.apache.xalan.templates.ElemValueOf;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,18 +26,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class MemberController {
 
-    private final MemberService memberService;
-    private final MailSenderService mailsenderService;
-    // my-history에서 회원이 작성한 글, 댓글, 좋아요한 글 목록을 가져오기 위해 BoardService 클래스를 필드로 추가
-    private final BoardService boardService;
     @Value("${file.upload.root-path}")
     private String rootPath;
+
+
+    private final MemberService memberService;
+    private final MailSenderService mailSenderService;
 
     @GetMapping("/sign-up")
     public String signUp() {
         return "chap/sign-up";
     }
-
     @GetMapping("/sign-in")
     public String signIn() {
         return "chap/sign-in";
@@ -58,6 +56,7 @@ public class MemberController {
 
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto) {
+        log.info("/members/sign-up: POST");
         String savePath = FileUtils.uploadFile(dto.getProfileImage(), rootPath);
         log.info("save-path: {}", savePath);
 
@@ -88,7 +87,7 @@ public class MemberController {
 
             // 로그인을 했다는 정보를 계속 유지하기 위한 수단으로 쿠키를 사용하자.
 
-            makeLoginCookie(dto, response);
+             makeLoginCookie(dto, response);
 
             // 세션으로 로그인 유지
             memberService.maintainLoginState(request.getSession(), dto.getEmail());
@@ -107,14 +106,13 @@ public class MemberController {
 
         response.addCookie(cookie);
     }
-
     // 이메일 인증
     @PostMapping("/email")
     @ResponseBody
     public ResponseEntity<?> mailCheck(@RequestBody String email) {
         log.info("이메일 인증 요청 들어옴!: {}", email);
         try {
-            String authNum = mailsenderService.joinEmail(email);
+            String authNum = mailSenderService.joinEmail(email);
             return ResponseEntity.ok().body(authNum);
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +120,7 @@ public class MemberController {
         }
     }
 
-    // my-history로 이동하는 메서드
+    // my-page로 이동하는 메서드
     @GetMapping("/my-history")
     public String myHistory() {
         log.info("my-history 페이지 들어옴");
