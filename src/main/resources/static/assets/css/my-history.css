@@ -40,6 +40,7 @@
     box-shadow: 0px 0px 0px 0px #007144;
   }
 
+/* 카드 형식 디자인 */
 .card-container {
         display: flex;
         justify-content: space-around;

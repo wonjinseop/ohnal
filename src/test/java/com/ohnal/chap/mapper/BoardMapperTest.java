@@ -1,9 +1,14 @@
 package com.ohnal.chap.mapper;
 
+import com.ohnal.chap.common.Page;
+import com.ohnal.chap.common.Search;
+import com.ohnal.chap.entity.Board;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,9 +34,7 @@ class BoardMapperTest {
             
 //            mapper.replySave(bno, email, content);
         }
-        
-    
-        // then
+
     }
-    
+
 }

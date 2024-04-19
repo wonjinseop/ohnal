@@ -2,7 +2,10 @@ package com.ohnal.chap.controller;
 
 import com.ohnal.chap.dto.request.LoginRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
+import com.ohnal.chap.dto.response.BoardListResponseDTO;
+import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Member;
+import com.ohnal.chap.service.BoardService;
 import com.ohnal.chap.service.LoginResult;
 import com.ohnal.chap.service.MemberService;
 import com.ohnal.util.FileUtils;
@@ -24,17 +27,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class MemberController {
 
-    @Value("${file.upload.root-path}")
-    private String rootPath;
-
-
     private final MemberService memberService;
     private final MailSenderService mailsenderService;
+    // my-history에서 회원이 작성한 글, 댓글, 좋아요한 글 목록을 가져오기 위해 BoardService 클래스를 필드로 추가
+    private final BoardService boardService;
+    @Value("${file.upload.root-path}")
+    private String rootPath;
 
     @GetMapping("/sign-up")
     public String signUp() {
         return "chap/sign-up";
     }
+
     @GetMapping("/sign-in")
     public String signIn() {
         return "chap/sign-in";
@@ -84,7 +88,7 @@ public class MemberController {
 
             // 로그인을 했다는 정보를 계속 유지하기 위한 수단으로 쿠키를 사용하자.
 
-             makeLoginCookie(dto, response);
+            makeLoginCookie(dto, response);
 
             // 세션으로 로그인 유지
             memberService.maintainLoginState(request.getSession(), dto.getEmail());
@@ -103,6 +107,7 @@ public class MemberController {
 
         response.addCookie(cookie);
     }
+
     // 이메일 인증
     @PostMapping("/email")
     @ResponseBody
@@ -117,9 +122,10 @@ public class MemberController {
         }
     }
 
-    // my-page로 이동하는 메서드
+    // my-history로 이동하는 메서드
     @GetMapping("/my-history")
     public String myHistory() {
+        log.info("my-history 페이지 들어옴");
         return "chap/my-history";
     }
 

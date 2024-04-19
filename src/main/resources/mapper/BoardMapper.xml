@@ -4,16 +4,17 @@
 
 <mapper namespace="com.ohnal.chap.mapper.BoardMapper">
 
-    <select id="findAllMyPosts" resultType="board">
+    <select id="findAll" resultType="board">
         SELECT * FROM tbl_board
-        WHERE email = "user123@naver.com"
+
         ORDER BY board_no DESC
         LIMIT #{pageStart}, #{amount}
     </select>
 
-    <select id="findAll" resultType="board">
+    <!-- my-history 에서 내가 쓴 글 찾아오는 sql문 -->
+    <select id="findAllMyPosts" resultType="board">
         SELECT * FROM tbl_board
-
+        WHERE email = #{email}
         ORDER BY board_no DESC
         LIMIT #{pageStart}, #{amount}
     </select>

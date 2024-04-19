@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,6 +34,24 @@ public class BoardService {
             dtoList.add(dto);
         }
         
+        return dtoList;
+    }
+
+    // my-histor
+    public List<BoardListResponseDTO> findAllMyPosts(String email, Search page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+
+        List<Board> boardList = mapper.findAllMyPosts(email, page);
+        log.info("boardList: {}", boardList);
+
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            log.info("new BoardListResponseDTO(board): {}", dto);
+            dtoList.add(dto);
+        }
+        log.info("dtoList: {}", dtoList);
         return dtoList;
     }
     
