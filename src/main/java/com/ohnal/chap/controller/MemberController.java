@@ -65,7 +65,7 @@ public class MemberController {
         dto.setLoginMethod(Member.LoginMethod.COMMON);
 
         memberService.join(dto, savePath);
-        return "redirect:/chap/sign-in";
+        return "redirect:/members/sign-in";
     }
 
     @PostMapping("/sign-in")
@@ -120,14 +120,6 @@ public class MemberController {
             return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
         }
     }
-
-    // my-page로 이동하는 메서드
-    @GetMapping("/my-history")
-    public String myHistory() {
-        log.info("my-history 페이지 들어옴");
-        return "chap/my-history";
-    }
-
     // 로그아웃 요청 처리
     @GetMapping("/sign-out")
     public String signOut(HttpSession session,
@@ -145,5 +137,16 @@ public class MemberController {
 
         return "redirect:/index";
     }
+
+    //---------my-history
+
+    // my-page로 이동하는 메서드
+    @GetMapping("/my-history")
+    public String myHistory() {
+        log.info("my-history 페이지 들어옴");
+        return "chap/my-history";
+    }
+
+
 
 }

@@ -50,7 +50,7 @@
 
                 <c:if test="${not empty login}">
                     <li><a href="#">My Info</a></li>
-                    <li><a href="#">My History</a></li>
+                    <li><a href="/members/my-history">My History</a></li>
                     <li><a href="/members/sign-out">Sign Out</a></li>
                 </c:if>
             </ul>

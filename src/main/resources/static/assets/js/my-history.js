@@ -4,7 +4,6 @@ console.log("my-history.js 파일이 업로드 되었습니다.");
 // 내가 쓴 글 버튼(div)을 누르면 내가 쓴 글 목록이 조회된다.
 function getMyPosts() {
     console.log("내가 쓴 글 목록 모두 조회 버튼 눌렀다.");
-    
     // const url = '/members/my-history/my-posts';
     // fetch(url);
 
@@ -13,7 +12,6 @@ function getMyPosts() {
 // 내가 쓴 댓글 버튼(div)을 누르면 내가 쓴 댓글 목록이 모두 조회된다.
 function getMyReplyPosts() {
     console.log("내가 쓴 댓글 목록 모두 조회 버튼 눌렀다.");
-
 
 }
 
