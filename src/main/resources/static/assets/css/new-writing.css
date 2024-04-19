@@ -8,6 +8,10 @@ input {
   border: none;
 }
 
+.btn {
+  width: 100%;
+}
+
 .new-writing-wrapper {
   margin: 150px auto 30px;
   border: 1px solid lightgray;

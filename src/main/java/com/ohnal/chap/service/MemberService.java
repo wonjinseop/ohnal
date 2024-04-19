@@ -52,6 +52,7 @@ public class MemberService {
                                     HttpServletResponse response) {
 
         Member foundMember = memberMapper.findMember(dto.getEmail());
+        log.info(String.valueOf(foundMember));
 
         if (foundMember == null) { // 회원가입 안한 상태
             System.out.println(dto.getEmail() + "(은) 가입되지 않은 아이디입니다.");

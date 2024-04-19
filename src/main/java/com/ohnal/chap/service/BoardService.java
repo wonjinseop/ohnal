@@ -7,6 +7,7 @@ import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
 import com.ohnal.chap.mapper.BoardMapper;
+import com.ohnal.util.LoginUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,8 +60,8 @@ public class BoardService {
         Board board = new Board(dto, savePath);
         log.info(dto.toString());
         
-        board.setEmail("user123@naver.com");
-//        board.setEmail(LoginUtils.getCurrentLoginMemberEmail(session));
+//        board.setEmail("user123@naver.com");
+        board.setEmail(LoginUtils.getCurrentLoginMemberEmail(session));
         
         mapper.save(board);
     }

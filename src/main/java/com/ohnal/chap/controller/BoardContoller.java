@@ -32,7 +32,7 @@ import static com.ohnal.util.FileUtils.uploadFile;
 public class BoardContoller {
     
     @Value("${file.upload.root-path}")
-    String rootPath;
+    private String rootPath;
     
     private final BoardService boardService;
     
@@ -63,7 +63,9 @@ public class BoardContoller {
         log.info("/board/write: POST, dto: {}", dto);
         log.info("attached file name: {}", dto.getImage().getOriginalFilename());
         
-        rootPath = rootPath + "/ootd";
+        if (!rootPath.contains("/ootd")) {
+            rootPath = rootPath + "/ootd";
+        }
         
         String savePath = "/ootd" + uploadFile(dto.getImage(), rootPath);
         

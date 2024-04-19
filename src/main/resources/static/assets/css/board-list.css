@@ -99,6 +99,7 @@
     align-items: center;
     margin-left: 20px;
     margin-top: 5px;
+    
 }
 
 .card-container .card .icon-wrapper .reply-icon {
@@ -145,6 +146,11 @@
 
     height: 500px;
     overflow: hidden;
+}
+
+.main-content {
+    overflow: hidden;
+    height: 30px;
 }
 
 
@@ -430,11 +436,13 @@ footer .lnr-envelope {
     margin-left: 45px;
 }
 
-.like-icon .content-comments {
+.replys .content-comments  {
     width: 100%;
-    padding-left: 40px;
+    padding-left: 20px;
+    padding-right: 10px;
     font-size: 20px;
     font-weight: 700;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
@@ -453,7 +461,7 @@ footer .lnr-envelope {
 .modal .modal-wrapper-card-2 .replys {
     width: 100%;
     /* border: 1px dashed red; */
-    height: 446px;
+    height: 481px;
     overflow: auto;
     -ms-overflow-style: none;
 }
@@ -500,14 +508,13 @@ footer .lnr-envelope {
  /* 댓글 입력 버튼창 */
 .modal-content .write-reply {
     border: 1px solid lightgray;
-    width: 100%;
+    align-items: end;
 }
 
 .modal-content .write-reply .write-wrapper {
-    
     width: 100%;
      /* border: 1px dashed;  */
-     display: flex;
+    display: flex;
 }
 .modal-content .card .content-wrapper p:first-child {
     margin-top: 10px;

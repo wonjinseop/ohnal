@@ -1,220 +1,206 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-
-<head>
-    <title>Today's weather, oh-nal</title>
-    <%@include file="../include/static-head.jsp"%>
-    <link rel="stylesheet" href="/assets/css/board-list.css">
-    <script type="text/javascript" src="/assets/js/board-list.js" defer></script>
-
-</head>
-
-<body>
-    <%@include file="../include/header.jsp"%>
-
-    <!-- BEST OOTD 게시판 영역 -->
+// HTML 문서의 로딩이 완료되었을 때, 해당 함수를 실행
+document.addEventListener("DOMContentLoaded", function () {
+  // elements
+  var modalBtn = document.getElementById("modalBtn");
+  var modal = document.getElementById("myModal");
+  var closeBtn = document.getElementById("closeBtn");
 
 
-    <!-- 카드 시작 -->
-    <div class="card-container">
+  // functions
+  function toggleModal() {
+    modal.classList.toggle("show");
+    document.body.style.overflow = 'auto';
+  }
 
-        <div class="new-upload-wrapper">
-            <a href="/board/write" class="upload-btn">새 글쓰기</a>
+  // events
+  modalBtn.addEventListener("click", toggleModal);
+  closeBtn.addEventListener("click", toggleModal);
+
+  window.addEventListener("click", function (event) {
+    // 모달의 검은색 배경 부분이 클릭된 경우 닫히도록 하는 코드
+    if (event.target === modal) {
+      toggleModal();
+    }
+  });
+});
+
+// card-container /card-wrapper/ data-bno="${b.boardNo}
+//게시물 클릭시 modal창 열리는 이벤트 발생, 클릭한 게시물 내용 모달창에 넣는 기능
+
+const $cardContainer = document.querySelector('.card-container');
+
+$cardContainer.onclick = e => {
+  const URL = '/board/detail/';
+  const $card = e.target.closest('.select-card');
+  if ($card) {
+    const bno = $card.dataset.bno;
+    boardNo = bno;
+    console.log(bno);
+    fetch(URL + bno)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        document.querySelector('.modal .card').dataset.bno = bno;
+        document.querySelector('.modal .card-account').textContent = data.nickname;
+        document.querySelector('.modal .content').textContent = data.content;
+        document.querySelector('.modal .content-img').setAttribute('src', '/display' + data.image);
+        document.querySelector('.modal .like-count').textContent = '좋아요 ' + data.likeCount + '개';
+        document.querySelector('.modal .reply-count').textContent = '댓글 ' + data.replyCount + '개';
+        document.querySelector('.modal .view-count').textContent = '조회수 ' + data.viewCount + '회';
+        document.querySelector('.modal .location').textContent = data.locationTag;
+        document.querySelector('.modal .weather').textContent = data.weatherTag;
+        document.querySelector('.modal .time-stamp').textContent = data.regDate;
+        document.body.style.overflow = 'hidden';
+
+      })
+
+    document.getElementById('modalBtn').click();
+    fetchGetReplies(bno);
+
+  }
+
+};
+
+
+
+//bno /  email nick prof reply-content reply-num regdate
+//댓글 내용 불러오는 함수
+
+/* <div class="reply-wrapper">
+  <span class="card-account">test3</span>
+  <p class="reply">
+      일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
+      좋아일교차가 클일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를
+  </p>
+  <!-- <input type="text" hidden> -->
+</div>
+
+<div class="reply-data">
+  <span>시간영역</span>
+  <button id="comments-modify">수정
+  </button>
+  <button>삭제</button>
+</div> */
+
+
+function fetchGetReplies(bno) {
+  console.log('응답');
+  const URL = '/board/reply/';
+  fetch(URL + bno)
+    .then(res => res.json())
+    .then(replyList => {
+      // console.log(replyList);
+      renderReplies(replyList);
+    });
+  
+};
+
+function renderReplies(replyList) {
+  const $replyWrapper = document.querySelector('.reply-wrapper')
+  let tag = '';
+
+  if (replyList !== null && replyList.length > 0) {
+    
+    for (let reply of replyList) {
+
+      // console.log(reply);
+
+      const {replyNo, email, content, profileImage, nickname, time} = reply
+
+      tag += `
+        <span class='card-account' data-email='${email}'><img src='${profileImage}' class='profile-img'>${nickname}</span>
+        <p class='reply' data-no='${replyNo}'>
+            ${content}
+        </p>
+        <!-- <input type='text' hidden> -->
+      
+
+        <div class='reply-data'>
+          <span>${time}</span>
+          <button id="comments-modify">수정</button>
+          <button>삭제</button>
         </div>
+      `
 
+    }
 
-        <!-- 카드 복사 -->
-        <c:forEach var="b" items="${bList}">
-            <div class="card-wrapper">
-                <section class="card select-card" data-bno="${b.boardNo}">
-                    <div class="card-title-wrapper">
-                        <div class="profile-box">
-                            <img src="/assets/img/anonymous.jpg" alt="프사">
-                        </div>
-                        <span class="card-account">test3</span>
-                    </div>
+  } else {
+    tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다! ㅠㅠ</div>";
+  }
 
-                    <div class="card-picture">
-                        <img src="/ohnal${b.image}" alt="sample">
-                    </div>
+// var btn = document.getElementById("like")
 
-                    <div class="icon-wrapper">
-                        <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
-                        </div>
-                        <span class="hashtag">${b.locationTag}</span>
-                        <span class="hashtag">${b.weatherTag}</span>
-                        <div class="reply-icon">
+//   btn.addEventListener('click',function(){
+//             btn.classList.toggle('active')
+//     })
 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-wrapper">
-                        <p>
-                            <span>좋아요 ${b.likeCount}개</span>
-                            &nbsp&nbsp&nbsp
-                            <span>댓글 ${b.replyCount}개</span>
-                            &nbsp&nbsp&nbsp
-                            <span>조회수 ${b.viewCount}회</span>
-                        </p>
-                        <p>${b.content}</p>
-                        <a href="#">
-                            <p>... 더 보기</p>
-                        </a>
-                    </div>
-                </section>
-            </div>
-        </c:forEach>
-        <!-- 카드 복사 끝 -->
-        <!-- 카드 끝 -->
+  $replyWrapper.innerHTML = tag;
 
-
-
-    </div>
-
-
-
-    <!-- 게시글 목록 하단 영역 -->
-    <div class="bottom-section">
-
-        <!-- 페이지 버튼 영역 -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-lg pagination-custom">
-                <c:if test="${maker.page.pageNo != 1}">
-                    <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
-                    </li>
-                </c:if>
-
-                <c:if test="${maker.prev}">
-                    <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
-                    </li>
-                </c:if>
-
-                <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                    <li data-page-num="${i}" class="page-item">
-                        <a class="page-link"
-                            href="/board/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
-                    </li>
-                </c:forEach>
-
-                <c:if test="${maker.next}">
-                    <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
-                    </li>
-                </c:if>
-
-                <c:if test="${maker.page.pageNo != maker.finalPage}">
-                    <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
-                    </li>
-                </c:if>
-
-            </ul>
-        </nav>
-
-    </div>
-
-
-
-
-    <!-- 모달 열기 버튼 -->
-    <button id="modalBtn" hidden>모달 글 확대</button>
-
-    <!-- 모달 컨테이너 -->
-    <div id="myModal" class="modal">
-        <!-- 모달 컨텐츠 -->
-        <div class="modal-content">
-
-
-
-            <div class="card-wrapper">
-
-
-
-                <section class="card" data-bno="${b.boardNo}">
-
-                    <div class="modal-wrapper-card" style="display: flex;">
-
-                        <div class="card-picture modal-wrapper-card-1">
-                            <img src="/ohnal${b.image}" alt="sample" class="content-img">
-                        </div>
+};
 
 
 
 
 
 
-                        <div class="modal-wrapper-card-2">
+// 버튼 요소 선택
+var submitButton = document.querySelector('.write-send');
 
-                            <div class="card-title-wrapper">
+// 버튼 클릭 이벤트 핸들러 등록
+submitButton.addEventListener('click', function() {
+  const boardNo = document.querySelector('.modal .card').dataset.bno;
 
-                                <div class="profile-box">
-                                    <img src="/assets/img/anonymous.jpg" alt="프사">
-                                </div>
-                                <span class="card-account"></span>
-                                <span class="time-stamp"></span>
-                                <!-- 모달 닫기 버튼 -->
-                                <span class="close" id="closeBtn">&times;</span>
+  // 입력 필드 선택
+  const inputField = document.querySelector('.write-input');
+  const content = inputField.value.trim();
+  const URL = '/board/reply'
 
-                            </div>
+  console.log(boardNo);
+  console.log(inputField.value);
 
+  // 사용자 입력자 검증
+  if (content === '') {
+    alert('댓글 내용은 필수값입니다!!');
+    return;
+  };
 
-                            <div class="icon-wrapper">
-                                <div class="reply-icon">
-                                    <!-- <span class="lnr lnr-bubble"></span> -->
-                                </div>
-                            </div>
+  const payLoad = {
+    text: content,
+    bno: boardNo
+  };
 
-                            <div class="li-ha">
+  // 요청 방식 및 데이터를 전달할 정보 객체 만들기 (POST)
+  const requestInfo = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(payLoad) // js 객체를 JSON으로 변환해서 body에 추가
+  };
 
-                                <div class="like-icon">
-                                    <p class="content-comments content"></p>
+  // 서버에 POST 요청 보내기
+  fetch(URL, requestInfo)
+    .then(res => {
+      console.log(res.status);
 
-                                    <span class="lnr lnr-heart"></span>
-                                    <div class="hashtag-wrapper">
-                                        <span class="hashtag location"></span>
-                                        <span class="hashtag weather"></span>
-                                    </div>
+      if (res.status === 200) {
+        return res.text();
+      } else {
+        alert('입력값에 문제가 있습니다! 입력값을 다시 확인해 보세요!');
+        return res.text();
+      }
+      
+    })
+    .then(data => {
+      // console.log('응답 성공! ', data);
 
-                                    <span class="like-count"></span>
-                                    &nbsp&nbsp&nbsp
-                                    <span class="reply-count"></span>
-                                    &nbsp&nbsp&nbsp
-                                    <span class="view-count"></span>
-                                </div>
+      // 입력 필드의 값 비우기
+      inputField.value = '';
 
-                            </div>
+      // 댓글 목록 비동기 요청
+      fetchGetReplies(boardNo);
+    });
 
-
-
-                            <div class="replys">
-                                <div class='reply-wrapper'>
-
-                                </div>
-                            </div>
-
-
-
-                            <form id="commentFrm" class="write-reply">
-                                <div class="write-wrapper">
-                                    <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
-                                    <button class="write-send" type="button">등록</button>
-                                </div>
-                            </form>
-
-
-                        </div>
-
-                </section>
-            </div>
-        </div>
-    </div>
+});
 
 
-    <%@include file="../include/footer.jsp"%>
-</body>
-
-</html>

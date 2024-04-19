@@ -34,14 +34,16 @@ public class ImageController {
     자동으로 요청이 들어오게 됩니다.
      */
 
-    @GetMapping("/{y}/{m}/{d}/{fileName}")
-    public ResponseEntity<?> getImage(@PathVariable String y,
+    @GetMapping("/{folder}/{y}/{m}/{d}/{fileName}")
+    public ResponseEntity<?> getImage(
+                                      @PathVariable String folder,
+                                      @PathVariable String y,
                                       @PathVariable String m,
                                       @PathVariable String d,
                                       @PathVariable String fileName) {
-        log.info("/display/{}/{}/{}/{}: GET!", y, m, d, fileName);
+        log.info("/display/{}/{}/{}/{}/{}: GET!", folder, y, m, d, fileName);
 
-        String fullPath = String.format("%s/%s/%s/%s/%s", rootPath, y, m, d, fileName);
+        String fullPath = String.format("%s/%s/%s/%s/%s/%s", rootPath, folder, y, m, d, fileName);
         log.info("fullPath: {}", fullPath);
         File file = new File(fullPath);
 

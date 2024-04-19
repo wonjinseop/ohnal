@@ -19,9 +19,11 @@
     <!-- 카드 시작 -->
     <div class="card-container">
 
-        <div class="new-upload-wrapper">
-            <a href="/board/write" class="upload-btn">새 글쓰기</a>
-        </div>
+        <c:if test="${login != null}">
+            <div class="new-upload-wrapper">
+                <a href="/board/write" class="upload-btn">새 글쓰기</a>
+            </div>
+        </c:if>
 
 
         <!-- 카드 복사 -->
@@ -36,7 +38,7 @@
                     </div>
 
                     <div class="card-picture">
-                        <img src="/ohnal${b.image}" alt="sample">
+                        <img src="/display${b.image}" alt="sample">
                     </div>
 
                     <div class="icon-wrapper">
@@ -58,7 +60,7 @@
                             &nbsp&nbsp&nbsp
                             <span>조회수 ${b.viewCount}회</span>
                         </p>
-                        <p>${b.content}</p>
+                        <p class="main-content">${b.content}</p>
                         <a href="#">
                             <p>... 더 보기</p>
                         </a>
@@ -134,12 +136,12 @@
 
 
 
-                <section class="card" data-bno="${b.boardNo}">
+                <section class="card" data-bno="">
 
                     <div class="modal-wrapper-card" style="display: flex;">
 
                         <div class="card-picture modal-wrapper-card-1">
-                            <img src="/ohnal${b.image}" alt="sample" class="content-img">
+                            <img src="" alt="sample" class="content-img">
                         </div>
 
 
@@ -171,8 +173,6 @@
                             <div class="li-ha">
 
                                 <div class="like-icon">
-                                    <p class="content-comments content"></p>
-
                                     <span class="lnr lnr-heart"></span>
                                     <div class="hashtag-wrapper">
                                         <span class="hashtag location"></span>
@@ -191,12 +191,11 @@
 
 
                             <div class="replys">
+                                <p class="content-comments content"></p>
                                 <div class='reply-wrapper'>
 
                                 </div>
                             </div>
-
-
 
                             <form id="commentFrm" class="write-reply">
                                 <div class="write-wrapper">
@@ -204,7 +203,6 @@
                                     <button class="write-send" type="button">등록</button>
                                 </div>
                             </form>
-
 
                         </div>
 
