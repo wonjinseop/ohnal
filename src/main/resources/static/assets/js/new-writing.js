@@ -15,6 +15,5 @@ $fileInput.onchange = e => {
 
   reader.onloadend = () => {
     $img.setAttribute('src', reader.result);
-    $image.setAttribute('value', reader.result);
   };
 };

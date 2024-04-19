@@ -17,24 +17,38 @@ class BoardMapperTest {
     BoardMapper mapper;
     
     @Test
-    @DisplayName("댓글 3000개 작성하기")
+    @DisplayName("댓글 10000개 작성하기")
     void writeReply() {
         // given
         int bno;
         String email = "user123@naver.com";
         String content = "";
+        String user = "user";
+        
+        Reply reply = new Reply();
+        reply.setEmail(email);
+        reply.setNickname(user);
         
         // when
-        for (int i = 1; i <= 3000; i++) {
+        for (int i = 1; i <= 10000; i++) {
             
             bno = (int) (Math.random() * 40 + 1);
             content = "더미댓글" + i + "입니다.";
             
-//            mapper.replySave(bno, email, content);
+            
+            reply.setBno(bno);
+            reply.setContent(content);
+            
+            mapper.updateCount(bno, "replies");
+            
+            mapper.replySave(reply);
         }
+        
         
     
         // then
     }
+    
+    
     
 }

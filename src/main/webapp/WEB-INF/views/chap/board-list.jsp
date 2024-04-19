@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="card-picture">
-                        <img src="${b.image}" alt="sample">
+                        <img src="/ohnal${b.image}" alt="sample">
                     </div>
 
                     <div class="icon-wrapper">
@@ -139,7 +139,7 @@
                     <div class="modal-wrapper-card" style="display: flex;">
 
                         <div class="card-picture modal-wrapper-card-1">
-                            <img src="" alt="sample" class="content-img">
+                            <img src="/ohnal${b.image}" alt="sample" class="content-img">
                         </div>
 
 

@@ -10,6 +10,7 @@ import com.ohnal.chap.service.BoardService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ import static com.ohnal.util.FileUtils.uploadFile;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardContoller {
+    
+    @Value("${file.upload.root-path}")
+    String rootPath;
     
     private final BoardService boardService;
     
@@ -59,8 +63,9 @@ public class BoardContoller {
         log.info("/board/write: POST, dto: {}", dto);
         log.info("attached file name: {}", dto.getImage().getOriginalFilename());
         
-        String savePath = "/local";
-                savePath = savePath + uploadFile(dto.getImage(), "C:/myWorkSpace/upload/");
+        rootPath = rootPath + "/ootd";
+        
+        String savePath = "/ootd" + uploadFile(dto.getImage(), rootPath);
         
         log.info("save-path: {}", savePath);
         
@@ -72,6 +77,7 @@ public class BoardContoller {
     
     // 게시글 자세히보기
     @GetMapping("/detail/{bno}")
+    
     @ResponseBody
     public ResponseEntity<?> detail(@PathVariable int bno) {
         

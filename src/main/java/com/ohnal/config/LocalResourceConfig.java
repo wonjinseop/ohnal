@@ -13,7 +13,8 @@ public class LocalResourceConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry
-                .addResourceHandler("/local/**")
-                .addResourceLocations("file:"+rootPath);
+                .addResourceHandler("/ohnal/**")
+                .addResourceLocations("file:" + rootPath);
+        
     }
 }
