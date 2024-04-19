@@ -69,8 +69,4 @@
         )
     </insert>
 
-    <update id="countUpdate">
-
-    </update>
-
 </mapper>

@@ -32,7 +32,6 @@
                 <div class="left-down">
                     <h2>오늘 ${dto.area1} ${dto.area2}의 기온은</h2>
                     <h2>최저 ${minInt}도, 최고 ${maxInt}도입니다</h2>
-
                 </div>
             </div>
             <div class="right-section">

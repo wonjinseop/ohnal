@@ -65,6 +65,7 @@ public class MemberService {
             System.out.println("비밀번호가 일치하지 않습니다.");
             return NO_PW;
         }
+
         // 자동 로그인 처리
         if (dto.isAutoLogin()) {
             // 1. 자동 로그인 쿠키 생성 - 쿠키 안에 절대 중복되지 않는 값을 저장. (브라우저 세션 아이디)
@@ -109,17 +110,19 @@ public class MemberService {
         // DB 데이터를 보여줄 것만 정제
         LoginUserResponseDTO dto = LoginUserResponseDTO.builder()
                 .email(foundMember.getEmail())
+                .nickname(foundMember.getNickname())
                 .profile(foundMember.getProfileImage())
                 .loginMethod(foundMember.getLoginMethod().toString())
                 .build();
+
         // 세션에 로그인한 회원 정보를 저장
         session.setAttribute(LOGIN_KEY, dto);
         // 세션 수명 설정
         session.setMaxInactiveInterval(60 * 60); // 1시간
+
     }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
-
         // 1. 자동 로그인 쿠키를 가져온다.
         Cookie c = WebUtils.getCookie(request, AUTO_LOGIN_COOKIE);
 
@@ -141,6 +144,4 @@ public class MemberService {
         }
 
     }
-
-
 }

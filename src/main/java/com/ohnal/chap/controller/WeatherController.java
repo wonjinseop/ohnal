@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 
 @Controller
-@Slf4j // 2024. 04. 12 오전 추가
+@Slf4j
 @RequiredArgsConstructor
 public class WeatherController {
     private final WeatherService weatherService;

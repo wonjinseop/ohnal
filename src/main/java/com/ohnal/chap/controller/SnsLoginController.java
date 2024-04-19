@@ -42,7 +42,7 @@ public class SnsLoginController {
 
         snsLoginService.kakaoLogin(params, session);
 
-        return "redirect:/";
+        return "redirect:/index";
     }
 
 }

@@ -1,0 +1,126 @@
+.container {
+    margin-top: 200px;
+    width: 70%;
+}
+
+.form {
+  margin-bottom: 30px;
+}
+
+.inner {
+  width: inherit;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+/*p.font {*/
+/*  margin: 10px;*/
+/*  font-weight: 700;*/
+/*}*/
+
+.image_container {
+  width: 350px;
+  height: 380px;
+  margin: 0 auto;
+}
+
+.image-preview {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  display: block;
+}
+
+.btn_image {
+  width: 200px;
+  text-align: center;
+  display: block;
+  margin: 30px auto 0;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: black;
+  color: #12e6fc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn_image:hover {
+  color: black;
+  background-color: #12e6fc;
+}
+
+.btn_image label {
+  cursor: pointer;
+}
+
+.form-selection {
+  margin: 0 auto;
+}
+
+.form-selection div {
+  margin: 0 auto;
+  width: 60%;
+}
+
+.input {
+  width: 400px;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-top: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.address {
+  width: 50%;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+.gender {
+  display: flex;
+}
+
+.btn_gender {
+  position: relative;
+  left: 30%;
+  border-radius: 5px;
+  height: 50px;
+  width: 100px;
+  border: 1px solid lightgray;
+  margin-top: 20px;
+  cursor: pointer;
+  justify-content: center;
+}
+.btn_gender:hover{
+  background-color: rgba(39, 185, 10, 0.3);
+}
+
+#submit_button {
+  width: 200px;
+  text-align: center;
+  display: block;
+  margin: 30px auto 0;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: black;
+  color: #12e6fc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#submit_button:hover {
+  color: black;
+  background-color: #12e6fc;
+}
+
+
