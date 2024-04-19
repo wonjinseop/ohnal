@@ -12,12 +12,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Type;
 import java.util.List;
+
+import static com.ohnal.util.FileUtils.uploadFile;
 
 @Controller
 @Slf4j
@@ -33,7 +38,7 @@ public class BoardContoller {
         log.info("/board/list: GET!");
         
         List<BoardListResponseDTO> dtoList = boardService.findAll(page);
-        PageMaker pageMaker = new PageMaker(page, boardService.getCount(page));
+        PageMaker pageMaker = new PageMaker(page, boardService.getCount());
         
         model.addAttribute("bList", dtoList);
         model.addAttribute("maker", pageMaker);
@@ -52,12 +57,20 @@ public class BoardContoller {
     @PostMapping("/write")
     public String write(BoardWriteRequestDTO dto, HttpSession session) {
         log.info("/board/write: POST, dto: {}", dto);
+        log.info("attached file name: {}", dto.getImage().getOriginalFilename());
         
-        boardService.save(dto, session);
+        String savePath = "/local";
+                savePath = savePath + uploadFile(dto.getImage(), "C:/myWorkSpace/upload/");
+        
+        log.info("save-path: {}", savePath);
+        
+        
+        boardService.save(dto, session, savePath);
         
         return "redirect:/board/list";
     }
     
+    // 게시글 자세히보기
     @GetMapping("/detail/{bno}")
     @ResponseBody
     public ResponseEntity<?> detail(@PathVariable int bno) {
@@ -68,6 +81,7 @@ public class BoardContoller {
         return ResponseEntity.ok().body(dto);
     }
     
+    // 댓글 창 불러오기
     @GetMapping("/reply/{bno}")
     @ResponseBody
     public ResponseEntity<?> reply(@PathVariable int bno) {
@@ -77,6 +91,7 @@ public class BoardContoller {
         return ResponseEntity.ok().body(replyList);
     }
     
+    // 댓글 쓰기
     @PostMapping("/reply")
     public ResponseEntity<?> writeReply(@Validated @RequestBody ReplyPostRequestDTO dto,
                                         BindingResult result) {
@@ -90,7 +105,7 @@ public class BoardContoller {
                     .body(result.toString());
         }
         
-        log.info("/board/reply/write: POST");
+        log.info("/board/reply: POST");
         
         boardService.writeReply(dto, email, nickname);
         

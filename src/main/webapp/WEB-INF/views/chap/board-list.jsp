@@ -24,8 +24,6 @@
         </div>
 
 
-
-
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
             <div class="card-wrapper">
@@ -38,7 +36,7 @@
                     </div>
 
                     <div class="card-picture">
-                        <img src="/assets/img/cody.png" alt="sample">
+                        <img src="${b.image}" alt="sample">
                     </div>
 
                     <div class="icon-wrapper">
@@ -58,9 +56,9 @@
                             &nbsp&nbsp&nbsp
                             <span>댓글 ${b.replyCount}개</span>
                             &nbsp&nbsp&nbsp
-                            <span>조회수 회</span>
+                            <span>조회수 ${b.viewCount}회</span>
                         </p>
-                        <p><span class="card-account">${b.nickname}</span> ${b.content}</p>
+                        <p>${b.content}</p>
                         <a href="#">
                             <p>... 더 보기</p>
                         </a>
@@ -141,7 +139,7 @@
                     <div class="modal-wrapper-card" style="display: flex;">
 
                         <div class="card-picture modal-wrapper-card-1">
-                            <img src="/assets/img/cody.png" alt="sample" class="content-img">
+                            <img src="" alt="sample" class="content-img">
                         </div>
 
 

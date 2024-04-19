@@ -3,6 +3,11 @@
   text-decoration-line: none;
 }
 
+input {
+  background: none;
+  border: none;
+}
+
 .new-writing-wrapper {
   margin: 150px auto 30px;
   border: 1px solid lightgray;
@@ -19,7 +24,8 @@
 .new-writing-wrapper .cody-load img {
   width: 100%; height: 100%;
 }
-#imagePreview{
+
+#img {
   width: 598px; height: 648px;
   border: 5px solid lightgray;
 }

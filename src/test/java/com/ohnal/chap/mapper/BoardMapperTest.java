@@ -1,8 +1,6 @@
 package com.ohnal.chap.mapper;
 
-import com.ohnal.chap.common.Page;
-import com.ohnal.chap.common.Search;
-import com.ohnal.chap.entity.Board;
+import com.ohnal.chap.entity.Reply;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +32,9 @@ class BoardMapperTest {
             
 //            mapper.replySave(bno, email, content);
         }
-
+        
+    
+        // then
     }
-
+    
 }

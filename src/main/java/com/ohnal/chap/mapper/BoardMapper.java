@@ -16,13 +16,13 @@ public interface BoardMapper {
     // my-history 에서 내가 쓴 글을 조회하는 sql문과 연결되어 있음
     List<Board> findAllMyPosts(@Param("email") String email,@Param("page") Search page);
     
-    void save(Board dto);
+    void save(Board board);
     
-    int getCount(Search page);
+    int getCount();
     
     Board findOne(int bno);
     
-    void updateViewCount(int bno);
+    void updateCount(@Param("bno") int bno, @Param("count") String count);
     
     List<Reply> replyList(int bno);
     

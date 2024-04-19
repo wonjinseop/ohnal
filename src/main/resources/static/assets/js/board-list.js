@@ -88,7 +88,7 @@ function fetchGetReplies(bno) {
   fetch(URL + bno)
     .then(res => res.json())
     .then(replyList => {
-      console.log(replyList);
+      // console.log(replyList);
       renderReplies(replyList);
     });
   
@@ -102,7 +102,7 @@ function renderReplies(replyList) {
     
     for (let reply of replyList) {
 
-      console.log(reply);
+      // console.log(reply);
 
       const {replyNo, email, content, profileImage, nickname, time} = reply
 
@@ -183,7 +183,6 @@ submitButton.addEventListener('click', function() {
       console.log(res.status);
 
       if (res.status === 200) {
-        alert('댓글이 정상 등록되었습니다.');
         return res.text();
       } else {
         alert('입력값에 문제가 있습니다! 입력값을 다시 확인해 보세요!');
@@ -192,7 +191,7 @@ submitButton.addEventListener('click', function() {
       
     })
     .then(data => {
-      console.log('응답 성공! ', data);
+      // console.log('응답 성공! ', data);
 
       // 입력 필드의 값 비우기
       inputField.value = '';

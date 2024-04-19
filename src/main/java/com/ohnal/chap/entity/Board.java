@@ -24,10 +24,10 @@ public class Board {
     private String weatherTag;
     private LocalDateTime regDate;
     
-    public Board(BoardWriteRequestDTO dto) {
+    public Board(BoardWriteRequestDTO dto, String savePath) {
         this.nickname = dto.getNickname();
         this.content = dto.getContent();
-        this.image = dto.getImage();
+        this.image = savePath;
         this.locationTag = dto.getLocationTag();
         this.weatherTag = dto.getWeatherTag();
     }
