@@ -1,5 +1,6 @@
 package com.ohnal.interceptor;
 
+import com.ohnal.util.LoginUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -7,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.io.PrintWriter;
+
+import static com.ohnal.util.LoginUtils.*;
 
 @Configuration
 public class AfterLoginInterceptor implements HandlerInterceptor {
@@ -20,7 +23,7 @@ public class AfterLoginInterceptor implements HandlerInterceptor {
 
         // 세션 데이터 중 login이라는 이름의 데이터가 있는지 확인한 후에
         // 만약 존재한다면 요청이 컨트롤러로 들어가지 못하게 하겠다.
-        if (session.getAttribute("login") != null) {
+        if (isLogin(session)) {
 
             response.setContentType("text/html; charset=UTF-8");
 
