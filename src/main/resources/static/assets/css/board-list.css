@@ -98,6 +98,10 @@
     opacity: 0;
 }
 
+.card-container .card-wrapper:hover .board-del-btn {
+    opacity: 1;
+}
+
 .card-container .card .icon-wrapper {
     display: flex;
     font-size: 25px;

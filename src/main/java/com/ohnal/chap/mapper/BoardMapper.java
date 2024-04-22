@@ -38,4 +38,7 @@ public interface BoardMapper {
 
     // my-history 에서 작성 댓글 버튼 누를 때, 작동하는 sql문
     List<Board> myWriteReply(String email);
+
+    void delete(int bno);
+
 }

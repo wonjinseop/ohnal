@@ -114,16 +114,6 @@
         WHERE email = #{email}
     </select>
 
-    <select id="ordersFindAll" resultType="board">
-        SELECT
-        A.*, B.profile_image
-        FROM tbl_board A
-        LEFT OUTER JOIN tbl_member B
-        ON A.email = B.email
-        ORDER BY #{orders} DESC
-        LIMIT #{page.pageStart}, #{page.amount}
-    </select>
-
     <delete id="delete">
         DELETE FROM tbl_board
         WHERE board_no = #{bno}

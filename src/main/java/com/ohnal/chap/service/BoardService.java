@@ -98,18 +98,6 @@ public class BoardService {
         return mapper.getMyPostsCount(loginUserEmail);
     }
 
-    public List<BoardListResponseDTO> ordersFindAll(Search page, String orders) {
-
-        List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = mapper.ordersFindAll(page, orders);
-        for (Board board : boardList) {
-            BoardListResponseDTO dto = new BoardListResponseDTO(board);
-            dtoList.add(dto);
-        }
-
-        return dtoList;
-    }
-
     public void delete(int bno) {
 
         mapper.delete(bno);
