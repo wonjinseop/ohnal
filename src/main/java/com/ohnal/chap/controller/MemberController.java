@@ -39,6 +39,7 @@ public class MemberController {
     private final MemberService memberService;
     private final MailSenderService mailSenderService;
     private final BoardService boardService;
+
     @Value("${file.upload.root-path}")
     private String rootPath;
 
@@ -46,7 +47,6 @@ public class MemberController {
     public String signUp() {
         return "chap/sign-up";
     }
-
     @GetMapping("/sign-in")
     public String signIn() {
         return "chap/sign-in";
@@ -67,11 +67,11 @@ public class MemberController {
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto) {
         log.info("/members/sign-up: POST");
-
+        
         if (!rootPath.contains("/profile")) {
             rootPath = rootPath + "/profile";
         }
-
+        
         String savePath = "/profile" + FileUtils.uploadFile(dto.getProfileImage(), rootPath);
         log.info("save-path: {}", savePath);
 
@@ -121,7 +121,6 @@ public class MemberController {
 
         response.addCookie(cookie);
     }
-
     // 이메일 인증
     @PostMapping("/email")
     @ResponseBody
@@ -135,7 +134,6 @@ public class MemberController {
             return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
         }
     }
-
     // 로그아웃 요청 처리
     @GetMapping("/sign-out")
     public String signOut(HttpSession session,
@@ -157,7 +155,6 @@ public class MemberController {
     //-----------------------my-history-----------------------
 
     // my-page로 이동하는 메서드
-    // 로그인한 사람만 들어올 수 있는 my-history 페이지
     @GetMapping("/my-history")
     public String myHistory(HttpSession session, Page page, Model model) {
         log.info("my-history 페이지 들어옴");
@@ -180,8 +177,6 @@ public class MemberController {
         return "chap/my-history";
     }
 
-
-    // 내가 쓴 글 조회
 
 
 }

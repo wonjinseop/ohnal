@@ -38,4 +38,12 @@
         FROM tbl_member
         WHERE session_id = #{sessionId}
     </select>
+
+    <update id="modify">
+        UPDATE tbl_member
+        SET nickname = #{nickname}, address = #{address},
+        gender = #{gender}, password = #{password},
+        profile_image = #{profileImage}
+        WHERE email = #{email}
+    </update>
 </mapper>

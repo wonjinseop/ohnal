@@ -5,9 +5,11 @@ import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.KakaoUserResponseDTO;
 import com.ohnal.chap.entity.Member;
 import com.ohnal.chap.mapper.MemberMapper;
+import com.ohnal.util.FileUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,27 +26,30 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SnsLoginService {
     private final MemberService memberService;
+
     public void kakaoLogin(Map<String, String> params , HttpSession session) {
+
 
         String accessToken = getKakaoAccessToken(params);
 
-        KakaoUserResponseDTO kakaoUserDTO = getKakaoUserInfo(accessToken);
+        KakaoUserResponseDTO dto = getKakaoUserInfo(accessToken);
 
-        String email = kakaoUserDTO.getAccount().getEmail();
+        String email = dto.getAccount().getEmail();
+        log.info("사용자의 이메일 : {}", email);
 
-        if (memberService.checkDuplicateValue("email",email)) {
+        if (!memberService.checkDuplicateValue("email",email)) {
             memberService.join(
                     SignUpRequestDTO.builder()
                             .email(email)
                             .password("0000")
-                            .nickname(kakaoUserDTO.getProperties().getNickname())
+                            .nickname(dto.getProperties().getNickname())
                             .loginMethod(Member.LoginMethod.KAKAO)
                             .build(),
-                    kakaoUserDTO.getProperties().getProfileImage()
+                    dto.getProperties().getProfileImage()
             );
         }
         //sns로그인 ohnal사이트로 로그인
-        memberService.maintainLoginState(session, String.valueOf(kakaoUserDTO.getId()));
+        memberService.maintainLoginState(session, email);
 
     }
 
@@ -66,11 +71,11 @@ public class SnsLoginService {
 
     }
 
-   //토큰발급
+   //토큰 발급
     private String getKakaoAccessToken(Map<String , String> requestParam) {
         String requestUri = "https://kauth.kakao.com/oauth/token";
         HttpHeaders headers = new HttpHeaders();
-        headers.add("content-type","application/x-www-form-urlencoded;charset=utf-8");
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type","authorization_code");

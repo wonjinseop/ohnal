@@ -23,18 +23,18 @@ public class KakaoUserResponseDTO {
     private KakaoAccount account;
 
 
- @Setter @Getter @ToString
-public static class Properties {
-     private String nickname;
-     @JsonProperty("profile_image")
-     private String profileImage;
-     @JsonProperty("thumnail_image")
-     private String thumnailImage;
-}
+    @Setter @Getter @ToString
+    public static class Properties {
+         private String nickname;
+         @JsonProperty("profile_image")
+         private String profileImage;
+         @JsonProperty("thumbnail_image")
+         private String thumbnailImage;
+    }
 
-@Getter @Setter @ToString
-public static class KakaoAccount {
-     private String email;
-}
+    @Getter @Setter @ToString
+    public static class KakaoAccount {
+         private String email;
+    }
 
 }

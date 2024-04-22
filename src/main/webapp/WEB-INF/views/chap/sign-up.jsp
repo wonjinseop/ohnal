@@ -25,9 +25,7 @@
 
           <img id="imagePreview" src="/assets/img/anonymous.jpg" alt="이미지 미리보기">
           <div class="btn_image">
-            <label for="selectFile">
-              프로필사진
-            </label>
+              프로필 사진
           </div>
           <input type="file" id="selectFile" name="profileImage" accept="image/*" style="display: none;">
 
