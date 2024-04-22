@@ -165,23 +165,6 @@ public class MemberController {
             return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
         }
     }
-    // 로그아웃 요청 처리
-    @GetMapping("/sign-out")
-    public String signOut(HttpSession session,
-                          HttpServletRequest request,
-                          HttpServletResponse response) {
-        log.info("members/sign-out: Get");
-
-
-        // 로그아웃 처리
-        // 1. 세션에서 로그인 정보 기록 삭제
-        session.removeAttribute("login");
-
-        // 2. 세션 전체 무효화(초기화)
-        session.invalidate();
-
-        return "redirect:/index";
-    }
 
     //-----------------------my-history-----------------------
 
