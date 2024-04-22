@@ -17,5 +17,5 @@ public interface MemberMapper {
 
     Member findMemberByCookie(String sessionId);
 
-
+    void modify(Member member);
 }

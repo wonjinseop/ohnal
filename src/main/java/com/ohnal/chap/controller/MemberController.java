@@ -152,6 +152,4 @@ public class MemberController {
         return "chap/my-history";
     }
 
-
-
 }

@@ -90,6 +90,7 @@ header .inner-header .profile-box {
   overflow: hidden;
   border: 2px solid #fff;
   margin-top: 5px;
+  cursor: pointer;
 }
 
 header .inner-header .profile-box img {
@@ -101,8 +102,8 @@ header .inner-header .intro-text {
   font-size: 15px;
   font-weight: 400;
   margin-left: 15px;
-  margin-top: 3px;
   line-height: 50px;
+  cursor: pointer;
 }
 
 header .inner-header .menu-open {

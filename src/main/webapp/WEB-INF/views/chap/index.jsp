@@ -38,31 +38,71 @@
                 <div class="right-top">
                     <h2>오늘의 패션 예보</h2>
                 </div>
-                <div class="swiper">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                <c:if test="${login.gender == null}">
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                    <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
+                            </div>
                         </div>
-                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
-                        </div>
-                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
-                        </div>
-                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
-                        </div>
-                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
-                        </div>
-                        <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                            <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
-                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
                     </div>
-                    <!-- If we need pagination -->
-                    <div class="swiper-pagination"></div>
-                </div>
+                </c:if>
+
+                <c:if test="${login.gender eq 'M'}">
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
+                            </div>
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </c:if>
+
+                <c:if test="${login.gender eq 'F'}">
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
+                            </div>
+                            <div class="right-down swiper-slide" data-swiper-autoplay="3000">
+                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
+                            </div>
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </c:if>
 
             </div>
         </div>

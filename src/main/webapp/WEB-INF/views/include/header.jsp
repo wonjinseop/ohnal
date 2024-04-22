@@ -11,16 +11,22 @@
             </h1>
             <div class="profile-wrapper">
                 <!-- 프로필 사진과 nickname 노출-->
-                <c:if test="${login != null}">
+                <c:if test="${login != null}"> <!--로그인이 되어 있고 -->
                     <c:choose>
-                        <c:when test="${login.profile != null}">
-                            <div class="profile-box">
-                                <%-- 프사 경로 수정 필요--%>
-                                <img src="/display${login.profile}" alt="프사">
-                            </div>
+                        <c:when test="${login.profile != null}"> <!--프로필 사진이 있는데 -->
+                            <c:if test="${login.loginMethod eq 'KAKAO'}"> <!--1. 카카오 로그인이면-->
+                                <div class="profile-box">
+                                    <img src="${login.profile}" alt="프사">
+                                </div>
+                            </c:if>
+                            <c:if test="${login.loginMethod != 'KAKAO'}"> <!-- 2. 카카오 로그인이 아니면-->
+                                <div class="profile-box">
+                                    <img src="/display${login.profile}" alt="프사">
+                                </div>
+                            </c:if>
                             <p class="intro-text">${login.nickname}님, 안녕하세요!</p>
                         </c:when>
-                        <c:otherwise>
+                        <c:otherwise> <!--프로필 사진이 없으면-->
                             <div class="profile-box">
                                 <img src="/assets/img/anonymous-image.png" alt="프사">
                             </div>
@@ -49,7 +55,7 @@
                 </c:if>
 
                 <c:if test="${not empty login}">
-                    <li><a href="#">My Info</a></li>
+                    <li><a href="/members/my-info">My Info</a></li>
                     <li><a href="/members/my-history">My History</a></li>
                     <li><a href="/members/sign-out">Sign Out</a></li>
                 </c:if>
