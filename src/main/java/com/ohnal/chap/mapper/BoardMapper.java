@@ -32,4 +32,10 @@ public interface BoardMapper {
     List<Board> findAllByEmail(@Param("email")String loginUserEmail,@Param("page")Page page);
 
     int getMyPostsCount(String loginUserEmail);
+
+    // my-history 에서 작성한 글 버튼 누를 때, 작동하는 sql문
+    List<Board> myPosts(String email);
+
+    // my-history 에서 작성 댓글 버튼 누를 때, 작동하는 sql문
+    List<Board> myWriteReply(String email);
 }

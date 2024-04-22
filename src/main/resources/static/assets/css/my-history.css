@@ -245,3 +245,300 @@ footer .lnr-envelope {
     background: #333 !important;
     color: #fff !important;
 }
+
+.modal {
+    /* 트랜지션 효과 */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    box-sizing: content-box;
+
+}
+
+.modal.show {
+    /* 모달이 열렸을 때 보여지게 하는 코드 */
+    opacity: 1;
+    pointer-events: auto;
+    
+    margin-left: 0;
+}
+
+.modal {
+    /* 스타일 - customize */
+    background-color: rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+    padding: 20px;
+
+    /* 트랜지션 효과 */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+
+    /* 화면 전체를 덮게하는 코드 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* 중앙에 오게하는 코드 */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20000px;
+}
+
+.modal-content {
+    /* 스타일 - customize */
+    max-width: 1200px;
+    width: 100%;
+    height: 700px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    /* 트랜지션 효과 */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+    transform: scale(0.8);
+    
+}
+
+.modal.show {
+    /* 모달이 열렸을 때 보여지게 하는 코드 */
+    opacity: 1;
+    pointer-events: auto;
+
+    margin-left: 0;
+}
+
+.modal.show .modal-content {
+    /* 모달이 열렸을 때 보여지게 하는 코드 */
+    opacity: 1;
+    transform: scale(1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.close:hover {
+    color: black;
+}
+
+
+.modal-content .card-wrapper div.modal-wrapper-card {
+    display: flex;
+    width: 100%;
+    height: 655px;
+    /* border: 1px dashed purple; */
+}
+
+.modal-content .card-wrapper div.modal-wrapper-card .modal-wrapper-card-1 {
+    width: 50%;
+    border-right: 1px solid lightgray;
+    height: 100%;
+}
+
+.modal-content .card-wrapper div.modal-wrapper-card .modal-wrapper-card-2 {
+    width: 50%;
+    /* border: 1px dashed red; */
+    height: 100%;
+}
+
+
+.modal-content .card-picture img {
+    width: 100%;
+    height: 100%;
+}
+.modal-content .card-wrapper .card-title-wrapper .profile-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px;
+    margin-left: 20px;
+    overflow: hidden;
+
+}
+
+.modal-content .card-wrapper .card-title-wrapper .card-account {
+    font-size: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 0px;
+
+
+}
+
+.modal .card-title-wrapper {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+
+/* 프로필사진 영역 */
+.modal-content .card-wrapper .card-title-wrapper .profile-box img {
+    width: 100%;
+    align-content: center;
+}
+
+.modal .card-title-wrapper .time-stamp {
+    width: 70px;
+    align-content: center;
+}
+
+.modal-content .card-account {
+    /* border: 1px dashed red; */
+    margin-left: 10px;
+
+    width: 80%;
+}
+.modal-content .li-ha .hashtag {
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.modal-content .card-account p {
+    font-size: 30px;
+}
+
+.modal-content .card .content-wrapper {
+    /* margin-top: 5px; */
+    border-top: 1px solid lightgray;
+    /* line-height: 15px; */
+    overflow: auto;
+    
+    /* border: 1px dashed; */
+}
+
+.like-icon {
+    display: flex;
+    flex-wrap: wrap;
+
+    border-bottom: 1px solid lightgray;
+
+    align-items: center;
+    padding: 10px;
+}
+
+.like-icon .like-count {
+    margin-left: 45px;
+}
+
+.replys .content-comments  {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.like-icon .lnr-heart {
+    width: 5%;
+}
+
+.like-icon .hashtag-wrapper {
+    width: 85%;
+}
+
+/* 댓글 부분 */
+
+
+
+.modal .modal-wrapper-card-2 .replys {
+    width: 100%;
+    /* border: 1px dashed red; */
+    height: 481px;
+    overflow: auto;
+    -ms-overflow-style: none;
+}
+
+.modal .modal-wrapper-card-2 .replys::-webkit-scrollbar {
+    display: none;
+}
+
+.modal .modal-wrapper-card-2 .replys .reply-wrapper {
+    width: 100%;
+    margin-top: 7px;
+    /* border: 1px dashed blue; */
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+}
+.modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account {
+    text-align: center;
+    width: 15%;
+    margin-left: 0px;
+}
+
+.modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account .profile-img {
+    width: 30px;
+    margin-right: 7px;
+}
+
+.modal .modal-wrapper-card-2 .replys .reply-wrapper .reply {
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.modal .modal-wrapper-card-2 .replys .reply-data {
+    width: 100%;
+    /* border: 1px dashed purple; */
+    margin-bottom: 7px;
+}
+.modal .modal-wrapper-card-2 .replys .reply-data *{
+    font-size: 13px; color: gray;
+    margin-left: 10px;
+    background: none;
+}
+ /* 댓글 입력 버튼창 */
+.modal-content .write-reply {
+    border: 1px solid lightgray;
+    align-items: end;
+}
+
+.modal-content .write-reply .write-wrapper {
+    width: 100%;
+     /* border: 1px dashed;  */
+    display: flex;
+}
+.modal-content .card .content-wrapper p:first-child {
+    margin-top: 10px;
+
+}
+
+.modal-content .write-reply .write-input {
+    font-size: 15px; 
+    width: 85%;
+    height: 100%;
+    border-style: none;
+    
+    /* border: 1px dashed; */
+}
+
+.modal-content .write-reply .write-send {
+    width: 15%;
+}
+
+.modal-content .lnr-heart {
+    margin: 0px 10px;
+    font-size: 30px;
+    
+    
+}
+
+
+.modal-content .card .card-picture {
+    background-color: #fff;
+    height: 500px;
+    overflow: hidden;
+}

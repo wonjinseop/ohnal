@@ -15,6 +15,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.tags.shaded.org.apache.xalan.templates.ElemValueOf;
@@ -168,9 +169,9 @@ public class MemberController {
 
     //-----------------------my-history-----------------------
 
-    // my-page로 이동하는 메서드
+    // my-history로 이동하는 메서드
     @GetMapping("/my-history")
-    public String myHistory(HttpSession session, Page page, Model model) {
+    public String myHistory(HttpSession session, @ModelAttribute("s") Page page, Model model) {
         log.info("my-history 페이지 들어옴");
 
         String loginUserEmail = getCurrentLoginMemberEmail(session);
@@ -184,13 +185,38 @@ public class MemberController {
         PageMaker maker = new PageMaker(page, boardService.getMyPostsCount(loginUserEmail));
         log.info("maker: {}", maker);
         log.info("조회한 게시물 총량: {}", String.valueOf(maker.getTotalCount()));
+        log.info("boardListResponseDTO: {}", allMyPosts);
 
-        model.addAttribute("allMyPosts", allMyPosts);
+        model.addAttribute("myPosts", allMyPosts);
         model.addAttribute("maker", maker);
 
         return "chap/my-history";
     }
 
+    // my-history에서 작성 글(버튼) 눌렀을 때
+    @GetMapping("/my-history/{email}")
+    public ResponseEntity<?> myPosts(@PathVariable("email") String email) {
+        log.info("my-history 페이지에서 작성한 글(버튼) 눌러서 fetch 작동함");
+        log.info("email: {}", email);
+
+        List<BoardListResponseDTO> myPosts = boardService.myPosts(email);
+        log.info("myPosts: {}", myPosts);
+        return ResponseEntity.ok().body(myPosts);
+    }
+
+    // my-history에서 작성 댓글(버튼) 눌렀을 때
+    /*
+    @GetMapping("/my-history/my-write-reply/{email}")
+    public ResponseEntity<?> myWriteReply(@PathVariable("email") String email) {
+        log.info("my-history 페이지에서 작성한 글(버튼) 눌러서 fetch 작동함");
+        log.info("email: {}", email);
+
+        // 여기서 myPosts는 내가 작성한 댓글의 글들의 정보를 담은 List컬렉션
+        // List<BoardListResponseDTO> myPosts = boardService.myWriteReply(email);
+
+    }
+
+     */
 
 
 }
