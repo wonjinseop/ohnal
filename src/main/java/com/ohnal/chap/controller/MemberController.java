@@ -5,6 +5,7 @@ import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.dto.request.LoginRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
+import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
 import com.ohnal.chap.service.*;
 import com.ohnal.util.FileUtils;
@@ -102,7 +103,7 @@ public class MemberController {
 
             // 로그인을 했다는 정보를 계속 유지하기 위한 수단으로 쿠키를 사용하자.
 
-            makeLoginCookie(dto, response);
+             makeLoginCookie(dto, response);
 
             // 세션으로 로그인 유지
             memberService.maintainLoginState(request.getSession(), dto.getEmail());
@@ -121,6 +122,36 @@ public class MemberController {
 
         response.addCookie(cookie);
     }
+
+    // 로그아웃 요청 처리
+    @GetMapping("/sign-out")
+    public String signOut(HttpSession session,
+                          HttpServletRequest request,
+                          HttpServletResponse response) {
+        log.info("/member/sign-out: GET!");
+
+        // 자동 로그인 중인지 확인
+        if (isAutoLogin(request)) {
+            // 쿠키를 삭제해주고 DB 데이터도 원래대로 돌려놓아야 한다.
+            memberService.autoLoginClear(request, response);
+        }
+
+        // sns 로그인 상태인지를 확인
+        LoginUserResponseDTO dto = (LoginUserResponseDTO) session.getAttribute(LOGIN_KEY);
+        if (dto.getLoginMethod().equals("KAKAO")) {
+            memberService.kakaoLogout(dto, session);
+        }
+
+        // 세션에서 로그인 정보 기록 삭제
+        session.removeAttribute("login");
+
+        // 세션 전체 무효화 (초기화)
+        session.invalidate();
+
+        return "redirect:/members/sign-in";
+
+    }
+
     // 이메일 인증
     @PostMapping("/email")
     @ResponseBody

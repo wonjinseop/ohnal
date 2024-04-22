@@ -12,7 +12,7 @@
 
     <select id="findMember" resultType="member">
         SELECT * FROM tbl_member
-        WHERE email=#{email}
+        WHERE email = #{email}
     </select>
 
 <select id="isDuplicate" resultType="boolean">
@@ -25,6 +25,12 @@
         WHERE nickname=#{keyword}
     </if>
 </select>
+
+    <update id="changePw">
+        UPDATE tbl_member
+        SET password = #{password}
+        WHERE email = #{email}
+    </update>
 
     <update id="saveAutoLogin">
         UPDATE tbl_member

@@ -19,7 +19,6 @@ public class Member {
     private String profileImage;
     private LoginMethod loginMethod;
     private LocalDateTime regDate;
-    private String Auth;
     private String sessionId;
     private LocalDateTime limitTime;
 

@@ -1,50 +1,81 @@
 
 .container {
-    max-width: 400px;
+    width: 400px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-top:300px;
+    margin-top:200px;
 }
-
 .form-group {
     margin-bottom: 15px;
 }
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
 input[type="email"] {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
-button {
+#emailChkInput{
+width:300px;
+}
+#mailCheckMsg{
+display:block;
+margin-top:5px;
+}
+input[type="password"]{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom:30px;
+}
+#button {
     padding: 10px 15px;
     background-color: #007BFF;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 10px;
+    margin-right:5px;
+     transition: background-color 0.4s;
 }
-
-#message {
-    margin-top: 15px;
-    color: red;
+#button:hover{
+  background-color: rgba(39, 185, 10, 0.3);
 }
-.ohnallogo{
-display: flex;
-    position: absolute;
-    right: 920;
-    top: 150;
+.pwFind{
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+    padding:40px;
+  height:300px;
+    margin-top:100px;
 }
-
-.ohnalimg {
-width:300px;
-height : 100px;
+p.font{
+    width:400px;
+    margin-left:10px;
+    display:block;
 }
+#pwChk2{
+  display:block;
+  position:relative;
+  bottom:25px;
+}
+#pwChk{
+  display:block;
+  position:relative;
+  bottom:25px;
+}
+#pwChange{
+  padding: 10px 15px;
+  background-color: #007BFF;
+   color: #fff;
+   width:400px;
+   height:60px;
+  border-radius: 10px;
+  margin-bottom:50px;
+  margin-left:38%;
+   transition:background-color 0.4s;
+ }
+ #pwChange:hover{
+   background-color: rgba(39, 185, 10, 0.3);
+ }

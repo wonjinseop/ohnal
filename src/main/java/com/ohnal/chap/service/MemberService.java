@@ -12,8 +12,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.WebUtils;
 
 import java.time.LocalDateTime;
@@ -21,12 +28,8 @@ import java.time.LocalDateTime;
 import static com.ohnal.chap.service.LoginResult.NO_PW;
 import static com.ohnal.chap.service.LoginResult.SUCCESS;
 import static com.ohnal.util.LoginUtils.*;
-import org.springframework.web.util.WebUtils;
 
-import java.time.LocalDateTime;
-
-import static com.ohnal.chap.service.LoginResult.NO_PW;
-import static com.ohnal.util.LoginUtils.*;
+import java.util.Map;
 
 
 @Service
@@ -72,7 +75,6 @@ public class MemberService {
             System.out.println("비밀번호가 일치하지 않습니다.");
             return NO_PW;
         }
-
         // 자동 로그인 처리
         if (dto.isAutoLogin()) {
             // 1. 자동 로그인 쿠키 생성 - 쿠키 안에 절대 중복되지 않는 값을 저장. (브라우저 세션 아이디)
@@ -103,6 +105,11 @@ public class MemberService {
         return memberMapper.isDuplicate(type, keyword);
     }
 
+    public void changePassword(String email, String password){
+        String encodedPw = encoder.encode(password);
+        memberMapper.changePw(email, encodedPw);
+    }
+
     public void maintainLoginState(HttpSession session, String account) {
 
         // 세션은 서버에서만 유일하게 보관되는 데이터로서
@@ -124,15 +131,14 @@ public class MemberService {
                 .gender(foundMember.getGender())
                 .regDate(String.valueOf(foundMember.getRegDate()))
                 .build();
-
         // 세션에 로그인한 회원 정보를 저장
         session.setAttribute(LOGIN_KEY, dto);
         // 세션 수명 설정
         session.setMaxInactiveInterval(60 * 60); // 1시간
-
     }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
+
         // 1. 자동 로그인 쿠키를 가져온다.
         Cookie c = WebUtils.getCookie(request, AUTO_LOGIN_COOKIE);
 
@@ -154,4 +160,36 @@ public class MemberService {
         }
 
     }
+
+    public void kakaoLogout(LoginUserResponseDTO dto, HttpSession session) {
+
+        String requestUri = "https://kapi.kakao.com/v1/user/logout";
+
+        String accessToken = (String) session.getAttribute("access_token");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+
+        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        params.add("target_id_type", "user_id");
+        params.add("target_id", dto.getEmail());
+
+        RestTemplate template = new RestTemplate();
+        ResponseEntity<Map> responseEntity = template.exchange(
+                requestUri,
+                HttpMethod.POST,
+                new HttpEntity<>(params, headers),
+                Map.class
+        );
+
+        Map<String, Object> responseJSON = (Map<String, Object>) responseEntity.getBody();
+        log.info("응답 데이터: {}", responseJSON); // 로그아웃하는 사용자의 id
+
+        // 만약 access_token의 값을 DB에 저장한 경우에는, 응답받은 id를 통해서
+        // DB의 access_token의 값을 update를 때려서 null로 만들어 주시면 됩니다.
+
+    }
+
+
+
 }
