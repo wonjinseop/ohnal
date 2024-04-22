@@ -10,10 +10,9 @@ import lombok.ToString;
 public class Search extends Page {
     
     // 검색 조건, 검색어
-    private String type, keyword;
+    private String keyword;
     
     public Search() {
-        this.type = "";
         this.keyword = "";
     }
     

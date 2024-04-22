@@ -19,12 +19,19 @@
     <!-- 카드 시작 -->
     <div class="card-container">
 
-        <div class="new-upload-wrapper">
-            <c:if test="${login != null}">
-                <a href="/board/write" class="upload-btn">새 글쓰기</a>
-            </c:if>
+        <div class="top-wrapper">
+            <input id="keywordValue" type="text" value="${s.keyword}" hidden></input>
+            <form action="/board/list" method="get">
+                <select name="keyword" id="keyword">
+                    <option id="option1" value=""></option>
+                    <option id="option2" value=""></option>
+                    <option id="option3" value=""></option>
+                    <option id="option4" value=""></option>
+                </select>
+                <button id="submitBtn" type="submit" hidden></button>
+            </form>
+            <a href="/board/write" class="upload-btn">새 글쓰기</a>
         </div>
-
 
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
@@ -32,9 +39,10 @@
                 <section class="card select-card" data-bno="${b.boardNo}">
                     <div class="card-title-wrapper">
                         <div class="profile-box">
-                            <img src="/assets/img/anonymous.jpg" alt="프사">
+                            <img src="/display${b.profileImage}" alt="프사">
                         </div>
-                        <span class="card-account">test3</span>
+                        <span class="card-account">${b.nickname}</span>
+                        <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button></c:if>
                     </div>
 
                     <div class="card-picture">
@@ -85,32 +93,32 @@
             <ul class="pagination pagination-lg pagination-custom">
                 <c:if test="${maker.page.pageNo != 1}">
                     <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=1&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&lt;&lt;</a>
+                            href="/board/list?pageNo=1&amount=${s.amount}&keyword=${s.keyword}">&lt;&lt;</a>
                     </li>
                 </c:if>
 
                 <c:if test="${maker.prev}">
                     <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=${maker.begin-1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">prev</a>
+                            href="/board/list?pageNo=${maker.begin-1}&amount=${s.amount}&keyword=${s.keyword}">prev</a>
                     </li>
                 </c:if>
 
                 <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
                     <li data-page-num="${i}" class="page-item">
                         <a class="page-link"
-                            href="/board/list?pageNo=${i}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">${i}</a>
+                            href="/board/list?pageNo=${i}&amount=${s.amount}&keyword=${s.keyword}">${i}</a>
                     </li>
                 </c:forEach>
 
                 <c:if test="${maker.next}">
                     <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=${maker.end+1}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">next</a>
+                            href="/board/list?pageNo=${maker.end+1}&amount=${s.amount}&keyword=${s.keyword}">next</a>
                     </li>
                 </c:if>
 
                 <c:if test="${maker.page.pageNo != maker.finalPage}">
                     <li class="page-item"><a class="page-link"
-                            href="/board/list?pageNo=${maker.finalPage}&amount=${s.amount}&type=${s.type}&keyword=${s.keyword}">&gt;&gt;</a>
+                            href="/board/list?pageNo=${maker.finalPage}&amount=${s.amount}&keyword=${s.keyword}">&gt;&gt;</a>
                     </li>
                 </c:if>
 
@@ -154,7 +162,7 @@
                             <div class="card-title-wrapper">
 
                                 <div class="profile-box">
-                                    <img src="/assets/img/anonymous.jpg" alt="프사">
+                                    <img src="" alt="프사" class="profile-image">
                                 </div>
                                 <span class="card-account"></span>
                                 <span class="time-stamp"></span>
@@ -199,6 +207,8 @@
 
                             <form id="commentFrm" class="write-reply">
                                 <div class="write-wrapper">
+                                    <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
+                                    <input name="email" class="email" value="${login.email}" hidden></input>
                                     <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
                                     <button class="write-send" type="button">등록</button>
                                 </div>

@@ -25,7 +25,8 @@ public class BoardListResponseDTO {
     private String regDate;
     private String viewCount;
     private String profileImage;
-    
+    private String email;
+
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
         this.nickname = board.getNickname();
@@ -38,6 +39,7 @@ public class BoardListResponseDTO {
         this.replyCount = makePrettierReplyCount(board.getReplyCount());
         this.viewCount = makePrettierViewCount(board.getViewCount());
         this.profileImage = board.getProfileImage();
+        this.email = board.getEmail();
     }
     
     // 뷰카운트 표시방식 변경

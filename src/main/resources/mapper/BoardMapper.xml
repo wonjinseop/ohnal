@@ -4,10 +4,31 @@
 
 <mapper namespace="com.ohnal.chap.mapper.BoardMapper">
 
-    <select id="findAll" resultType="board">
-        SELECT * FROM tbl_board
+    <sql id="search">
+        <if test="keyword == ''">
+            ORDER BY board_no DESC
+        </if>
+        <if test="keyword == 'last'">
+            ORDER BY board_no DESC
+        </if>
+        <if test="keyword == 'view'">
+            ORDER BY view_count DESC
+        </if>
+        <if test="keyword == 'reply'">
+            ORDER BY reply_count DESC
+        </if>
+        <if test="keyword == 'like'">
+            ORDER BY like_count DESC
+        </if>
+    </sql>
 
-        ORDER BY board_no DESC
+    <select id="findAll" resultType="board">
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        <include refid="search" />
         LIMIT #{pageStart}, #{amount}
     </select>
 
@@ -26,7 +47,11 @@
     </insert>
 
     <select id="findOne" resultType="board">
-        SELECT * FROM tbl_board
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
         WHERE board_no = #{bno}
     </select>
 
@@ -78,8 +103,9 @@
     <!-- my-history 에서 내가 쓴 글 찾아오는 sql문(버튼버전) -->
     <select id="myPosts" resultType="board">
         SELECT * FROM tbl_board
-        WHERE email = #{loginUserEmail}
+        WHERE email = #{email}
         ORDER BY board_no DESC
+        LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
     <!-- my-history 에서 내가 쓴 글 갯수 찾아오는 sql문 -->
@@ -88,6 +114,19 @@
         WHERE email = #{email}
     </select>
 
+    <select id="ordersFindAll" resultType="board">
+        SELECT
+        A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        ORDER BY #{orders} DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
 
+    <delete id="delete">
+        DELETE FROM tbl_board
+        WHERE board_no = #{bno}
+    </delete>
 
 </mapper>
