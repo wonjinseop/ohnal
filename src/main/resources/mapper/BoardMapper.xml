@@ -11,14 +11,6 @@
         LIMIT #{pageStart}, #{amount}
     </select>
 
-    <!-- my-history 에서 내가 쓴 글 찾아오는 sql문 -->
-    <select id="findAllMyPosts" resultType="board">
-        SELECT * FROM tbl_board
-        WHERE email = #{email}
-        ORDER BY board_no DESC
-        LIMIT #{pageStart}, #{amount}
-    </select>
-
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_board
@@ -68,5 +60,21 @@
             #{email}, #{bno}, #{content}, #{nickname}
         )
     </insert>
+
+
+
+    <!-- my-history 에서 내가 쓴 글 찾아오는 sql문 -->
+    <select id="findAllByEmail" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE email = #{email}
+        ORDER BY board_no DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <!-- my-history 에서 내가 쓴 글 갯수 찾아오는 sql문 -->
+    <select id="getMyPostsCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_board
+        WHERE email = #{email}
+    </select>
 
 </mapper>

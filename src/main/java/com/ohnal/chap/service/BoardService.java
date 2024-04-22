@@ -1,4 +1,5 @@
 package com.ohnal.chap.service;
+import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.controller.ReplyPostRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
@@ -14,8 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -37,24 +36,6 @@ public class BoardService {
         return dtoList;
     }
 
-    // my-histor
-    public List<BoardListResponseDTO> findAllMyPosts(String email, Search page) {
-        List<BoardListResponseDTO> dtoList = new ArrayList<>();
-
-
-        List<Board> boardList = mapper.findAllMyPosts(email, page);
-        log.info("boardList: {}", boardList);
-
-
-        for (Board board : boardList) {
-            BoardListResponseDTO dto = new BoardListResponseDTO(board);
-            log.info("new BoardListResponseDTO(board): {}", dto);
-            dtoList.add(dto);
-        }
-        log.info("dtoList: {}", dtoList);
-        return dtoList;
-    }
-    
     // 게시글 등록
     public void save(BoardWriteRequestDTO dto, HttpSession session, String savePath) {
         Board board = new Board(dto, savePath);
@@ -97,5 +78,25 @@ public class BoardService {
         mapper.replySave(reply);
         
         mapper.updateCount(dto.getBno(), "replies");
+    }
+
+
+    //------------------my history------------------
+    public List<BoardListResponseDTO> findAllByEmail(String loginUserEmail, Page page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = mapper.findAllByEmail(loginUserEmail, page);
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            log.info("new BoardListResponseDTO(board): {}", dto);
+            dtoList.add(dto);
+        }
+        log.info("dtoList: {}", dtoList);
+        return dtoList;
+    }
+
+    public int getMyPostsCount(String loginUserEmail) {
+        return mapper.getMyPostsCount(loginUserEmail);
     }
 }

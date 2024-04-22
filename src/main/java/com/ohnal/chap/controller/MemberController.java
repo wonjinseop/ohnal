@@ -1,13 +1,15 @@
 package com.ohnal.chap.controller;
 
+import com.ohnal.chap.common.Page;
+import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.dto.request.LoginRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
+import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.entity.Member;
-import com.ohnal.chap.service.LoginResult;
-import com.ohnal.chap.service.MailSenderService;
-import com.ohnal.chap.service.MemberService;
+import com.ohnal.chap.service.*;
 import com.ohnal.util.FileUtils;
 import com.ohnal.chap.service.MailSenderService;
+import com.ohnal.util.LoginUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,8 +20,15 @@ import org.eclipse.tags.shaded.org.apache.xalan.templates.ElemValueOf;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Collections;
+import java.util.List;
+
+import static com.ohnal.util.LoginUtils.*;
 
 @Controller
 @RequestMapping("/members")
@@ -27,17 +36,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class MemberController {
 
-    @Value("${file.upload.root-path}")
-    private String rootPath;
-
-
     private final MemberService memberService;
     private final MailSenderService mailSenderService;
+    private final BoardService boardService;
+    @Value("${file.upload.root-path}")
+    private String rootPath;
 
     @GetMapping("/sign-up")
     public String signUp() {
         return "chap/sign-up";
     }
+
     @GetMapping("/sign-in")
     public String signIn() {
         return "chap/sign-in";
@@ -58,11 +67,11 @@ public class MemberController {
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto) {
         log.info("/members/sign-up: POST");
-        
+
         if (!rootPath.contains("/profile")) {
             rootPath = rootPath + "/profile";
         }
-        
+
         String savePath = "/profile" + FileUtils.uploadFile(dto.getProfileImage(), rootPath);
         log.info("save-path: {}", savePath);
 
@@ -93,7 +102,7 @@ public class MemberController {
 
             // 로그인을 했다는 정보를 계속 유지하기 위한 수단으로 쿠키를 사용하자.
 
-             makeLoginCookie(dto, response);
+            makeLoginCookie(dto, response);
 
             // 세션으로 로그인 유지
             memberService.maintainLoginState(request.getSession(), dto.getEmail());
@@ -112,6 +121,7 @@ public class MemberController {
 
         response.addCookie(cookie);
     }
+
     // 이메일 인증
     @PostMapping("/email")
     @ResponseBody
@@ -125,6 +135,7 @@ public class MemberController {
             return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
         }
     }
+
     // 로그아웃 요청 처리
     @GetMapping("/sign-out")
     public String signOut(HttpSession session,
@@ -143,15 +154,34 @@ public class MemberController {
         return "redirect:/index";
     }
 
-    //---------my-history
+    //-----------------------my-history-----------------------
 
     // my-page로 이동하는 메서드
+    // 로그인한 사람만 들어올 수 있는 my-history 페이지
     @GetMapping("/my-history")
-    public String myHistory() {
+    public String myHistory(HttpSession session, Page page, Model model) {
         log.info("my-history 페이지 들어옴");
+
+        String loginUserEmail = getCurrentLoginMemberEmail(session);
+        log.info("loginUserEmail: {}", loginUserEmail);
+        model.addAttribute("loginUserEmail", loginUserEmail);
+
+        // 처음 들어왔을 때, my-history 페이지에서
+        // 작성한 글 버튼 눌렀을 때 보여지는 화면이 기본 값이다.
+        List<BoardListResponseDTO> allMyPosts = boardService.findAllByEmail(loginUserEmail, page);
+
+        PageMaker maker = new PageMaker(page, boardService.getMyPostsCount(loginUserEmail));
+        log.info("maker: {}", maker);
+        log.info("조회한 게시물 총량: {}", String.valueOf(maker.getTotalCount()));
+
+        model.addAttribute("allMyPosts", allMyPosts);
+        model.addAttribute("maker", maker);
+
         return "chap/my-history";
     }
 
+
+    // 내가 쓴 글 조회
 
 
 }

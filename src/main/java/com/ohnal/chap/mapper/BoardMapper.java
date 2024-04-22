@@ -1,5 +1,6 @@
 package com.ohnal.chap.mapper;
 
+import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
@@ -13,9 +14,6 @@ public interface BoardMapper {
     
     List<Board> findAll(Search page);
 
-    // my-history 에서 내가 쓴 글을 조회하는 sql문과 연결되어 있음
-    List<Board> findAllMyPosts(@Param("email") String email,@Param("page") Search page);
-    
     void save(Board board);
     
     int getCount();
@@ -27,4 +25,11 @@ public interface BoardMapper {
     List<Reply> replyList(int bno);
     
     void replySave(Reply reply);
+
+
+    // ------------my-history--------------
+    // my-history 에서 내가 쓴 글을 조회하는 sql문과 연결되어 있음
+    List<Board> findAllByEmail(@Param("email")String loginUserEmail,@Param("page")Page page);
+
+    int getMyPostsCount(String loginUserEmail);
 }
