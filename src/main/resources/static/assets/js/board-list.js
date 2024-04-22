@@ -33,12 +33,24 @@ $cardContainer.onclick = e => {
   const URL = '/board/detail/';
   const $card = e.target.closest('.select-card');
   if ($card) {
+
     const bno = $card.dataset.bno;
     boardNo = bno;
-    console.log(bno);
-    fetch(URL + bno)
+
+    if (e.target.matches('button')) {
+      console.log("button click!");
+
+      fetch('/board/delete/' + bno)
+      .then(() => {
+        document.getElementById('submitBtn').click();
+      });
+    } else {
+
+      console.log(bno);
+      fetch(URL + bno)
       .then(res => res.json())
       .then(data => {
+
         console.log(data);
         document.querySelector('.modal .card').dataset.bno = bno;
         document.querySelector('.modal .card-account').textContent = data.nickname;
@@ -50,12 +62,17 @@ $cardContainer.onclick = e => {
         document.querySelector('.modal .location').textContent = data.locationTag;
         document.querySelector('.modal .weather').textContent = data.weatherTag;
         document.querySelector('.modal .time-stamp').textContent = data.regDate;
+        document.querySelector('.modal .profile-image').setAttribute('src', '/display' + data.profileImage);
         document.body.style.overflow = 'hidden';
 
-      })
+      });
 
-    document.getElementById('modalBtn').click();
-    fetchGetReplies(bno);
+      document.getElementById('modalBtn').click();
+      fetchGetReplies(bno);
+
+    }
+
+    
 
   }
 
@@ -106,9 +123,9 @@ function renderReplies(replyList) {
       // console.log(reply);
 
       const {replyNo, email, content, profileImage, nickname, time} = reply
-
+      console.log(profileImage);
       tag += `
-        <span class='card-account' data-email='${email}'><img src='${profileImage}' class='profile-img'>${nickname}</span>
+        <span class='card-account' data-email='${email}'><img src='/display${profileImage}' class='profile-img'>${nickname}</span>
         <p class='reply' data-no='${replyNo}'>
             ${content}
         </p>
@@ -116,7 +133,7 @@ function renderReplies(replyList) {
       
 
         <div class='reply-data'>
-          <span>${time}</span>
+          <span class='time'>${time}</span>
           <button id="comments-modify">수정</button>
           <button>삭제</button>
         </div>
@@ -139,10 +156,6 @@ function renderReplies(replyList) {
 };
 
 
-
-
-
-
 // 버튼 요소 선택
 var submitButton = document.querySelector('.write-send');
 
@@ -153,6 +166,8 @@ submitButton.addEventListener('click', function() {
   // 입력 필드 선택
   const inputField = document.querySelector('.write-input');
   const content = inputField.value.trim();
+  const nickname = document.querySelector('.nickname').value;
+  const email = document.querySelector('.email').value;
   const URL = '/board/reply'
 
   console.log(boardNo);
@@ -164,9 +179,14 @@ submitButton.addEventListener('click', function() {
     return;
   };
 
+  console.log(email);
+  console.log(nickname);
+
   const payLoad = {
     text: content,
-    bno: boardNo
+    bno: boardNo,
+    nickname: nickname,
+    email: email
   };
 
   // 요청 방식 및 데이터를 전달할 정보 객체 만들기 (POST)
@@ -203,4 +223,49 @@ submitButton.addEventListener('click', function() {
 
 });
 
+const $keyword = document.getElementById('keyword');
 
+$keyword.addEventListener('change', e => {
+  console.log(e.target.value);
+  document.getElementById('submitBtn').click();
+});
+
+const $keywordValue = document.getElementById('keywordValue').value;
+
+if ($keywordValue === 'last' || $keywordValue === '' ) {
+  document.getElementById('option1').value = 'last';
+  document.getElementById('option1').textContent = '최신순';
+  document.getElementById('option2').value = 'view';
+  document.getElementById('option2').textContent = '조회순';
+  document.getElementById('option3').value = 'like';
+  document.getElementById('option3').textContent = '좋아요순';
+  document.getElementById('option4').value = 'reply';
+  document.getElementById('option4').textContent = '댓글순';
+}else if ($keywordValue === 'view') {
+  document.getElementById('option1').value = 'view';
+  document.getElementById('option1').textContent = '조회순';
+  document.getElementById('option2').value = 'last';
+  document.getElementById('option2').textContent = '최신순';
+  document.getElementById('option3').value = 'like';
+  document.getElementById('option3').textContent = '좋아요순';
+  document.getElementById('option4').value = 'reply';
+  document.getElementById('option4').textContent = '댓글순';
+} else if ($keywordValue === 'like') {
+  document.getElementById('option1').value = 'like';
+  document.getElementById('option1').textContent = '좋아요순';
+  document.getElementById('option2').value = 'view';
+  document.getElementById('option2').textContent = '조회순';
+  document.getElementById('option3').value = 'last';
+  document.getElementById('option3').textContent = '최신순';
+  document.getElementById('option4').value = 'reply';
+  document.getElementById('option4').textContent = '댓글순';
+} else {
+  document.getElementById('option1').value = 'reply';
+  document.getElementById('option1').textContent = '댓글순';
+  document.getElementById('option2').value = 'view';
+  document.getElementById('option2').textContent = '조회순';
+  document.getElementById('option3').value = 'like';
+  document.getElementById('option3').textContent = '좋아요순';
+  document.getElementById('option4').value = 'last';
+  document.getElementById('option4').textContent = '최신순';
+};

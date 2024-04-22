@@ -32,4 +32,8 @@ public interface BoardMapper {
     List<Board> findAllByEmail(@Param("email")String loginUserEmail,@Param("page")Page page);
 
     int getMyPostsCount(String loginUserEmail);
+    
+    List<Board> ordersFindAll(@Param("page") Search page, @Param("orders") String orders);
+    
+    void delete(int bno);
 }

@@ -69,11 +69,9 @@ public class BoardService {
         return dtoList;
     }
     
-    public void writeReply(ReplyPostRequestDTO dto, String email, String nickname) {
+    public void writeReply(ReplyPostRequestDTO dto) {
         
-        Reply reply = dto.toEntity(nickname);
-        
-        reply.setEmail(email);
+        Reply reply = dto.toEntity();
         
         mapper.replySave(reply);
         
@@ -98,5 +96,23 @@ public class BoardService {
 
     public int getMyPostsCount(String loginUserEmail) {
         return mapper.getMyPostsCount(loginUserEmail);
+    }
+    
+    public List<BoardListResponseDTO> ordersFindAll(Search page, String orders) {
+        
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = mapper.ordersFindAll(page, orders);
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+        
+        return dtoList;
+    }
+    
+    public void delete(int bno) {
+        
+        mapper.delete(bno);
+        
     }
 }

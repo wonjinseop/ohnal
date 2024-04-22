@@ -17,15 +17,22 @@ public class ReplyPostRequestDTO {
     @Size(min = 1, max =  300)
     private String text;
     
+    @NotBlank
+    private String nickname;
+    
+    @NotBlank
+    private String email;
+    
     @NotNull
     private int bno;
     
     // dto를 entity로 바꾸는 메서드
-    public Reply toEntity(String nickname) {
+    public Reply toEntity() {
         return Reply.builder()
                 .content(this.text)
                 .bno(this.bno)
-                .nickname(nickname)
+                .nickname(this.nickname)
+                .email(this.email)
                 .build();
     }
     

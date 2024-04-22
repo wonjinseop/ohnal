@@ -32,7 +32,7 @@
           <div class="profile-box">
             <img src="/display${login.profile}" alt="프사">
           </div>
-          <input type="text" id="nickname" name="nickname" value="user" readonly>
+          <input type="text" id="nickname" name="nickname" value="${login.nickname}" readonly>
         </div>
 
         <div class="hash">

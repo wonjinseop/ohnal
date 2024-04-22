@@ -24,6 +24,8 @@ public class BoardListResponseDTO {
     private String weatherTag;
     private String regDate;
     private String viewCount;
+    private String profileImage;
+    private String email;
     
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
@@ -36,6 +38,8 @@ public class BoardListResponseDTO {
         this.likeCount = makePrettierLikeCount(board.getLikeCount());
         this.replyCount = makePrettierReplyCount(board.getReplyCount());
         this.viewCount = makePrettierViewCount(board.getViewCount());
+        this.profileImage = board.getProfileImage();
+        this.email = board.getEmail();
     }
     
     // 뷰카운트 표시방식 변경

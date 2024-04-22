@@ -13,14 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import static com.ohnal.util.FileUtils.uploadFile;
@@ -40,6 +37,7 @@ public class BoardContoller {
     @GetMapping("/list")
     public String boardList(Model model, @ModelAttribute("s") Search page) {
         log.info("/board/list: GET!");
+        log.info(String.valueOf(page));
         
         List<BoardListResponseDTO> dtoList = boardService.findAll(page);
         PageMaker pageMaker = new PageMaker(page, boardService.getCount());
@@ -79,12 +77,13 @@ public class BoardContoller {
     
     // 게시글 자세히보기
     @GetMapping("/detail/{bno}")
-    
     @ResponseBody
     public ResponseEntity<?> detail(@PathVariable int bno) {
         
         Board board = boardService.findOne(bno);
+        log.info("boardProfileImage: {}", board.getProfileImage());
         BoardListResponseDTO dto = new BoardListResponseDTO(board);
+        log.info("dtoProfileImage: {}", dto.getProfileImage());
         
         return ResponseEntity.ok().body(dto);
     }
@@ -103,10 +102,6 @@ public class BoardContoller {
     @PostMapping("/reply")
     public ResponseEntity<?> writeReply(@Validated @RequestBody ReplyPostRequestDTO dto,
                                         BindingResult result) {
-        
-        String email = "user123@naver.com";
-        String nickname = "user";
-        
         if (result.hasErrors()) {
             return ResponseEntity
                     .badRequest()
@@ -115,9 +110,16 @@ public class BoardContoller {
         
         log.info("/board/reply: POST");
         
-        boardService.writeReply(dto, email, nickname);
+        boardService.writeReply(dto);
         
         return ResponseEntity.ok().body("success");
+    }
+    
+    @GetMapping("/delete/{bno}")
+    public void delete(@PathVariable int bno) {
+        log.info("delete: {}", bno);
+        
+        boardService.delete(bno);
     }
 
 }

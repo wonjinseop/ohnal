@@ -3,11 +3,32 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ohnal.chap.mapper.BoardMapper">
+    
+    <sql id="search">
+        <if test="keyword == ''">
+            ORDER BY board_no DESC
+        </if>
+        <if test="keyword == 'last'">
+            ORDER BY board_no DESC
+        </if>
+        <if test="keyword == 'view'">
+            ORDER BY view_count DESC
+        </if>
+        <if test="keyword == 'reply'">
+            ORDER BY reply_count DESC
+        </if>
+        <if test="keyword == 'like'">
+            ORDER BY like_count DESC
+        </if>
+    </sql>
 
     <select id="findAll" resultType="board">
-        SELECT * FROM tbl_board
-
-        ORDER BY board_no DESC
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        <include refid="search" />
         LIMIT #{pageStart}, #{amount}
     </select>
 
@@ -26,7 +47,11 @@
     </insert>
 
     <select id="findOne" resultType="board">
-        SELECT * FROM tbl_board
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
         WHERE board_no = #{bno}
     </select>
 
@@ -76,5 +101,20 @@
         SELECT COUNT(*) FROM tbl_board
         WHERE email = #{email}
     </select>
+
+    <select id="ordersFindAll" resultType="board">
+        SELECT
+        A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        ORDER BY #{orders} DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM tbl_board
+        WHERE board_no = #{bno}
+    </delete>
 
 </mapper>
