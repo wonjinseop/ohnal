@@ -65,10 +65,21 @@
 
     <!-- my-history 에서 내가 쓴 글 찾아오는 sql문 -->
     <select id="findAllByEmail" resultType="board">
-        SELECT * FROM tbl_board
-        WHERE email = #{email}
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE A.email = #{email}
         ORDER BY board_no DESC
         LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <!-- my-history 에서 내가 쓴 글 찾아오는 sql문(버튼버전) -->
+    <select id="myPosts" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE email = #{loginUserEmail}
+        ORDER BY board_no DESC
     </select>
 
     <!-- my-history 에서 내가 쓴 글 갯수 찾아오는 sql문 -->
@@ -76,5 +87,7 @@
         SELECT COUNT(*) FROM tbl_board
         WHERE email = #{email}
     </select>
+
+
 
 </mapper>
