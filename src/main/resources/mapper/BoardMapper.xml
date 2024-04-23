@@ -1,0 +1,174 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohnal.chap.mapper.BoardMapper">
+
+    <sql id="search">
+        <if test="search.keyword == ''">
+            ORDER BY board_no DESC
+        </if>
+        <if test="search.keyword == 'last'">
+            ORDER BY board_no DESC
+        </if>
+        <if test="search.keyword == 'view'">
+            ORDER BY view_count DESC
+        </if>
+        <if test="search.keyword == 'reply'">
+            ORDER BY reply_count DESC
+        </if>
+        <if test="search.keyword == 'like'">
+            ORDER BY like_count DESC
+        </if>
+    </sql>
+
+    <select id="findAll" resultType="board">
+        SELECT
+            A.*, B.profile_image, C.like_no, c.like_email
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        LEFT OUTER JOIN tbl_like C
+        ON A.board_no = C.board_no AND C.like_email = #{email}
+        <include refid="search" />
+        LIMIT #{search.pageStart}, #{search.amount}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board
+    </select>
+
+    <insert id="save">
+        INSERT INTO tbl_board (
+            nickname, content, image, location_tag, weather_tag, email
+        )
+        VALUES (
+            #{nickname}, #{content}, #{image}, #{locationTag}, #{weatherTag}, #{email}
+        )
+    </insert>
+
+    <select id="findOne" resultType="board">
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no = #{bno}
+    </select>
+
+    <update id="updateCount">
+        UPDATE tbl_board
+        <if test="count == 'view'">
+            SET view_count = view_count + 1
+        </if>
+        <if test="count == 'replies'">
+            SET reply_count = reply_count + 1
+        </if>
+        <if test="count == 'likePlus'">
+            SET like_count = like_count + 1
+        </if>
+        <if test="count == 'likeMinus'">
+            SET like_count = like_count - 1
+        </if>
+        WHERE board_no = #{bno}
+    </update>
+    
+    <select id="replyList" resultType="reply">
+        SELECT
+            A.reply_no, A.content, A.reg_date,
+            B.email, B.nickname, B.profile_image
+        FROM tbl_reply A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no = #{bno}
+        ORDER BY reply_no DESC
+    </select>
+
+    <insert id="replySave">
+        INSERT INTO tbl_reply (
+            email, board_no, content, nickname
+        )
+        VALUES (
+            #{email}, #{bno}, #{content}, #{nickname}
+        )
+    </insert>
+
+
+
+    <!-- my-history 에서 내가 쓴 글 찾아오는 sql문 -->
+    <!--    -->
+    <select id="findAllByEmail" resultType="board">
+        SELECT
+            A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE A.email = #{email}
+        ORDER BY board_no DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <!-- my-history 에서 내가 쓴 글 찾아오는 sql문(버튼버전) -->
+    <select id="myPosts" resultType="board">
+        SELECT * FROM tbl_board
+        WHERE email = #{email}
+        ORDER BY board_no DESC
+        LIMIT #{page.pageStart}, #{page.amount}
+    </select>
+
+    <!-- my-history 에서 내가 쓴 글 갯수 찾아오는 sql문 -->
+    <select id="getMyPostsCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_board
+        WHERE email = #{email}
+    </select>
+
+    <!-- my-history 에서 내가 쓴 댓글 목록(작성 댓글 버튼 눌렀을 때) 조회시
+    사용되는 sql문 (내가 쓴 댓글의 게시물의 목록을 모두 조회한다. -->
+    <select id="findMyComments" resultType="board">
+        SELECT A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no
+        IN (SELECT board_no FROM tbl_reply WHERE email = #{email});
+    </select>
+
+    <!-- my-history 에서 내가 쓴 댓글 목록(작성 댓글 버튼 눌렀을 때) 조회시
+    사용되는 sql문 (내가 쓴 댓글의 게시물의 총 갯수를 조회한다. -->
+    <select id="getMyCommentsCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no
+        IN (SELECT board_no FROM tbl_reply WHERE email = #{email});
+    </select>
+
+    <delete id="delete">
+        DELETE FROM tbl_board
+        WHERE board_no = #{bno}
+    </delete>
+
+    <select id="findLike" resultType="boolean">
+        SELECT
+            count(*)
+        FROM tbl_like
+        WHERE board_no = #{bno} AND like_email = #{email}
+    </select>
+
+    <insert id="insertLike">
+        INSERT INTO tbl_like (
+            like_email, board_no
+        )
+        VALUES (
+            #{email}, #{bno}
+        )
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM tbl_like
+        WHERE board_no = #{bno} AND like_email = #{email}
+    </delete>
+
+</mapper>
