@@ -111,10 +111,8 @@ function like(likeEmail, bno) {
     body: JSON.stringify(payLoad)
   };
 
-  fetch(URL, requestInfo);
-  // .then(() => {
-  //   document.getElementById('submitBtn').click();
-  // });
+  fetch(URL, requestInfo)
+  .then(res => console.log(res));
 
 };
 

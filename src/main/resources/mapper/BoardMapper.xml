@@ -5,19 +5,19 @@
 <mapper namespace="com.ohnal.chap.mapper.BoardMapper">
 
     <sql id="search">
-        <if test="keyword == ''">
+        <if test="search.keyword == ''">
             ORDER BY board_no DESC
         </if>
-        <if test="keyword == 'last'">
+        <if test="search.keyword == 'last'">
             ORDER BY board_no DESC
         </if>
-        <if test="keyword == 'view'">
+        <if test="search.keyword == 'view'">
             ORDER BY view_count DESC
         </if>
-        <if test="keyword == 'reply'">
+        <if test="search.keyword == 'reply'">
             ORDER BY reply_count DESC
         </if>
-        <if test="keyword == 'like'">
+        <if test="search.keyword == 'like'">
             ORDER BY like_count DESC
         </if>
     </sql>
@@ -29,9 +29,9 @@
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
         LEFT OUTER JOIN tbl_like C
-        ON A.board_no = C.board_no
+        ON A.board_no = C.board_no AND C.like_email = #{email}
         <include refid="search" />
-        LIMIT #{pageStart}, #{amount}
+        LIMIT #{search.pageStart}, #{search.amount}
     </select>
 
     <select id="getCount" resultType="int">
@@ -154,12 +154,12 @@
         SELECT
             count(*)
         FROM tbl_like
-        WHERE board_no = #{bno} AND email = #{email}
+        WHERE board_no = #{bno} AND like_email = #{email}
     </select>
 
     <insert id="insertLike">
         INSERT INTO tbl_like (
-            email, board_no
+            like_email, board_no
         )
         VALUES (
             #{email}, #{bno}
@@ -168,7 +168,7 @@
 
     <delete id="deleteLike">
         DELETE FROM tbl_like
-        WHERE board_no = #{bno} AND email = #{email}
+        WHERE board_no = #{bno} AND like_email = #{email}
     </delete>
 
 </mapper>

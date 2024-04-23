@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     
-    List<Board> findAll(Search page);
+    List<Board> findAll(@Param("search") Search page, @Param("email") String email);
 
     void save(Board board);
     

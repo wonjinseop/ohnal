@@ -26,9 +26,9 @@ public class BoardService {
     private final BoardMapper mapper;
     
     // 게시글 전체 조회
-    public List<BoardListResponseDTO> findAll(Search page) {
+    public List<BoardListResponseDTO> findAll(Search page, String email) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
-        List<Board> boardList = mapper.findAll(page);
+        List<Board> boardList = mapper.findAll(page, email);
         for (Board board : boardList) {
             BoardListResponseDTO dto = new BoardListResponseDTO(board);
             dtoList.add(dto);
