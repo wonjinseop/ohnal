@@ -104,7 +104,7 @@ public class MemberController {
 
             // 로그인을 했다는 정보를 계속 유지하기 위한 수단으로 쿠키를 사용하자.
 
-             makeLoginCookie(dto, response);
+            makeLoginCookie(dto, response);
 
             // 세션으로 로그인 유지
             memberService.maintainLoginState(request.getSession(), dto.getEmail());

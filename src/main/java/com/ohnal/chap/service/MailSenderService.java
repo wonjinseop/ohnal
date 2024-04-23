@@ -16,7 +16,7 @@ import java.util.Random;
 public class MailSenderService {
 
 
-    private final JavaMailSender mailSender;
+     private final JavaMailSender mailSender;
 
     private int makeRandomNumber(){
         Random r=new Random();

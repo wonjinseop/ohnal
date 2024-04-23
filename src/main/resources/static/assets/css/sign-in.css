@@ -1,20 +1,31 @@
+@font-face {
+    font-family: 'YEONGJUSeonbiTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2403@1.0/YEONGJUSeonbiTTF.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
+body {
+    background-color: black;
+}
 
 .container {
-    background-color: #f0f0f0;
+    background-color: black;
     border-radius: 8px;
-
+    letter-spacing: 2px;
     padding: 20px;
     width: 300px;
     margin-top: 100px;
     padding-top: 180px;
     height : 820px;
+    font-family:'YEONGJUSeonbiTTF';
 
 
 }
 
 .logintextlogin{
     padding-bottom: 5px;
+    color: white;
 }
 
 h2 {
@@ -40,51 +51,67 @@ input[type="password"] {
     margin-bottom: 10px;
     width:400px;
 }
-
 input[type="submit"] {
     width: 300px;
-    padding: 10px;
-    background-color:black;
     border: none;
-    color: white;
-
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 10px;
-    color: #12e6fc;
-    margin-top:10px;
-
-
+    margin-bottom: 20px;
+    margin-top: 28px;
+    background-color: aquamarine;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 8px aqua, 0 0 28px aqua, 0 0 58px aqua, 0 0 208px aqua;
+    overflow: hidden;
+    transition: background-color 0.3s ease-in-out;
+    height: 44px;
+    
 }
 
 input[type="submit"]:hover {
-    background-color: #002254;
-}
+    background-color: black;
+    color: white;
+    transition: 0.5s;
 
-.signup-link,
-.forgot-link {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: bolder;
-    margin-left : 47px;
 }
 
 .signup-btn {
     display: block;
-    background-color: black;
-    color: #12e6fc;
+    cursor: pointer;
     text-decoration: none;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     width: 300px;
-
     margin-bottom: 15px;
+    color: black;
+    font-weight: bold;
+    background-color: aquamarine;
+    box-shadow: 0 0 8px aqua,
+    0 0 28px aqua,
+    0 0 58px aqua,
+    0 0 208px aqua;
+    overflow: hidden;
+    transition: background-color 0.3s ease-in-out;
+}
+.signup-btn:hover{
+    background-color: black;
+    color: white;
+    transition: 0.5s;
 
 }
 
-.signup-btn:hover {
-    background-color: #002254;
+.signup-link,
+.forgot-link {
+     text-align: center;
+    margin-top: 10px;
+    font-weight: bolder;
+    margin-left : 47px;
+    color: white;
+}
+
+a:hover {
+    color: white;
 }
 
 .kakaologinlogo {
@@ -99,6 +126,11 @@ input[type="submit"]:hover {
 }
 .autologinbox {
 pointer:cursor;
+
+
+}
+span {
+    color: white;
 }
 
 #naverlogo {
@@ -116,4 +148,198 @@ pointer:cursor;
     border-radius: 5px;
     height:51px;
     }
+    
+    .snowflake {
+        color: #fff;
+        font-size: 1em;
+        font-family: Arial;
+        text-shadow: 0 0 1px #000;
+    }
 
+    @-webkit-keyframes snowflakes-fall {
+        0% {
+            top: -10%
+        }
+
+        100% {
+            top: 100%
+        }
+    }
+
+    @-webkit-keyframes snowflakes-shake {
+
+        0%,
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0)
+        }
+
+        50% {
+            -webkit-transform: translateX(80px);
+            transform: translateX(80px)
+        }
+    }
+
+    @keyframes snowflakes-fall {
+        0% {
+            top: -10%
+        }
+
+        100% {
+            top: 100%
+        }
+    }
+
+    @keyframes snowflakes-shake {
+
+        0%,
+        100% {
+            transform: translateX(0)
+        }
+
+        50% {
+            transform: translateX(80px)
+        }
+    }
+
+    .snowflake {
+        position: fixed;
+        top: -10%;
+        z-index: 9999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: default;
+        -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+        -webkit-animation-duration: 10s, 3s;
+        -webkit-animation-timing-function: linear, ease-in-out;
+        -webkit-animation-iteration-count: infinite, infinite;
+        -webkit-animation-play-state: running, running;
+        animation-name: snowflakes-fall, snowflakes-shake;
+        animation-duration: 10s, 3s;
+        animation-timing-function: linear, ease-in-out;
+        animation-iteration-count: infinite, infinite;
+        animation-play-state: running, running
+    }
+
+    .snowflake:nth-of-type(0) {
+        left: 1%;
+        -webkit-animation-delay: 0s, 0s;
+        animation-delay: 0s, 0s
+    }
+
+    .snowflake:nth-of-type(1) {
+        left: 5%;
+        -webkit-animation-delay: 1s, 1s;
+        animation-delay: 1s, 1s
+    }
+
+    .snowflake:nth-of-type(2) {
+        left: 10%;
+        -webkit-animation-delay: 6s, .5s;
+        animation-delay: 6s, .5s
+    }
+
+    .snowflake:nth-of-type(3) {
+        left: 15%;
+        -webkit-animation-delay: 4s, 2s;
+        animation-delay: 4s, 2s
+    }
+
+    .snowflake:nth-of-type(4) {
+        left: 20%;
+        -webkit-animation-delay: 2s, 2s;
+        animation-delay: 2s, 2s
+    }
+
+    .snowflake:nth-of-type(5) {
+        left: 25%;
+        -webkit-animation-delay: 8s, 3s;
+        animation-delay: 8s, 3s
+    }
+
+    .snowflake:nth-of-type(6) {
+        left: 30%;
+        -webkit-animation-delay: 6s, 2s;
+        animation-delay: 6s, 2s
+    }
+
+    .snowflake:nth-of-type(7) {
+        left: 35%;
+        -webkit-animation-delay: 2.5s, 1s;
+        animation-delay: 2.5s, 1s
+    }
+
+    .snowflake:nth-of-type(8) {
+        left: 40%;
+        -webkit-animation-delay: 1s, 0s;
+        animation-delay: 1s, 0s
+    }
+
+    .snowflake:nth-of-type(9) {
+        left: 45%;
+        -webkit-animation-delay: 3s, 1.5s;
+        animation-delay: 3s, 1.5s
+    }
+
+    .snowflake:nth-of-type(10) {
+        left: 50%;
+        -webkit-animation-delay: 0s, 0s;
+        animation-delay: 0s, 0s
+    }
+
+    .snowflake:nth-of-type(11) {
+        left: 55%;
+        -webkit-animation-delay: 1s, 1s;
+        animation-delay: 1s, 1s
+    }
+
+    .snowflake:nth-of-type(12) {
+        left: 60%;
+        -webkit-animation-delay: 6s, .5s;
+        animation-delay: 6s, .5s
+    }
+
+    .snowflake:nth-of-type(13) {
+        left: 65%;
+        -webkit-animation-delay: 4s, 2s;
+        animation-delay: 4s, 2s
+    }
+
+    .snowflake:nth-of-type(14) {
+        left: 70%;
+        -webkit-animation-delay: 2s, 2s;
+        animation-delay: 2s, 2s
+    }
+
+    .snowflake:nth-of-type(15) {
+        left: 75%;
+        -webkit-animation-delay: 8s, 3s;
+        animation-delay: 8s, 3s
+    }
+
+    .snowflake:nth-of-type(16) {
+        left: 80%;
+        -webkit-animation-delay: 6s, 2s;
+        animation-delay: 6s, 2s
+    }
+
+    .snowflake:nth-of-type(17) {
+        left: 85%;
+        -webkit-animation-delay: 2.5s, 1s;
+        animation-delay: 2.5s, 1s
+    }
+
+    .snowflake:nth-of-type(18) {
+        left: 90%;
+        -webkit-animation-delay: 1s, 0s;
+        animation-delay: 1s, 0s
+    }
+
+    .snowflake:nth-of-type(19) {
+        left: 95%;
+        -webkit-animation-delay: 3s, 1.5s;
+        animation-delay: 3s, 1.5s
+    }
+    

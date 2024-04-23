@@ -13,8 +13,7 @@
 <%@include file="../include/header.jsp"%>
 
 <body>
-
-
+ 
   <div class="container">
 
     <form action="/members/sign-up" name="signup" id="signUpForm" method="post" enctype="multipart/form-data">
@@ -36,33 +35,33 @@
 
             <div class="form-email" id="femail">
               <p class="font"><strong>이메일을 입력해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
-              <input type="email" id="email" name="email" placeholder="ex) on-nal@gmail.com" required="required"
+              <input type="email" id="email" name="email" placeholder=" ex) on-nal@gmail.com" required="required"
                 aria-required="true" class="input">
               <button type="button" id="emailAuth">이메일 인증</button>
-              <input type="text" id="emailChkInput" placeholder="인증번호 6자리를 입력하세요." maxlength="6" disabled> <br>
+              <input type="text" id="emailChkInput" placeholder=" 인증번호 6자리를 입력하세요." maxlength="6" disabled> <br>
               <span id="mailCheckMsg"></span>
               <span id="emailChk"></span>
             </div>
 
             <div class="form-pw" id="fpw">
               <p class="font"><strong>비밀번호를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
-              <input type="password" id="pw" name="password" placeholder="영문과 특수문자를 포함한 8자를 입력해주세요" maxlength="20"
+              <input type="password" id="pw" name="password" placeholder=" 영문과 특수문자를 포함한 8자를 입력해주세요" maxlength="20"
                 required="required" aria-required="true" class="input">
               <span id="pwChk"></span>
             </div>
             <div class="form-pw2" id="fpw2">
-              <p class="font"><strong>비밀번호를 재확인해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
-              <input type="password" id="pw2" placeholder="입력하신 비밀번호와 동일하게 입력해주세요" maxlength="20" required="required"
+              <p class="font"><strong>비밀번호를 재입력해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
+              <input type="password" id="pw2" placeholder=" 입력하신 비밀번호와 동일하게 입력해주세요" maxlength="20" required="required"
                 aria-required="true" class="input">
               <span id="reChkPw"></span>
             </div>
 
             <div class="address" name="address">
-              <input type="text" id="sample6_postcode" placeholder="우편번호">
-              <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-              <input type="text" id="sample6_address" placeholder="주소"><br>
-              <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-              <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+              <input type="text" id="sample6_postcode" placeholder=" 우편번호">
+              <input type="button" class="addressbtn" onclick="sample6_execDaumPostcode()" value=" 우편번호 찾기"><br>
+              <input type="text" id="sample6_address" placeholder=" 주소"><br>
+              <input type="text" id="sample6_detailAddress" placeholder=" 상세주소">
+              <input type="text" id="sample6_extraAddress" placeholder=" 참고항목">
 
               <input type="hidden" id="address" name="address">
 
@@ -70,7 +69,7 @@
 
             <div class="form-nick" id="fnick">
               <p class="font"><strong>닉네임을 입력해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
-              <input type="text" id="nick" name="nickname" placeholder="필수입력란입니다." required="required"
+              <input type="text" id="nick" name="nickname" placeholder=" 필수입력란입니다." required="required"
                 aria-required="true" maxlength="8" class="input">
               <span id="nickChk"></span>
             </div>
@@ -91,7 +90,7 @@
       </div>
     </form>
   </div>
-
+  
   <input type="file" multiple>
 
   <%@include file="../include/footer.jsp"%>
@@ -377,6 +376,7 @@
         $form.submit();
       }
     }
+
   </script>
 </body>
 

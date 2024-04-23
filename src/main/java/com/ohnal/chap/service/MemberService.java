@@ -2,6 +2,7 @@ package com.ohnal.chap.service;
 
 import com.ohnal.chap.dto.request.AutoLoginDTO;
 import com.ohnal.chap.dto.request.LoginRequestDTO;
+//import com.ohnal.chap.dto.request.NaverSignUpRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
@@ -49,6 +50,11 @@ public class MemberService {
         memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
+//    public void snsJoin(NaverSignUpRequestDTO dto, String savePath) {
+//
+//        memberMapper.save(dto.toEntity(encoder, savePath));
+//    }
+
     // 회원 정보 수정 처리 서비스
     public void modify(SignUpRequestDTO dto, String savePath) {
         log.info("회원 정보 수정 처리 요청 들어옴! mapper로 접근합니다");
@@ -75,6 +81,7 @@ public class MemberService {
             System.out.println("비밀번호가 일치하지 않습니다.");
             return NO_PW;
         }
+
         // 자동 로그인 처리
         if (dto.isAutoLogin()) {
             // 1. 자동 로그인 쿠키 생성 - 쿠키 안에 절대 중복되지 않는 값을 저장. (브라우저 세션 아이디)
@@ -131,10 +138,12 @@ public class MemberService {
                 .gender(foundMember.getGender())
                 .regDate(String.valueOf(foundMember.getRegDate()))
                 .build();
+
         // 세션에 로그인한 회원 정보를 저장
         session.setAttribute(LOGIN_KEY, dto);
         // 세션 수명 설정
         session.setMaxInactiveInterval(60 * 60); // 1시간
+
     }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {

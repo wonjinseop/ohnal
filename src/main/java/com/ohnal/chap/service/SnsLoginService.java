@@ -75,7 +75,7 @@ public class SnsLoginService {
     private String getKakaoAccessToken(Map<String , String> requestParam) {
         String requestUri = "https://kauth.kakao.com/oauth/token";
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+        headers.add("content-type","application/x-www-form-urlencoded;charset=utf-8");
 
         MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
         params.add("grant_type","authorization_code");
