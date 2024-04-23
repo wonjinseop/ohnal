@@ -27,6 +27,7 @@ public class BoardListResponseDTO {
     private String profileImage;
     private String email;
     private int likeNo;
+    private String likeEmail;
 
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
@@ -42,6 +43,7 @@ public class BoardListResponseDTO {
         this.profileImage = board.getProfileImage();
         this.email = board.getEmail();
         this.likeNo = board.getLikeNo();
+        this.likeEmail = board.getLikeEmail();
     }
     
     // 뷰카운트 표시방식 변경

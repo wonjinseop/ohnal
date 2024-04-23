@@ -24,7 +24,7 @@
 
     <select id="findAll" resultType="board">
         SELECT
-            A.*, B.profile_image, C.like_no
+            A.*, B.profile_image, C.like_no, c.like_email
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email

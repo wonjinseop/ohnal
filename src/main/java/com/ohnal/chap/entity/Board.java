@@ -25,6 +25,7 @@ public class Board {
     private LocalDateTime regDate;
     private String profileImage;
     private int likeNo;
+    private String likeEmail;
     
     public Board(BoardWriteRequestDTO dto, String savePath) {
         this.nickname = dto.getNickname();

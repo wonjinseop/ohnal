@@ -53,7 +53,7 @@
                     <div class="icon-wrapper">
                         <div class="like-icon">
                             <c:choose>
-                                <c:when test="${b.likeNo != 0}">
+                                <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
                                     <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
                                 </c:when>
                                 <c:otherwise>
@@ -191,46 +191,46 @@
 
                                 <div class="like-icon">
                                     <c:choose>
-                                        <c:when test="${b.likeNo != 0}">
+                                        <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
                                             <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
                                         </c:when>
                                         <c:otherwise>
                                             <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
                                         </c:otherwise>
                                     </c:choose>
+                                    <div class="hashtag-wrapper">
+                                        <span class="hashtag location"></span>
+                                        <span class="hashtag weather"></span>
+                                    </div>
+                                    
+                                    <span class="like-count count"></span>
+                                    &nbsp&nbsp&nbsp
+                                    <span class="reply-count count"></span>
+                                    &nbsp&nbsp&nbsp
+                                    <span class="view-count count"></span>
                                 </div>
-                                <div class="hashtag-wrapper">
-                                    <span class="hashtag location"></span>
-                                    <span class="hashtag weather"></span>
+                            </div>
+
+                            
+                            
+                            
+                            <div class="replys">
+                                <p class="content-comments content"></p>
+                                <div class='reply-wrapper'>
+                                    
                                 </div>
-
-                                <span class="like-count count"></span>
-                                &nbsp&nbsp&nbsp
-                                <span class="reply-count count"></span>
-                                &nbsp&nbsp&nbsp
-                                <span class="view-count count"></span>
                             </div>
-
+                            
+                            <form id="commentFrm" class="write-reply">
+                                <div class="write-wrapper">
+                                    <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
+                                    <input name="email" class="email" value="${login.email}" hidden></input>
+                                    <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                    <button class="write-send" type="button">등록</button>
+                                </div>
+                            </form>
                         </div>
-
-
-
-                        <div class="replys">
-                            <p class="content-comments content"></p>
-                            <div class='reply-wrapper'>
-
-                            </div>
-                        </div>
-
-                        <form id="commentFrm" class="write-reply">
-                            <div class="write-wrapper">
-                                <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
-                                <input name="email" class="email" value="${login.email}" hidden></input>
-                                <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
-                                <button class="write-send" type="button">등록</button>
-                            </div>
-                        </form>
-
+                            
                     </div>
 
                 </section>
