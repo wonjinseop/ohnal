@@ -1,4 +1,5 @@
 
+
 // HTML 문서의 로딩이 완료되었을 때, 해당 함수를 실행
 document.addEventListener("DOMContentLoaded", function () {
     // elements

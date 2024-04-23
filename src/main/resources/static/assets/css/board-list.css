@@ -436,6 +436,7 @@ footer .lnr-envelope {
 
     width: 80%;
 }
+
 .modal-content .li-ha .hashtag {
     font-size: 20px;
     line-height: 15px;
@@ -467,6 +468,7 @@ footer .lnr-envelope {
 
 .modal .like-icon .heart {
     width: 23px;
+    margin-left 23px;
 }
 
 .modal .like-icon .count {
@@ -498,7 +500,7 @@ footer .lnr-envelope {
 .modal .modal-wrapper-card-2 .replys {
     width: 100%;
     /* border: 1px dashed red; */
-    height: 487px;
+    height: 481px;
     overflow: auto;
     -ms-overflow-style: none;
 }

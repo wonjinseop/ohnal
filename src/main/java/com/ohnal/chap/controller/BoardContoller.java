@@ -45,6 +45,7 @@ public class BoardContoller {
         List<BoardListResponseDTO> dtoList = boardService.findAll(page, email);
         log.info(dtoList.toString());
         PageMaker pageMaker = new PageMaker(page, boardService.getCount());
+        
         model.addAttribute("bList", dtoList);
         model.addAttribute("maker", pageMaker);
         
@@ -129,19 +130,18 @@ public class BoardContoller {
     // 좋아요 기능
     @PostMapping("/like")
     public ResponseEntity<?> like(@RequestBody BoardLikeRequestDTO dto) {
-        
+
         log.info(dto.toString());
         
         boolean flag = boardService.findLike(dto);
         
         if (!flag) {
             boardService.insertLike(dto);
-            return ResponseEntity.ok().body("success");
+
         } else {
             boardService.deleteLike(dto);
-            return ResponseEntity.badRequest().body("failed");
         }
-        
+        return ResponseEntity.ok().body("success");
     }
 
 }
