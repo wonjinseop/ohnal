@@ -109,8 +109,18 @@
     align-items: center;
     margin-left: 20px;
     margin-top: 5px;
+    margin-bottom: 5px;
     
 }
+
+.card-container .card .icon-wrapper .like-icon {
+    width: 23px;
+    align-items: center;
+    margin-right: 10px;
+}
+
+
+
 
 .card-container .card .icon-wrapper .reply-icon {
     margin-left: 10px;
@@ -118,7 +128,8 @@
 }
 
 .card-container .card .icon-wrapper span.hashtag {
-    font-size: 13px;
+    margin-left: 10px;
+    font-size: 17px;
     font-weight: 400;
     color: #646464;
 }
@@ -133,9 +144,20 @@
 
 }
 
-.card-container .card .content-wrapper p:first-child {
-    margin-top: 10px;
+.card-container .card .content-wrapper .count-wrapper {
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+    width: 100%;
+    align-content: center;
+    height: 40px;
+}
 
+.card-container .card .content-wrapper .main-content {
+    margin-top: 10px;
+}
+
+.card-container .card .content-wrapper .count-wrapper .count:first-child {
+    margin-left: 20px;
 }
 
 .card-container .card .content-wrapper p {
@@ -404,7 +426,7 @@ footer .lnr-envelope {
 }
 
 .modal .card-title-wrapper .time-stamp {
-    width: 70px;
+    width: 20%;
     align-content: center;
 }
 
@@ -414,6 +436,7 @@ footer .lnr-envelope {
 
     width: 80%;
 }
+
 .modal-content .li-ha .hashtag {
     font-size: 20px;
     line-height: 15px;
@@ -432,14 +455,23 @@ footer .lnr-envelope {
     /* border: 1px dashed; */
 }
 
-.like-icon {
+.modal .like-icon {
     display: flex;
     flex-wrap: wrap;
 
+    width: 100%;
     border-bottom: 1px solid lightgray;
 
     align-items: center;
     padding: 10px;
+}
+
+.modal .like-icon .heart {
+    width: 23px;
+}
+
+.modal .like-icon .count {
+    width: fit-content;
 }
 
 .like-icon .like-count {
@@ -456,11 +488,7 @@ footer .lnr-envelope {
     margin-bottom: 5px;
 }
 
-.like-icon .lnr-heart {
-    width: 5%;
-}
-
-.like-icon .hashtag-wrapper {
+.hashtag-wrapper {
     width: 85%;
 }
 
@@ -551,13 +579,10 @@ footer .lnr-envelope {
     width: 15%;
 }
 
-.modal-content .lnr-heart {
+.modal-content .like-image {
     margin: 0px 10px;
-    font-size: 30px;
-    
-    
+    width: 23px;
 }
-
 
 .modal-content .card .card-picture {
     background-color: #fff;

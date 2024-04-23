@@ -19,7 +19,6 @@
         <typeAlias type="com.ohnal.chap.entity.Board" alias="board" />
         <typeAlias type="com.ohnal.chap.entity.Member" alias="member"/>
         <typeAlias type="com.ohnal.chap.entity.Reply" alias="reply" />
-        <typeAlias type="com.ohnal.chap.entity.Member" alias="member"/>
     </typeAliases>
 
     <!-- SQL을 적어놓은 XML 파일의 위치를 설정 -->

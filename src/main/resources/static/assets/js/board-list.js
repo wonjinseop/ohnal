@@ -5,12 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var modal = document.getElementById("myModal");
   var closeBtn = document.getElementById("closeBtn");
 
-
   // functions
   function toggleModal() {
     modal.classList.toggle("show");
     document.body.style.overflow = 'auto';
-  }
+  };
 
   // events
   modalBtn.addEventListener("click", toggleModal);
@@ -20,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 모달의 검은색 배경 부분이 클릭된 경우 닫히도록 하는 코드
     if (event.target === modal) {
       toggleModal();
-    }
+    };
   });
 });
 
@@ -32,49 +31,90 @@ const $cardContainer = document.querySelector('.card-container');
 $cardContainer.onclick = e => {
   const URL = '/board/detail/';
   const $card = e.target.closest('.select-card');
+  const $likeEmail = e.target.closest('.card-wrapper').dataset.email;
   if ($card) {
 
     const bno = $card.dataset.bno;
-    boardNo = bno;
+    const $like = e.target.closest('.like-icon');
 
-    if (e.target.matches('button')) {
-      console.log("button click!");
+    if ($like) {
+      if ($likeEmail !== '') {
+        const $likeIcon = $like.querySelector('img');
+        if ($likeIcon.getAttribute('src').endsWith('fill-heart.svg')) {
+          $likeIcon.setAttribute('src', '/assets/img/heart.svg');
+        } else {
+          $likeIcon.setAttribute('src', '/assets/img/fill-heart.svg');
+        };
+        like($likeEmail, bno);
+      };
 
-      fetch('/board/delete/' + bno)
-      .then(() => {
-        document.getElementById('submitBtn').click();
-      });
     } else {
 
-      console.log(bno);
-      fetch(URL + bno)
-      .then(res => res.json())
-      .then(data => {
+      if (e.target.matches('button')) {
+        console.log("button click!");
 
-        console.log(data);
-        document.querySelector('.modal .card').dataset.bno = bno;
-        document.querySelector('.modal .card-account').textContent = data.nickname;
-        document.querySelector('.modal .content').textContent = data.content;
-        document.querySelector('.modal .content-img').setAttribute('src', '/display' + data.image);
-        document.querySelector('.modal .like-count').textContent = '좋아요 ' + data.likeCount + '개';
-        document.querySelector('.modal .reply-count').textContent = '댓글 ' + data.replyCount + '개';
-        document.querySelector('.modal .view-count').textContent = '조회수 ' + data.viewCount + '회';
-        document.querySelector('.modal .location').textContent = data.locationTag;
-        document.querySelector('.modal .weather').textContent = data.weatherTag;
-        document.querySelector('.modal .time-stamp').textContent = data.regDate;
-        document.querySelector('.modal .profile-image').setAttribute('src', '/display' + data.profileImage);
-        document.body.style.overflow = 'hidden';
+        fetch('/board/delete/' + bno)
+          .then(() => {
+            document.getElementById('submitBtn').click();
+          });
+      } else {
 
-      });
+        console.log(bno);
+        fetch(URL + bno)
+          .then(res => res.json())
+          .then(data => {
 
-      document.getElementById('modalBtn').click();
-      fetchGetReplies(bno);
+            console.log(data);
+            document.querySelector('.modal .card').dataset.bno = bno;
+            document.querySelector('.modal .card-account').textContent = data.nickname;
+            document.querySelector('.modal .content').textContent = data.content;
+            document.querySelector('.modal .content-img').setAttribute('src', '/display' + data.image);
+            document.querySelector('.modal .like-count').textContent = '좋아요 ' + data.likeCount + '개';
+            document.querySelector('.modal .reply-count').textContent = '댓글 ' + data.replyCount + '개';
+            document.querySelector('.modal .view-count').textContent = '조회수 ' + data.viewCount + '회';
+            document.querySelector('.modal .location').textContent = data.locationTag;
+            document.querySelector('.modal .weather').textContent = data.weatherTag;
+            document.querySelector('.modal .time-stamp').textContent = data.regDate;
+            document.querySelector('.modal .profile-image').setAttribute('src', '/display' + data.profileImage);
+            document.body.style.overflow = 'hidden';
 
-    }
+          });
 
-    
+        document.getElementById('modalBtn').click();
+        fetchGetReplies(bno);
 
-  }
+      };
+
+
+
+    };
+  };
+
+};
+
+function like(likeEmail, bno) {
+
+  const URL = '/board/like';
+
+  const payLoad = {
+    email: likeEmail,
+    bno: bno
+  };
+
+  console.log(payLoad);
+
+  const requestInfo = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(payLoad)
+  };
+
+  fetch(URL, requestInfo);
+  // .then(() => {
+  //   document.getElementById('submitBtn').click();
+  // });
 
 };
 
@@ -109,7 +149,7 @@ function fetchGetReplies(bno) {
       // console.log(replyList);
       renderReplies(replyList);
     });
-  
+
 };
 
 function renderReplies(replyList) {
@@ -117,12 +157,19 @@ function renderReplies(replyList) {
   let tag = '';
 
   if (replyList !== null && replyList.length > 0) {
-    
+
     for (let reply of replyList) {
 
       // console.log(reply);
 
-      const {replyNo, email, content, profileImage, nickname, time} = reply
+      const {
+        replyNo,
+        email,
+        content,
+        profileImage,
+        nickname,
+        time
+      } = reply
       console.log(profileImage);
       tag += `
         <span class='card-account' data-email='${email}'><img src='/display${profileImage}' class='profile-img'>${nickname}</span>
@@ -137,19 +184,19 @@ function renderReplies(replyList) {
           <button id="comments-modify">수정</button>
           <button>삭제</button>
         </div>
-      `
+      `;
 
-    }
+    };
 
   } else {
     tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다! ㅠㅠ</div>";
-  }
+  };
 
-// var btn = document.getElementById("like")
+  // var btn = document.getElementById("like")
 
-//   btn.addEventListener('click',function(){
-//             btn.classList.toggle('active')
-//     })
+  //   btn.addEventListener('click',function(){
+  //             btn.classList.toggle('active')
+  //     })
 
   $replyWrapper.innerHTML = tag;
 
@@ -160,7 +207,7 @@ function renderReplies(replyList) {
 var submitButton = document.querySelector('.write-send');
 
 // 버튼 클릭 이벤트 핸들러 등록
-submitButton.addEventListener('click', function() {
+submitButton.addEventListener('click', function () {
   const boardNo = document.querySelector('.modal .card').dataset.bno;
 
   // 입력 필드 선택
@@ -208,8 +255,8 @@ submitButton.addEventListener('click', function() {
       } else {
         alert('입력값에 문제가 있습니다! 입력값을 다시 확인해 보세요!');
         return res.text();
-      }
-      
+      };
+
     })
     .then(data => {
       // console.log('응답 성공! ', data);
@@ -232,7 +279,7 @@ $keyword.addEventListener('change', e => {
 
 const $keywordValue = document.getElementById('keywordValue').value;
 
-if ($keywordValue === 'last' || $keywordValue === '' ) {
+if ($keywordValue === 'last' || $keywordValue === '') {
   document.getElementById('option1').value = 'last';
   document.getElementById('option1').textContent = '최신순';
   document.getElementById('option2').value = 'view';
@@ -241,7 +288,7 @@ if ($keywordValue === 'last' || $keywordValue === '' ) {
   document.getElementById('option3').textContent = '좋아요순';
   document.getElementById('option4').value = 'reply';
   document.getElementById('option4').textContent = '댓글순';
-}else if ($keywordValue === 'view') {
+} else if ($keywordValue === 'view') {
   document.getElementById('option1').value = 'view';
   document.getElementById('option1').textContent = '조회순';
   document.getElementById('option2').value = 'last';

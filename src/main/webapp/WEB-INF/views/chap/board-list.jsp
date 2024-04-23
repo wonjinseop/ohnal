@@ -35,14 +35,15 @@
 
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
-            <div class="card-wrapper">
+            <div class="card-wrapper" data-email="${login.email}">
                 <section class="card select-card" data-bno="${b.boardNo}">
                     <div class="card-title-wrapper">
                         <div class="profile-box">
                             <img src="/display${b.profileImage}" alt="프사">
                         </div>
                         <span class="card-account">${b.nickname}</span>
-                        <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button></c:if>
+                        <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button>
+                        </c:if>
                     </div>
 
                     <div class="card-picture">
@@ -51,8 +52,16 @@
 
                     <div class="icon-wrapper">
                         <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
+                            <c:choose>
+                                <c:when test="${b.likeNo != 0}">
+                                    <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                </c:otherwise>
+                            </c:choose>
                         </div>
+
                         <span class="hashtag">${b.locationTag}</span>
                         <span class="hashtag">${b.weatherTag}</span>
                         <div class="reply-icon">
@@ -61,15 +70,15 @@
                     </div>
                     <hr>
                     <div class="content-wrapper">
-                        <p>
-                            <span>좋아요 ${b.likeCount}개</span>
+                        <p class="count-wrapper">
+                            <span class="count">좋아요 ${b.likeCount}개</span>
                             &nbsp&nbsp&nbsp
-                            <span>댓글 ${b.replyCount}개</span>
+                            <span class="count">댓글 ${b.replyCount}개</span>
                             &nbsp&nbsp&nbsp
-                            <span>조회수 ${b.viewCount}회</span>
+                            <span class="count">조회수 ${b.viewCount}회</span>
                         </p>
                         <p class="main-content">${b.content}</p>
-                        <a href="#">
+                        <a href="#modalBtn">
                             <p>... 더 보기</p>
                         </a>
                     </div>
@@ -140,7 +149,7 @@
 
 
 
-            <div class="card-wrapper">
+            <div class="card-wrapper" data-email="${login.email}">
 
 
 
@@ -181,40 +190,48 @@
                             <div class="li-ha">
 
                                 <div class="like-icon">
-                                    <span class="lnr lnr-heart"></span>
-                                    <div class="hashtag-wrapper">
-                                        <span class="hashtag location"></span>
-                                        <span class="hashtag weather"></span>
-                                    </div>
-
-                                    <span class="like-count"></span>
-                                    &nbsp&nbsp&nbsp
-                                    <span class="reply-count"></span>
-                                    &nbsp&nbsp&nbsp
-                                    <span class="view-count"></span>
+                                    <c:choose>
+                                        <c:when test="${b.likeNo != 0}">
+                                            <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div class="hashtag-wrapper">
+                                    <span class="hashtag location"></span>
+                                    <span class="hashtag weather"></span>
                                 </div>
 
+                                <span class="like-count count"></span>
+                                &nbsp&nbsp&nbsp
+                                <span class="reply-count count"></span>
+                                &nbsp&nbsp&nbsp
+                                <span class="view-count count"></span>
                             </div>
-
-
-
-                            <div class="replys">
-                                <p class="content-comments content"></p>
-                                <div class='reply-wrapper'>
-
-                                </div>
-                            </div>
-
-                            <form id="commentFrm" class="write-reply">
-                                <div class="write-wrapper">
-                                    <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
-                                    <input name="email" class="email" value="${login.email}" hidden></input>
-                                    <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
-                                    <button class="write-send" type="button">등록</button>
-                                </div>
-                            </form>
 
                         </div>
+
+
+
+                        <div class="replys">
+                            <p class="content-comments content"></p>
+                            <div class='reply-wrapper'>
+
+                            </div>
+                        </div>
+
+                        <form id="commentFrm" class="write-reply">
+                            <div class="write-wrapper">
+                                <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
+                                <input name="email" class="email" value="${login.email}" hidden></input>
+                                <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                <button class="write-send" type="button">등록</button>
+                            </div>
+                        </form>
+
+                    </div>
 
                 </section>
             </div>

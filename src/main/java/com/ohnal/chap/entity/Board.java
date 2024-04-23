@@ -24,6 +24,7 @@ public class Board {
     private String weatherTag;
     private LocalDateTime regDate;
     private String profileImage;
+    private int likeNo;
     
     public Board(BoardWriteRequestDTO dto, String savePath) {
         this.nickname = dto.getNickname();

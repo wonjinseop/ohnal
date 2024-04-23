@@ -2,6 +2,7 @@ package com.ohnal.chap.service;
 import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.controller.ReplyPostRequestDTO;
+import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
@@ -52,11 +53,13 @@ public class BoardService {
         return mapper.getCount();
     }
     
+    // 게시글 하나 조회
     public Board findOne(int bno) {
         mapper.updateCount(bno, "view");
         return mapper.findOne(bno);
     }
     
+    // 댓글 목록 불러오기
     public List<BoardReplyResponseDTO> getReplyList(int bno) {
         List<BoardReplyResponseDTO> dtoList = new ArrayList<>();
         List<Reply> replyList = mapper.replyList(bno);
@@ -69,6 +72,7 @@ public class BoardService {
         return dtoList;
     }
     
+    // 댓글 작성 기능
     public void writeReply(ReplyPostRequestDTO dto) {
         
         Reply reply = dto.toEntity();
@@ -101,10 +105,29 @@ public class BoardService {
     public int getMyPostsCount(String email) {
         return mapper.getMyPostsCount(email);
     }
+
+    // 글 삭제
     public void delete(int bno) {
 
         mapper.delete(bno);
 
+    }
+    
+    // 게시글에 이용자가 좋아요를 누른적이 있는지 확인하는 기능
+    public boolean findLike(BoardLikeRequestDTO dto) {
+        return mapper.findLike(dto);
+    }
+    
+    // 좋아요 기능
+    public void insertLike(BoardLikeRequestDTO dto) {
+        mapper.insertLike(dto);
+        mapper.updateCount(dto.getBno(), "likePlus");
+    }
+    
+    // 좋아요 취소 기능
+    public void deleteLike(BoardLikeRequestDTO dto) {
+        mapper.deleteLike(dto);
+        mapper.updateCount(dto.getBno(), "likeMinus");
     }
 
     // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드 (작성 댓글 버튼 눌렀을 때)

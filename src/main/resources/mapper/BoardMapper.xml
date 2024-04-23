@@ -24,10 +24,12 @@
 
     <select id="findAll" resultType="board">
         SELECT
-            A.*, B.profile_image
+            A.*, B.profile_image, C.like_no
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
+        LEFT OUTER JOIN tbl_like C
+        ON A.board_no = C.board_no
         <include refid="search" />
         LIMIT #{pageStart}, #{amount}
     </select>
@@ -62,6 +64,12 @@
         </if>
         <if test="count == 'replies'">
             SET reply_count = reply_count + 1
+        </if>
+        <if test="count == 'likePlus'">
+            SET like_count = like_count + 1
+        </if>
+        <if test="count == 'likeMinus'">
+            SET like_count = like_count - 1
         </if>
         WHERE board_no = #{bno}
     </update>
@@ -140,6 +148,27 @@
     <delete id="delete">
         DELETE FROM tbl_board
         WHERE board_no = #{bno}
+    </delete>
+
+    <select id="findLike" resultType="boolean">
+        SELECT
+            count(*)
+        FROM tbl_like
+        WHERE board_no = #{bno} AND email = #{email}
+    </select>
+
+    <insert id="insertLike">
+        INSERT INTO tbl_like (
+            email, board_no
+        )
+        VALUES (
+            #{email}, #{bno}
+        )
+    </insert>
+
+    <delete id="deleteLike">
+        DELETE FROM tbl_like
+        WHERE board_no = #{bno} AND email = #{email}
     </delete>
 
 </mapper>

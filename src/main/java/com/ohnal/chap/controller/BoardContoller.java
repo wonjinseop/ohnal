@@ -2,6 +2,7 @@ package com.ohnal.chap.controller;
 
 import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.common.Search;
+import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
@@ -40,6 +41,7 @@ public class BoardContoller {
         log.info(String.valueOf(page));
         
         List<BoardListResponseDTO> dtoList = boardService.findAll(page);
+        log.info(dtoList.toString());
         PageMaker pageMaker = new PageMaker(page, boardService.getCount());
         
         model.addAttribute("bList", dtoList);
@@ -115,11 +117,26 @@ public class BoardContoller {
         return ResponseEntity.ok().body("success");
     }
     
+    // 게시물 자세히 보기
     @GetMapping("/delete/{bno}")
     public void delete(@PathVariable int bno) {
         log.info("delete: {}", bno);
         
         boardService.delete(bno);
+    }
+    
+    // 좋아요 기능
+    @PostMapping("/like")
+    public void like(@RequestBody BoardLikeRequestDTO dto) {
+        
+        boolean flag = boardService.findLike(dto);
+        
+        if (!flag) {
+            boardService.insertLike(dto);
+        } else {
+            boardService.deleteLike(dto);
+        }
+        
     }
 
 }

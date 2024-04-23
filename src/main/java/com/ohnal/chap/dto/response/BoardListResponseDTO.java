@@ -26,6 +26,7 @@ public class BoardListResponseDTO {
     private String viewCount;
     private String profileImage;
     private String email;
+    private int likeNo;
 
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
@@ -40,6 +41,7 @@ public class BoardListResponseDTO {
         this.viewCount = makePrettierViewCount(board.getViewCount());
         this.profileImage = board.getProfileImage();
         this.email = board.getEmail();
+        this.likeNo = board.getLikeNo();
     }
     
     // 뷰카운트 표시방식 변경
@@ -57,7 +59,7 @@ public class BoardListResponseDTO {
         return result;
     }
     
-    // 시간 표시 방식 변경
+    // 시간 표기
     public static String makePrettierDateString(LocalDateTime regDate) {
         
         // 현재 시간
@@ -85,7 +87,7 @@ public class BoardListResponseDTO {
         return time;
     }
     
-    // likeCount 표시방식 변경
+    // 좋아요수 표기
     public static String makePrettierLikeCount(int likeCount) {
         String result;
         if (likeCount == 1000) {
@@ -100,6 +102,7 @@ public class BoardListResponseDTO {
         return result;
     }
     
+    // 댓글 수 표기
     public static String makePrettierReplyCount(int replyCount) {
         String result;
         if (replyCount > 1000) {
