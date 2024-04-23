@@ -118,8 +118,8 @@
 </head>
 <body>
   <canvas></canvas>
-  <div id="bear"><img class="gom" src="../../../../resources/static/assets/img/bear.jpg" alt="곰"></div>
-  <script type="text/javascript" src="../../../../resources/static/assets/js/errorpage.js"></script>
+  <div id="bear"><img class="gom" src="./bear.jpg" alt="곰"></div>
+  <script type="text/javascript" src="./errorpage.js"></script>
 
   <div class="container">
     <div class="message-container">

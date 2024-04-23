@@ -71,7 +71,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: black;
     color: white;
-    transition: 0.5s;  
+    transition: 0.5s;
 
 }
 
@@ -98,6 +98,7 @@ input[type="submit"]:hover {
     background-color: black;
     color: white;
     transition: 0.5s;
+
 }
 
 .signup-link,
@@ -124,7 +125,7 @@ a:hover {
 
 }
 .autologinbox {
-cursor: pointer;
+pointer:cursor;
 
 
 }

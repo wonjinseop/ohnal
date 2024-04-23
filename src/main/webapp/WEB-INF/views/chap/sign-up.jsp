@@ -90,8 +90,6 @@
       </div>
     </form>
   </div>
-  
-  
 
   <%@include file="../include/footer.jsp"%>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -291,24 +289,21 @@
     }
 
     $maleButton.addEventListener('click', () => {
-      $maleButton.style.backgroundColor = "skyblue";
+      $maleButton.style.backgroundColor = "rgba(4, 25, 44, 0.3)";
       $maleButton.value="M";
       $femaleButton.style.backgroundColor = "";
       $femaleButton.value = ""; // 선택되지 않은 버튼의 값 삭제
       document.getElementById('gender').value = 'M';
       checkResultList[4] = true;
-      $maleButton.style.color = "#ffffff";
     });
 
     $femaleButton.addEventListener('click', () => {
-      $femaleButton.style.backgroundColor = "pink";
+      $femaleButton.style.backgroundColor = "rgba(4, 25, 44, 0.3)";
       $femaleButton.value="F";
       $maleButton.style.backgroundColor = "";
       $maleButton.value = ""; // 선택되지 않은 버튼의 값 삭제
        document.getElementById('gender').value = 'F';
       checkResultList[4] = true;
-      $femaleButton.style.color = "#ffffff";
-      
     });
 
 
