@@ -3,6 +3,7 @@ package com.ohnal.chap.service;
 import com.mysql.cj.Session;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.KakaoUserResponseDTO;
+import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
 import com.ohnal.chap.mapper.MemberMapper;
 import com.ohnal.util.FileUtils;
@@ -10,10 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -26,6 +24,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SnsLoginService {
     private final MemberService memberService;
+
+    @Value("${spring.security.oauth2.client.registration.google.client-id}")
+    private String clientId;
+
+    @Value("${spring.security.oauth2.client.registration.google.redirect-uri}")
+    private String redirectUri;
+
+    @Value("${spring.security.oauth2.client.registration.google.client-secret}")
+    private String clientSecret;
+
+
 
     public void kakaoLogin(Map<String, String> params , HttpSession session) {
 
@@ -48,7 +57,7 @@ public class SnsLoginService {
                     dto.getProperties().getProfileImage()
             );
         }
-        //sns로그인 ohnal사이트로 로그인
+
         memberService.maintainLoginState(session, email);
 
     }
@@ -98,4 +107,99 @@ public class SnsLoginService {
         return accessToken;
 
     }
+
+    private String GoogleAccessToken(String code, String clientId, String clientSecret, String redirectUri) {
+        // Google OAuth 2.0의 토큰 발급 엔드포인트 URL
+        String tokenUri = "https://oauth2.googleapis.com/token";
+
+        // HTTP 요청을 보낼 때 필요한 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        // HTTP 요청을 보낼 때 필요한 파라미터 설정
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("code", code);
+        params.add("client_id", clientId);
+        params.add("client_secret", clientSecret);
+        params.add("redirect_uri", redirectUri);
+        params.add("grant_type", "authorization_code");
+
+        // REST API를 호출하기 위한 RestTemplate 객체 생성
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Google OAuth 서버에 POST 요청을 보내서 액세스 토큰을 요청
+        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(
+                tokenUri,
+                new HttpEntity<>(params, headers),
+                Map.class
+        );
+
+        // 응답에서 액세스 토큰을 추출하여 반환
+        Map<String, String> responseMap = responseEntity.getBody();
+        String accessToken = responseMap.get("access_token");
+
+        return accessToken;
+    }
+
+
+    public void googleLogin(Map<String, String> params, HttpSession session) {
+        String code = params.get("code");
+
+
+        String accessToken = GoogleAccessToken(code, clientId,
+                clientSecret,
+                "http://localhost:8282/index");
+
+
+        LoginUserResponseDTO dto = getGoogleUserInfo(accessToken);
+
+
+        String email = dto.getEmail();
+        log.info("사용자의 이메일: {}", email);
+
+
+        if (!memberService.checkDuplicateValue("email", email)) {
+            memberService.join(
+                    SignUpRequestDTO.builder()
+                            .email(email)
+                            .password("0000")
+                            .nickname(dto.getNickname())
+                            .loginMethod(Member.LoginMethod.GOOGLE)
+                            .build(),
+                    null
+            );
+        }
+
+
+        memberService.maintainLoginState(session, email);
+    }
+
+
+
+    private LoginUserResponseDTO getGoogleUserInfo(String accessToken) {
+        String userInfoUri = "https://www.googleapis.com/oauth2/v3/userinfo";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+
+
+        RestTemplate restTemplate = new RestTemplate();
+
+
+        ResponseEntity<LoginUserResponseDTO> responseEntity = restTemplate.exchange(
+                userInfoUri,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                LoginUserResponseDTO.class
+        );
+
+
+        LoginUserResponseDTO userResponseDTO = responseEntity.getBody();
+
+        return userResponseDTO;
+    }
+
+
+
 }

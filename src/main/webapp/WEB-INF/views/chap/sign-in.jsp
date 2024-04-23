@@ -34,10 +34,10 @@
         <div class="snowflake">❄</div>
         <div class="snowflake">❄</div>
     </div>
-       
-           
-        
-    
+
+
+
+
 
 
     <div class="container">
@@ -75,15 +75,9 @@
         </div>
 
 
-        <a href="/kakao/login" class="kakaologinlogo"><img class="kakaologo" src="/assets/img/kakaologo.png"
-                alt="카카오톡로그인로고"></a>
-
-
-
-        <a href="/naver/login" class="naverlogobackground"><img id="naverlogo" src="/assets/img/naverlogo.png"
-                alt="네이버로그인로고"></a>
-
-
+            <a href="/kakao/login" class="kakaologinlogo"><img class="kakaologo" src="/assets/img/kakaologo.png" alt="카카오톡로그인로고"></a>
+            <a href="/naver/login" class="naverlogobackground"><img id="naverlogo" src="/assets/img/naverlogo.png" alt="네이버로그인로고"></a>
+            <a href="/google/login" class="googlelogobackground"><img id="googlelogo" src="/assets/img/googlelogo.png" alt="Google 로그인 로고"></a>
 
     </div>
     <%@include file="../include/footer.jsp"%>
