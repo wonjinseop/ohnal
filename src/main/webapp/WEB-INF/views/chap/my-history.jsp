@@ -22,9 +22,9 @@
                 <h1>My history</h1>
             </div>
             <div class="user-feed">
-                <div class="user-feed-button" onclick="getMyPosts()">작성 글</div>
-                <div class="user-feed-button" onclick="getMyReplyPosts()">작성 댓글</div>
-                <div class="user-feed-button" onclick="getLikedPosts()">좋아요한 글</div>
+                <div class="user-feed-button"><a href="/members/my-history">작성 글</a></div>
+                <div class="user-feed-button"><a href="/members/my-history/find-my-comments">작성 댓글</a></div>
+                <div class="user-feed-button"><a href="/members/my-history/find-my-like-post">좋아요한 글</a></div>
             </div>
         </div>
 
@@ -114,8 +114,7 @@
 
                     <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
                         <li data-page-num="${i}" class="page-item">
-                            <a class="page-link"
-                                href="/member/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                            <a class="page-link" href="/member/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
                         </li>
                     </c:forEach>
 
@@ -227,31 +226,6 @@
         </div>
 
         <%@include file="../include/footer.jsp"%>
-
-        <script>
-            console.log("my-history.js 파일이 업로드 되었습니다.");
-            // 내가 쓴 글 버튼(div)을 누르면 내가 쓴 글 목록이 조회된다.
-            function getMyPosts() {
-                console.log("내가 쓴 글 목록 모두 조회 버튼 눌렀다.");
-
-                
-
-
-            }
-
-            // 내가 쓴 댓글 버튼(div)을 누르면 내가 쓴 댓글 목록이 모두 조회된다.
-            function getMyReplyPosts() {
-                console.log("내가 쓴 댓글 목록 모두 조회 버튼 눌렀다.");
-                const url = '/members/';
-            }
-
-            // 내가 좋아요한 글 버튼(div)을 누르면 내가 좋아요한 글 목록이 조회된다.
-            function getLikedPosts() {
-                console.log("내가 좋아요한 글 목록 모두 조회 버튼 눌렀다.");
-
-
-            }
-        </script>
 </body>
 
 </html>

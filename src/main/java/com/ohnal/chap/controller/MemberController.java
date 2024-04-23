@@ -137,11 +137,13 @@ public class MemberController {
             memberService.autoLoginClear(request, response);
         }
 
+        /*
         // sns 로그인 상태인지를 확인
         LoginUserResponseDTO dto = (LoginUserResponseDTO) session.getAttribute(LOGIN_KEY);
         if (dto.getLoginMethod().equals("KAKAO")) {
             memberService.kakaoLogout(dto, session);
         }
+         */
 
         // 세션에서 로그인 정보 기록 삭제
         session.removeAttribute("login");
@@ -169,54 +171,50 @@ public class MemberController {
 
     //-----------------------my-history-----------------------
 
-    // my-history로 이동하는 메서드
+    // my-history로 이동하는 메서드와 내가 작성한 글 버튼 누르면 작동하는 메서드
     @GetMapping("/my-history")
-    public String myHistory(HttpSession session, @ModelAttribute("s") Page page, Model model) {
+    public String myHistory(HttpSession session, @ModelAttribute("s")Page page, Model model) {
         log.info("my-history 페이지 들어옴");
+        log.info("page: {}", page);
+        log.info("s: {}", "s");
 
-        String loginUserEmail = getCurrentLoginMemberEmail(session);
-        log.info("loginUserEmail: {}", loginUserEmail);
-        model.addAttribute("loginUserEmail", loginUserEmail);
+        String email = getCurrentLoginMemberEmail(session); // 사용자 email 얻어옴
+        log.info("email: {}", email);
 
         // 처음 들어왔을 때, my-history 페이지에서
         // 작성한 글 버튼 눌렀을 때 보여지는 화면이 기본 값이다.
-        List<BoardListResponseDTO> allMyPosts = boardService.findAllByEmail(loginUserEmail, page);
+        List<BoardListResponseDTO> myPosts = boardService.findAllByEmail(email, page);
 
-        PageMaker maker = new PageMaker(page, boardService.getMyPostsCount(loginUserEmail));
+        PageMaker maker = new PageMaker(page, boardService.getMyPostsCount(email));
         log.info("maker: {}", maker);
-        log.info("조회한 게시물 총량: {}", String.valueOf(maker.getTotalCount()));
-        log.info("boardListResponseDTO: {}", allMyPosts);
+        log.info("내가 작성한 글 목록 개수: {}", maker.getTotalCount());
+        log.info("내가 작성한 글 목록: {}", myPosts);
 
-        model.addAttribute("myPosts", allMyPosts);
-        model.addAttribute("maker", maker);
+        model.addAttribute("myPosts", myPosts); // 내가 작성한 글 목록을 모델에 담아
+        model.addAttribute("maker", maker); // 페이징 처리된 객체를 모델에 담아
 
         return "chap/my-history";
     }
 
-    // my-history에서 작성 글(버튼) 눌렀을 때
-    @GetMapping("/my-history/{email}")
-    public ResponseEntity<?> myPosts(@PathVariable("email") String email) {
-        log.info("my-history 페이지에서 작성한 글(버튼) 눌러서 fetch 작동함");
-        log.info("email: {}", email);
+    @GetMapping("/my-history/find-my-comments")
+    public String findMyComments(HttpSession session, @ModelAttribute("s")Page page, Model model) {
+        log.info("my-history 페이지에서 작성 댓글(버튼) 누름");
 
-        List<BoardListResponseDTO> myPosts = boardService.myPosts(email);
-        log.info("myPosts: {}", myPosts);
-        return ResponseEntity.ok().body(myPosts);
-    }
-
-    // my-history에서 작성 댓글(버튼) 눌렀을 때
-    /*
-    @GetMapping("/my-history/my-write-reply/{email}")
-    public ResponseEntity<?> myWriteReply(@PathVariable("email") String email) {
-        log.info("my-history 페이지에서 작성한 글(버튼) 눌러서 fetch 작동함");
+        String email = getCurrentLoginMemberEmail(session); // 사용자 email 얻어옴
         log.info("email: {}", email);
 
         // 여기서 myPosts는 내가 작성한 댓글의 글들의 정보를 담은 List컬렉션
-        // List<BoardListResponseDTO> myPosts = boardService.myWriteReply(email);
+        List<BoardListResponseDTO> myPosts = boardService.findMyComments(email);
 
+        PageMaker maker = new PageMaker(page, boardService.getMyCommentsCount(email));
+        log.info("maker: {}", maker);
+        log.info("내가 작성한 댓글 개수: {}", maker.getTotalCount());
+        log.info("내가 작성한 댓글 목록: {}", myPosts);
+
+        model.addAttribute("myPosts", myPosts); // 내가 작성한 댓글 목록을 모델에 담아
+        model.addAttribute("maker", maker); // 페이징 처리된 객체를 모델에 담아
+
+        return "chap/my-history";
     }
-
-     */
-
 
 }

@@ -89,6 +89,7 @@
 
 
     <!-- my-history 에서 내가 쓴 글 찾아오는 sql문 -->
+    <!--    -->
     <select id="findAllByEmail" resultType="board">
         SELECT
             A.*, B.profile_image
@@ -112,6 +113,28 @@
     <select id="getMyPostsCount" resultType="int">
         SELECT COUNT(*) FROM tbl_board
         WHERE email = #{email}
+    </select>
+
+    <!-- my-history 에서 내가 쓴 댓글 목록(작성 댓글 버튼 눌렀을 때) 조회시
+    사용되는 sql문 (내가 쓴 댓글의 게시물의 목록을 모두 조회한다. -->
+    <select id="findMyComments" resultType="board">
+        SELECT A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no
+        IN (SELECT board_no FROM tbl_reply WHERE email = #{email});
+    </select>
+
+    <!-- my-history 에서 내가 쓴 댓글 목록(작성 댓글 버튼 눌렀을 때) 조회시
+    사용되는 sql문 (내가 쓴 댓글의 게시물의 총 갯수를 조회한다. -->
+    <select id="getMyCommentsCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no
+        IN (SELECT board_no FROM tbl_reply WHERE email = #{email});
     </select>
 
     <delete id="delete">
