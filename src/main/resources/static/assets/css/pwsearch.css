@@ -1,11 +1,33 @@
+@font-face {
+  font-family:'GOSEONGGEUMGANGNURI';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404-2@1.0/GOSEONGGEUMGANGNURI.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+body{
+
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, white ,gray, black);
+    height: 100vh;
+    margin: 0;
+}
+
+strong{
+  color: white;
+}
 
 .container {
     width: 400px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 15px;
     margin-top:200px;
+    background-color: black;
+    font-family:'GOSEONGGEUMGANGNURI';
 }
 .form-group {
     margin-bottom: 15px;
@@ -32,20 +54,24 @@ input[type="password"]{
 }
 #button {
     padding: 10px 15px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
     margin-right:5px;
-     transition: background-color 0.4s;
+     cursor: pointer;
+  transition: background-color 0.4s;
+  color: black;
+  border: 3px solid white;
+  border-radius:15px;
+  box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
 }
 #button:hover{
-  background-color: rgba(39, 185, 10, 0.3);
+  box-shadow:inset 0 0 10px 2px rgb(202, 22, 238),0 0 10px 2px rgb(202, 22, 238);
+  transition: 0.5s;
+  scale:1.1;
 }
+
 .pwFind{
   width: 400px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
     padding:40px;
   height:300px;
     margin-top:100px;
@@ -67,15 +93,23 @@ p.font{
 }
 #pwChange{
   padding: 10px 15px;
-  background-color: #007BFF;
-   color: #fff;
    width:400px;
    height:60px;
   border-radius: 10px;
   margin-bottom:50px;
   margin-left:38%;
-   transition:background-color 0.4s;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  color: black;
+  border: 3px solid white;
+  border-radius:10px;
+  box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
+  font-weight: bold;
+  font-family:'GOSEONGGEUMGANGNURI';
+  font-size: 21px;
  }
  #pwChange:hover{
-   background-color: rgba(39, 185, 10, 0.3);
+  box-shadow:inset 0 0 10px 2px rgb(202, 22, 238),0 0 10px 2px rgb(202, 22, 238);
+  transition: 0.5s;
+  scale:1.1;
  }

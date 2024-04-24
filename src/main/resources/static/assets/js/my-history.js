@@ -125,12 +125,6 @@ function renderReplies(replyList) {
         tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다! ㅠㅠ</div>";
     }
 
-    // var btn = document.getElementById("like")
-
-    //   btn.addEventListener('click',function(){
-    //             btn.classList.toggle('active')
-    //     })
-
     $replyWrapper.innerHTML = tag;
 
 };
