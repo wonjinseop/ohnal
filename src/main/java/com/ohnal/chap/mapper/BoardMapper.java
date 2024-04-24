@@ -12,19 +12,19 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    
+
     List<Board> findAll(@Param("search") Search page, @Param("email") String email);
 
     void save(Board board);
-    
+
     int getCount();
-    
+
     Board findOne(int bno);
-    
+
     void updateCount(@Param("bno") int bno, @Param("count") String count);
-    
+
     List<Reply> replyList(int bno);
-    
+
     void replySave(Reply reply);
 
 
@@ -43,13 +43,13 @@ public interface BoardMapper {
     // 글 삭제
     List<Board> findMyComments(String email);
     void delete(int bno);
-    
+
     // 좋아요 내역 확인
     boolean findLike(BoardLikeRequestDTO dto);
-    
+
     // 좋아요
     void insertLike(BoardLikeRequestDTO dto);
-    
+
     // 좋아요 취소
     void deleteLike(BoardLikeRequestDTO dto);
 

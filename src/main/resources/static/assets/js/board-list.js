@@ -29,25 +29,23 @@ document.addEventListener("DOMContentLoaded", function () {
 const $cardContainer = document.querySelector('.card-container');
 
 $cardContainer.onclick = e => {
-  const URL = '/board/detail/';
-  const $card = e.target.closest('.select-card');
-  const $likeEmail = e.target.closest('.card-wrapper').dataset.email;
-  if ($card) {
 
+  const $card = e.target.closest('.select-card');
+  const $cardWrapper = e.target.closest('.card-wrapper');
+  if ($card) {
+    const $likeEmail = $cardWrapper.dataset.email;
     const bno = $card.dataset.bno;
     const $like = e.target.closest('.like-icon');
+    
+    const $wrapper = $card.querySelector('.icon-wrapper');
+    const $likeIcon = $wrapper.querySelector('.like-icon');
+    const $likeImg = $likeIcon.querySelector('img');
 
+    const src = $likeImg.getAttribute('src');
+    
+    const URL = '/board/detail/' + bno;
     if ($like) {
-      if ($likeEmail !== '') {
-        const $likeIcon = $like.querySelector('img');
-        if ($likeIcon.getAttribute('src').endsWith('fill-heart.svg')) {
-          $likeIcon.setAttribute('src', '/assets/img/heart.svg');
-        } else {
-          $likeIcon.setAttribute('src', '/assets/img/fill-heart.svg');
-        };
-        like($likeEmail, bno);
-      };
-
+      toggleHeart($likeEmail, $like, bno);
     } else {
 
       if (e.target.matches('button')) {
@@ -60,10 +58,10 @@ $cardContainer.onclick = e => {
       } else {
 
         console.log(bno);
-        fetch(URL + bno)
+        fetch(URL)
           .then(res => res.json())
           .then(data => {
-
+            const $heart = document.querySelector('.modal .heart');
             console.log(data);
             document.querySelector('.modal .card').dataset.bno = bno;
             document.querySelector('.modal .card-account').textContent = data.nickname;
@@ -76,28 +74,64 @@ $cardContainer.onclick = e => {
             document.querySelector('.modal .weather').textContent = data.weatherTag;
             document.querySelector('.modal .time-stamp').textContent = data.regDate;
             document.querySelector('.modal .profile-image').setAttribute('src', '/display' + data.profileImage);
+            $heart.setAttribute('src', src);
+            $heart.setAttribute('data-email', $likeEmail)
+
             document.body.style.overflow = 'hidden';
 
           });
+      }
 
-        document.getElementById('modalBtn').click();
-        fetchGetReplies(bno);
-
-      };
-
-
+      document.getElementById('modalBtn').click();
+      fetchGetReplies(bno);
 
     };
-  };
 
+    document.querySelector('.modal .heart').onclick = e => {
+      const $likeEmail = e.target.dataset.email;
+      const $liked = e.target;
+      detailToggleHeart($likeEmail, $liked, $likeImg, bno);
+    }
+  };
 };
 
-function like(likeEmail, bno) {
+function toggleHeart(likeEmail, $like, bno) {
+  like(likeEmail, bno);
+  console.log(likeEmail);
+  console.log($like);
+  if (likeEmail !== '') {
+    const likeIcon = $like.querySelector('img');
+    if (likeIcon.getAttribute('src').endsWith('fill-heart.svg')) {
+      likeIcon.setAttribute('src', '/assets/img/heart.svg');
+    } else {
+      likeIcon.setAttribute('src', '/assets/img/fill-heart.svg');
+    };
+    
+  };
+}
+
+function detailToggleHeart(likeEmail, $like, likeImg, bno) {
+  like(likeEmail, bno);
+  console.log(likeEmail);
+  console.log($like);
+  if (likeEmail !== '') {
+    if ($like.getAttribute('src').endsWith('fill-heart.svg')) {
+      $like.setAttribute('src', '/assets/img/heart.svg');
+      likeImg.setAttribute('src', '/assets/img/heart.svg');
+    } else {
+      $like.setAttribute('src', '/assets/img/fill-heart.svg');
+      likeImg.setAttribute('src', '/assets/img/fill-heart.svg');
+    };
+  };
+  
+}
+
+function like(email, bno) {
 
   const URL = '/board/like';
 
   const payLoad = {
-    email: likeEmail,
+    email: email,
     bno: bno
   };
 
@@ -112,9 +146,17 @@ function like(likeEmail, bno) {
   };
 
   fetch(URL, requestInfo)
-  .then(res => console.log(res));
+    .then(res => console.log(res));
 
 };
+
+
+
+
+
+
+
+
 
 
 
@@ -175,7 +217,7 @@ function renderReplies(replyList) {
             ${content}
         </p>
         <!-- <input type='text' hidden> -->
-      
+
 
         <div class='reply-data'>
           <span class='time'>${time}</span>

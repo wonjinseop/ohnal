@@ -10,5 +10,5 @@ public class BoardLikeRequestDTO {
 
     private String email;
     private int bno;
-    
+
 }
