@@ -88,7 +88,7 @@
 
                                         <span class="hashtag">${mp.locationTag}</span>
                                         <span class="hashtag">${mp.weatherTag}</span>
-                                        <div class="reply-icon">
+                                        <div class="reply-i
 
                                         </div>
                                     </div>
