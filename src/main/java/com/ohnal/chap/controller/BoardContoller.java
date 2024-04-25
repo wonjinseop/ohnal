@@ -4,6 +4,7 @@ import com.mysql.cj.Session;
 import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
+import com.ohnal.chap.dto.request.BoardReplyDeleteRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
@@ -165,6 +166,23 @@ public class BoardContoller {
         }
         return ResponseEntity.ok().body("success");
 
+    }
+    
+    @DeleteMapping("/reply")
+    private ResponseEntity<?> replyDel(@RequestBody BoardReplyDeleteRequestDTO dto) {
+        log.info("/board/reply/delete: DELETE, dto: {}", dto);
+        
+        int rno = dto.getRno();
+        int bno = dto.getBno();
+        
+        boolean flag = boardService.findReply(dto);
+        
+        if (!flag) {
+            return ResponseEntity.badRequest().body("false");
+        } else {
+            boardService.deleteReply(rno, bno);
+            return ResponseEntity.ok().body("success");
+        }
     }
 
 }
