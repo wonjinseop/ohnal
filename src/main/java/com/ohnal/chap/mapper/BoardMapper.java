@@ -3,6 +3,7 @@ package com.ohnal.chap.mapper;
 import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
+import com.ohnal.chap.dto.request.BoardReplyDeleteRequestDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
 import org.apache.ibatis.annotations.Mapper;
@@ -62,7 +63,9 @@ public interface BoardMapper {
 
     // 좋아요 취소
     void deleteLike(BoardLikeRequestDTO dto);
-
-
-
+    
+    
+    void deleteReply(int rno);
+    
+    boolean findReply(BoardReplyDeleteRequestDTO dto);
 }

@@ -65,6 +65,9 @@
         <if test="count == 'replies'">
             SET reply_count = reply_count + 1
         </if>
+        <if test="count == 'replyDelete'">
+            SET reply_count = reply_count - 1
+        </if>
         <if test="count == 'likePlus'">
             SET like_count = like_count + 1
         </if>
@@ -191,5 +194,15 @@
         DELETE FROM tbl_like
         WHERE board_no = #{bno} AND like_email = #{email}
     </delete>
+
+    <delete id="deleteReply">
+        DELETE FROM tbl_reply
+        WHERE reply_no = #{rno}
+    </delete>
+
+    <select id="findReply" resultType="boolean">
+        SELECT COUNT(*) FROM tbl_reply
+        WHERE reply_no = #{rno} AND email = #{email}
+    </select>
 
 </mapper>

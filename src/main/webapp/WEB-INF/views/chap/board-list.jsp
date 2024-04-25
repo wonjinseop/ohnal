@@ -143,13 +143,13 @@
     <button id="modalBtn" hidden>모달 글 확대</button>
 
     <!-- 모달 컨테이너 -->
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" data-email="${login.email}">
         <!-- 모달 컨텐츠 -->
         <div class="modal-content">
 
 
 
-            <div class="card-wrapper" data-email="${login.email}">
+            <div class="card-wrapper">
 
 
 
@@ -202,7 +202,7 @@
                                         <span class="hashtag location"></span>
                                         <span class="hashtag weather"></span>
                                     </div>
-                                    
+
                                     <span class="like-count count"></span>
                                     &nbsp&nbsp&nbsp
                                     <span class="reply-count count"></span>
@@ -211,26 +211,31 @@
                                 </div>
                             </div>
 
-                            
-                            
-                            
+
+
+
                             <div class="replys">
                                 <p class="content-comments content"></p>
                                 <div class='reply-wrapper'>
-                                    
+
                                 </div>
                             </div>
-                            
+
                             <form id="commentFrm" class="write-reply">
                                 <div class="write-wrapper">
                                     <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
                                     <input name="email" class="email" value="${login.email}" hidden></input>
-                                    <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                    <c:if test="${login != null}">
+                                        <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                    </c:if>
+                                    <c:if test="${login == null}">
+                                        <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다." readonly></input>
+                                    </c:if>
                                     <button class="write-send" type="button">등록</button>
                                 </div>
                             </form>
                         </div>
-                            
+
                     </div>
 
                 </section>
