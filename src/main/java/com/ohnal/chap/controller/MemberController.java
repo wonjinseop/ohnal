@@ -192,6 +192,8 @@ public class MemberController {
         log.info("내가 작성한 글 목록 개수: {}", maker.getTotalCount());
         log.info("내가 작성한 글 목록: {}", myPosts);
 
+        int type = 1;
+        model.addAttribute("type", type);
         model.addAttribute("myPosts", myPosts); // 내가 작성한 글 목록을 모델에 담아
         model.addAttribute("maker", maker); // 페이징 처리된 객체를 모델에 담아
 
@@ -213,6 +215,8 @@ public class MemberController {
         log.info("내가 작성한 댓글 개수: {}", maker.getTotalCount());
         log.info("내가 작성한 댓글 목록: {}", myPosts);
 
+        int type = 2;
+        model.addAttribute("type", type);
         model.addAttribute("myPosts", myPosts); // 내가 작성한 댓글 목록을 모델에 담아
         model.addAttribute("maker", maker); // 페이징 처리된 객체를 모델에 담아
 
@@ -234,6 +238,9 @@ public class MemberController {
         log.info("maker: {}", maker);
         log.info("내가 좋아요한 글 개수: {}", maker.getTotalCount());
         log.info("내가 좋아요한 글 목록: {}", myPosts);
+
+        int type = 3;
+        model.addAttribute("type", type);
 
         model.addAttribute("myPosts", myPosts); // 내가 작성한 댓글 목록을 모델에 담아
         model.addAttribute("maker", maker); // 페이징 처리된 객체를 모델에 담아
