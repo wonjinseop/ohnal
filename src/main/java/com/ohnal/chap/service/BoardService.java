@@ -6,6 +6,7 @@ import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
+import com.ohnal.chap.dto.response.BoardWriteDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
 import com.ohnal.chap.mapper.BoardMapper;
@@ -38,7 +39,7 @@ public class BoardService {
     }
 
     // 게시글 등록
-    public void save(BoardWriteRequestDTO dto, HttpSession session, String savePath) {
+    public void save(BoardWriteDTO dto, HttpSession session, String savePath) {
         Board board = new Board(dto, savePath);
         log.info(dto.toString());
 

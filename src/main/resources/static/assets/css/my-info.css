@@ -174,10 +174,10 @@ tr td:first-child {
 }
 
 #submit_button {
-  width: 200px;
+  width: 150px;
   text-align: center;
   display: block;
-  margin: 30px auto 0;
+  margin: 30px auto 20px;
   text-decoration: none;
   padding: 10px 20px;
   background-color: black;
@@ -186,7 +186,20 @@ tr td:first-child {
   cursor: pointer;
 }
 
-#submit_button:hover {
+#change-password {
+  width: 150px;
+  text-align: center;
+  display: block;
+  margin: 15px auto 30px;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: black;
+  color: #12e6fc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#submit_button:hover, #change-password:hover {
   color: black;
   background-color: #12e6fc;
 }

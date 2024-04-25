@@ -146,8 +146,26 @@ span {
     width: 300px;
     border-radius: 5px;
     height:51px;
-    }
+}
 
+#googlelogo {
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    width: 300px;
+    height: 45px;
+    margin-top:10px;
+}
+
+.googlelogobackground {
+    background-color: #ffffff;
+    text-align:center;
+    display: block;
+    margin-top: 10px;
+    width: 300px;
+    border-radius: 5px;
+    height:51px;
+}
     .snowflake {
         color: #fff;
         font-size: 1em;

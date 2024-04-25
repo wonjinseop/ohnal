@@ -6,8 +6,11 @@ import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
+import com.ohnal.chap.dto.response.BoardWriteDTO;
+import com.ohnal.chap.dto.response.WeatherInfoResponseDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.service.BoardService;
+import com.ohnal.chap.service.WeatherService;
 import com.ohnal.util.LoginUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,7 @@ public class BoardContoller {
     private String rootPath;
 
     private final BoardService boardService;
+    private final WeatherService weatherService;
 
     // 게시판 이동
     @GetMapping("/list")
@@ -60,15 +64,34 @@ public class BoardContoller {
 
     // 게시글 등록
     @PostMapping("/write")
-    public String write(BoardWriteRequestDTO dto, HttpSession session) {
-        log.info("/board/write: POST, dto: {}", dto);
-        log.info("attached file name: {}", dto.getImage().getOriginalFilename());
+    public String write(BoardWriteRequestDTO requestDTO, HttpSession session) {
+        log.info("attached file name: {}", requestDTO.getImage().getOriginalFilename());
+        log.info("dto에 담긴 값: {}", requestDTO);
+        WeatherInfoResponseDTO weatherDTO = weatherService.getShortTermForecast(requestDTO.getValueArea1(), requestDTO.getValueArea2());
 
         if (!rootPath.contains("/ootd")) {
             rootPath = rootPath + "/ootd";
         }
+        String nickname = requestDTO.getNickname();
+        String content = requestDTO.getContent();
 
-        String savePath = "/ootd" + uploadFile(dto.getImage(), rootPath);
+        int minTemperature = (int) weatherDTO.getMinTemperature();
+        int maxTemperature = (int) weatherDTO.getMaxTemperature();
+
+        String locationTag = "#" + weatherDTO.getArea1()+ weatherDTO.getArea2();
+
+        String weatherTag = "#최고" + maxTemperature + "º최저" + minTemperature + "º";
+
+        BoardWriteDTO dto =BoardWriteDTO.builder()
+                .nickname(nickname)
+                .content(content)
+                .locationTag(locationTag)
+                .weatherTag(weatherTag)
+                .build();
+
+        log.info(dto.toString());
+
+        String savePath = "/ootd" + uploadFile(requestDTO.getImage(), rootPath);
 
         log.info("save-path: {}", savePath);
 

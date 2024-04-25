@@ -20,11 +20,23 @@ closeBtn.addEventListener('click', () => {
 const $profileBox = document.querySelector('.profile-box');
 const $introText = document.querySelector('.intro-text');
 
-$profileBox.onclick = () => {
-  location.replace('/members/my-info');
-};
-
-$introText.onclick = () => {
-  $profileBox.onclick();
+if ($profileBox !== null) {
+  $profileBox.onclick = () => {
+    location.replace('/members/my-info');
+  };
 }
 
+
+if ($introText !== null) {
+  $introText.onclick = () => {
+    $profileBox.onclick();
+  }
+}
+
+// 사이드 메뉴 바깥 영역 클릭 시 사이드 메뉴 닫히는 이벤트
+
+window.addEventListener("click", e => {
+  if (!e.target.closest('.menu-open') && !e.target.closest('.gnb')) {
+    gnb.classList.remove('on');
+  }
+});

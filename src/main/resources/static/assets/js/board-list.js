@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function toggleModal() {
     modal.classList.toggle("show");
     document.body.style.overflow = 'auto';
-  };
+  }
 
   // events
   modalBtn.addEventListener("click", toggleModal);
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 모달의 검은색 배경 부분이 클릭된 경우 닫히도록 하는 코드
     if (event.target === modal) {
       toggleModal();
-    };
+    }
   });
 });
 
@@ -31,9 +31,8 @@ const $cardContainer = document.querySelector('.card-container');
 $cardContainer.onclick = e => {
 
   const $card = e.target.closest('.select-card');
-  const $cardWrapper = e.target.closest('.card-wrapper');
   if ($card) {
-    const $likeEmail = $cardWrapper.dataset.email;
+    const $likeEmail = $card.dataset.email;
     const bno = $card.dataset.bno;
     const $like = e.target.closest('.like-icon');
     
@@ -73,7 +72,7 @@ $cardContainer.onclick = e => {
             document.querySelector('.modal .location').textContent = data.locationTag;
             document.querySelector('.modal .weather').textContent = data.weatherTag;
             document.querySelector('.modal .time-stamp').textContent = data.regDate;
-            document.querySelector('.modal .profile-image').setAttribute('src', '/display' + data.profileImage);
+            document.querySelector('.modal .profile-image').setAttribute('src', data.profileImage);
             $heart.setAttribute('src', src);
             $heart.setAttribute('data-email', $likeEmail)
 
@@ -190,7 +189,7 @@ function fetchGetReplies(bno) {
       renderReplies(replyList);
     });
 
-};
+}
 
 function renderReplies(replyList) {
   const $replyWrapper = document.querySelector('.reply-wrapper')
@@ -212,7 +211,7 @@ function renderReplies(replyList) {
       } = reply
       console.log(profileImage);
       tag += `
-        <span class='card-account' data-email='${email}'><img src='/display${profileImage}' class='profile-img'>${nickname}</span>
+        <span class='card-account' data-email='${email}'><img src='${profileImage}' class='profile-img'>${nickname}</span>
         <p class='reply' data-no='${replyNo}'>
             ${content}
         </p>
@@ -221,16 +220,16 @@ function renderReplies(replyList) {
 
         <div class='reply-data'>
           <span class='time'>${time}</span>
-          <button id="comments-modify">수정</button>
-          <button>삭제</button>
+          <button class="reply-modify" data-reply-no="${replyNo}">수정</button>
+          <button class="reply-delete" data-reply-no="${replyNo}">삭제</button>
         </div>
       `;
 
-    };
+    }
 
   } else {
     tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다! ㅠㅠ</div>";
-  };
+  }
 
   // var btn = document.getElementById("like")
 

@@ -80,7 +80,7 @@
 
 .card-container .card-wrapper .card-title-wrapper .profile-box img {
     width: 100%;
-    padding-top: 5px;
+    height: 100%;
 }
 
 
@@ -107,16 +107,16 @@
     font-size: 25px;
     font-weight: 700;
     align-items: center;
-    margin-left: 20px;
-    margin-top: 5px;
+    padding-top: 5px;
     margin-bottom: 5px;
-    
+    border-top: 1px solid lightgray;
 }
 
 .card-container .card .icon-wrapper .like-icon {
     width: 23px;
     align-items: center;
     margin-right: 10px;
+    margin-left: 20px;
 }
 
 
@@ -129,7 +129,7 @@
 
 .card-container .card .icon-wrapper span.hashtag {
     margin-left: 10px;
-    font-size: 17px;
+    font-size: 13px;
     font-weight: 400;
     color: #646464;
 }
@@ -422,6 +422,7 @@ footer .lnr-envelope {
 /* 프로필사진 영역 */
 .modal-content .card-wrapper .card-title-wrapper .profile-box img {
     width: 100%;
+    height: 100%;
     align-content: center;
 }
 
@@ -439,6 +440,7 @@ footer .lnr-envelope {
 .modal-content .li-ha .hashtag {
     font-size: 20px;
     line-height: 15px;
+    margin-left: 22px;
 }
 
 .modal-content .card-account p {
@@ -509,7 +511,7 @@ footer .lnr-envelope {
 
 .modal .modal-wrapper-card-2 .replys .reply-wrapper {
     width: 100%;
-    margin-top: 7px;
+    margin-top: 40px;
     /* border: 1px dashed blue; */
     display: flex;
     flex-wrap: wrap;

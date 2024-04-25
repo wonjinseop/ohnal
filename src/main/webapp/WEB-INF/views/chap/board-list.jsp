@@ -35,11 +35,11 @@
 
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
-            <div class="card-wrapper" data-email="${login.email}">
-                <section class="card select-card" data-bno="${b.boardNo}">
+            <div class="card-wrapper">
+                <section class="card select-card" data-bno="${b.boardNo}" data-email="${login.email}">
                     <div class="card-title-wrapper">
                         <div class="profile-box">
-                            <img src="/display${b.profileImage}" alt="프사">
+                            <img src="${b.profileImage}" alt="프사">
                         </div>
                         <span class="card-account">${b.nickname}</span>
                         <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button>

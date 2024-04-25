@@ -40,11 +40,20 @@ public class BoardListResponseDTO {
         this.likeCount = makePrettierLikeCount(board.getLikeCount());
         this.replyCount = makePrettierReplyCount(board.getReplyCount());
         this.viewCount = makePrettierViewCount(board.getViewCount());
-        this.profileImage = board.getProfileImage();
         this.email = board.getEmail();
         this.likeNo = board.getLikeNo();
         this.likeEmail = board.getLikeEmail();
+
+        if(board.getProfileImage() == null) { // 설정된 이미지 정보가 없으면
+            this.profileImage = "/assets/img/anonymous-image.png"; // 기본 프로필 사진
+        } else if(board.getProfileImage().contains("/profile")) { // 설정한 이미지 정보가 있고, profile 경로로 시작하면
+            this.profileImage = "/display" + board.getProfileImage();
+        } else { // profile 경로로 시작하지 않음(예: 카카오 로그인)
+            this.profileImage = board.getProfileImage();
+        }
     }
+
+
 
     // 뷰카운트 표시방식 변경
     private String makePrettierViewCount(int viewCount) {

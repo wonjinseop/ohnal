@@ -304,7 +304,7 @@
         // navigator.geolocation 객체 사용 가능 여부 확인
         if("geolocation" in navigator) {
             // 브라우저가 지원한다면
-            console.log('success');
+            // console.log('success');
             // 콘솔창에 success 출력되어 navigator.geolocation 객체를 사용해서 사용자의 위치를 가져오겠습니다.
         } else {
             console.log(fail);
@@ -340,11 +340,6 @@
             },
         });
         swiper.autoplay.start();
-
-
-
-
-
     </script>
 </body>
 </html>

@@ -10,9 +10,8 @@
 
 </head>
 
-<%@include file="../include/header.jsp"%>
-
 <body>
+<%@include file="../include/header.jsp"%>
 
   <div class="container">
 

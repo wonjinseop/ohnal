@@ -12,7 +12,7 @@ public class BoardWriteRequestDTO {
     private String nickname;
     private String content;
     private MultipartFile image;
-    private String locationTag;
-    private String weatherTag;
+    private String valueArea1;
+    private String valueArea2;
 
 }

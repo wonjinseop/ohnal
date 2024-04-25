@@ -1,12 +1,10 @@
 package com.ohnal.chap.service;
 
-import com.mysql.cj.Session;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
+import com.ohnal.chap.dto.response.GoogleUserResponseDTO;
 import com.ohnal.chap.dto.response.KakaoUserResponseDTO;
 import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
-import com.ohnal.chap.mapper.MemberMapper;
-import com.ohnal.util.FileUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +32,6 @@ public class SnsLoginService {
     @Value("${spring.security.oauth2.client.registration.google.client-secret}")
     private String clientSecret;
 
-
-
     public void kakaoLogin(Map<String, String> params , HttpSession session) {
 
 
@@ -57,7 +53,7 @@ public class SnsLoginService {
                     dto.getProperties().getProfileImage()
             );
         }
-
+        //sns로그인 ohnal사이트로 로그인
         memberService.maintainLoginState(session, email);
 
     }
@@ -148,14 +144,16 @@ public class SnsLoginService {
 
         String accessToken = GoogleAccessToken(code, clientId,
                 clientSecret,
-                "http://localhost:8282/index");
+                "http://localhost:8282/auth/google");
 
 
-        LoginUserResponseDTO dto = getGoogleUserInfo(accessToken);
+        GoogleUserResponseDTO dto = getGoogleUserInfo(accessToken);
 
 
         String email = dto.getEmail();
-        log.info("사용자의 이메일: {}", email);
+        log.info("email: {}", email);
+        String nickname = dto.getNickname();
+        log.info("nickname : {}", nickname);
 
 
         if (!memberService.checkDuplicateValue("email", email)) {
@@ -176,7 +174,7 @@ public class SnsLoginService {
 
 
 
-    private LoginUserResponseDTO getGoogleUserInfo(String accessToken) {
+    private GoogleUserResponseDTO getGoogleUserInfo(String accessToken) {
         String userInfoUri = "https://www.googleapis.com/oauth2/v3/userinfo";
 
 
@@ -187,19 +185,18 @@ public class SnsLoginService {
         RestTemplate restTemplate = new RestTemplate();
 
 
-        ResponseEntity<LoginUserResponseDTO> responseEntity = restTemplate.exchange(
+        ResponseEntity<GoogleUserResponseDTO> responseEntity = restTemplate.exchange(
                 userInfoUri,
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
-                LoginUserResponseDTO.class
+                GoogleUserResponseDTO.class
         );
 
 
-        LoginUserResponseDTO userResponseDTO = responseEntity.getBody();
+        GoogleUserResponseDTO userResponseDTO = responseEntity.getBody();
+        log.info("구글에서 받은 사용자 정보 {}", userResponseDTO);
 
         return userResponseDTO;
     }
-
-
 
 }
