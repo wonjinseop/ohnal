@@ -3,7 +3,7 @@ m * {
 }
 
 body {
-  background-color: #f0f0f0;
+  background: black;
   font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -33,9 +33,7 @@ a {
 
 /* header style */
 header {
-  /* background: red; */
-  /* background: #fff7d6; */
-  background: #000000;
+  background: #fff7d6;
   position: fixed;
   width: 100%;
   top: 0;
