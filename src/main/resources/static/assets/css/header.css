@@ -1,10 +1,17 @@
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 m * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #f0f0f0;
-  font-family: "Noto Sans KR", sans-serif;
+  background: black;
+  font-family: 'GangwonEdu_OTFBoldA';
 }
 
 button {
@@ -33,9 +40,7 @@ a {
 
 /* header style */
 header {
-  /* background: red; */
-  /* background: #fff7d6; */
-  background: #000000;
+  background: #fff7d6;
   position: fixed;
   width: 100%;
   top: 0;
@@ -103,7 +108,7 @@ header .inner-header .profile-box img {
 }
 
 header .inner-header .intro-text {
-  color: white;
+  color: black;
   font-size: 15px;
   font-weight: 400;
   margin-left: 15px;

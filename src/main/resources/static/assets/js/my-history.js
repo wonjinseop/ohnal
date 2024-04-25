@@ -1,3 +1,39 @@
+// const $buttonBox = document.querySelector('.user-feed');
+// const $button = document.querySelector('.user-feed .user-feed-button');
+
+// console.log($buttonBox);
+
+// $buttonBox.addEventListener('click', e => {
+//     console.log('버튼박스 클릭실행됨');
+//     if (e.matches('$button')) {
+//         console.log('버튼박스 안 버튼이 클릭됨');
+//     }
+
+
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // HTML 문서의 로딩이 완료되었을 때, 해당 함수를 실행
@@ -6,25 +42,25 @@ document.addEventListener("DOMContentLoaded", function () {
     var modalBtn = document.getElementById("modalBtn");
     var modal = document.getElementById("myModal");
     var closeBtn = document.getElementById("closeBtn");
-  
-  
+
+
     // functions
     function toggleModal() {
-      modal.classList.toggle("show");
-      document.body.style.overflow = 'auto';
+        modal.classList.toggle("show");
+        document.body.style.overflow = 'auto';
     }
-  
+
     // events
     modalBtn.addEventListener("click", toggleModal);
     closeBtn.addEventListener("click", toggleModal);
-  
+
     window.addEventListener("click", function (event) {
-      // 모달의 검은색 배경 부분이 클릭된 경우 닫히도록 하는 코드
-      if (event.target === modal) {
-        toggleModal();
-      }
+        // 모달의 검은색 배경 부분이 클릭된 경우 닫히도록 하는 코드
+        if (event.target === modal) {
+            toggleModal();
+        }
     });
-  });
+});
 
 // 내가 좋아요한 글 버튼(div)을 누르면 내가 좋아요한 글 목록이 조회된다.
 function getLikedPosts() {

@@ -1,11 +1,11 @@
 /* footer style */
 footer {
-  background-color: black;
+  background-color:  #fff7d6;
   position: relative;
 }
 
 footer .inner {
-  color: #fff;
+  color: black;
   width: 60%;
   height: 125px;
   margin: 0 auto 0;

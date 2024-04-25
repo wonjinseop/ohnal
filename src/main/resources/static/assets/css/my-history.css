@@ -1,16 +1,44 @@
-.main-wrapper {
-    margin: 170px 0px auto;
-    width: 100%;
-    display: flex;
+@font-face {
+    font-family: 'EF_jejudoldam';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
-/* 카드 형식(낱개) */
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'GangwonEdu_OTFBoldA';
+    background-color: #fff;
+}
+
+/* static header 아래 my-history 틀과 카드 형식을 감싸는 */
+.main-wrapper {
+    margin: 170px auto 0px;
+
+    width: 88%;
+
+    flex-direction: column;
+}
+
+/* my-history 제목과 버튼[작성한글, 작성댓글, 좋아요 글]을 감싼*/
 .main-wrapper .title {
-    margin: 20px auto;
+    margin: 160px auto 40px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 85%;
+}
+
+/* my-history 글자체 */
+.main-wrapper .title div h1 {
+    justify-content: flex-end;
+    font-family: 'EF_jejudoldam';
 }
 
 .main-wrapper .title .user-feed {
@@ -19,29 +47,62 @@
 }
 
 .main-wrapper .title .user-feed .user-feed-button {
-    display: block;
-    position: relative;
-    float: left;
     width: 120px;
-    padding: 0;
-    margin: 10px 20px 10px 0;
+    margin: 10px 0 10px 20px;
+    border-radius: 10px;
+
+    /* 글자 */
+    color: black; /* 글자색 */
     font-weight: 600;
     text-align: center;
     line-height: 50px;
-    color: #FFF;
-    border-radius: 5px;
+
     transition: all 0.2s;
 
-    background: gray;
-    box-shadow: 0px 5px 0px 0px #31087e;
+    background: #12e6fc;
+    box-shadow: 0px 5px 0px 0px #0c91a5;
 }
 
+/* 버튼 눌렀을 때 디자인 */
+.main-wrapper .title .user-feed .selected {
+    width: 120px;
+    border-radius: 10px;
+
+    /* 글자 */
+    color: white; /* 글자색 */
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+
+    transition: all 0.2s;
+
+    background: #0f0288;
+
+    margin-top: 15px;
+
+    /* margin-bottom 을 주어야 버튼이 눌러졌을 때,
+    아래 카드 박스의 배치에 영향이 없다.  */
+    margin-bottom: 5px;
+
+    box-shadow: 0px 0px 0px 0px #0c91a5;
+}
+
+/* 버튼 박스 안의 a태그 */
+.main-wrapper .title .user-feed .user-feed-button a {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* 버튼에 마우스 올렸을 때*/
 .main-wrapper .title .user-feed .user-feed-button:hover {
     margin-top: 15px;
     margin-bottom: 5px;
     box-shadow: 0px 0px 0px 0px #007144;
 }
 
+/* .upload-btn은 뭐냐 */
 .upload-btn {
     margin-right: 30px;
     margin-bottom: 10px;
@@ -52,15 +113,44 @@
     border: 0.5px solid #000;
 }
 
+/* --- 카드 형식 디자인 --- */
 
-.card-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 75px 100px;
-
+/* 1. 포스트가 비어있을 때 디자인 버전 */
+/* 텅 디자인 */
+.main-wrapper div:nth-child(2) .empty-post-box {
+    margin: 0 auto;
 }
 
+.main-wrapper div:nth-child(2) .empty-post-box h1 {
+    font-family: 'EF_jejudoldam';
+    font-weight: 600;
+
+    font-size: 35rem;
+    text-align: center;
+
+    margin-bottom: 0;
+}
+
+
+/* 게시글이 존재하지 않습니다 텍스트 디자인 */
+.main-wrapper div:nth-child(2) .empty-post-box p {
+    font-family: 'GangwonEdu_OTFBoldA';
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* 2. 포스트가 있을 때 디자인 버전 */
+
+/* 카드 n개를 감싸는 컨테이너 */
+.card-container {
+    display: flex;
+    /* justify-content: space-around; */
+    flex-wrap: wrap;
+    margin: 4% auto;
+}
+
+/* ? */
 .card-container .top-wrapper {
     display: flex;
     justify-content: space-between;
@@ -69,11 +159,13 @@
     margin-top: 100px;
 }
 
+/* ? */
 #keyword {
     margin-left: 30px;
     height: 30px;
 }
 
+/* 카드 한 개 */
 .card-container .card-wrapper {
     position: relative;
     width: 22%;
@@ -81,14 +173,24 @@
     cursor: pointer;
     transition: 0.5s;
     margin-bottom: 70px;
-}
-.card-container .card-wrapper .card-picture img{
-    width: 100%;
-    height: 100%;
 
+    /* 한 줄에 카드 4개 오는데,
+    카드 3개만 margin-right 4%씩 */
+    margin-right: 4%;
 }
 
-.card-container .card {
+.card-container .card-wrapper:nth-child(4n) {
+    /* 한 줄에 카드 4개 오는데,
+    카드 3개만 margin-right 4%씩
+    마지막 카드 1개는 margin-right 0% */
+    margin-right: 0%;
+}
+
+
+/* 카드 n개를 감싸는 대형 컨테이너(.card-container) 안에
+카드 1개의 형식을 감싸는(.card-wrapper)
+찐 최종으로 카드 1개 내부의 내용(컨텐츠 ex. 프로필 사진, 아이콘 등)을 모두 감싸는*/
+.card-container .card-wrapper .card {
     height: 100%;
     border-radius: 5px;
     box-shadow: 0 5px 0 #999;
@@ -97,9 +199,12 @@
     border: 0px solid transparent;
 }
 
-.card-container .card:last-child {
-    margin-right: 0;
+/* 유저가 게시물 올릴 때 올리는 사진 공간 */
+.card-container .card-wrapper .card-picture img {
+    width: 100%;
+    height: 100%;
 }
+
 
 .card-container .card .card-title-wrapper {
     color: #000000;
@@ -151,7 +256,7 @@
     margin-left: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
-    
+
 }
 
 .card-container .card .icon-wrapper .like-icon {
@@ -226,64 +331,7 @@
     height: 30px;
 }
 
-
-/* footer style */
-footer {
-    background-color: black;
-    position: relative;
-}
-
-footer .inner {
-    color: #fff;
-    width: 60%;
-    height: 125px;
-    margin: 0 auto 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer .inner h2 {
-    width: 30%;
-}
-
-footer .inner h2 img {
-    width: 100px;
-}
-
-footer .inner p {
-    width: 30%;
-    font-size: 12px;
-    flex-grow: 2;
-    text-align: center;
-}
-
-footer .inner ul {
-    font-size: 16px;
-    width: 30%;
-    display: flex;
-    justify-content: end;
-}
-
-footer .inner ul li:first-child {
-    font-weight: bold;
-}
-
-footer .inner ul li {
-    margin-right: 10px;
-}
-
-footer .inner ul li:last-child {
-    margin-right: 5px;
-}
-
-footer .lnr-envelope {
-    font-size: 23px;
-    font-weight: 600;
-}
-
-
-/* 페이지 스타일 /
+/* start 페이지 스타일 /
 / pagination style */
 .bottom-section {
     display: flex;
@@ -307,7 +355,7 @@ footer .lnr-envelope {
     color: #fff !important;
 }
 
-/*  페이지스타일  */
+/*  end 페이지스타일  */
 
 
 
@@ -320,7 +368,7 @@ footer .lnr-envelope {
 
 
 
- /* 모달 */
+/* 모달 */
 
 
 
@@ -336,7 +384,7 @@ footer .lnr-envelope {
     /* 모달이 열렸을 때 보여지게 하는 코드 */
     opacity: 1;
     pointer-events: auto;
-    
+
     margin-left: 0;
 }
 
@@ -380,7 +428,7 @@ footer .lnr-envelope {
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
     transform: scale(0.8);
-    
+
 }
 
 .modal.show {
@@ -435,6 +483,7 @@ footer .lnr-envelope {
     width: 100%;
     height: 100%;
 }
+
 .modal-content .card-wrapper .card-title-wrapper .profile-box {
     width: 50px;
     height: 50px;
@@ -477,6 +526,7 @@ footer .lnr-envelope {
 
     width: 80%;
 }
+
 .modal-content .li-ha .hashtag {
     font-size: 20px;
     line-height: 15px;
@@ -491,7 +541,7 @@ footer .lnr-envelope {
     border-top: 1px solid lightgray;
     /* line-height: 15px; */
     overflow: auto;
-    
+
     /* border: 1px dashed; */
 }
 
@@ -518,7 +568,7 @@ footer .lnr-envelope {
     margin-left: 45px;
 }
 
-.replys .content-comments  {
+.replys .content-comments {
     width: 100%;
     padding-left: 20px;
     padding-right: 10px;
@@ -556,6 +606,7 @@ footer .lnr-envelope {
     flex-wrap: wrap;
     box-sizing: content-box;
 }
+
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account {
     width: 40%;
     margin-left: 15px;
@@ -575,6 +626,7 @@ footer .lnr-envelope {
     margin-top: 5px;
     margin-bottom: 0;
 }
+
 .modal .modal-wrapper-card-2 .replys .reply-data {
     width: 100%;
     /* border: 1px dashed purple; */
@@ -585,12 +637,14 @@ footer .lnr-envelope {
     margin-left: 8%;
 }
 
-.modal .modal-wrapper-card-2 .replys .reply-data *{
-    font-size: 13px; color: gray;
+.modal .modal-wrapper-card-2 .replys .reply-data * {
+    font-size: 13px;
+    color: gray;
     margin-left: 10px;
     background: none;
 }
- /* 댓글 입력 버튼창 */
+
+/* 댓글 입력 버튼창 */
 .modal-content .write-reply {
     border: 1px solid lightgray;
     align-items: end;
@@ -598,20 +652,21 @@ footer .lnr-envelope {
 
 .modal-content .write-reply .write-wrapper {
     width: 100%;
-     /* border: 1px dashed;  */
+    /* border: 1px dashed;  */
     display: flex;
 }
+
 .modal-content .card .content-wrapper p:first-child {
     margin-top: 10px;
 
 }
 
 .modal-content .write-reply .write-input {
-    font-size: 15px; 
+    font-size: 15px;
     width: 85%;
     height: 100%;
     border-style: none;
-    
+
     /* border: 1px dashed; */
 }
 
