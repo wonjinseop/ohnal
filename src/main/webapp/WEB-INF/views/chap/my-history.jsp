@@ -16,11 +16,13 @@
     <%@include file="../include/header.jsp"%>
     <!-- My history -->
     <main class="main-wrapper">
+
         <div class="title">
 
             <div>
                 <h1>My history</h1>
             </div>
+            
             <div class="user-feed">
                 <div class="user-feed-button"><a href="/members/my-history">작성 글</a></div>
                 <div class="user-feed-button"><a href="/members/my-history/find-my-comments">작성 댓글</a></div>
@@ -28,8 +30,7 @@
             </div>
         </div>
 
-        <div class="card-container">
-
+        <div>
             <c:choose>
                 <c:when test="${myPosts == null}">
                     <!-- 게시글 목록 조회 결과가 비어있다면 -->
@@ -43,14 +44,18 @@
                     <!-- 카드 복사 -->
                     <c:forEach var="mp" items="${myPosts}">
                         <!-- 인스타 형식의 카드(글)들 전체를 감싸는 컨테이너
-                이 컨테이너 안에 회원이 쓴 글, 댓글, 좋아요한 글들이 배치된다.-->
-                        <div class="card-wrapper">
+                                이 컨테이너 안에 회원이 쓴 글, 댓글, 좋아요한 글들이 배치된다.-->
+                        <!-- 카드 복사 -->
+                        <div class="card-wrapper" data-email="${login.email}">
                             <section class="card select-card" data-bno="${mp.boardNo}">
                                 <div class="card-title-wrapper">
                                     <div class="profile-box">
                                         <img src="/display${mp.profileImage}" alt="프사">
                                     </div>
                                     <span class="card-account">${mp.nickname}</span>
+                                    <c:if test="${login.email == mp.email}"><button class="board-del-btn"
+                                            type="button">삭제</button>
+                                    </c:if>
                                 </div>
 
                                 <div class="card-picture">
@@ -59,8 +64,16 @@
 
                                 <div class="icon-wrapper">
                                     <div class="like-icon">
-                                        <span class="lnr lnr-heart"></span>
+                                        <c:choose>
+                                            <c:when test="${mp.likeNo != 0 && mp.likeEmail == login.email}">
+                                                <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
+
                                     <span class="hashtag">${mp.locationTag}</span>
                                     <span class="hashtag">${mp.weatherTag}</span>
                                     <div class="reply-icon">
@@ -69,29 +82,27 @@
                                 </div>
                                 <hr>
                                 <div class="content-wrapper">
-                                    <p>
-                                        <span>좋아요 ${mp.likeCount}개</span>
+                                    <p class="count-wrapper">
+                                        <span class="count">좋아요 ${mp.likeCount}개</span>
                                         &nbsp&nbsp&nbsp
-                                        <span>댓글 ${mp.replyCount}개</span>
+                                        <span class="count">댓글 ${mp.replyCount}개</span>
                                         &nbsp&nbsp&nbsp
-                                        <span>조회수 회</span>
+                                        <span class="count">조회수 ${mp.viewCount}회</span>
                                     </p>
-                                    <p><span class="card-account">${mp.nickname}</span> ${mp.content}</p>
-                                    <a href="#">
+                                    <p class="main-content">${mp.content}</p>
+                                    <a href="#modalBtn">
                                         <p>... 더 보기</p>
                                     </a>
                                 </div>
                             </section>
                         </div>
                     </c:forEach>
-                    <!-- 카드 복사 끝 -->
-                    <!-- 카드 끝 -->
-
-
-
                 </c:otherwise>
             </c:choose>
         </div>
+        <!-- 카드 복사 끝 -->
+        <!-- 카드 끝 -->
+
 
 
         <!-- 게시글 목록 하단 영역 -->
@@ -226,6 +237,13 @@
         </div>
 
         <%@include file="../include/footer.jsp"%>
+
+        <script>
+            const $email = '${sessionScope.login}';
+            console.log('-----------------------');
+            console.log(`sessionScope: ${sessionScope}`);
+        </script>
 </body>
+
 
 </html>

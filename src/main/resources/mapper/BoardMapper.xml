@@ -145,6 +145,27 @@
         IN (SELECT board_no FROM tbl_reply WHERE email = #{email});
     </select>
 
+    <!-- my-history 에서 내가 좋아요 누른 글 목록 조회 버튼 눌렀을 때 사용되는 sql문  -->
+    <select id="findMyLikePosts" resultType="board">
+        SELECT A.*, B.profile_image
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        WHERE board_no
+        IN (SELECT board_no
+        FROM tbl_like WHERE like_email = #{email})
+        ORDER BY reg_date DESC;
+    </select>
+
+    <!-- my-history 에서 내가 좋아요 누른 글 목록 조회(버튼 눌렀을 때)시 사용되는 sql문
+    (내가 누른 좋아요 게시물의 총 갯수를 조회한다. -->
+    <select id="getMyLikeCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_like WHERE like_email = #{email};
+    </select>
+
+
+    <!-- 좋아요 기능과 관련된 sql문   -->
     <delete id="delete">
         DELETE FROM tbl_board
         WHERE board_no = #{bno}

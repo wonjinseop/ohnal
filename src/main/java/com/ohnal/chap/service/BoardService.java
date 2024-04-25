@@ -156,4 +156,24 @@ public class BoardService {
     public int getMyCommentsCount(String email) {
         return mapper.getMyCommentsCount(email);
     }
+
+    public List<BoardListResponseDTO> findMyLikePosts(String email) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        List<Board> boardList = mapper.findMyLikePosts(email);
+
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        log.info("내가 좋아요한 글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
+    }
+
+    public int getMyLikeCount(String email) {
+        return mapper.getMyLikeCount(email);
+    }
 }

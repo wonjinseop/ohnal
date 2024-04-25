@@ -219,4 +219,26 @@ public class MemberController {
         return "chap/my-history";
     }
 
+    // 내가 좋아요한 글 버튼 누르면 작동하는 컨트롤러단 메서드
+    @GetMapping("/my-history/find-my-like-post")
+    public String findMyLikePosts(HttpSession session, @ModelAttribute("s")Page page, Model model) {
+        log.info("my-history 페이지에서 좋아요한 글(버튼) 누름");
+
+        String email = getCurrentLoginMemberEmail(session); // 사용자 email 얻어옴
+        log.info("email: {}", email);
+
+        // 여기서 myPosts는 내가 좋아요한 글의 정보를 담은 List컬렉션
+        List<BoardListResponseDTO> myPosts = boardService.findMyLikePosts(email);
+
+        PageMaker maker = new PageMaker(page, boardService.getMyLikeCount(email));
+        log.info("maker: {}", maker);
+        log.info("내가 좋아요한 글 개수: {}", maker.getTotalCount());
+        log.info("내가 좋아요한 글 목록: {}", myPosts);
+
+        model.addAttribute("myPosts", myPosts); // 내가 작성한 댓글 목록을 모델에 담아
+        model.addAttribute("maker", maker); // 페이징 처리된 객체를 모델에 담아
+
+        return "chap/my-history";
+    }
+
 }

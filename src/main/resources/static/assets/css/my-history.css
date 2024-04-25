@@ -1,10 +1,10 @@
 .main-wrapper {
     margin: 170px 0px auto;
-    /* 예시: 상단 마진 추가 *
-    /*padding: 10px; 예시: 안쪽 여백 지정 */
     width: 100%;
+    display: flex;
 }
 
+/* 카드 형식(낱개) */
 .main-wrapper .title {
     margin: 20px auto;
     display: flex;
@@ -42,26 +42,50 @@
     box-shadow: 0px 0px 0px 0px #007144;
 }
 
-/* 카드 형식 디자인 */
-.card-container {
-    width: 85%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 75px auto;
+.upload-btn {
+    margin-right: 30px;
+    margin-bottom: 10px;
+    background-color: lightgray;
+    padding: 10px;
+    height: 30px;
+    align-content: center;
+    border: 0.5px solid #000;
 }
 
-.card-wrapper {
-    width: calc(25% - 25px);
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 75px 100px;
+
+}
+
+.card-container .top-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    margin-top: 100px;
+}
+
+#keyword {
+    margin-left: 30px;
+    height: 30px;
+}
+
+.card-container .card-wrapper {
+    position: relative;
+    width: 22%;
+    height: 600px;
     cursor: pointer;
     transition: 0.5s;
     margin-bottom: 70px;
 }
-
-.card-container .card-wrapper .card-picture img {
+.card-container .card-wrapper .card-picture img{
     width: 100%;
     height: 100%;
+
 }
 
 .card-container .card {
@@ -102,12 +126,21 @@
 
 
 .card-container .card-wrapper .card-title-wrapper .card-account {
-    /* width: 50%; */
+    width: 70%;
     font-size: 15px;
     display: flex;
     justify-content: start;
     align-items: center;
 
+}
+
+.board-del-btn {
+    background: none;
+    opacity: 0;
+}
+
+.card-container .card-wrapper:hover .board-del-btn {
+    opacity: 1;
 }
 
 .card-container .card .icon-wrapper {
@@ -117,7 +150,18 @@
     align-items: center;
     margin-left: 20px;
     margin-top: 5px;
+    margin-bottom: 5px;
+    
 }
+
+.card-container .card .icon-wrapper .like-icon {
+    width: 23px;
+    align-items: center;
+    margin-right: 10px;
+}
+
+
+
 
 .card-container .card .icon-wrapper .reply-icon {
     margin-left: 10px;
@@ -125,7 +169,8 @@
 }
 
 .card-container .card .icon-wrapper span.hashtag {
-    font-size: 13px;
+    margin-left: 10px;
+    font-size: 17px;
     font-weight: 400;
     color: #646464;
 }
@@ -140,9 +185,20 @@
 
 }
 
-.card-container .card .content-wrapper p:first-child {
-    margin-top: 10px;
+.card-container .card .content-wrapper .count-wrapper {
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+    width: 100%;
+    align-content: center;
+    height: 40px;
+}
 
+.card-container .card .content-wrapper .main-content {
+    margin-top: 10px;
+}
+
+.card-container .card .content-wrapper .count-wrapper .count:first-child {
+    margin-left: 20px;
 }
 
 .card-container .card .content-wrapper p {
@@ -163,6 +219,11 @@
 
     height: 500px;
     overflow: hidden;
+}
+
+.main-content {
+    overflow: hidden;
+    height: 30px;
 }
 
 
@@ -223,7 +284,7 @@ footer .lnr-envelope {
 
 
 /* 페이지 스타일 /
-    / pagination style */
+/ pagination style */
 .bottom-section {
     display: flex;
     width: fit-content;
@@ -245,6 +306,23 @@ footer .lnr-envelope {
     background: #333 !important;
     color: #fff !important;
 }
+
+/*  페이지스타일  */
+
+
+
+
+
+
+
+
+
+
+
+
+ /* 모달 */
+
+
 
 .modal {
     /* 트랜지션 효과 */
@@ -389,7 +467,7 @@ footer .lnr-envelope {
 }
 
 .modal .card-title-wrapper .time-stamp {
-    width: 70px;
+    width: 20%;
     align-content: center;
 }
 
@@ -417,14 +495,23 @@ footer .lnr-envelope {
     /* border: 1px dashed; */
 }
 
-.like-icon {
+.modal .like-icon {
     display: flex;
     flex-wrap: wrap;
 
+    width: 100%;
     border-bottom: 1px solid lightgray;
 
     align-items: center;
     padding: 10px;
+}
+
+.modal .like-icon .heart {
+    width: 23px;
+}
+
+.modal .like-icon .count {
+    width: fit-content;
 }
 
 .like-icon .like-count {
@@ -441,11 +528,7 @@ footer .lnr-envelope {
     margin-bottom: 5px;
 }
 
-.like-icon .lnr-heart {
-    width: 5%;
-}
-
-.like-icon .hashtag-wrapper {
+.hashtag-wrapper {
     width: 85%;
 }
 
@@ -456,7 +539,7 @@ footer .lnr-envelope {
 .modal .modal-wrapper-card-2 .replys {
     width: 100%;
     /* border: 1px dashed red; */
-    height: 481px;
+    height: 487px;
     overflow: auto;
     -ms-overflow-style: none;
 }
@@ -474,19 +557,21 @@ footer .lnr-envelope {
     box-sizing: content-box;
 }
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account {
-    text-align: center;
-    width: 15%;
-    margin-left: 0px;
+    width: 40%;
+    margin-left: 15px;
 }
 
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .card-account .profile-img {
-    width: 30px;
+    width: 25px;
+    height: 25px;
     margin-right: 7px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .reply {
     width: 100%;
-    margin-left: 10px;
+    margin-left: 8%;
     margin-top: 5px;
     margin-bottom: 0;
 }
@@ -495,6 +580,11 @@ footer .lnr-envelope {
     /* border: 1px dashed purple; */
     margin-bottom: 7px;
 }
+
+.modal .modal-wrapper-card-2 .replys .reply-data .time {
+    margin-left: 8%;
+}
+
 .modal .modal-wrapper-card-2 .replys .reply-data *{
     font-size: 13px; color: gray;
     margin-left: 10px;
@@ -529,16 +619,17 @@ footer .lnr-envelope {
     width: 15%;
 }
 
-.modal-content .lnr-heart {
+.modal-content .like-image {
     margin: 0px 10px;
-    font-size: 30px;
-    
-    
+    width: 23px;
 }
-
 
 .modal-content .card .card-picture {
     background-color: #fff;
     height: 500px;
     overflow: hidden;
 }
+
+
+
+/* 모달 끝*/
