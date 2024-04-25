@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 public class NaverRequestDTO {
 
-private String Adress;
+private String Address;
 private String Password;
 private boolean autoLogin;
 

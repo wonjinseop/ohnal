@@ -10,9 +10,10 @@
 
 </head>
 
-<body>
 <%@include file="../include/header.jsp"%>
 
+<body>
+ 
   <div class="container">
 
     <form action="/members/sign-up" name="signup" id="signUpForm" method="post" enctype="multipart/form-data">
@@ -89,8 +90,8 @@
       </div>
     </form>
   </div>
-
-
+  
+  
 
   <%@include file="../include/footer.jsp"%>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -307,7 +308,7 @@
        document.getElementById('gender').value = 'F';
       checkResultList[4] = true;
       $femaleButton.style.color = "#ffffff";
-
+      
     });
 
 
