@@ -20,4 +20,6 @@ public interface MemberMapper {
     Member findMemberByCookie(String sessionId);
 
     void modify(Member member);
+
+    void modifyProfileImage(@Param("email") String email, @Param("profileImage") String savePath);
 }

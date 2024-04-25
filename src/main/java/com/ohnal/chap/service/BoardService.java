@@ -6,6 +6,7 @@ import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
+import com.ohnal.chap.dto.response.BoardWriteDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
 import com.ohnal.chap.mapper.BoardMapper;
@@ -38,7 +39,7 @@ public class BoardService {
     }
 
     // 게시글 등록
-    public void save(BoardWriteRequestDTO dto, HttpSession session, String savePath) {
+    public void save(BoardWriteDTO dto, HttpSession session, String savePath) {
         Board board = new Board(dto, savePath);
         log.info(dto.toString());
 
@@ -154,5 +155,25 @@ public class BoardService {
     // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
     public int getMyCommentsCount(String email) {
         return mapper.getMyCommentsCount(email);
+    }
+
+    public List<BoardListResponseDTO> findMyLikePosts(String email) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        List<Board> boardList = mapper.findMyLikePosts(email);
+
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        log.info("내가 좋아요한 글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
+    }
+
+    public int getMyLikeCount(String email) {
+        return mapper.getMyLikeCount(email);
     }
 }

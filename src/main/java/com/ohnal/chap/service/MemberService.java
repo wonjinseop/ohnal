@@ -2,7 +2,8 @@ package com.ohnal.chap.service;
 
 import com.ohnal.chap.dto.request.AutoLoginDTO;
 import com.ohnal.chap.dto.request.LoginRequestDTO;
-//import com.ohnal.chap.dto.request.NaverSignUpRequestDTO;
+import com.ohnal.chap.dto.request.ModifyRequestDTO;
+import com.ohnal.chap.dto.request.NaverSignUpRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
@@ -50,15 +51,9 @@ public class MemberService {
         memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
-//    public void snsJoin(NaverSignUpRequestDTO dto, String savePath) {
-//
-//        memberMapper.save(dto.toEntity(encoder, savePath));
-//    }
+    public void snsJoin(NaverSignUpRequestDTO dto, String savePath) {
 
-    // 회원 정보 수정 처리 서비스
-    public void modify(SignUpRequestDTO dto, String savePath) {
-        log.info("회원 정보 수정 처리 요청 들어옴! mapper로 접근합니다");
-        memberMapper.modify(dto.toEntity(encoder, savePath));
+        memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
     // 로그인 검증 처리
@@ -132,18 +127,27 @@ public class MemberService {
         LoginUserResponseDTO dto = LoginUserResponseDTO.builder()
                 .email(foundMember.getEmail())
                 .nickname(foundMember.getNickname())
-                .profile(foundMember.getProfileImage())
                 .loginMethod(foundMember.getLoginMethod().toString())
                 .address(foundMember.getAddress())
                 .gender(foundMember.getGender())
                 .regDate(String.valueOf(foundMember.getRegDate()))
                 .build();
 
+        // 프로필 사진 설정 여부에 따라 다른 이미지 경로 적용
+        if(foundMember.getProfileImage() == null) { // 설정된 이미지 정보가 없으면
+            dto.setProfile("/assets/img/anonymous-image.png"); // 기본 프로필 사진
+        } else if(foundMember.getProfileImage().contains("/profile")) { // 설정한 이미지 정보가 있고, profile 경로로 시작하면
+            dto.setProfile("/display" + foundMember.getProfileImage());
+        } else { // profile 경로로 시작하지 않음(예: 카카오 로그인)
+            dto.setProfile(foundMember.getProfileImage());
+        }
+
+        log.info(dto.toString());
+
         // 세션에 로그인한 회원 정보를 저장
         session.setAttribute(LOGIN_KEY, dto);
         // 세션 수명 설정
         session.setMaxInactiveInterval(60 * 60); // 1시간
-
     }
 
     public void autoLoginClear(HttpServletRequest request, HttpServletResponse response) {
@@ -168,6 +172,21 @@ public class MemberService {
             );
         }
 
+    }
+
+    public LoginUserResponseDTO getMemberInfo(String account) {
+        Member foundMember = memberMapper.findMember(account);
+
+        LoginUserResponseDTO dto = LoginUserResponseDTO.builder()
+                .email(foundMember.getEmail())
+                .nickname(foundMember.getNickname())
+                .address(foundMember.getAddress())
+                .gender(foundMember.getGender())
+                .profile(foundMember.getProfileImage())
+                .loginMethod(foundMember.getLoginMethod().toString())
+                .regDate(String.valueOf(foundMember.getRegDate()).substring(0,10))
+                .build();
+        return dto;
     }
 
     public void kakaoLogout(LoginUserResponseDTO dto, HttpSession session) {
@@ -200,5 +219,12 @@ public class MemberService {
     }
 
 
+    // 회원 정보 수정 처리 서비스
+    public void modifyInfo(ModifyRequestDTO dto) {
+        memberMapper.modify(dto.toEntity());
+    }
 
+    public void modifyProfileImage(String email, String savePath) {
+        memberMapper.modifyProfileImage(email, savePath);
+    }
 }

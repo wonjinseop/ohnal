@@ -13,36 +13,25 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class NaverSignUpRequestDTO {
+public class ModifyRequestDTO {
 
-    @NotBlank
-    @Email
+
     private String email;
-    @NotBlank
-    private  String password;
-    @NotBlank
+
     private String nickname;
-    @NotBlank
+
     private String gender;
-    @NotBlank
+
     private String address;
 
-    private String profileImage;
 
-    private LoginMethod loginMethod;
-
-    public Member toEntity(PasswordEncoder encoder, String savePath) {
+    public Member toEntity() {
         return Member.builder()
                 .email(email)
-                .password(encoder.encode(password))
-                .address(address)
                 .nickname(nickname)
+                .address(address)
                 .gender(gender)
-                .profileImage(savePath)
-                .loginMethod(LoginMethod.NAVER)
                 .build();
-
     }
-
 
 }

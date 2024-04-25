@@ -1,6 +1,7 @@
 package com.ohnal.chap.entity;
 
 import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
+import com.ohnal.chap.dto.response.BoardWriteDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ public class Board {
     private int likeNo;
     private String likeEmail;
     
-    public Board(BoardWriteRequestDTO dto, String savePath) {
+    public Board(BoardWriteDTO dto, String savePath) {
         this.nickname = dto.getNickname();
         this.content = dto.getContent();
         this.image = savePath;

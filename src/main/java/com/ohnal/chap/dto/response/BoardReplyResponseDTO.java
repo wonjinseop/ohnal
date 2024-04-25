@@ -25,6 +25,14 @@ public class BoardReplyResponseDTO {
         this.profileImage = reply.getProfileImage();
         this.nickname = reply.getNickname();
         this.time = makePrettierDateString(reply.getRegDate());
+
+        if(reply.getProfileImage() == null) { // 설정된 이미지 정보가 없으면
+            this.profileImage = "/assets/img/anonymous-image.png"; // 기본 프로필 사진
+        } else if(reply.getProfileImage().contains("/profile")) { // 설정한 이미지 정보가 있고, profile 경로로 시작하면
+            this.profileImage = "/display" + reply.getProfileImage();
+        } else { // profile 경로로 시작하지 않음(예: 카카오 로그인)
+            this.profileImage = reply.getProfileImage();
+        }
         
     }
     

@@ -94,7 +94,12 @@ header .inner-header .profile-box {
 }
 
 header .inner-header .profile-box img {
-  width: 100%;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
 header .inner-header .intro-text {

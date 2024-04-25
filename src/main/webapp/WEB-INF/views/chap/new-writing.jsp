@@ -18,7 +18,7 @@
 
     <div class="image_container cody-load">
       <div class="btn_image">
-        <label for="image">
+        <label for="img">
           <img id="img" src="/assets/img/upload.png" alt="이미지 미리보기">
         </label>
       </div>
@@ -30,14 +30,36 @@
 
         <div class="profile-name">
           <div class="profile-box">
-            <img src="/display${login.profile}" alt="프사">
+            <img src="${login.profile}" alt="프사">
           </div>
           <input type="text" id="nickname" name="nickname" value="${login.nickname}" readonly>
         </div>
 
         <div class="hash">
-          <input type="text" class="hashtag" id="locationTag" name="locationTag" value="#서울시강남구"></input>
-          <input type="text" class="hashtag" id="weatherTag" name="weatherTag" value="#최저12최고25"></input>
+              <select name="h_area1" onChange="cat1_change(this.value,h_area2)" class="h_area1">
+                <option>시, 도를 선택하세요</option>
+                <option value='1'>서울특별시</option>
+                <option value='2'>부산광역시</option>
+                <option value='3'>대구광역시</option>
+                <option value='4'>인천광역시</option>
+                <option value='5'>광주광역시</option>
+                <option value='6'>대전광역시</option>
+                <option value='7'>울산광역시</option>
+                <option value='8'>강원특별자치도</option>
+                <option value='9'>경기도</option>
+                <option value='10'>경상남도</option>
+                <option value='11'>경상북도</option>
+                <option value='12'>전라남도</option>
+                <option value='13'>전라북도</option>
+                <option value='14'>제주특별자치도</option>
+                <option value='15'>충청남도</option>
+                <option value='16'>충청북도</option>
+              </select>
+              <select name="h_area2" class="h_area2">
+                <option>시,군,구를 선택하세요</option>
+              </select>
+              <input type="text" name="valueArea1" id="valueArea1" hidden>
+              <input type="text" name="valueArea2" id="valueArea2" hidden>
         </div>
 
       </div>
@@ -53,6 +75,7 @@
 
 
   <%@include file="../include/footer.jsp"%>
+
 </body>
 
 </html>
