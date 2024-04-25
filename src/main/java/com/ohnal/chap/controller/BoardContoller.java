@@ -1,5 +1,6 @@
 package com.ohnal.chap.controller;
 
+import com.mysql.cj.Session;
 import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;

@@ -112,7 +112,8 @@
             <h2 class="main-title">WEATHER SEARCH</h2>
 
             <form action="#">
-                <select name="h_area1" onChange="cat1_change(this.value,h_area2)" class="h_area1">
+                <select name="h_area1" onChange="cat1_change(this.value,h_area2)"
+                 class="h_area1" style="font-family:'SejonghospitalBold';font-size:13;letter-spacing:1;">
                     <option>시, 도를 선택하세요</option>
                     <option value='1'>서울특별시</option>
                     <option value='2'>부산광역시</option>
@@ -131,7 +132,7 @@
                     <option value='15'>충청남도</option>
                     <option value='16'>충청북도</option>
                 </select>
-                <select name="h_area2">
+                <select name="h_area2" style="font-family:'SejonghospitalBold';font-size:13;letter-spacing:1;">
                     <option>시,군,구를 선택하세요</option>
                 </select>
                 <button id="send-btn" class="btn btn-primary" type="button">
@@ -228,7 +229,7 @@
                         <div class="profile-box">
                             <img src="/assets/img/anonymous.jpg" alt="프사">
                         </div>
-                        <span c lass="card-account">test3</span>
+                        <span class="card-account">test3</span>
                     </div>
 
                     <div class="card-picture">

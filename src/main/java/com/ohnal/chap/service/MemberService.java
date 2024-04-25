@@ -3,6 +3,7 @@ package com.ohnal.chap.service;
 import com.ohnal.chap.dto.request.AutoLoginDTO;
 import com.ohnal.chap.dto.request.LoginRequestDTO;
 import com.ohnal.chap.dto.request.ModifyRequestDTO;
+import com.ohnal.chap.dto.request.NaverSignUpRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
@@ -50,6 +51,10 @@ public class MemberService {
         memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
+    public void snsJoin(NaverSignUpRequestDTO dto, String savePath) {
+
+        memberMapper.save(dto.toEntity(encoder, savePath));
+    }
 
     // 로그인 검증 처리
     public LoginResult authenticate(LoginRequestDTO dto,
@@ -71,6 +76,7 @@ public class MemberService {
             System.out.println("비밀번호가 일치하지 않습니다.");
             return NO_PW;
         }
+
         // 자동 로그인 처리
         if (dto.isAutoLogin()) {
             // 1. 자동 로그인 쿠키 생성 - 쿠키 안에 절대 중복되지 않는 값을 저장. (브라우저 세션 아이디)

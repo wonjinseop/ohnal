@@ -1,3 +1,26 @@
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'EF_jejudoldam';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SejonghospitalBold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2312-1@1.1/SejonghospitalBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+body{
+  font-family:'GangwonEdu_OTFBoldA' ;
+  background-color: #fff;
+}
+
 /* 상단 날씨, 의상 표현 영역 */
 .top-section {
   width: 100%;
@@ -75,6 +98,7 @@
   justify-content: flex-end;
   margin-top: 60px;
   margin-bottom: 30px;
+  font-family: 'EF_jejudoldam';
 }
 
 
@@ -96,6 +120,7 @@
 .board-section {
   margin-top: 60px;
   position: relative;
+  font-family: 'EF_jejudoldam';
 }
 
 
