@@ -532,6 +532,12 @@ footer .lnr-envelope {
 
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .reply {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal .modal-wrapper-card-2 .replys .reply-wrapper .reply .reply-content {
+    width: 100%;
     margin-left: 8%;
     margin-top: 5px;
     margin-bottom: 0;
