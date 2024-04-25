@@ -44,10 +44,10 @@ public class NaverLoginService {
                                     .email(email)
                                     .password("0000")
 //                                    .address(dto.getAddress())
-//                                    .nickname(dto.getNickName())
+                                    .nickname(dto.getResponse().getNickName())
 //                                    .gender(dto.getGender())
-//                                    .profileImage(dto.getProperties().getProfileImage())
-//                                    .loginMethod(Member.LoginMethod.NAVER)
+                                    .profileImage(dto.getResponse().getProfileImage())
+                                    .loginMethod(Member.LoginMethod.NAVER)
                                     .build(),
 //                            dto.getProperties().getProfileImage()
                             null

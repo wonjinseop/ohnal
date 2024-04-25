@@ -39,8 +39,9 @@ public class NaverSignUpRequestDTO {
                 .nickname(nickname)
                 .gender(gender)
                 .profileImage(savePath)
-                .loginMethod(loginMethod)
+                .loginMethod(LoginMethod.NAVER)
                 .build();
+
     }
 
 

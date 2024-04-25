@@ -41,5 +41,7 @@ public class NaverResponseDTO {
     @EqualsAndHashCode
     public static class Response {
         private String email;
+        private String nickName;
+        private String profileImage;
     }
 }
