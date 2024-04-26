@@ -173,7 +173,7 @@ const $replyWrite = document.querySelector('.write-reply');
 if ($replyWrite) {
     const $submitButton = document.querySelector('.write-send');
     const email = document.querySelector('.email').value;
-
+    console.log(email);
     // 버튼 요소 선택
     $replyWrite.onclick = () => {
         if (email == '') {
@@ -368,13 +368,3 @@ function renderReplies(replyList) {
     $replyWrapper.innerHTML = tag;
 
 };
-
-
-const $keyword = document.getElementById('keyword');
-
-$keyword.addEventListener('change', e => {
-    console.log(e.target.value);
-    document.getElementById('submitBtn').click();
-});
-
-const $keywordValue = document.getElementById('keywordValue').value;

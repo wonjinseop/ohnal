@@ -83,27 +83,6 @@ public class BoardService {
         mapper.updateCount(dto.getBno(), "replies");
     }
 
-
-    //------------------my history------------------
-    // 우측 슬라이드에서 My History 메뉴 눌렀을 때
-    public List<BoardListResponseDTO> findAllByEmail(String email, Page page) {
-
-        List<BoardListResponseDTO> dtoList = new ArrayList<>();
-
-        List<Board> boardList = mapper.findAllByEmail(email, page);
-
-        log.info("boardList: {}", boardList);
-
-        for (Board board : boardList) {
-            BoardListResponseDTO dto = new BoardListResponseDTO(board);
-            dtoList.add(dto);
-        }
-        log.info("(가공한) 내가 작성한 게시물 리스트 {}", dtoList);
-        return dtoList;
-    }
-
-
-
     // 글 삭제
     public void delete(int bno) {
 
@@ -128,11 +107,55 @@ public class BoardService {
         mapper.updateCount(dto.getBno(), "likeMinus");
     }
 
-    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드 (작성 댓글 버튼 눌렀을 때)
-    public List<BoardListResponseDTO> findMyComments(String email) {
+    // 우측 슬라이드에서 My History 메뉴 눌렀을 때
+
+
+    public void deleteReply(int rno, int bno) {
+        mapper.deleteReply(rno);
+        mapper.updateCount(bno, "replyDelete");
+    }
+
+    public boolean findReply(BoardReplyDeleteRequestDTO dto) { return mapper.findReply(dto); }
+
+    //------------------my history------------------
+
+    public List<BoardListResponseDTO> findAllByEmail(String email, Page page) {
+
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
-        List<Board> boardList = mapper.findMyComments(email);
+        List<Board> boardList = mapper.findAllByEmail(email, page);
+
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+        log.info("(가공한) 내가 작성한 게시물 리스트 {}", dtoList);
+        return dtoList;
+    }
+
+    public List<BoardListResponseDTO> findMyLikePosts(String email, Page page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        List<Board> boardList = mapper.findAllByEmail(email, page);
+
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        log.info("내가 좋아요한 글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
+    }
+
+    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드 (작성 댓글 버튼 눌렀을 때)
+    public List<BoardListResponseDTO> findMyComments(String email, Page page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        List<Board> boardList = mapper.findMyComments(email, page);
 
         log.info("boardList: {}", boardList);
 
@@ -147,33 +170,6 @@ public class BoardService {
     }
 
 
-
-    public List<BoardListResponseDTO> findMyLikePosts(String email) {
-        List<BoardListResponseDTO> dtoList = new ArrayList<>();
-
-        List<Board> boardList = mapper.findMyLikePosts(email);
-
-        log.info("boardList: {}", boardList);
-
-        for (Board board : boardList) {
-            BoardListResponseDTO dto = new BoardListResponseDTO(board);
-            dtoList.add(dto);
-        }
-
-        log.info("내가 좋아요한 글이 작성된 게시글 목록: {}", dtoList);
-        return dtoList;
-    }
-
-
-    
-    public void deleteReply(int rno, int bno) {
-        mapper.deleteReply(rno);
-        mapper.updateCount(bno, "replyDelete");
-    }
-
-
-
-    public boolean findReply(BoardReplyDeleteRequestDTO dto) { return mapper.findReply(dto); }
 
 
 

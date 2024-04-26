@@ -210,7 +210,7 @@ public class MemberController {
         log.info("email: {}", email);
 
         // 여기서 myPosts는 내가 작성한 댓글의 글들의 정보를 담은 List컬렉션
-        List<BoardListResponseDTO> myPosts = boardService.findMyComments(email);
+        List<BoardListResponseDTO> myPosts = boardService.findMyLikePosts(email, page);
         PageMaker maker = new PageMaker(page, myPosts.size());
 
         log.info("maker: {}", maker);
@@ -234,7 +234,7 @@ public class MemberController {
         log.info("email: {}", email);
 
         // 여기서 myPosts는 내가 좋아요한 글의 정보를 담은 List컬렉션
-        List<BoardListResponseDTO> myPosts = boardService.findMyLikePosts(email);
+        List<BoardListResponseDTO> myPosts = boardService.findMyLikePosts(email, page);
         PageMaker maker = new PageMaker(page, myPosts.size());
 
         log.info("maker: {}", maker);
