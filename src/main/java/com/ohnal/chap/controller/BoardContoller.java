@@ -1,6 +1,5 @@
 package com.ohnal.chap.controller;
 
-import com.mysql.cj.Session;
 import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
@@ -145,10 +144,12 @@ public class BoardContoller {
 
     // 게시물 자세히 보기
     @GetMapping("/delete/{bno}")
-    public void delete(@PathVariable int bno) {
+    public ResponseEntity<?> delete(@PathVariable int bno) {
         log.info("delete: {}", bno);
 
         boardService.delete(bno);
+
+        return ResponseEntity.ok().body("success");
     }
 
     // 좋아요 기능

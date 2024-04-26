@@ -215,35 +215,38 @@ body {
 .card-container .card-wrapper .card-title-wrapper .profile-box {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    margin: 10px;
-    margin-left: 20px;
-    overflow: hidden;
+    margin: 15px;
 }
 
+/* 프로필 사진을 감싸는 div 속 프로필 */
 .card-container .card-wrapper .card-title-wrapper .profile-box img {
     width: 100%;
-    padding-top: 5px;
+    height: 100%;
+    border-radius: 50%;
 }
 
 
+/* span요소 사용자 닉네임이 출력되는 */
 .card-container .card-wrapper .card-title-wrapper .card-account {
     width: 70%;
-    font-size: 15px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
+    font-size: 20px;
+    padding-top: 30px;
 }
 
+/* 카드 형식에서 프로필 사진, 닉네임 옆에 삭제 버튼을 감싸는
+background를 none으로 해야 바깥 배경 회색이 비쳐진다.
+opacity(투명도)를 0으로 주어 글자가 안보이게 한다. */
 .board-del-btn {
     background: none;
     opacity: 0;
 }
 
+/* 프로필 박스와 닉네임, 삭제 버튼을 감싸는 박스에 마우스를 올리면
+삭제 버튼의 투명도가 1이 되어 삭제 글씨가 보이게 된다. */
 .card-container .card-wrapper:hover .board-del-btn {
     opacity: 1;
 }
+
 
 .card-container .card .icon-wrapper {
     display: flex;
