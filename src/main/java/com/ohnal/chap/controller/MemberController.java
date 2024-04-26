@@ -141,11 +141,11 @@ public class MemberController {
             memberService.autoLoginClear(request, response);
         }
 
-        // sns 로그인 상태인지를 확인
-//        LoginUserResponseDTO dto = (LoginUserResponseDTO) session.getAttribute(LOGIN_KEY);
-//        if (dto.getLoginMethod().equals("KAKAO")) {
-//            memberService.kakaoLogout(dto, session);
-//        }
+         //sns 로그인 상태인지를 확인
+        LoginUserResponseDTO dto = (LoginUserResponseDTO) session.getAttribute(LOGIN_KEY);
+        if (dto.getLoginMethod().equals("KAKAO")) {
+            memberService.kakaoLogout(dto, session);
+        }
 
         // 세션에서 로그인 정보 기록 삭제
         session.removeAttribute("login");

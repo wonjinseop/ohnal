@@ -170,8 +170,10 @@
 
   <script>
     // 비밀번호 변경 버튼 누르면 비밀번호 변경 페이지로 이동
-    document.getElementById('change-password').onclick = () => {
+    if (${login.loginMethod eq 'COMMON'}) {
+      document.getElementById('change-password').onclick = () => {
         location.replace("/members/changePassword");
+      }
     }
   </script>
 

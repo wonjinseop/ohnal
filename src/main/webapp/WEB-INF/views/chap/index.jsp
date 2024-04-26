@@ -15,6 +15,7 @@
     <%-- swiper.js --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/assets/js/index.js" defer></script>
 </head>
 
 <body>
@@ -149,198 +150,163 @@
 
 
         <!-- BEST OOTD 게시판 영역 -->
-
-        <!-- 카드 복붙 -->
+        <!-- 카드 시작 -->
         <div class="card-container">
+            <!-- 카드 복사 -->
+            <c:forEach var="b" items="${bList}">
+                            <div class="card-wrapper">
+                                <section class="card select-card" data-bno="${b.boardNo}" data-email="${login.email}">
+                                    <div class="card-title-wrapper">
+                                        <div class="profile-box">
+                                            <img src="${b.profileImage}" alt="프사">
+                                        </div>
+                                        <span class="card-account">${b.nickname}</span>
+                                        <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button>
+                                        </c:if>
+                                    </div>
 
-            <div class="card-wrapper">
-                <section class="card" data-bno="${b.boardNo}">
-                    <div class="card-title-wrapper">
-                        <div class="profile-box">
-                            <img src="./assets/img/anonymous.jpg" alt="프사">
+                                    <div class="card-picture">
+                                        <img src="/display${b.image}" alt="sample">
+                                    </div>
+
+                                    <div class="icon-wrapper">
+                                        <div class="like-icon">
+                                            <c:choose>
+                                                <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
+                                                    <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+
+                                        <span class="hashtag">${b.locationTag}</span>
+                                        <span class="hashtag">${b.weatherTag}</span>
+                                        <div class="reply-icon">
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="content-wrapper">
+                                        <p class="count-wrapper">
+                                            <span class="count">좋아요 ${b.likeCount}개</span>
+                                            &nbsp&nbsp&nbsp
+                                            <span class="count">댓글 ${b.replyCount}개</span>
+                                            &nbsp&nbsp&nbsp
+                                            <span class="count">조회수 ${b.viewCount}회</span>
+                                        </p>
+                                        <p class="main-content">${b.content}</p>
+                                        <a href="#modalBtn">
+                                            <p>... 더 보기</p>
+                                        </a>
+                                    </div>
+                                </section>
+                            </div>
+            </c:forEach>
+            <!-- 카드 복사 끝 -->
+            <!-- 카드 끝 -->
+        </div>
+
+        <!-- 모달 열기 버튼 -->
+        <button id="modalBtn" hidden>모달 글 확대</button>
+
+        <!-- 모달 컨테이너 -->
+        <div id="myModal" class="modal">
+            <!-- 모달 컨텐츠 -->
+            <div class="modal-content">
+
+
+
+                <div class="card-wrapper" data-email="${login.email}">
+
+
+
+                    <section class="card" data-bno="">
+
+                        <div class="modal-wrapper-card" style="display: flex;">
+
+                            <div class="card-picture modal-wrapper-card-1">
+                                <img src="" alt="sample" class="content-img">
+                            </div>
+
+
+
+
+
+
+                            <div class="modal-wrapper-card-2">
+
+                                <div class="card-title-wrapper">
+
+                                    <div class="profile-box">
+                                        <img src="" alt="프사" class="profile-image">
+                                    </div>
+                                    <span class="card-account"></span>
+                                    <span class="time-stamp"></span>
+                                    <!-- 모달 닫기 버튼 -->
+                                    <span class="close" id="closeBtn">&times;</span>
+
+                                </div>
+
+
+                                <div class="icon-wrapper">
+                                    <div class="reply-icon">
+                                        <!-- <span class="lnr lnr-bubble"></span> -->
+                                    </div>
+                                </div>
+
+                                <div class="li-ha">
+
+                                    <div class="like-icon">
+                                        <c:choose>
+                                            <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
+                                                <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <div class="hashtag-wrapper">
+                                            <span class="hashtag location"></span>
+                                            <span class="hashtag weather"></span>
+                                        </div>
+
+                                        <span class="like-count count"></span>
+                                        &nbsp&nbsp&nbsp
+                                        <span class="reply-count count"></span>
+                                        &nbsp&nbsp&nbsp
+                                        <span class="view-count count"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="replys">
+                                    <p class="content-comments content"></p>
+                                    <div class='reply-wrapper'>
+
+                                    </div>
+                                </div>
+
+                                <form id="commentFrm" class="write-reply">
+                                    <div class="write-wrapper">
+                                        <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
+                                        <input name="email" class="email" value="${login.email}" hidden></input>
+                                        <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                        <button class="write-send" type="button">등록</button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
-                        <span class="card-account">test3</span>
-                    </div>
 
-                    <div class="card-picture">
-                        <img src="./assets/img/cody.png" alt="sample">
-                    </div>
-
-                    <div class="icon-wrapper">
-                        <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
-                        </div>
-                        <span class="hashtag">#서울시강남구</span>
-                        <span class="hashtag">#최저12최고25</span>
-                        <div class="reply-icon">
-                            <!-- <span class="lnr lnr-bubble"></span> -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-wrapper">
-                        <p><span>좋아요 598개</span>&nbsp&nbsp&nbsp<span>댓글 30개</span></p>
-                        <p><span class="card-account">test3</span> 일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p>
-                        <a href="#">
-                            <p>... 더 보기</p>
-                        </a>
-                    </div>
-                </section>
-            </div>
-
-            <!-- 카드 복붙 -->
-            <div class="card-wrapper">
-                <section class="card" data-bno="${b.boardNo}">
-                    <div class="card-title-wrapper">
-                        <div class="profile-box">
-                            <img src="/assets/img/anonymous.jpg" alt="프사">
-                        </div>
-                        <span class="card-account">test3</span>
-                    </div>
-
-                    <div class="card-picture">
-                        <img src="./assets/img/cody.png" alt="sample">
-                    </div>
-
-                    <div class="icon-wrapper">
-                        <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
-                        </div>
-                        <span class="hashtag">#서울시강남구</span>
-                        <span class="hashtag">#최저12최고25</span>
-                        <div class="reply-icon">
-                            <!-- <span class="lnr lnr-bubble"></span> -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-wrapper">
-                        <p><span>좋아요 598개</span>&nbsp&nbsp&nbsp<span>댓글 30개</span></p>
-                        <p><span class="card-account">test3</span> 일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p>
-                        <a href="#">
-                            <p>... 더 보기</p>
-                        </a>
-                    </div>
-                </section>
-            </div>
-
-            <!-- 카드 복붙 -->
-            <div class="card-wrapper">
-                <section class="card" data-bno="${b.boardNo}">
-                    <div class="card-title-wrapper">
-                        <div class="profile-box">
-                            <img src="/assets/img/anonymous.jpg" alt="프사">
-                        </div>
-                        <span class="card-account">test3</span>
-                    </div>
-
-                    <div class="card-picture">
-                        <img src="./assets/img/cody.png" alt="sample">
-                    </div>
-
-                    <div class="icon-wrapper">
-                        <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
-                        </div>
-                        <span class="hashtag">#서울시강남구</span>
-                        <span class="hashtag">#최저12최고25</span>
-                        <div class="reply-icon">
-                            <!-- <span class="lnr lnr-bubble"></span> -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-wrapper">
-                        <p><span>좋아요 598개</span>&nbsp&nbsp&nbsp<span>댓글 30개</span></p>
-                        <p><span class="card-account">test3</span> 일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p>
-                        <a href="#">
-                            <p>... 더 보기</p>
-                        </a>
-                    </div>
-                </section>
-            </div>
-
-            <!-- 카드 복붙 -->
-            <div class="card-wrapper">
-                <section class="card" data-bno="${b.boardNo}">
-                    <div class="card-title-wrapper">
-                        <div class="profile-box">
-                            <img src="/assets/img/anonymous.jpg" alt="프사">
-                        </div>
-                        <span class="card-account">test3</span>
-                    </div>
-
-                    <div class="card-picture">
-                        <img src="./assets/img/cody.png" alt="sample">
-                    </div>
-
-                    <div class="icon-wrapper">
-                        <div class="like-icon">
-                            <span class="lnr lnr-heart"></span>
-                        </div>
-                        <span class="hashtag">#서울시강남구</span>
-                        <span class="hashtag">#최저12최고25</span>
-                        <div class="reply-icon">
-                            <!-- <span class="lnr lnr-bubble"></span> -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="content-wrapper">
-                        <p><span>좋아요 598개</span>&nbsp&nbsp&nbsp<span>댓글 30개</span></p>
-
-                        <p><span class="card-account">test3</span> 일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아</p>
-                        <a href="#">
-                            <p>... 더 보기</p>
-                        </a>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
 
 
     <%@include file="../include/footer.jsp"%>
-
-    <script>
-        // 사용자의 위치를 (자동으로) 가져오기
-        
-        // 사용자의 위치(위도, 경도)를 가져올 변수 선언 및 초기화
-        // navigator.geolocation 객체 사용 가능 여부 확인
-        if("geolocation" in navigator) {
-            // 브라우저가 지원한다면
-            // console.log('success');
-            // 콘솔창에 success 출력되어 navigator.geolocation 객체를 사용해서 사용자의 위치를 가져오겠습니다.
-        } else {
-            console.log(fail);
-        }
-
-        navigator.geolocation.getCurrentPosition(function(permitPosition) {
-            console.log(permit);
-            var latitude = permitPosition.coords.latitude; // 위도
-            var longitude = permitPosition.coords.longitude; // 경도
-            console.log("현재 위치는 : " + latitude + ", "+ longitude);
-        });
-
-        // swiper 함수
-        const swiper = new Swiper('.swiper', {
-            // Optional parameters
-            direction: 'horizontal',
-            loop: true,
-
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-        });
-        swiper.autoplay.start();
-    </script>
 </body>
 </html>

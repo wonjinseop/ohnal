@@ -187,6 +187,18 @@
         WHERE reply_no = #{rno} AND email = #{email}
     </select>
 
+    <select id="findBestOOTD" resultType="board">
+        SELECT
+            A.*, B.profile_image, C.like_no, C.like_email
+        FROM tbl_board A
+        LEFT OUTER JOIN tbl_member B
+        ON A.email = B.email
+        LEFT OUTER JOIN tbl_like C
+        ON A.board_no = C.board_no AND C.like_email = #{email}
+        ORDER BY like_count DESC
+        LIMIT 0, 8
+    </select>
+
     <!--  갯수 찾아오는 건 컬렉션 size()로 정함  -->
     <!-- my-history 에서 내가 쓴 글 갯수 찾아오는 sql문 -->
     <!--    <select id="getMyPostsCount" resultType="int">-->
