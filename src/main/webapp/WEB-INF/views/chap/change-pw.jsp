@@ -54,7 +54,7 @@
                 return;
             } else if (!passwordPattern.test(pwValue)) {
                 $pwInput.style.borderColor = 'red';
-                document.getElementById('pwChk').innerHTML = '<b style="color: red;">특수문자 포함 8자 이상 입력해주세요</b>';
+                document.getElementById('pwChk').innerHTML = '<b style="color: red;">영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</b>';
                 checkResultList[0] = false;
                 return;
             } else {

@@ -33,7 +33,7 @@
         <div class="pwFind container">
             <div class="newPwInput">
                 <p class="font"><strong>새로 설정하실 비밀번호를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
-                <input type="password" placeholder="영문과 특수문자를 포함한 8자를 입력해주세요" id="newPw" name="password" required="required"
+                <input type="password" placeholder="영문, 숫자, 특수문자를 포함한 8자 이상의 비밀번호를 입력해주세요" id="newPw" name="password" required="required"
                     aria-required="true" readonly>
                 <span id="pwChk"></span>
             </div>
@@ -153,7 +153,7 @@
                 return;
             } else if (!passwordPattern.test(pwValue)) {
                 $pwInput.style.borderColor = 'red';
-                document.getElementById('pwChk').innerHTML = '<b style="color: red;">특수문자 포함 8자 이상 입력해주세요</b>';
+                document.getElementById('pwChk').innerHTML = '<b style="color: red;">영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</b>';
                 checkResultList[1] = false;
                 return;
             } else {

@@ -81,7 +81,7 @@ public class BoardContoller {
 
         String locationTag = "#" + weatherDTO.getArea1()+ weatherDTO.getArea2();
 
-        String weatherTag = "#최고" + maxTemperature + "º최저" + minTemperature + "º";
+        String weatherTag = "#최고" + maxTemperature + "최저" + minTemperature;
 
         BoardWriteDTO dto =BoardWriteDTO.builder()
                 .nickname(nickname)

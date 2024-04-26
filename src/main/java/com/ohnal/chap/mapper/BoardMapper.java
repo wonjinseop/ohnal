@@ -63,9 +63,12 @@ public interface BoardMapper {
 
     // 좋아요 취소
     void deleteLike(BoardLikeRequestDTO dto);
-    
-    
+
+
     void deleteReply(int rno);
-    
+
     boolean findReply(BoardReplyDeleteRequestDTO dto);
+
+
+    List<Board> findBestOOTD(String email);
 }

@@ -38,6 +38,7 @@ public class SnsLoginService {
         String accessToken = getKakaoAccessToken(params);
 
         KakaoUserResponseDTO dto = getKakaoUserInfo(accessToken);
+        log.info(dto.toString());
 
         String email = dto.getAccount().getEmail();
         log.info("사용자의 이메일 : {}", email);

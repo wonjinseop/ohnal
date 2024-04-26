@@ -94,6 +94,7 @@
 }
 
 .board-del-btn {
+    width: 80px;
     background: none;
     opacity: 0;
 }
@@ -209,15 +210,6 @@
 }
 
 /*  페이지스타일  */
-
-
-
-
-
-
-
-
-
 
 
 

@@ -34,7 +34,7 @@
 
     <update id="saveAutoLogin">
         UPDATE tbl_member
-        SET session_id= ${sessionId},limit_time = #{limitTime}
+        SET session_id= #{sessionId},limit_time = #{limitTime}
         WHERE email = #{email}
     </update>
 

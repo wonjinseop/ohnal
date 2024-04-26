@@ -148,6 +148,17 @@ public class BoardService {
 
 
 
+    public List<BoardListResponseDTO> findBestOOTD(String email) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = mapper.findBestOOTD(email);
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
+    }
+
     public List<BoardListResponseDTO> findMyLikePosts(String email) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
@@ -164,14 +175,11 @@ public class BoardService {
         return dtoList;
     }
 
-
-    
+  
     public void deleteReply(int rno, int bno) {
         mapper.deleteReply(rno);
         mapper.updateCount(bno, "replyDelete");
     }
-
-
 
     public boolean findReply(BoardReplyDeleteRequestDTO dto) { return mapper.findReply(dto); }
 
@@ -190,4 +198,5 @@ public class BoardService {
     // 내가 작성한 댓글 수와 내가 작성한 댓글 수를 가지고 있는 게시물의 수가 다른 이슈로
     // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
     // public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }
+
 }

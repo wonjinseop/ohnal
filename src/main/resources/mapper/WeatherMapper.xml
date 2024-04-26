@@ -6,9 +6,9 @@
 
     <select id="getCode" resultType="map">
         SELECT
-        nx, ny
+        *
         FROM location
-        WHERE area1 = #{area1}
+        WHERE area1 LIKE CONCAT('%', #{area1}, '%')
         AND area2 LIKE CONCAT('%', #{area2}, '%')
         LIMIT 0, 1
     </select>
