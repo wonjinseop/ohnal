@@ -4,15 +4,19 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'TAEBAEKmilkyway';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+ }
 
-m * {
+
+m*{
   box-sizing: border-box;
-}
-
-body {
-  background: black;
   font-family: 'GangwonEdu_OTFBoldA';
 }
+
 
 button {
   outline: none;
@@ -28,9 +32,10 @@ button {
 
 /* reset */
 a {
-  color: inherit;
+  color: black;
   text-decoration: none;
 }
+
 
 
 /* common style */
@@ -46,6 +51,7 @@ header {
   top: 0;
   z-index: 1000;
 }
+
 
 
 
@@ -126,33 +132,37 @@ header .inner-header .menu-open {
 
 
 header .inner-header .menu-open .lnr-menu {
-  color: #12e6fc;
+  color: #878981;
   font-size: 40px;
   font-weight: bold;
+  box-shadow: 0 0 1px rgb(70 70 68), 0 0 4px rgb(4, 18, 19);
 }
 
 /* header gnb style */
 header .gnb {
-  background: #12e6fc;
-  color: #000000;
-  width: 400px;
-  height: 100vh;
-  font-size: 25px;
-  padding-top: 110px;
-  box-sizing: border-box;
-
-  position: fixed;
-  z-index: 2000;
-  right: -100%;
-  top: 0;
-  transition: .6s;
-
-  display: flex;
-  flex-direction: row-reverse;
+  font-family: 'TAEBAEKmilkyway';
+    background: #c9fbd9;
+    color: #c8ced3;
+    width: 400px;
+    height: 50%;
+    font-size: 25px;
+    padding-top: 110px;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 2000;
+    right: 0;
+    top: -100%;
+    transition: .6s;
+    display: flex;
+    flex-direction: row-reverse;
+    opacity: 0.9;
+    font-weight: bold;
 }
 header .gnb.on {
-  right: 0;
+  top: 0;
 }
+
+ 
 
 header .gnb .close {
   display: block;
@@ -167,9 +177,13 @@ header .gnb ul {
 }
 header .gnb ul li {
   line-height: 1.7;
+  margin-bottom: 60px;
 }
 
-header .gnb ul li.active
-{
+header .gnb ul li.active{
   color: #ffffff;
+}
+
+.linkcolor li a:hover {
+color: #d92bca;
 }

@@ -29,7 +29,7 @@
     
     .cat {
         width: 100%;
-    height: 905px;
+        height: 1022px;
     }
     .container{
         float: left;
@@ -44,15 +44,24 @@
     .alink {
      float: left;
     position: relative;
-    left: 94px;
-    top: 105px;
+    left: 171px;
+    top: 140px;
     text-decoration: none;
     letter-spacing: -1px;
     font-family: 'WagleWagle';
     font-size: 81px;
     color: cornsilk;
+    animation: shine 0.4s infinite alternate;
 
 }
+@keyframes shine {
+            from {
+                text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            }
+            to {
+                text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 8px rgba(255, 255, 255, 0.8);
+            }
+        }
     
     
         </style>
@@ -60,7 +69,7 @@
     
 </head>
 <body>
-    <div class="catbox"><img src="./cat.jpg" alt="cat" class="cat"></div>
+    <div class="catbox"><img src="/assets/img/cat.jpg" alt="cat" class="cat"></div>
    <div class="container">
     <p class="text">I'm Sorry! <br> 다시 한번 시도해주세요</p>
     <a href="http://localhost:8282/index" class="alink">메인페이지 이동</a>
