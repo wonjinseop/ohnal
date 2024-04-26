@@ -225,10 +225,10 @@
                                 <div class="write-wrapper">
                                     <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
                                     <input name="email" class="email" value="${login.email}" hidden></input>
-                                    <c:if test="${login != null}">
+                                    <c:if test="${login != ''}">
                                         <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
                                     </c:if>
-                                    <c:if test="${login == null}">
+                                    <c:if test="${login == ''}">
                                         <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다." readonly></input>
                                     </c:if>
                                     <button class="write-send" type="button">등록</button>

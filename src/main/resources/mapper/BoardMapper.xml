@@ -224,4 +224,20 @@
     <!--        IN (SELECT board_no FROM tbl_reply WHERE email = #{email})-->
     <!--    </select>-->
 
+    <delete id="deleteReplyToBno">
+        DELETE FROM tbl_reply
+        WHERE board_no = #{bno}
+    </delete>
+
+    <delete id="deleteLikeToBno">
+        DELETE FROM tbl_like
+        WHERE board_no = #{bno}
+    </delete>
+
+    <update id="modifyReply">
+        UPDATE tbl_reply
+        SET content = #{content}
+        WHERE reply_no = #{rno}
+    </update>
+
 </mapper>
