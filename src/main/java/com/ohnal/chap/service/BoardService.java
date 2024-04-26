@@ -102,10 +102,7 @@ public class BoardService {
         return dtoList;
     }
 
-    // my-history에서 내가 작성한 게시물 총 갯수를 가져오는 메서드
-    public int getMyPostsCount(String email) {
-        return mapper.getMyPostsCount(email);
-    }
+
 
     // 글 삭제
     public void delete(int bno) {
@@ -149,12 +146,17 @@ public class BoardService {
 
     }
 
-    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드에 사용되는
-    // 내가 작성한 댓글을 가진 게시판에 올라간 게시물의 총 개수를 가져오는 메서드
-    // 내가 작성한 댓글 수와 내가 작성한 댓글 수를 가지고 있는 게시물의 수가 다른 이슈로
-    // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
-    public int getMyCommentsCount(String email) {
-        return mapper.getMyCommentsCount(email);
+
+
+    public List<BoardListResponseDTO> findBestOOTD(String email) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+        List<Board> boardList = mapper.findBestOOTD(email);
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 
     public List<BoardListResponseDTO> findMyLikePosts(String email) {
@@ -173,18 +175,28 @@ public class BoardService {
         return dtoList;
     }
 
-    public int getMyLikeCount(String email) {
-        return mapper.getMyLikeCount(email);
-    }
-    
+  
     public void deleteReply(int rno, int bno) {
         mapper.deleteReply(rno);
         mapper.updateCount(bno, "replyDelete");
     }
-    
-    public boolean findReply(BoardReplyDeleteRequestDTO dto) {
-        
-        return mapper.findReply(dto);
-        
-    }
+
+    public boolean findReply(BoardReplyDeleteRequestDTO dto) { return mapper.findReply(dto); }
+
+
+
+    //----------------- 컬렉션 size() 로 게시물 총 갯수 구하기로 정함 -----------------
+
+    // public int getMyLikeCount(String email) { return mapper.getMyLikeCount(email); }
+
+    // my-history에서 내가 작성한 게시물 총 갯수를 가져오는 메서드
+    // public int getMyPostsCount(String email) { return mapper.getMyPostsCount(email); }
+
+
+    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드에 사용되는
+    // 내가 작성한 댓글을 가진 게시판에 올라간 게시물의 총 개수를 가져오는 메서드
+    // 내가 작성한 댓글 수와 내가 작성한 댓글 수를 가지고 있는 게시물의 수가 다른 이슈로
+    // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
+    // public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }
+
 }

@@ -1,6 +1,5 @@
 package com.ohnal.chap.controller;
 
-import com.mysql.cj.Session;
 import com.ohnal.chap.common.PageMaker;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
@@ -82,7 +81,7 @@ public class BoardContoller {
 
         String locationTag = "#" + weatherDTO.getArea1()+ weatherDTO.getArea2();
 
-        String weatherTag = "#최고" + maxTemperature + "º최저" + minTemperature + "º";
+        String weatherTag = "#최고" + maxTemperature + "최저" + minTemperature;
 
         BoardWriteDTO dto =BoardWriteDTO.builder()
                 .nickname(nickname)
@@ -145,10 +144,12 @@ public class BoardContoller {
 
     // 게시물 자세히 보기
     @GetMapping("/delete/{bno}")
-    public void delete(@PathVariable int bno) {
+    public ResponseEntity<?> delete(@PathVariable int bno) {
         log.info("delete: {}", bno);
 
         boardService.delete(bno);
+
+        return ResponseEntity.ok().body("success");
     }
 
     // 좋아요 기능

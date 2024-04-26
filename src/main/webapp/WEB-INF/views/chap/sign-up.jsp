@@ -10,10 +10,9 @@
 
 </head>
 
+<body>
 <%@include file="../include/header.jsp"%>
 
-<body>
- 
   <div class="container">
 
     <form action="/members/sign-up" name="signup" id="signUpForm" method="post" enctype="multipart/form-data">
@@ -45,7 +44,7 @@
 
             <div class="form-pw" id="fpw">
               <p class="font"><strong>비밀번호를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;</p>
-              <input type="password" id="pw" name="password" placeholder=" 영문과 특수문자를 포함한 8자를 입력해주세요" maxlength="20"
+              <input type="password" id="pw" name="password" placeholder=" 영문, 숫자, 특수문자를 포함한 8자 이상의 비밀번호를 입력해주세요" maxlength="20"
                 required="required" aria-required="true" class="input">
               <span id="pwChk"></span>
             </div>
@@ -90,8 +89,8 @@
       </div>
     </form>
   </div>
-  
-  
+
+
 
   <%@include file="../include/footer.jsp"%>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -193,7 +192,7 @@
         return;
       } else if (!passwordPattern.test(pwValue)) {
         $pwInput.style.borderColor = 'red';
-        document.getElementById('pwChk').innerHTML = '<b style="color: red;">특수문자 포함 8자 이상 입력해주세요</b>';
+        document.getElementById('pwChk').innerHTML = '<b style="color: red;">영문, 숫자, 특수문자 포함 8자 이상 입력해주세요</b>';
         checkResultList[1] = false;
         return;
       } else {
@@ -308,7 +307,7 @@
        document.getElementById('gender').value = 'F';
       checkResultList[4] = true;
       $femaleButton.style.color = "#ffffff";
-      
+
     });
 
 

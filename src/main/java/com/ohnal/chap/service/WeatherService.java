@@ -39,10 +39,14 @@ public class WeatherService {
         int sky = 0; // 현재 하늘 상태
 
 
-        // nx(map의 키가 컬럼값) nx의 value가 map의 value다.
-        Map<String, Integer> map = mapper.getCode(area1, area2);
-        log.info("좌표 결과: {}", map);
-
+        // map의 키가 컬럼값임. nx의 value가 map의 value다.
+        Map<String, Object> map = mapper.getCode(area1, area2);
+        log.info("map에 담긴 값 {}", map);
+        String newArea1 = map.get("area1").toString();
+        String newArea2 = map.get("area2").toString();
+        log.info("new Area1: {}", newArea1);
+        log.info("new Area2: {}", newArea2);
+        
         try {
 
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"); /*URL*/
@@ -138,14 +142,14 @@ public class WeatherService {
 
             String clothesInfo = mapClothes(tmx, tmn); // 옷 정보 담기
             String weatherIcon = mapIcon(sky, pty, now); // sky(현재 하늘 상태), pty(현재 강수 형태) 기반으로 Icon 담기
-            if(area2.length() >= 5) { // area2 지역명 띄어쓰기가 필요한 경우 공백 삽입하기 예) 청주시 상당구
-                area2 = area2.substring(0,3) + " " + area2.substring(3);
+            if(newArea2.length() >= 5) { // area2 지역명 띄어쓰기가 필요한 경우 공백 삽입하기 예) 청주시 상당구
+                newArea2 = newArea2.substring(0,3) + " " + newArea2.substring(3);
             }
 
             return WeatherInfoResponseDTO
                     .builder()
-                    .area1(area1)
-                    .area2(area2)
+                    .area1(newArea1)
+                    .area2(newArea2)
                     .comment(clothesInfo)
                     .maxTemperature(tmx)
                     .minTemperature(tmn)

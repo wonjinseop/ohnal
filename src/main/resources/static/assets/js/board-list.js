@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // card-container /card-wrapper/ data-bno="${b.boardNo}
 //게시물 클릭시 modal창 열리는 이벤트 발생, 클릭한 게시물 내용 모달창에 넣는 기능
-
 const $cardContainer = document.querySelector('.card-container');
 
 $cardContainer.onclick = e => {
 
+  const $cardWrapper = e.target.closest('.card-wrapper');
   const $card = e.target.closest('.select-card');
   if ($card) {
     const $email = $card.dataset.email;
@@ -53,11 +53,15 @@ $cardContainer.onclick = e => {
 
       if (e.target.matches('button')) {
         console.log("button click!");
+        if (!confirm("정말 삭제하시겠습니까?")) {
+          return;
+        }
 
         // 글 삭제
         fetch('/board/delete/' + bno)
-          .then(() => {
-            document.getElementById('submitBtn').click();
+          .then(res => {
+            console.log(res);
+            $cardWrapper.style.display = 'none';
           });
       } else {
 
@@ -85,10 +89,10 @@ $cardContainer.onclick = e => {
             document.body.style.overflow = 'hidden';
 
           });
+          
+                document.getElementById('modalBtn').click();
+                fetchGetReplies(bno);
       }
-
-      document.getElementById('modalBtn').click();
-      fetchGetReplies(bno);
 
     };
 
@@ -320,24 +324,6 @@ function like(email, bno) {
 
 //bno /  email nick prof reply-content reply-num regdate
 //댓글 내용 불러오는 함수
-
-/* <div class="reply-wrapper">
-  <span class="card-account">test3</span>
-  <p class="reply">
-      일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게
-      좋아일교차가 클일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를 가볍게 걸치는 게 좋아일교차가 클 땐 아우터를
-  </p>
-  <!-- <input type="text" hidden> -->
-</div>
-
-<div class="reply-data">
-  <span>시간영역</span>
-  <button id="comments-modify">수정
-  </button>
-  <button>삭제</button>
-</div> */
-
-
 function fetchGetReplies(bno) {
   console.log('응답');
   const URL = '/board/reply/';
@@ -391,16 +377,9 @@ function renderReplies(replyList) {
   } else {
     tag += "<div id='replyContent' class='card-body'>댓글이 아직 없습니다! ㅠㅠ</div>";
   }
-
-  // var btn = document.getElementById("like")
-
-  //   btn.addEventListener('click',function(){
-  //             btn.classList.toggle('active')
-  //     })
-
   $replyWrapper.innerHTML = tag;
 
-};
+}
 
 
 const $keyword = document.getElementById('keyword');

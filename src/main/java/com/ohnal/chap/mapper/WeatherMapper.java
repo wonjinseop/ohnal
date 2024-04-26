@@ -7,5 +7,5 @@ import java.util.Map;
 
 @Mapper
 public interface WeatherMapper {
-    Map<String, Integer> getCode(@Param("area1") String area1, @Param("area2") String area2);
+    Map<String, Object> getCode(@Param("area1") String area1, @Param("area2") String area2);
 }
