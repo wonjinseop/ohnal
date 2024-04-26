@@ -28,8 +28,8 @@ public interface BoardMapper {
 
     void replySave(Reply reply);
 
-    List<Board> findMyLikePosts(String email);
-    int getMyLikeCount(String email);
+
+
 
     // 글 삭제
     void delete(int bno);
@@ -56,6 +56,7 @@ public interface BoardMapper {
     // my-history 에서 내가 쓴 글을 조회하는 sql문과 연결되어 있음
     List<Board> findAllByEmail(@Param("email")String email,@Param("page")Page page);
     List<Board> findMyComments(@Param("email")String email,@Param("page")Page page);
-    List<Board> myWriteReply(@Param("email")String email,@Param("page")Page page);
+
+    List<Board> findMyLikePosts(@Param("email")String email,@Param("page")Page page);
 
 }

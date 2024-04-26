@@ -123,7 +123,7 @@ public class BoardService {
     public List<BoardListResponseDTO> findMyLikePosts(String email, Page page) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
-        List<Board> boardList = mapper.findAllByEmail(email, page);
+        List<Board> boardList = mapper.findMyLikePosts(email, page);
 
         log.info("boardList: {}", boardList);
 
@@ -162,6 +162,22 @@ public class BoardService {
 
     public boolean findReply(BoardReplyDeleteRequestDTO dto) {
         return mapper.findReply(dto);
+    }
+
+    public List<BoardListResponseDTO> findAllByEmail(String email, Page page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        List<Board> boardList = mapper.findAllByEmail(email, page);
+
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        log.info("내가 작성한 댓글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
     }
 }
 

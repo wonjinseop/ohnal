@@ -125,12 +125,15 @@
     <!-- my-history 에서 내가 쓴 댓글 목록(작성 댓글 버튼 눌렀을 때) 조회시
     사용되는 sql문 (내가 쓴 댓글의 게시물의 목록을 모두 조회한다. -->
     <select id="findMyComments" resultType="board">
-        SELECT A.*, B.profile_image
+        SELECT
+        A.*, B.profile_image, C.like_no, C.like_email
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
-        WHERE board_no
-        IN (SELECT board_no FROM tbl_reply WHERE email = #{email})
+        LEFT OUTER JOIN tbl_like C
+        ON A.board_no = C.board_no AND C.like_email = #{email}
+        WHERE A.board_no IN (SELECT board_no
+        FROM tbl_reply WHERE like_email = #{email})
         LIMIT #{page.pageStart}, #{page.amount}
     </select>
 
