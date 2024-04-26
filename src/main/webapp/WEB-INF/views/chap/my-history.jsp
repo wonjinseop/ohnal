@@ -120,41 +120,43 @@
         <!-- 게시글 목록 하단 영역 -->
         <div class="bottom-section">
 
-            <!-- 페이지 버튼 영역 -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-lg pagination-custom">
-                    <c:if test="${maker.page.pageNo != 1}">
-                        <li class="page-item"><a class="page-link"
-                                href="/member/my-history?pageNo=1&amount=${s.amount}">&lt;&lt;</a>
-                        </li>
-                    </c:if>
+            <c:if test="${myPosts.size() != 0}">
+                <!-- 페이지 버튼 영역 -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg pagination-custom">
+                        <c:if test="${maker.page.pageNo != 1}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=1&amount=${s.amount}">&lt;&lt;</a>
+                            </li>
+                        </c:if>
 
-                    <c:if test="${maker.prev}">
-                        <li class="page-item"><a class="page-link"
-                                href="/member/my-history?pageNo=${maker.begin-1}&amount=${s.amount}">prev</a>
-                        </li>
-                    </c:if>
+                        <c:if test="${maker.prev}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=${maker.begin-1}&amount=${s.amount}">prev</a>
+                            </li>
+                        </c:if>
 
-                    <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                        <li data-page-num="${i}" class="page-item">
-                            <a class="page-link" href="/member/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
-                        </li>
-                    </c:forEach>
+                        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                            <li data-page-num="${i}" class="page-item">
+                                <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                            </li>
+                        </c:forEach>
 
-                    <c:if test="${maker.next}">
-                        <li class="page-item"><a class="page-link"
-                                href="/member/my-history?pageNo=${maker.end+1}&amount=${s.amount}">next</a>
-                        </li>
-                    </c:if>
+                        <c:if test="${maker.next}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=${maker.end+1}&amount=${s.amount}">next</a>
+                            </li>
+                        </c:if>
 
-                    <c:if test="${maker.page.pageNo != maker.finalPage}">
-                        <li class="page-item"><a class="page-link"
-                                href="/board/list?pageNo=${maker.finalPage}&amount=${s.amount}">&gt;&gt;</a>
-                        </li>
-                    </c:if>
+                        <c:if test="${maker.page.pageNo != maker.finalPage}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=${maker.finalPage}&amount=${s.amount}">&gt;&gt;</a>
+                            </li>
+                        </c:if>
 
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </c:if>
 
 
 

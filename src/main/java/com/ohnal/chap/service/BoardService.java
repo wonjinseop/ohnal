@@ -1,4 +1,5 @@
 package com.ohnal.chap.service;
+
 import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.controller.ReplyPostRequestDTO;
@@ -90,7 +91,7 @@ public class BoardService {
         mapper.delete(bno);
         mapper.deleteReplyToBno(bno);
         mapper.deleteLikeToBno(bno);
-        
+
     }
 
     // 게시글에 이용자가 좋아요를 누른적이 있는지 확인하는 기능
@@ -182,14 +183,11 @@ public class BoardService {
         return dtoList;
     }
 
-
-  
-    public void deleteReply(int rno, int bno) {
-        mapper.deleteReply(rno);
-        mapper.updateCount(bno, "replyDelete");
+    public void modifyReply(BoardReplyModifyRequestDTO dto) {
+        mapper.modifyReply(dto);
     }
 
-
+}
 
 //----------------- 컬렉션 size() 로 게시물 총 갯수 구하기로 정함 -----------------
 
@@ -205,12 +203,4 @@ public class BoardService {
 // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
 // public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }
 
-public boolean findReply(BoardReplyDeleteRequestDTO dto) {
 
-    return mapper.findReply(dto);
-
-}
-
-public void modifyReply(BoardReplyModifyRequestDTO dto) {
-    mapper.modifyReply(dto);
-}
