@@ -1,4 +1,4 @@
-package com.ohnal.chap.dto.response;
+package com.ohnal.chap.dto;
 
 import lombok.*;
 
