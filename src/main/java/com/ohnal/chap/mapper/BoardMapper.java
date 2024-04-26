@@ -4,6 +4,7 @@ import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardReplyDeleteRequestDTO;
+import com.ohnal.chap.dto.request.BoardReplyModifyRequestDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
 import org.apache.ibatis.annotations.Mapper;
@@ -68,6 +69,12 @@ public interface BoardMapper {
     void deleteReply(int rno);
 
     boolean findReply(BoardReplyDeleteRequestDTO dto);
+    
+    void deleteReplyToBno(int bno);
+    
+    void deleteLikeToBno(int bno);
+    
+    void modifyReply(BoardReplyModifyRequestDTO dto);
 
 
     List<Board> findBestOOTD(String email);

@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // card-container /card-wrapper/ data-bno="${b.boardNo}
 //게시물 클릭시 modal창 열리는 이벤트 발생, 클릭한 게시물 내용 모달창에 넣는 기능
 const $cardContainer = document.querySelector('.card-container');
-
 $cardContainer.onclick = e => {
 
   const $cardWrapper = e.target.closest('.card-wrapper');
@@ -89,13 +88,14 @@ $cardContainer.onclick = e => {
             document.body.style.overflow = 'hidden';
 
           });
-          
+
                 document.getElementById('modalBtn').click();
                 fetchGetReplies(bno);
       }
 
     };
 
+    // 좋아요 기능
     document.querySelector('.modal .heart').onclick = e => {
       const $likeEmail = e.target.dataset.email;
       const $liked = e.target;
@@ -104,7 +104,7 @@ $cardContainer.onclick = e => {
       } else {
         detailToggleHeart($likeEmail, $liked, $likeImg, bno);
       }
-      
+
     }
 
   };
@@ -116,12 +116,14 @@ $cardContainer.onclick = e => {
 
 // 모달창 이벤트
 const $modal = document.querySelector('.modal');
-const $modalCard = document.querySelector('.modal-wrapper-card-2');
+const $replys = document.querySelector('.replys');
 console.log($modal);
-$modalCard.onclick = e => {
+$replys.onclick = e => {
   const bno = $modal.querySelector('.card').dataset.bno;
   console.log(bno);
   const $reply = e.target.closest('.reply');
+
+  // 댓글 선택시 이벤트 발생
   if ($reply) {
     const replyNo = $reply.dataset.replyNo;
 
@@ -130,12 +132,12 @@ $modalCard.onclick = e => {
     console.log($email);
 
     const select = $reply.querySelector('.reply-data');
-    const $deleteBtn = select.querySelector('.reply-delete');
-    console.log($deleteBtn);
     console.log(select);
+    // 댓글 삭제 이벤트
     if (e.target.matches('.reply-delete')) {
       if ($email !== '') {
         if ($reply.querySelector('.card-account').dataset.email == $email) {
+
           const payLoad = {
             bno: bno,
             rno: replyNo,
@@ -161,26 +163,97 @@ $modalCard.onclick = e => {
       } else {
         alert("로그인 후 이용 가능합니다.")
       }
+
+      // 댓글 수정 이벤트
+    } else if (e.target.matches('.reply-modify')) {
+      document.removeEventListener('keydown', handleEnterKeyPress);
+      const $modBtn = $reply.querySelector('.mod-btn');
+      console.log($modBtn);
+      const $replyContent = $reply.querySelector('.reply-content');
+      const $replyMod = $reply.querySelector('.reply-mod');
+
+
+      if ($email !== '') {
+
+        if ($reply.querySelector('.card-account').dataset.email == $email) {
+          // 엔터 키가 눌렸을 때 이벤트 리스너 추가
+          document.addEventListener('keydown', handleModEnterKeyPress);
+          $replyMod.classList.toggle('toggle');
+          $replyMod.focus();
+          $modBtn.onclick = () => {
+            $replyContent.textContent = $replyMod.value
+            const content = $replyMod.value;
+            console.log($replyMod.value);
+            $replyMod.setAttribute('placeholder', content)
+            $replyMod.value = '';
+
+            console.log("modBtn 클릭!");
+            const payLoad = {
+              rno: replyNo,
+              content: content
+            };
+
+            const requestInfo = {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(payLoad)
+            };
+
+            // 댓글 수정
+            fetch("/board/reply/update", requestInfo)
+              .then(res => {
+                console.log(res)
+                $replyMod.classList.toggle('toggle');
+                document.removeEventListener('keydown', handleModEnterKeyPress);
+              });
+
+
+          }
+        } else {
+          alert("본인 글만 수정이 가능합니다.")
+        };
+      } else {
+        alert("로그인 후 이용 가능합니다.")
+      }
+
+      function handleModEnterKeyPress(event) {
+        if (event.key === 'Enter') {
+          // submitButton을 클릭합니다.
+          $modBtn.click();
+        }
+      }
     }
 
 
   }
 
 
-
 }
+
+
+
+
+
+
+
 
 const $replyWrite = document.querySelector('.write-reply');
 
-if ($replyWrite) {
-  const $submitButton = document.querySelector('.write-send');
-  const email = document.querySelector('.email').value;
+const $submitButton = document.querySelector('.write-send');
+const email = document.querySelector('.email').value;
 
-  // 버튼 요소 선택
+// 버튼 요소 선택
+if (email == '') {
   $replyWrite.onclick = () => {
-    if (email == '') {
-      alert("로그인 후 이용 가능합니다.");
-    }
+    alert("로그인 후 이용 가능합니다.");
+  }
+} else {
+
+  $replyWrite.onclick = () => {
+    // 엔터 키가 눌렸을 때 이벤트 리스너 추가
+    document.addEventListener('keydown', handleEnterKeyPress);
   }
 
 
@@ -196,71 +269,71 @@ if ($replyWrite) {
 
     console.log(boardNo);
     console.log(inputField.value);
-    
-      // 사용자 입력자 검증
-      if (inputField.value.trim() === '') {
-        alert('댓글 내용은 필수값입니다!!');
-        return;
-      };
 
-      console.log(email);
-      console.log(nickname);
+    // 사용자 입력자 검증
+    if (inputField.value.trim() === '') {
+      alert('댓글 내용은 필수값입니다!!');
+      return;
+    };
 
-      const payLoad = {
-        text: inputField.value.trim(),
-        bno: boardNo,
-        nickname: nickname,
-        email: email
-      };
+    console.log(email);
+    console.log(nickname);
 
-      // 요청 방식 및 데이터를 전달할 정보 객체 만들기 (POST)
-      const requestInfo = {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(payLoad) // js 객체를 JSON으로 변환해서 body에 추가
-      };
+    const payLoad = {
+      text: inputField.value.trim(),
+      bno: boardNo,
+      nickname: nickname,
+      email: email
+    };
 
-      // 서버에 POST 요청 보내기
-      fetch(URL, requestInfo)
-        .then(res => {
-          console.log(res.status);
+    // 요청 방식 및 데이터를 전달할 정보 객체 만들기 (POST)
+    const requestInfo = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(payLoad) // js 객체를 JSON으로 변환해서 body에 추가
+    };
 
-          if (res.status === 200) {
-            return res.text();
-          } else {
-            alert('입력값에 문제가 있습니다! 입력값을 다시 확인해 보세요!');
-            return res.text();
-          };
+    // 서버에 POST 요청 보내기
+    fetch(URL, requestInfo)
+      .then(res => {
 
-        })
-        .then(() => {
-          // 입력 필드의 값 비우기
-          inputField.value = '';
+        if (res.status === 200) {
+          return res.text();
+        } else {
+          alert('입력값에 문제가 있습니다! 입력값을 다시 확인해 보세요!');
+          return res.text();
+        };
 
-          // 댓글 목록 비동기 요청
-          fetchGetReplies(boardNo);
+      })
+      .then(() => {
+        // 입력 필드의 값 비우기
+        inputField.value = '';
 
-        });
+        // 댓글 목록 비동기 요청
+        fetchGetReplies(boardNo);
+      });
   });
-
-  function handleEnterKeyPress(event) {
-    if (event.key === 'Enter') {
-      // submitButton을 클릭합니다.
-      $submitButton.click();
-    }
-  }
-
-  // 엔터 키가 눌렸을 때 이벤트 리스너 추가
-  document.addEventListener('keydown', handleEnterKeyPress);
 
 }
 
+
+
+
+function handleEnterKeyPress(event) {
+  if (event.key === 'Enter') {
+    // submitButton을 클릭합니다.
+    $submitButton.click();
+  }
+}
+
+
+
+
+// 게시판에서 좋아요 기능
 function toggleHeart(likeEmail, $like, bno) {
   like(likeEmail, bno);
-  console.log(likeEmail);
-  console.log($like);
   if (likeEmail !== '') {
     const likeIcon = $like.querySelector('img');
     if (likeIcon.getAttribute('src').endsWith('fill-heart.svg')) {
@@ -272,10 +345,9 @@ function toggleHeart(likeEmail, $like, bno) {
   };
 }
 
+// 게시물 자세히 보기때 좋아요 기능
 function detailToggleHeart(likeEmail, $like, likeImg, bno) {
   like(likeEmail, bno);
-  console.log(likeEmail);
-  console.log($like);
   if (likeEmail !== '') {
     if ($like.getAttribute('src').endsWith('fill-heart.svg')) {
       $like.setAttribute('src', '/assets/img/heart.svg');
@@ -297,8 +369,6 @@ function like(email, bno) {
     bno: bno
   };
 
-  console.log(payLoad);
-
   const requestInfo = {
     method: 'POST',
     headers: {
@@ -312,20 +382,8 @@ function like(email, bno) {
 
 };
 
-
-
-
-
-
-
-
-
-
-
-//bno /  email nick prof reply-content reply-num regdate
 //댓글 내용 불러오는 함수
 function fetchGetReplies(bno) {
-  console.log('응답');
   const URL = '/board/reply/';
   fetch(URL + bno)
     .then(res => res.json())
@@ -353,15 +411,15 @@ function renderReplies(replyList) {
         profileImage,
         nickname,
         time
-      } = reply
-      console.log(profileImage);
+      } = reply;
       tag += `
         <div class="reply" data-reply-no="${replyNo}">
           <span class='card-account' data-email='${email}'><img src='${profileImage}' class='profile-img'>${nickname}</span>
           <p class='reply-content'>
               ${content}
           </p>
-          <input type='text' placeholder='${content}' hidden>
+          <input class='reply-mod toggle' type='text' placeholder='${content}'>
+          <button class='mod-btn' type='button' hidden></button>
 
 
           <div class='reply-data'>
@@ -385,7 +443,6 @@ function renderReplies(replyList) {
 const $keyword = document.getElementById('keyword');
 
 $keyword.addEventListener('change', e => {
-  console.log(e.target.value);
   document.getElementById('submitBtn').click();
 });
 

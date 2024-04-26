@@ -146,7 +146,7 @@
     };
 
     // login 사용자의 주소 정보가 있을 시 작동하는 코드
-    if (${login.address != ''} && ${login.address != null}) {
+    if (`${login.address != ''}` && `${login.address != null}`) {
       console.log('사용자의 주소 정보가 있습니다. 주소 정보로 기본 세팅합니다.');
 
       // 사용자가 설정한 주소를 기본값으로 설정하는 세팅

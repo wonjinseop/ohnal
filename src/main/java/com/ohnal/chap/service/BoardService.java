@@ -4,9 +4,10 @@ import com.ohnal.chap.common.Search;
 import com.ohnal.chap.controller.ReplyPostRequestDTO;
 import com.ohnal.chap.dto.request.BoardLikeRequestDTO;
 import com.ohnal.chap.dto.request.BoardReplyDeleteRequestDTO;
+import com.ohnal.chap.dto.request.BoardReplyModifyRequestDTO;
 import com.ohnal.chap.dto.response.BoardListResponseDTO;
 import com.ohnal.chap.dto.response.BoardReplyResponseDTO;
-import com.ohnal.chap.dto.response.BoardWriteDTO;
+import com.ohnal.chap.dto.BoardWriteDTO;
 import com.ohnal.chap.entity.Board;
 import com.ohnal.chap.entity.Reply;
 import com.ohnal.chap.mapper.BoardMapper;
@@ -108,7 +109,9 @@ public class BoardService {
     public void delete(int bno) {
 
         mapper.delete(bno);
-
+        mapper.deleteReplyToBno(bno);
+        mapper.deleteLikeToBno(bno);
+        
     }
 
     // 게시글에 이용자가 좋아요를 누른적이 있는지 확인하는 기능
@@ -181,8 +184,6 @@ public class BoardService {
         mapper.updateCount(bno, "replyDelete");
     }
 
-    public boolean findReply(BoardReplyDeleteRequestDTO dto) { return mapper.findReply(dto); }
-
 
 
     //----------------- 컬렉션 size() 로 게시물 총 갯수 구하기로 정함 -----------------
@@ -199,4 +200,14 @@ public class BoardService {
     // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
     // public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }
 
+    
+    public boolean findReply(BoardReplyDeleteRequestDTO dto) {
+        
+        return mapper.findReply(dto);
+        
+    }
+    
+    public void modifyReply(BoardReplyModifyRequestDTO dto) {
+        mapper.modifyReply(dto);
+    }
 }

@@ -1,7 +1,6 @@
 package com.ohnal.chap.entity;
 
-import com.ohnal.chap.dto.request.BoardWriteRequestDTO;
-import com.ohnal.chap.dto.response.BoardWriteDTO;
+import com.ohnal.chap.dto.BoardWriteDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
