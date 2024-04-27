@@ -55,8 +55,8 @@
                    
                     <c:forEach var="mp" items="${myPosts}">
           
-                        <div class="card-wrapper" data-email="${login.email}">
-                            <section class="card select-card" data-bno="${mp.boardNo}">
+                        <div class="card-wrapper">
+                            <section class="card select-card" data-bno="${mp.boardNo}" data-email="${login.email}">
                                 <div class="card-title-wrapper">
                                     <div class="profile-box">
                                         <img src="${mp.profileImage}" alt="프사">
@@ -120,41 +120,43 @@
         <!-- 게시글 목록 하단 영역 -->
         <div class="bottom-section">
 
-            <!-- 페이지 버튼 영역 -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-lg pagination-custom">
-                    <c:if test="${maker.page.pageNo != 1}">
-                        <li class="page-item"><a class="page-link"
-                                href="/member/my-history?pageNo=1&amount=${s.amount}">&lt;&lt;</a>
-                        </li>
-                    </c:if>
+            <c:if test="${myPosts.size() != 0}">
+                <!-- 페이지 버튼 영역 -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg pagination-custom">
+                        <c:if test="${maker.page.pageNo != 1}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=1&amount=${s.amount}">&lt;&lt;</a>
+                            </li>
+                        </c:if>
 
-                    <c:if test="${maker.prev}">
-                        <li class="page-item"><a class="page-link"
-                                href="/member/my-history?pageNo=${maker.begin-1}&amount=${s.amount}">prev</a>
-                        </li>
-                    </c:if>
+                        <c:if test="${maker.prev}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=${maker.begin-1}&amount=${s.amount}">prev</a>
+                            </li>
+                        </c:if>
 
-                    <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                        <li data-page-num="${i}" class="page-item">
-                            <a class="page-link" href="/member/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
-                        </li>
-                    </c:forEach>
+                        <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
+                            <li data-page-num="${i}" class="page-item">
+                                <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                            </li>
+                        </c:forEach>
 
-                    <c:if test="${maker.next}">
-                        <li class="page-item"><a class="page-link"
-                                href="/member/my-history?pageNo=${maker.end+1}&amount=${s.amount}">next</a>
-                        </li>
-                    </c:if>
+                        <c:if test="${maker.next}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=${maker.end+1}&amount=${s.amount}">next</a>
+                            </li>
+                        </c:if>
 
-                    <c:if test="${maker.page.pageNo != maker.finalPage}">
-                        <li class="page-item"><a class="page-link"
-                                href="/board/list?pageNo=${maker.finalPage}&amount=${s.amount}">&gt;&gt;</a>
-                        </li>
-                    </c:if>
+                        <c:if test="${maker.page.pageNo != maker.finalPage}">
+                            <li class="page-item"><a class="page-link"
+                                    href="/members/my-history?pageNo=${maker.finalPage}&amount=${s.amount}">&gt;&gt;</a>
+                            </li>
+                        </c:if>
 
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </c:if>
 
 
 
@@ -164,7 +166,7 @@
     <button id="modalBtn" hidden>모달 글 확대</button>
 
     <!-- 모달 컨테이너 -->
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal"  data-email="${login.email}">
         <!-- 모달 컨텐츠 -->
         <div class="modal-content">
             <div class="card-wrapper">
@@ -179,7 +181,7 @@
                         <div class="modal-wrapper-card-2">
                             <div class="card-title-wrapper">
                                 <div class="profile-box">
-                                    <img src="/assets/img/anonymous.jpg" alt="프사">
+                                    <img class="profile-image" src="" alt="프사">
                                 </div>
                                 <span class="card-account"></span>
                                 <span class="time-stamp"></span>
@@ -198,7 +200,14 @@
                             <div class="li-ha">
 
                                 <div class="like-icon">
-                                    <span class="lnr lnr-heart"></span>
+                                    <c:choose>
+                                        <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
+                                            <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                        </c:otherwise>
+                                    </c:choose>
                                     <div class="hashtag-wrapper">
                                         <span class="hashtag location"></span>
                                         <span class="hashtag weather"></span>
@@ -224,7 +233,14 @@
 
                             <form id="commentFrm" class="write-reply">
                                 <div class="write-wrapper">
-                                    <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                    <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
+                                    <input name="email" class="email" value="${login.email}" hidden></input>
+                                    <c:if test="${login != null}">
+                                        <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                    </c:if>
+                                    <c:if test="${login == null}">
+                                        <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다." readonly></input>
+                                    </c:if>
                                     <button class="write-send" type="button">등록</button>
                                 </div>
                             </form>
@@ -254,16 +270,19 @@
         if (type === '1') {
             console.log(`타입이 ${type} 입니다.`);
             btn1.classList.add('selected');
+            // btn1.style.color = 'white';
             $changeText.textContent = '게시글';
 
         } else if (type === '2') {
             console.log(`타입이 ${type} 입니다.`);
             btn2.classList.add('selected');
+            // btn2.style.color = 'white';
             $changeText.textContent = '작성 댓글';
 
         } else if (type === '3') {
             console.log(`타입이 ${type} 입니다.`);
             btn3.classList.add('selected');
+            // btn3.style.color = 'white';
             $changeText.textContent = '좋아요한 글';
         }
     </script>

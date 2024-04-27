@@ -1,4 +1,5 @@
 package com.ohnal.chap.service;
+
 import com.ohnal.chap.common.Page;
 import com.ohnal.chap.common.Search;
 import com.ohnal.chap.controller.ReplyPostRequestDTO;
@@ -84,34 +85,13 @@ public class BoardService {
         mapper.updateCount(dto.getBno(), "replies");
     }
 
-
-    //------------------my history------------------
-    // 우측 슬라이드에서 My History 메뉴 눌렀을 때
-    public List<BoardListResponseDTO> findAllByEmail(String email, Page page) {
-
-        List<BoardListResponseDTO> dtoList = new ArrayList<>();
-
-        List<Board> boardList = mapper.findAllByEmail(email, page);
-
-        log.info("boardList: {}", boardList);
-
-        for (Board board : boardList) {
-            BoardListResponseDTO dto = new BoardListResponseDTO(board);
-            dtoList.add(dto);
-        }
-        log.info("(가공한) 내가 작성한 게시물 리스트 {}", dtoList);
-        return dtoList;
-    }
-
-
-
     // 글 삭제
     public void delete(int bno) {
 
         mapper.delete(bno);
         mapper.deleteReplyToBno(bno);
         mapper.deleteLikeToBno(bno);
-        
+
     }
 
     // 게시글에 이용자가 좋아요를 누른적이 있는지 확인하는 기능
@@ -131,26 +111,7 @@ public class BoardService {
         mapper.updateCount(dto.getBno(), "likeMinus");
     }
 
-    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드 (작성 댓글 버튼 눌렀을 때)
-    public List<BoardListResponseDTO> findMyComments(String email) {
-        List<BoardListResponseDTO> dtoList = new ArrayList<>();
-
-        List<Board> boardList = mapper.findMyComments(email);
-
-        log.info("boardList: {}", boardList);
-
-        for (Board board : boardList) {
-            BoardListResponseDTO dto = new BoardListResponseDTO(board);
-            dtoList.add(dto);
-        }
-
-        log.info("내가 작성한 댓글이 작성된 게시글 목록: {}", dtoList);
-        return dtoList;
-
-    }
-
-
-
+    //  findBestOOTD
     public List<BoardListResponseDTO> findBestOOTD(String email) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
         List<Board> boardList = mapper.findBestOOTD(email);
@@ -162,10 +123,10 @@ public class BoardService {
         return dtoList;
     }
 
-    public List<BoardListResponseDTO> findMyLikePosts(String email) {
+    public List<BoardListResponseDTO> findMyLikePosts(String email, Page page) {
         List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
-        List<Board> boardList = mapper.findMyLikePosts(email);
+        List<Board> boardList = mapper.findMyLikePosts(email, page);
 
         log.info("boardList: {}", boardList);
 
@@ -178,36 +139,66 @@ public class BoardService {
         return dtoList;
     }
 
-  
+
     public void deleteReply(int rno, int bno) {
         mapper.deleteReply(rno);
         mapper.updateCount(bno, "replyDelete");
     }
 
+    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드 (작성 댓글 버튼 눌렀을 때)
+    public List<BoardListResponseDTO> findMyComments(String email, Page page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
 
+        List<Board> boardList = mapper.findMyComments(email, page);
 
-    //----------------- 컬렉션 size() 로 게시물 총 갯수 구하기로 정함 -----------------
+        log.info("boardList: {}", boardList);
 
-    // public int getMyLikeCount(String email) { return mapper.getMyLikeCount(email); }
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+        log.info("내가 작성한 댓글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
 
-    // my-history에서 내가 작성한 게시물 총 갯수를 가져오는 메서드
-    // public int getMyPostsCount(String email) { return mapper.getMyPostsCount(email); }
-
-
-    // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드에 사용되는
-    // 내가 작성한 댓글을 가진 게시판에 올라간 게시물의 총 개수를 가져오는 메서드
-    // 내가 작성한 댓글 수와 내가 작성한 댓글 수를 가지고 있는 게시물의 수가 다른 이슈로
-    // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
-    // public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }
-
-    
-    public boolean findReply(BoardReplyDeleteRequestDTO dto) {
-        
-        return mapper.findReply(dto);
-        
     }
-    
+
+
+    public boolean findReply(BoardReplyDeleteRequestDTO dto) {
+        return mapper.findReply(dto);
+    }
+
+    public List<BoardListResponseDTO> findAllByEmail(String email, Page page) {
+        List<BoardListResponseDTO> dtoList = new ArrayList<>();
+
+        List<Board> boardList = mapper.findAllByEmail(email, page);
+
+        log.info("boardList: {}", boardList);
+
+        for (Board board : boardList) {
+            BoardListResponseDTO dto = new BoardListResponseDTO(board);
+            dtoList.add(dto);
+        }
+
+        log.info("내가 작성한 댓글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
+    }
+
     public void modifyReply(BoardReplyModifyRequestDTO dto) {
         mapper.modifyReply(dto);
     }
+
 }
+
+//----------------- 컬렉션 size() 로 게시물 총 갯수 구하기로 정함 -----------------
+
+// public int getMyLikeCount(String email) { return mapper.getMyLikeCount(email); }
+
+// my-history에서 내가 작성한 게시물 총 갯수를 가져오는 메서드
+// public int getMyPostsCount(String email) { return mapper.getMyPostsCount(email); }
+
+
+// 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드에 사용되는
+// 내가 작성한 댓글을 가진 게시판에 올라간 게시물의 총 개수를 가져오는 메서드
+// 내가 작성한 댓글 수와 내가 작성한 댓글 수를 가지고 있는 게시물의 수가 다른 이슈로
+// 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
+// public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }

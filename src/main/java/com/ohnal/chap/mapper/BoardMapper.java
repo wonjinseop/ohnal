@@ -30,28 +30,7 @@ public interface BoardMapper {
     void replySave(Reply reply);
 
 
-    // ------------my-history--------------
-    // my-history 에서 내가 쓴 글을 조회하는 sql문과 연결되어 있음
-    List<Board> findAllByEmail(@Param("email")String email,@Param("page")Page page);
-    List<Board> findMyComments(String email);
 
-
-    // my-history 에서 작성한 글 버튼 누를 때, 작동하는 sql문
-    List<Board> myPosts(String email);
-    int getMyPostsCount(String email);
-
-
-
-    // my-history 에서 작성 댓글 버튼 누를 때, 작동하는 sql문
-    // --> 페이지네이션을 위해 내가 작성한 댓글을 보유한 게시물 개수를 조회하는 sql문
-    int getMyCommentsCount(String email);
-    // my-history 에서 작성 댓글 버튼 누를 때, 작동하는 sql문
-    List<Board> myWriteReply(String email);
-
-
-    // my-history 에서 좋아요한 글 버튼 누를 때, 작동하는 sql문
-    List<Board> findMyLikePosts(String email);
-    int getMyLikeCount(String email);
 
     // 글 삭제
     void delete(int bno);
@@ -78,4 +57,13 @@ public interface BoardMapper {
 
 
     List<Board> findBestOOTD(String email);
+
+
+    // ------------my-history--------------
+    // my-history 에서 내가 쓴 글을 조회하는 sql문과 연결되어 있음
+    List<Board> findAllByEmail(@Param("email")String email,@Param("page")Page page);
+    List<Board> findMyComments(@Param("email")String email,@Param("page")Page page);
+
+    List<Board> findMyLikePosts(@Param("email")String email,@Param("page")Page page);
+
 }
