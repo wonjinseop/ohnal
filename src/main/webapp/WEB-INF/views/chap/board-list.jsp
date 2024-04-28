@@ -32,7 +32,7 @@
         <a class="refresh" href="/board/list?pageNo=${maker.page.pageNo}&amount=${s.amount}&keyword=${s.keyword}" hidden></a>
 
     <!-- 카드 시작 -->
-    <div class="card-container">
+    <div class="card-container" data-auth="${login.auth}">
 
 
         <!-- 카드 복사 -->
@@ -44,7 +44,7 @@
                             <img src="${b.profileImage}" alt="프사">
                         </div>
                         <span class="card-account">${b.nickname}</span>
-                        <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button>
+                        <c:if test="${login.email == b.email || login.auth == 'ADMIN'}"><button class="board-del-btn" type="button">삭제</button>
                         </c:if>
                     </div>
 
