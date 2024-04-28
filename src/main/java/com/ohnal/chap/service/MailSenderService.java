@@ -26,7 +26,6 @@ public class MailSenderService {
 
     public String joinEmail(String email){
         int authNum= makeRandomNumber();
-        log.info("메일인증번호: {}",String.valueOf(authNum));
 
         String setFrom="ohnal2024@gmail.com";
         String toMail=email;
@@ -34,6 +33,21 @@ public class MailSenderService {
         String content = "회원가입을 신청해 주셔서 감사합니다."+
                 "<br><br><br>"+
                 "인증 번호는 <strong>"+authNum+"</strong>입니다."+
+                "인증 번호를 인증번호 확인란에 기입해 주세요.";
+
+        mailSend(setFrom,toMail,title,content);
+        return Integer.toString(authNum);
+    }
+    public String pwEmail(String email){
+        int authNum= makeRandomNumber();
+
+        String setFrom="ohnal2024@gmail.com";
+        String toMail=email;
+        String title="oh-nal 비밀번호 찾기 이메일입니다.";
+        String content =
+                "<br><br><br>"+
+                "인증 번호는 <strong>"+authNum+"</strong>입니다."+
+                        "<br>"+
                 "인증 번호를 인증번호 확인란에 기입해 주세요.";
 
         mailSend(setFrom,toMail,title,content);

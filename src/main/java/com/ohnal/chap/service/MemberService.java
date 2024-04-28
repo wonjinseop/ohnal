@@ -131,6 +131,7 @@ public class MemberService {
                 .address(foundMember.getAddress())
                 .gender(foundMember.getGender())
                 .regDate(String.valueOf(foundMember.getRegDate()))
+                .auth(foundMember.getAuth())
                 .build();
 
         // 프로필 사진 설정 여부에 따라 다른 이미지 경로 적용
@@ -191,9 +192,12 @@ public class MemberService {
 
     public void kakaoLogout(LoginUserResponseDTO dto, HttpSession session) {
 
+        log.info("kakaoLogout, session: {}", session);
         String requestUri = "https://kapi.kakao.com/v1/user/logout";
 
         String accessToken = (String) session.getAttribute("access_token");
+
+        log.info("accessToken: {}", accessToken);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
@@ -215,7 +219,7 @@ public class MemberService {
 
         // 만약 access_token의 값을 DB에 저장한 경우에는, 응답받은 id를 통해서
         // DB의 access_token의 값을 update를 때려서 null로 만들어 주시면 됩니다.
-
+        session.setAttribute("access_token", null);
     }
 
 
