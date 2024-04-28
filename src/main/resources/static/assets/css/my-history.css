@@ -181,6 +181,9 @@ body {
     /* 한 줄에 카드 4개 오는데,
     카드 3개만 margin-right 4%씩 */
     margin-right: 4%;
+
+    border: solid 1px black;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
 }
 
 .card-container .card-wrapper:nth-child(4n) {
