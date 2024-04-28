@@ -33,6 +33,8 @@
             <a href="/board/write" class="upload-btn">새 글쓰기</a>
         </div>
 
+        <a class="refresh" href="/board/list?pageNo=${maker.page.pageNo}&amount=${s.amount}&keyword=${s.keyword}" hidden></a>
+
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
             <div class="card-wrapper">

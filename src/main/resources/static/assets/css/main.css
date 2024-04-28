@@ -201,6 +201,7 @@ body{
   color: #000000;
   display: flex;
   background: #ffffff;
+  border-bottom: 1px solid lightgray;
 }
 
 .card-container .card-wrapper .card-title-wrapper .profile-box {

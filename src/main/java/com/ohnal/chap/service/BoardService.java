@@ -202,5 +202,3 @@ public class BoardService {
 // 내가 작성한 댓글 수와 내가 작성한 댓글 수를 가지고 있는 게시물의 수가 다른 이슈로
 // 내가 작성한 댓글 수를 가진 게시물을 불러오는 쪽으로 택함.
 // public int getMyCommentsCount(String email) { return mapper.getMyCommentsCount(email); }
-
-
