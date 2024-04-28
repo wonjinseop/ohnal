@@ -285,6 +285,7 @@
             // btn3.style.color = 'white';
             $changeText.textContent = '좋아요한 글';
         }
+
     </script>
 </body>
 
