@@ -517,9 +517,12 @@
     font-size: 15px;
     width: 85%;
     height: 100%;
-    border-style: none;
 
     /* border: 1px dashed; */
+}
+
+.modal-content .write-reply .write-input:focus {
+    outline-style: none;
 }
 
 .modal-content .write-reply .write-send {
@@ -540,6 +543,10 @@
 .reply-mod {
     margin-left: 8%;
     width: 92%;
+}
+
+.reply-mod:focus {
+    outline-style: none;
 }
 
 .reply-mod.toggle {

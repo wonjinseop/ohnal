@@ -48,8 +48,8 @@ public class BoardContoller {
         log.info(String.valueOf(page));
         String email = LoginUtils.getCurrentLoginMemberEmail(session);
         log.info("email: {}", email);
+        log.info("pageNo: {}", page.getPageNo());
         List<BoardListResponseDTO> dtoList = boardService.findAll(page, email);
-        log.info(dtoList.toString());
         PageMaker pageMaker = new PageMaker(page, boardService.getCount());
         model.addAttribute("bList", dtoList);
         model.addAttribute("maker", pageMaker);

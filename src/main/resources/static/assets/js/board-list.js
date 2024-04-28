@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 const $cardContainer = document.querySelector('.card-container');
 $cardContainer.onclick = e => {
 
-  const $cardWrapper = e.target.closest('.card-wrapper');
   const $card = e.target.closest('.select-card');
   if ($card) {
     const $email = $card.dataset.email;
@@ -60,12 +59,12 @@ $cardContainer.onclick = e => {
         fetch('/board/delete/' + bno)
           .then(res => {
             console.log(res);
-            $cardWrapper.style.display = 'none';
+            document.querySelector('.refresh').click();
           });
       } else {
 
         // 모달창 채워넣기
-        console.log(bno);
+        // console.log(bno);
         fetch(URL)
           .then(res => res.json())
           .then(data => {
@@ -89,8 +88,8 @@ $cardContainer.onclick = e => {
 
           });
 
-                document.getElementById('modalBtn').click();
-                fetchGetReplies(bno);
+        document.getElementById('modalBtn').click();
+        fetchGetReplies(bno);
       }
 
     };
@@ -117,10 +116,10 @@ $cardContainer.onclick = e => {
 // 모달창 이벤트
 const $modal = document.querySelector('.modal');
 const $replys = document.querySelector('.replys');
-console.log($modal);
+// console.log($modal);
 $replys.onclick = e => {
   const bno = $modal.querySelector('.card').dataset.bno;
-  console.log(bno);
+  // console.log(bno);
   const $reply = e.target.closest('.reply');
 
   // 댓글 선택시 이벤트 발생
@@ -128,11 +127,9 @@ $replys.onclick = e => {
     const replyNo = $reply.dataset.replyNo;
 
     const $email = $modal.dataset.email;
-    console.log(replyNo);
-    console.log($email);
-
-    const select = $reply.querySelector('.reply-data');
-    console.log(select);
+    // console.log(replyNo);
+    // console.log($email);
+    
     // 댓글 삭제 이벤트
     if (e.target.matches('.reply-delete')) {
       if ($email !== '') {
@@ -168,26 +165,36 @@ $replys.onclick = e => {
     } else if (e.target.matches('.reply-modify')) {
       document.removeEventListener('keydown', handleEnterKeyPress);
       const $modBtn = $reply.querySelector('.mod-btn');
-      console.log($modBtn);
+      // console.log($modBtn);
       const $replyContent = $reply.querySelector('.reply-content');
       const $replyMod = $reply.querySelector('.reply-mod');
 
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            $replyMod.classList.add('toggle');
+        }
+    });
 
       if ($email !== '') {
 
         if ($reply.querySelector('.card-account').dataset.email == $email) {
           // 엔터 키가 눌렸을 때 이벤트 리스너 추가
           document.addEventListener('keydown', handleModEnterKeyPress);
+          // Esc 키가 눌렸을 때 이벤트 리스너 추가
+          
           $replyMod.classList.toggle('toggle');
           $replyMod.focus();
+          $replyMod.onblur = () => {
+            $replyMod.classList.add('toggle');
+          }
           $modBtn.onclick = () => {
-            $replyContent.textContent = $replyMod.value
+            
             const content = $replyMod.value;
-            console.log($replyMod.value);
+            // console.log($replyMod.value);
             $replyMod.setAttribute('placeholder', content)
             $replyMod.value = '';
 
-            console.log("modBtn 클릭!");
+            // console.log("modBtn 클릭!");
             const payLoad = {
               rno: replyNo,
               content: content
@@ -200,14 +207,17 @@ $replys.onclick = e => {
               },
               body: JSON.stringify(payLoad)
             };
+            if (content != '') {
+              $replyContent.textContent = content
+              // 댓글 수정
+              fetch("/board/reply/update", requestInfo)
+                .then(res => {
+                  console.log(res)
+                  $replyMod.classList.toggle('toggle');
+                  document.removeEventListener('keydown', handleModEnterKeyPress);
+                });
+            }
 
-            // 댓글 수정
-            fetch("/board/reply/update", requestInfo)
-              .then(res => {
-                console.log(res)
-                $replyMod.classList.toggle('toggle');
-                document.removeEventListener('keydown', handleModEnterKeyPress);
-              });
 
 
           }
@@ -267,8 +277,8 @@ if (email == '') {
 
     const URL = '/board/reply'
 
-    console.log(boardNo);
-    console.log(inputField.value);
+    // console.log(boardNo);
+    // console.log(inputField.value);
 
     // 사용자 입력자 검증
     if (inputField.value.trim() === '') {
@@ -276,8 +286,8 @@ if (email == '') {
       return;
     };
 
-    console.log(email);
-    console.log(nickname);
+    // console.log(email);
+    // console.log(nickname);
 
     const payLoad = {
       text: inputField.value.trim(),
