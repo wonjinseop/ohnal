@@ -15,14 +15,14 @@ button {
 strong {
   color: black;
   font-size:23px;
- }
- 
+}
+
 
 .container {
-    margin-top: 120px;
-    font-family:'TAEBAEKmilkyway';
-    /* background: linear-gradient(to left bottom, #fff7d6, pink, #fff7d6); */
-    letter-spacing: 3px;
+  margin-top: 120px;
+  font-family:'TAEBAEKmilkyway';
+  /* background: linear-gradient(to left bottom, #fff7d6, pink, #fff7d6); */
+  letter-spacing: 3px;
 }
 
 p.font {
@@ -51,14 +51,14 @@ p.font {
   color: black;
   box-shadow: 2px 2px 5px #8d8383;
   font-weight: 700;
-  
+
 }
 #sample6_address{
   margin-bottom: 1px;
 }
 
 .address {
-  
+
   border-radius: 10px;
   margin-top:5px;
 }
@@ -83,20 +83,20 @@ p.font {
   margin-left: 5px;
 }
 .btn_gender.m:hover{
-    transition:0.5s;
-    box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
+  transition:0.5s;
+  box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
 }
 .btn_gender.f:hover{
-    transition:0.5s;
-    box-shadow:inset 0 0 10px 2px rgb(234, 19, 253),0 0 10px 2px rgb(226, 82, 195);
+  transition:0.5s;
+  box-shadow:inset 0 0 10px 2px rgb(234, 19, 253),0 0 10px 2px rgb(226, 82, 195);
 }
 
 
 #emailAuth{
- font-size: 18px;
- cursor: pointer;
- transition: background-color 0.4s;
- color: black;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  color: black;
   border: 3px solid white;
   border-radius:10px;
   box-shadow:inset 0 0 10px 2px black,0 0 10px 2px black;
@@ -104,13 +104,13 @@ p.font {
   font-weight: 600;
 }
 #emailAuth:hover{
-  
+
   transition:0.5s;
-    box-shadow:inset 0 0 10px 2px green,0 0 10px 2px green;
+  box-shadow:inset 0 0 10px 2px green,0 0 10px 2px green;
 
 }
 #emailChkInput{
-width:300px;
+  width:300px;
 }
 #btn_submit_button {
   display: flex;

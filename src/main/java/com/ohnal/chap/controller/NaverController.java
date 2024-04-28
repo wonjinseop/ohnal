@@ -50,23 +50,6 @@ public class NaverController {
 
     }
 
-    //인가코드발급
-//    @GetMapping("/auth/naver")
-//    public String naverCallback(HttpSession session ,String code, String state) {
-//        log.info("/auth/naver: GET!");
-//
-//        log.info("code: {}, state: {}", code, state);
-//
-//        Map<String , String > naverParams = new HashMap<>();
-//        naverParams.put("grant_type", "authorization_code");
-//        naverParams.put("client_id",clientId);
-//        naverParams.put("client_secret",clientSecret);
-//        naverParams.put("code", code);
-//        naverParams.put("state", state);
-//
-//        naverLoginService.naverLogin(naverParams , session);
-//        return "redirect:/index";
-//    }
     @GetMapping("/auth/naver")
     public String naverCallback(HttpSession session ,String code, String state) {
         log.info("/auth/naver: GET!");

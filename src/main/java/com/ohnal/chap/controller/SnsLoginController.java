@@ -30,6 +30,7 @@ public class SnsLoginController {
         uri += "?client_id=" + kakaoAppKey;
         uri += "&redirect_uri=" + kakaoRedirectUri;
         uri += "&response_type=code";
+        uri += "&prompt=login";
         return "redirect:" + uri;
     }
 

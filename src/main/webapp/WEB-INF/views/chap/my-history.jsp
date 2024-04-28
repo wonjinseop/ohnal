@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="card-container">
+        <div class="card-container" data-auth="${login.auth}">
             
             <c:choose>
                 <c:when test="${empty myPosts}">
@@ -62,7 +62,7 @@
                                         <img src="${mp.profileImage}" alt="프사">
                                     </div>
                                     <span class="card-account">${mp.nickname}</span>
-                                    <c:if test="${login.email == mp.email}">
+                                    <c:if test="${login.email == mp.email || login.auth == 'ADMIN'}">
                                         <button class="board-del-btn" type="button">삭제</button>
                                     </c:if>
                                 </div>

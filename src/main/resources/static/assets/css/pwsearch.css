@@ -1,30 +1,30 @@
 @font-face {
-  font-family: 'TAEBAEKmilkyway';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKmilkyway.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'TAEBAEKmilkyway';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 #signUpForm {
-  letter-spacing: 3px;
-  background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6);
-  height: 100%;
-  width: 100%;
-  padding-top: 1px;
+    letter-spacing: 3px;
+    background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6);
+    height: 100%;
+    width: 100%;
+    padding-top: 1px;
 }
 
 
 body {
-  letter-spacing: 3px;
-  background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6); 
+    letter-spacing: 3px;
+    background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6);
     height: 100%;
     margin: 0;
     width: 100%;
 }
 
 strong{
-  color:black;
-  font-size : 21px;
+    color:black;
+    font-size : 21px;
 }
 
 .container {
@@ -34,27 +34,27 @@ strong{
     border: 1px solid #ccc;
     border-radius: 15px;
     margin-top:200px;
-    
+
     font-family: 'TAEBAEKmilkyway';
     background-color: white;
     box-shadow: 2px 2px 12px #8d8383;
-  }
+}
 .form-group {
     margin-bottom: 15px;
 }
 input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-weight: 700;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-weight: 700;
 }
 #emailChkInput{
-width:300px;
+    width:300px;
 }
 #mailCheckMsg{
-display:block;
-margin-top:5px;
+    display:block;
+    margin-top:5px;
 }
 input[type="password"]{
     width: 100%;
@@ -66,30 +66,30 @@ input[type="password"]{
 #button {
     padding: 10px 15px;
     margin-right:5px;
-     cursor: pointer;
-  transition: background-color 0.4s;
-  font-weight: bold;
-  cursor: pointer;
-  color: black;
-  font-weight: bold;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px #8d8383;
-  background: linear-gradient(to left bottom, white, #80808070, white, #80808070);
- 
+    cursor: pointer;
+    transition: background-color 0.4s;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #8d8383;
+    background: linear-gradient(to left bottom, white, #80808070, white, #80808070);
+
 }
 #button:hover{
-  box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
+    box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
     color: black;
-    border: solid 0px; 
+    border: solid 0px;
     transition: 0.1s;
 }
 
 .pwFind{
-  width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
     padding:40px;
-  height:300px;
+    height:300px;
     margin-top:100px;
 }
 p.font{
@@ -98,24 +98,24 @@ p.font{
     display:block;
 }
 #pwChk2{
-  display:block;
-  position:relative;
-  bottom:25px;
+    display:block;
+    position:relative;
+    bottom:25px;
 }
 #pwChk{
-  display:block;
-  position:relative;
-  bottom:25px;
+    display:block;
+    position:relative;
+    bottom:25px;
 }
 #pwChange{
-  padding: 10px 15px;
-   width:400px;
-   height:60px;
-   font-family:'TAEBAEKmilkyway';
-   font-size: 21px;
-  margin-bottom:50px;
-  margin-left:38%;
-  color: black;
+    padding: 10px 15px;
+    width:400px;
+    height:60px;
+    font-family:'TAEBAEKmilkyway';
+    font-size: 21px;
+    margin-bottom:50px;
+    margin-left:38%;
+    color: black;
 
     font-weight: bold;
     cursor: pointer;
@@ -126,12 +126,12 @@ p.font{
     box-shadow: 2px 2px 5px #8d8383;
     background: linear-gradient(to left bottom, white, #80808070, white, #80808070);
 
-  
-  
- }
- #pwChange:hover{
-  box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
-  color: black;
-  border: solid 0px; 
-  transition: 0.1s;
- }
+
+
+}
+#pwChange:hover{
+    box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
+    color: black;
+    border: solid 0px;
+    transition: 0.1s;
+}
