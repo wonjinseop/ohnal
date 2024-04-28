@@ -42,14 +42,10 @@ public class NaverLoginService {
                     memberService.snsJoin(NaverSignUpRequestDTO.builder()
                                     .email(email)
                                     .password("0000")
-//                                    .address(dto.getAddress())
-                                    .nickname(dto.getResponse().getNickName())
-//                                    .gender(dto.getGender())
-                                    .profileImage(dto.getResponse().getProfileImage())
+                                    .nickname(dto.getResponse().getNickname())
                                     .loginMethod(Member.LoginMethod.NAVER)
                                     .build(),
-//                            dto.getProperties().getProfileImage()
-                            null
+                            dto.getResponse().getProfileImage()
                     );
 
         }

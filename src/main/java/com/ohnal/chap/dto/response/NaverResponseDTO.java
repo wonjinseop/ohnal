@@ -10,29 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NaverResponseDTO {
-//    private String Address;
-//    private String NickName;
-//    private String ProfileImg;
-//
-//    @JsonProperty("Naver_account")
-//    private NaverAccount email;
-//    private String nickName;
-//    private String profileImg;
-//    private String gender;
-//    private Properties properties;
-//
-//    @Setter @Getter @ToString
-//    public static class Properties {
-//        private String nickname;
-//
-//        @JsonProperty("profile_image")
-//        private String profileImage;
-//    }
-//    @Getter @Setter @ToString
-//    public static class NaverAccount {
-//        private String email;
-//    }
-
     @JsonProperty("response")
     private Response response;
 
@@ -41,7 +18,9 @@ public class NaverResponseDTO {
     @EqualsAndHashCode
     public static class Response {
         private String email;
-        private String nickName;
+        private String nickname;
+
+        @JsonProperty("profile_image")
         private String profileImage;
     }
 }

@@ -9,7 +9,7 @@
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKmilkyway.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
- }
+}
 
 
 m*{
@@ -136,33 +136,33 @@ header .inner-header .menu-open .lnr-menu {
   font-size: 40px;
   font-weight: bold;
   box-shadow: 0 0 1px rgb(70 70 68), 0 0 4px rgb(4, 18, 19);
+  cursor: pointer;
 }
 
 /* header gnb style */
 header .gnb {
   font-family: 'TAEBAEKmilkyway';
-    background: #c9fbd9;
-    color: #c8ced3;
-    width: 400px;
-    height: 50%;
-    font-size: 25px;
-    padding-top: 110px;
-    box-sizing: border-box;
-    position: fixed;
-    z-index: 2000;
-    right: 0;
-    top: -100%;
-    transition: .6s;
-    display: flex;
-    flex-direction: row-reverse;
-    opacity: 0.9;
-    font-weight: bold;
+  background: #c9fbd9;
+  color: #c8ced3;
+  width: 400px;
+  height: 65%;
+  font-size: 25px;
+  padding-top: 110px;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 2000;
+  right: 0;
+  top: -100%;
+  transition: .6s;
+  display: flex;
+  flex-direction: row-reverse;
+  font-weight: bold;
 }
 header .gnb.on {
   top: 0;
 }
 
- 
+
 
 header .gnb .close {
   display: block;
@@ -173,7 +173,7 @@ header .gnb ul {
   width: 300px;
   /* background-color: tomato; */
   margin-right: 100px;
-  
+
 }
 header .gnb ul li {
   line-height: 1.7;
@@ -185,5 +185,5 @@ header .gnb ul li.active{
 }
 
 .linkcolor li a:hover {
-color: #d92bca;
+  color: #d92bca;
 }

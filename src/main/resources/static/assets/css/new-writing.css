@@ -1,6 +1,18 @@
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   text-decoration-line: none;
+
+}
+body{
+  font-family: 'GangwonEdu_OTFBoldA';
+  background: linear-gradient(to left bottom, #f1ecd5, #c6dfe1, white, #fff7d6);
 }
 
 input {
@@ -9,16 +21,37 @@ input {
 }
 
 .btn {
-  width: 100%;
+  width: 273px;
+  background: #e9ecef;
+  position: absolute;
+  left: 823px;
+  top: 918px;
+  height: 67px;
+  font-size: 28px;
+  letter-spacing: 25px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  color: black;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px 2px black, 0 0 10px 2px black;
+  font-weight: 600;
+  padding-left: 27px;
+  padding-top: 15px;
+}
+.btn:hover{
+  transition:0.5s;
+  box-shadow:inset 0 0 10px 2px blue,0 0 10px 2px blue;
 }
 
 .new-writing-wrapper {
-  margin: 150px auto 30px;
-  border: 1px solid lightgray;
+  margin: 11% auto;
+  border: 1px solid black;
   max-width: 1200px;
-  width: 1200px; height: 650px;
+  width: 1200px;
+  height: 650px;
   display: flex;
-  
+  background-color: white;
 }
 
 .new-writing-wrapper .cody-load {
@@ -30,20 +63,23 @@ input {
 }
 
 #img {
-  width: 598px; height: 648px;
-  border: 5px solid lightgray;
+  width: 598px;
+  height: 648px;
+  border: 1px solid black;
+  cursor: pointer;
 }
 
 .new-writing-wrapper .user-info {
   border-bottom: 1px solid lightgray;
-  
+
   width: 50%; height: 120px;
 }
 
 .new-writing-wrapper .user-info .profile-name {
   width: 100%; height: 70px;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid black;
   display: flex;
+  padding-left: 206px;
 }
 
 .new-writing-wrapper .user-info .profile-box {
@@ -65,13 +101,14 @@ input {
 
 .new-writing-wrapper .user-info .hash {
   width: 100%; height: 50px;
-  
-  padding: 10px 20px;
+
+  padding: 10px 30px;
 }
+
 
 .new-writing-wrapper .user-info .write-content1 {
   width: 100%; height: 530px;
-  
+
 }
 
 .write-input {
@@ -80,11 +117,16 @@ input {
   border: none;
   border-bottom: 1px solid lightgray;
   text-align: left;
-  
+  padding: 26px;
+
 }
 .content {
   width: 100%; height: 37px;
-  
+
   /* background: none; */
   /* border: 1px solid lightgray; */
+}
+
+select{
+  font-family:sans-serif;
 }

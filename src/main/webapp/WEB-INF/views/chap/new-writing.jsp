@@ -146,7 +146,8 @@
     };
 
     // login 사용자의 주소 정보가 있을 시 작동하는 코드
-    if (`${login.address != ''}` && `${login.address != null}`) {
+
+    if (${login.address != null}) {
       console.log('사용자의 주소 정보가 있습니다. 주소 정보로 기본 세팅합니다.');
 
       // 사용자가 설정한 주소를 기본값으로 설정하는 세팅
@@ -193,25 +194,6 @@
       console.log('첫번째 targetNum은 '+ targetNum);
       console.log('두번째 targetNum은 '+ targetNum2)
       setDefault(targetNum, targetNum2, $area2);
-
-      // function setDefault(key, sel) {
-      //   console.log('setDefault 호출됨!')
-      //   if (key == '') return;
-      //   var name = cat2_name[key];
-      //   var val = cat2_num[key];
-      //   for (i = sel.length - 1; i >= 0; i--)
-      //     sel.options[i] = null;
-      //   sel.options[0] = new Option('시,군,구를 선택하세요', '', '', 'true');
-      //   for (i = 0; i < name.length; i++) {
-      //     sel.options[i + 1] = new Option(name[i], val[i]);
-      //     if(i === targetNum2) { // targetNum2을 바꾸면 원하는 것으로 selected가 된다.
-      //       sel.options[i+1].selected = true;
-      //       console.log('기본으로 세팅될 area2 textContent: ', sel.options[i+1].textContent);
-      //       $valueArea2.setAttribute("value", sel.options[i+1].textContent);
-      //       break;
-      //     }
-      //   }
-      // }
     } else {
       console.log('주소가 없는 경우 서울시 중구를 기본으로 설정합니다');
       // 서울시는 첫번째 select의 1번 인덱스, 중구는 두번째 select의 23번 인덱스이기 때문에 함수에 1, 23을 대입
