@@ -133,7 +133,8 @@ $replys.onclick = e => {
     // 댓글 삭제 이벤트
     if (e.target.matches('.reply-delete')) {
       if ($email !== '') {
-        if ($reply.querySelector('.card-account').dataset.email == $email) {
+        if ($reply.querySelector('.card-account').dataset.email == $email ||
+            document.querySelector('.card-container').dataset.auth == 'ADMIN') {
 
           const payLoad = {
             bno: bno,
