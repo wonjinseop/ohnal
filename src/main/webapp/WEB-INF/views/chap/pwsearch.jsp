@@ -93,7 +93,7 @@
 
 
                                 let code = '';
-                                fetch('/members/email', {
+                                fetch('/sign-in/email', {
                                         method: 'post',
                                         headers: {
                                             'Content-type': 'text/plain'

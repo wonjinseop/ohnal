@@ -3,7 +3,6 @@ package com.ohnal.chap.service;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
 import com.ohnal.chap.dto.response.GoogleUserResponseDTO;
 import com.ohnal.chap.dto.response.KakaoUserResponseDTO;
-import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +35,7 @@ public class SnsLoginService {
 
 
         String accessToken = getKakaoAccessToken(params);
+        session.setAttribute("access_token", accessToken);
 
         KakaoUserResponseDTO dto = getKakaoUserInfo(accessToken);
         log.info(dto.toString());

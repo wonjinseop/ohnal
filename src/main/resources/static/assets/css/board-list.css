@@ -11,18 +11,20 @@
 
 .card-container {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     flex-wrap: wrap;
-    margin: 75px 100px;
+    /*margin: 75px 100px;*/
+    margin: 0 auto 0;
 
 }
 
-.card-container .top-wrapper {
+.top-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 94%;
     height: 70px;
-    margin-top: 100px;
+    margin-top: 200px;
+    margin-left: 3%;
 }
 
 #keyword {
@@ -32,11 +34,34 @@
 
 .card-container .card-wrapper {
     position: relative;
-    width: 22%;
-    height: 600px;
+    width: 20%;
+    height: 750px;
     cursor: pointer;
     transition: 0.5s;
     margin-bottom: 70px;
+
+    margin-right: 4%;
+}
+
+.card-container .card-wrapper:nth-child(4n) {
+    /* 한 줄에 카드 4개 오는데,
+    카드 3개만 margin-right 4%씩
+    마지막 카드 1개는 margin-right 0% */
+    margin-right: 4%;
+}
+
+.card-container .card-wrapper:first-child {
+    /* 한 줄에 카드 4개 오는데,
+    카드 3개만 margin-right 4%씩
+    마지막 카드 1개는 margin-right 0% */
+    margin-left: 4%;
+}
+
+.card-container .card-wrapper:nth-child(4n + 1) {
+    /* 한 줄에 카드 4개 오는데,
+    카드 3개만 margin-right 4%씩
+    마지막 카드 1개는 margin-right 0% */
+    margin-left: 4%;
 }
 
 .card-container .card-wrapper .card-picture img {
@@ -54,9 +79,9 @@
     border: 0px solid transparent;
 }
 
-.card-container .card:last-child {
+/*.card-container .card:last-child {
     margin-right: 0;
-}
+}*/
 
 .card-container .card .card-title-wrapper {
     color: #000000;

@@ -1,7 +1,6 @@
 package com.ohnal.chap.service;
 
 
-import com.ohnal.chap.controller.NaverController;
 import com.ohnal.chap.dto.request.NaverSignUpRequestDTO;
 import com.ohnal.chap.dto.response.NaverResponseDTO;
 import com.ohnal.chap.entity.Member;
