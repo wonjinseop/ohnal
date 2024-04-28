@@ -30,82 +30,82 @@ const $cardContainer = document.querySelector('.card-container');
 
 $cardContainer.onclick = e => {
 
-  const $cardWrapper = e.target.closest('.card-wrapper');
-  const $card = e.target.closest('.select-card');
-  if ($card) {
-    const $email = $card.dataset.email;
-    const bno = $card.dataset.bno;
-    const $like = e.target.closest('.like-icon');
+    const $cardWrapper = e.target.closest('.card-wrapper');
+    const $card = e.target.closest('.select-card');
+    if ($card) {
+        const $email = $card.dataset.email;
+        const bno = $card.dataset.bno;
+        const $like = e.target.closest('.like-icon');
 
-    const $wrapper = $card.querySelector('.icon-wrapper');
-    const $likeIcon = $wrapper.querySelector('.like-icon');
-    const $likeImg = $likeIcon.querySelector('img');
+        const $wrapper = $card.querySelector('.icon-wrapper');
+        const $likeIcon = $wrapper.querySelector('.like-icon');
+        const $likeImg = $likeIcon.querySelector('img');
 
-    const src = $likeImg.getAttribute('src');
+        const src = $likeImg.getAttribute('src');
 
-    const URL = '/board/detail/' + bno;
-    if ($like) {
-      if ($email == '') {
-        alert("로그인한 회원만 가능합니다.");
-      } else {
-        toggleHeart($email, $like, bno);
-      }
-    } else {
+        const URL = '/board/detail/' + bno;
+        if ($like) {
+            if ($email == '') {
+                alert("로그인한 회원만 가능합니다.");
+            } else {
+                toggleHeart($email, $like, bno);
+            }
+        } else {
 
-      if (e.target.matches('button')) {
-        console.log("button click!");
+            if (e.target.matches('button')) {
+                console.log("button click!");
 
-        // 글 삭제
-        fetch('/board/delete/' + bno)
-          .then(res => {
-            console.log(res);
-            $cardWrapper.style.display = 'none';
-          });
-      } else {
+                // 글 삭제
+                fetch('/board/delete/' + bno)
+                    .then(res => {
+                        console.log(res);
+                        $cardWrapper.style.display = 'none';
+                    });
+            } else {
 
-        // 모달창 채워넣기
-        console.log(bno);
-        fetch(URL)
-          .then(res => res.json())
-          .then(data => {
-            const $heart = document.querySelector('.modal .heart');
-            console.log(data);
-            document.querySelector('.modal .card').dataset.bno = bno;
-            document.querySelector('.modal .card-account').textContent = data.nickname;
-            document.querySelector('.modal .content').textContent = data.content;
-            document.querySelector('.modal .content-img').setAttribute('src', '/display' + data.image);
-            document.querySelector('.modal .like-count').textContent = '좋아요 ' + data.likeCount + '개';
-            document.querySelector('.modal .reply-count').textContent = '댓글 ' + data.replyCount + '개';
-            document.querySelector('.modal .view-count').textContent = '조회수 ' + data.viewCount + '회';
-            document.querySelector('.modal .location').textContent = data.locationTag;
-            document.querySelector('.modal .weather').textContent = data.weatherTag;
-            document.querySelector('.modal .time-stamp').textContent = data.regDate;
-            document.querySelector('.modal .profile-image').setAttribute('src', data.profileImage);
-            $heart.setAttribute('src', src);
-            $heart.setAttribute('data-email', $email)
+                // 모달창 채워넣기
+                console.log(bno);
+                fetch(URL)
+                    .then(res => res.json())
+                    .then(data => {
+                        const $heart = document.querySelector('.modal .heart');
+                        console.log(data);
+                        document.querySelector('.modal .card').dataset.bno = bno;
+                        document.querySelector('.modal .card-account').textContent = data.nickname;
+                        document.querySelector('.modal .content').textContent = data.content;
+                        document.querySelector('.modal .content-img').setAttribute('src', '/display' + data.image);
+                        document.querySelector('.modal .like-count').textContent = '좋아요 ' + data.likeCount + '개';
+                        document.querySelector('.modal .reply-count').textContent = '댓글 ' + data.replyCount + '개';
+                        document.querySelector('.modal .view-count').textContent = '조회수 ' + data.viewCount + '회';
+                        document.querySelector('.modal .location').textContent = data.locationTag;
+                        document.querySelector('.modal .weather').textContent = data.weatherTag;
+                        document.querySelector('.modal .time-stamp').textContent = data.regDate;
+                        document.querySelector('.modal .profile-image').setAttribute('src', data.profileImage);
+                        $heart.setAttribute('src', src);
+                        $heart.setAttribute('data-email', $email)
 
-            document.body.style.overflow = 'hidden';
+                        document.body.style.overflow = 'hidden';
 
-          });
-          
+                    });
+
                 document.getElementById('modalBtn').click();
                 fetchGetReplies(bno);
-      }
+            }
+
+        };
+
+        document.querySelector('.modal .heart').onclick = e => {
+            const $likeEmail = e.target.dataset.email;
+            const $liked = e.target;
+            if ($email == '') {
+                alert("로그인한 회원만 가능합니다.");
+            } else {
+                detailToggleHeart($likeEmail, $liked, $likeImg, bno);
+            }
+
+        }
 
     };
-
-    document.querySelector('.modal .heart').onclick = e => {
-      const $likeEmail = e.target.dataset.email;
-      const $liked = e.target;
-      if ($email == '') {
-        alert("로그인한 회원만 가능합니다.");
-      } else {
-        detailToggleHeart($likeEmail, $liked, $likeImg, bno);
-      }
-      
-    }
-
-  };
 
 
 
@@ -133,7 +133,8 @@ $modalCard.onclick = e => {
         console.log(select);
         if (e.target.matches('.reply-delete')) {
             if ($email !== '') {
-                if ($reply.querySelector('.card-account').dataset.email == $email) {
+                if ($reply.querySelector('.card-account').dataset.email == $email ||
+                    document.querySelector('.card-container').dataset.auth == 'ADMIN') {
                     const payLoad = {
                         bno: bno,
                         rno: replyNo,
@@ -159,7 +160,81 @@ $modalCard.onclick = e => {
             } else {
                 alert("로그인 후 이용 가능합니다.")
             }
+            // 댓글 수정 이벤트
+        } else if (e.target.matches('.reply-modify')) {
+            document.removeEventListener('keydown', handleEnterKeyPress);
+            const $modBtn = $reply.querySelector('.mod-btn');
+            // console.log($modBtn);
+            const $replyContent = $reply.querySelector('.reply-content');
+            const $replyMod = $reply.querySelector('.reply-mod');
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    $replyMod.classList.add('toggle');
+                }
+            });
+
+            if ($email !== '') {
+
+                if ($reply.querySelector('.card-account').dataset.email == $email) {
+                    // 엔터 키가 눌렸을 때 이벤트 리스너 추가
+                    document.addEventListener('keydown', handleModEnterKeyPress);
+                    // Esc 키가 눌렸을 때 이벤트 리스너 추가
+
+                    $replyMod.classList.toggle('toggle');
+                    $replyMod.focus();
+                    $replyMod.onblur = () => {
+                        $replyMod.classList.add('toggle');
+                    }
+                    $modBtn.onclick = () => {
+
+                        const content = $replyMod.value;
+                        // console.log($replyMod.value);
+                        $replyMod.setAttribute('placeholder', content)
+                        $replyMod.value = '';
+
+                        // console.log("modBtn 클릭!");
+                        const payLoad = {
+                            rno: replyNo,
+                            content: content
+                        };
+
+                        const requestInfo = {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(payLoad)
+                        };
+                        if (content != '') {
+                            $replyContent.textContent = content
+                            // 댓글 수정
+                            fetch("/board/reply/update", requestInfo)
+                                .then(res => {
+                                    console.log(res)
+                                    $replyMod.classList.toggle('toggle');
+                                    document.removeEventListener('keydown', handleModEnterKeyPress);
+                                });
+                        }
+
+
+
+                    }
+                } else {
+                    alert("본인 글만 수정이 가능합니다.")
+                };
+            } else {
+                alert("로그인 후 이용 가능합니다.")
+            }
+
+            function handleModEnterKeyPress(event) {
+                if (event.key === 'Enter') {
+                    // submitButton을 클릭합니다.
+                    $modBtn.click();
+                }
+            }
         }
+
 
 
     }
@@ -343,12 +418,13 @@ function renderReplies(replyList) {
             } = reply
             console.log(profileImage);
             tag += `
-          <div class="reply" data-reply-no="${replyNo}">
+            <div class="reply" data-reply-no="${replyNo}">
             <span class='card-account' data-email='${email}'><img src='${profileImage}' class='profile-img'>${nickname}</span>
             <p class='reply-content'>
                 ${content}
             </p>
-            <input type='text' placeholder='${content}' hidden>
+            <input class='reply-mod toggle' type='text' placeholder='${content}'>
+            <button class='mod-btn' type='button' hidden></button>
   
   
             <div class='reply-data'>

@@ -690,5 +690,19 @@ opacity(투명도)를 0으로 주어 글자가 안보이게 한다. */
 }
 
 
+.reply-mod {
+    margin-left: 8%;
+    width: 92%;
+}
+
+.reply-mod:focus {
+    outline-style: none;
+}
+
+.reply-mod.toggle {
+    display: none;
+}
+
+
 
 /* 모달 끝*/
