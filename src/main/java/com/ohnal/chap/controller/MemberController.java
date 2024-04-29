@@ -64,19 +64,19 @@ public class MemberController {
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto) {
         
-        if (dto.getProfileImage().toString().contains("org.springframework.web")) { // 프사 등록 안 했을 시
+        if (!dto.getProfileImage().toString().contains("org.springframework.web")) { // 프사 등록 안 했을 시
             dto.setProfileImage(null);
-            dto.setLoginMethod(Member.LoginMethod.COMMON);
             memberService.join(dto, null);
         } else {
             if (!rootPath.contains("/profile")) {
-                rootPath = rootPath + "/profile";
+                rootPath +="/profile";
             }
             String savePath = "/profile" + FileUtils.uploadFile(dto.getProfileImage(), rootPath);
             log.info("save-path: {}", savePath);
 
             // 일반 방식(우리사이트를 통해)으로 회원가입
             dto.setLoginMethod(Member.LoginMethod.COMMON);
+
             memberService.join(dto, savePath);
         }
 
@@ -90,7 +90,7 @@ public class MemberController {
                          HttpServletRequest request
     ) {
 
-            // 쿠키 생성
+
 
 
         // 자동 로그인 서비스를 추가하기 위해 세션과 응답객체도 함께 전달.
@@ -102,20 +102,11 @@ public class MemberController {
         if (result == LoginResult.SUCCESS) { // 로그인 성공 시
             // 세션으로 로그인 유지
             memberService.maintainLoginState(request.getSession(), dto.getEmail());
+
             return "redirect:/index";
         }
 
         return "redirect:/members/sign-in"; // 로그인 실패 시
-    }
-
-
-    private void makeLoginCookie(LoginRequestDTO dto, HttpServletResponse response) {
-        Cookie cookie = new Cookie("login", dto.getEmail());
-
-        cookie.setMaxAge(3600*24*7);
-        cookie.setPath("/");
-
-        response.addCookie(cookie);
     }
 
     // 로그아웃 요청 처리
@@ -153,13 +144,13 @@ public class MemberController {
     @PostMapping("/email")
     @ResponseBody
     public ResponseEntity<?> mailCheck(@RequestBody String email) {
-        log.info("이메일 인증 요청 들어옴!: {}", email);
+        log.info("이메일 인증 요청: {}", email);
         try {
             String authNum = mailSenderService.joinEmail(email);
             return ResponseEntity.ok().body(authNum);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생!");
+            return ResponseEntity.internalServerError().body("이메일 전송 과정에서 에러 발생");
         }
     }
 
