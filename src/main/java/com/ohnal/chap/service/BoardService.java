@@ -179,7 +179,7 @@ public class BoardService {
             dtoList.add(dto);
         }
 
-        log.info("내가 작성한 댓글이 작성된 게시글 목록: {}", dtoList);
+        log.info("내가 작성한 글이 작성된 게시글 목록: {}", dtoList);
         return dtoList;
     }
 
@@ -194,7 +194,7 @@ public class BoardService {
 // public int getMyLikeCount(String email) { return mapper.getMyLikeCount(email); }
 
 // my-history에서 내가 작성한 게시물 총 갯수를 가져오는 메서드
-// public int getMyPostsCount(String email) { return mapper.getMyPostsCount(email); }
+//public int getMyPostsCount(String email) { return mapper.getMyPostsCount(email); }
 
 
 // 내가 작성한 댓글이 작성되어 있는 게시글을 찾아오는 메서드에 사용되는

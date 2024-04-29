@@ -11,6 +11,15 @@
   font-style: normal;
 }
 
+body::-webkit-scrollbar {
+  width: 15px;  /* 스크롤바의 너비 */
+}
+
+body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #afcce7; /* 스크롤바의 색상 */
+  border-radius: 10px;
+}
 
 m*{
   box-sizing: border-box;

@@ -154,7 +154,7 @@
         <div class="card-container">
             <!-- 카드 복사 -->
             <c:forEach var="b" items="${bList}">
-                            <div class="card-wrapper">
+                            <div class="card-wrapper box">
                                 <section class="card select-card" data-bno="${b.boardNo}" data-email="${login.email}">
                                     <div class="card-title-wrapper">
                                         <div class="profile-box">
@@ -212,7 +212,7 @@
         <button id="modalBtn" hidden>모달 글 확대</button>
 
         <!-- 모달 컨테이너 -->
-        <div id="myModal" class="modal">
+        <div id="myModal" class="modal" data-email="${login.email}">
             <!-- 모달 컨텐츠 -->
             <div class="modal-content">
 
@@ -292,7 +292,12 @@
                                     <div class="write-wrapper">
                                         <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
                                         <input name="email" class="email" value="${login.email}" hidden></input>
-                                        <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                        <c:if test="${login != ''}">
+                                            <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                        </c:if>
+                                        <c:if test="${login == ''}">
+                                            <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다." readonly></input>
+                                        </c:if>
                                         <button class="write-send" type="button">등록</button>
                                     </div>
                                 </form>

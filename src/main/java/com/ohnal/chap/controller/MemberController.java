@@ -64,7 +64,7 @@ public class MemberController {
     @PostMapping("/sign-up")
     public String signUp(SignUpRequestDTO dto) {
         
-        if (dto.getProfileImage().toString().contains("org.springframework.web")) { // 프사 등록 안 했을 시
+        if (!dto.getProfileImage().toString().contains("org.springframework.web")) { // 프사 등록 안 했을 시
             dto.setProfileImage(null);
             dto.setLoginMethod(Member.LoginMethod.COMMON);
             memberService.join(dto, null);

@@ -26,12 +26,10 @@ public class ModifyRequestDTO {
 
 
     public Member toEntity() {
-        return Member.builder()
-                .email(email)
-                .nickname(nickname)
-                .address(address)
-                .gender(gender)
-                .build();
+        if (address.equals("")) {
+            return Member.builder().email(email).nickname(nickname).gender(gender).build();
+        } else {
+            return Member.builder().email(email).nickname(nickname).gender(gender).address(address).build();
+        }
     }
-
 }

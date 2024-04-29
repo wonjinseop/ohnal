@@ -56,13 +56,23 @@
 .card-container .card-wrapper {
     position: relative;
     width: 20%;
-    height: 750px;
+    height: 700px;
     cursor: pointer;
     transition: 0.5s;
     margin-bottom: 70px;
     margin-right: 4%;
     border: solid 1px black;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/*아래 두개 추가*/
+.box {
+  transition: all 0.5s ease;
+}
+
+.box:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 26px 56px 0px rgba(0, 0, 0, 0.10), 0px 102px 102px 0px rgba(0, 0, 0, 0.09), 0px 230px 138px 0px rgba(0, 0, 0, 0.05), 0px 410px 164px 0px rgba(0, 0, 0, 0.01), 0px 640px 179px 0px rgba(0, 0, 0, 0.00);
 }
 
 .card-container .card-wrapper:nth-child(4n) {
@@ -229,7 +239,6 @@
 .main-content {
     overflow: hidden;
     height: 30px;
-    /*패딩 이상하면 삭제*/
     padding-top: 2px;
 }
 
@@ -481,7 +490,6 @@
 /* 댓글 부분 */
 
 
-
 .modal .modal-wrapper-card-2 .replys {
     width: 100%;
     /* border: 1px dashed red; */
@@ -515,6 +523,7 @@
     border-radius: 50%;
     overflow: hidden;
 }
+
 
 .modal .modal-wrapper-card-2 .replys .reply-wrapper .reply {
     width: 100%;

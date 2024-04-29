@@ -55,7 +55,7 @@
                    
                     <c:forEach var="mp" items="${myPosts}">
           
-                        <div class="card-wrapper">
+                        <div class="card-wrapper box">
                             <section class="card select-card" data-bno="${mp.boardNo}" data-email="${login.email}">
                                 <div class="card-title-wrapper">
                                     <div class="profile-box">
