@@ -160,10 +160,12 @@
                         document.getElementById('mailCheckMsg').textContent = '인증번호가 일치합니다!';
                         document.getElementById('mailCheckMsg').style.color = 'skyblue';
                         e.target.style.display = 'none';
+                          document.getElementById('emailChk').innerHTML = '';
                         checkResultList[0] = true;
                       } else {
                         document.getElementById('mailCheckMsg').textContent = '인증번호를 다시 확인하세요!';
                         document.getElementById('mailCheckMsg').style.color = 'red';
+                          document.getElementById('emailChk').innerHTML = '';
                         e.target.focus();
                       }
                     }

@@ -147,9 +147,7 @@ public class SnsLoginService {
                 clientSecret,
                 "http://localhost:8282/auth/google");
 
-
         GoogleUserResponseDTO dto = getGoogleUserInfo(accessToken);
-
 
         String email = dto.getEmail();
         log.info("email: {}", email);
