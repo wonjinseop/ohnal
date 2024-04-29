@@ -1,6 +1,7 @@
 package com.ohnal.config;
 
 import com.ohnal.interceptor.AfterLoginInterceptor;
+import com.ohnal.interceptor.AutoLoginInterceptor;
 import com.ohnal.interceptor.BoardInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     private final AfterLoginInterceptor afterLoginInterceptor;
     private final BoardInterceptor boardInterceptor;
+    private final AutoLoginInterceptor autoLoginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -31,6 +33,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/board/*", "/members/my-history")
                 .excludePathPatterns("/board/list", "/board/detail/{bno}", "/reply/{bno}");
 
+        registry
+                .addInterceptor(autoLoginInterceptor)
+                .addPathPatterns("/**");
 
     }
 }
