@@ -137,9 +137,16 @@
                         </c:if>
 
                         <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                            <li data-page-num="${i}" class="page-item">
-                                <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
-                            </li>
+                            <c:if test="${maker.page.pageNo != i}">
+                                <li data-page-num="${i}" class="page-item">
+                                    <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                                </li>
+                            </c:if>
+                            <c:if test="${maker.page.pageNo == i}">
+                                <li data-page-num="${i}" class="page-item hover">
+                                    <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                                </li>
+                            </c:if>
                         </c:forEach>
 
                         <c:if test="${maker.next}">
