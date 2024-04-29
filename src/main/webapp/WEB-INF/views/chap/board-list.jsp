@@ -37,7 +37,7 @@
 
         <!-- 카드 복사 -->
         <c:forEach var="b" items="${bList}">
-            <div class="card-wrapper">
+            <div class="card-wrapper box">
                 <section class="card select-card" data-bno="${b.boardNo}" data-email="${login.email}">
                     <div class="card-title-wrapper">
                         <div class="profile-box">

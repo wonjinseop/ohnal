@@ -144,7 +144,7 @@ public class BoardContoller {
         return ResponseEntity.ok().body("success");
     }
 
-    // 게시물 자세히 보기
+    // 게시물 삭제
     @GetMapping("/delete/{bno}")
     public void delete(@PathVariable int bno) {
         log.info("delete: {}", bno);

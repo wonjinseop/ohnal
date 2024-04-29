@@ -6,6 +6,7 @@ import com.ohnal.chap.dto.request.ModifyRequestDTO;
 import com.ohnal.chap.dto.request.ModifyRequestDTO;
 import com.ohnal.chap.dto.request.NaverSignUpRequestDTO;
 import com.ohnal.chap.dto.request.SignUpRequestDTO;
+import com.ohnal.chap.dto.response.GoogleUserResponseDTO;
 import com.ohnal.chap.dto.response.LoginUserResponseDTO;
 import com.ohnal.chap.entity.Member;
 import com.ohnal.chap.mapper.MemberMapper;
@@ -16,10 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -54,10 +52,6 @@ public class MemberService {
 
     // 회원 가입 처리 서비스
     public void join(SignUpRequestDTO dto, String savePath) {
-        // 클라이언트가 보낸 회원가입 데이터를
-        // 패스워드 인코딩하여 엔터티로 변환해서 전달.
-       // String encodedPw = encoder.encode(dto.getPassword());
-       // dto.setPassword(encodedPw);
         memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
@@ -269,4 +263,6 @@ public class MemberService {
         String responseJSON = responseEntity.getBody();
         log.info("응답 데이터: {}", responseJSON); // SUCCESS 나오면 성공
     }
+
+
 }
