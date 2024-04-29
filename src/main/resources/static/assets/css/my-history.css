@@ -375,6 +375,11 @@ body {
     color: #fff !important;
 }
 
+.pagination-custom li.hover a{
+    background: #333 !important;
+    color: #fff !important;
+}
+
 /*  end 페이지스타일  */
 
 

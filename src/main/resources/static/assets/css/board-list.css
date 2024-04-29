@@ -266,6 +266,11 @@
     color: #fff !important;
 }
 
+.pagination-custom li.hover a{
+    background: #333 !important;
+    color: #fff !important;
+}
+
 /*  페이지스타일  */
 
 

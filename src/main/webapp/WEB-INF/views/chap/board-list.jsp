@@ -115,10 +115,18 @@
                 </c:if>
 
                 <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
-                    <li data-page-num="${i}" class="page-item">
-                        <a class="page-link"
-                            href="/board/list?pageNo=${i}&amount=${s.amount}&keyword=${s.keyword}">${i}</a>
-                    </li>
+                    <c:if test="${maker.page.pageNo != i}">
+                        <li data-page-num="${i}" class="page-item">
+                            <a class="page-link"
+                                href="/board/list?pageNo=${i}&amount=${s.amount}&keyword=${s.keyword}">${i}</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${maker.page.pageNo == i}">
+                        <li data-page-num="${i}" class="page-item hover">
+                            <a class="page-link"
+                                href="/board/list?pageNo=${i}&amount=${s.amount}&keyword=${s.keyword}">${i}</a>
+                        </li>
+                    </c:if>
                 </c:forEach>
 
                 <c:if test="${maker.next}">
@@ -223,7 +231,7 @@
                                 </div>
                             </div>
 
-                            <form id="commentFrm" class="write-reply">
+                            <div id="commentFrm" class="write-reply">
                                 <div class="write-wrapper">
                                     <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
                                     <input name="email" class="email" value="${login.email}" hidden></input>
@@ -235,7 +243,7 @@
                                     </c:if>
                                     <button class="write-send" type="button">등록</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
                     </div>

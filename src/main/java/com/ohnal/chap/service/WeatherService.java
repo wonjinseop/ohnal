@@ -40,7 +40,7 @@ public class WeatherService {
 
 
         // map의 키가 컬럼값임. nx의 value가 map의 value다.
-        Map<String, Object> map = mapper.getCode(area1, area2);
+        Map<String, Object> map = mapper.getCode(area1, area2.replace(" ", ""));
         log.info("map에 담긴 값 {}", map);
         String newArea1 = map.get("area1").toString();
         String newArea2 = map.get("area2").toString();
