@@ -187,6 +187,13 @@ public class BoardService {
         mapper.modifyReply(dto);
     }
 
+    public int findAllMyPostsCount(String email) {
+        return mapper.findAllMyPostsCount(email);
+    }
+
+    public int findAllMyComments(String email) { return mapper.findAllMyComments(email); }
+
+    public int findMyLikeCount(String email) { return mapper.findMyLikeCount(email); }
 }
 
 //----------------- 컬렉션 size() 로 게시물 총 갯수 구하기로 정함 -----------------

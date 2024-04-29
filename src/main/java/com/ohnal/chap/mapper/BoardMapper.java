@@ -66,4 +66,9 @@ public interface BoardMapper {
 
     List<Board> findMyLikePosts(@Param("email")String email,@Param("page")Page page);
 
+    int findAllMyPostsCount(String email);
+
+    int findAllMyComments(String email);
+
+    int findMyLikeCount(String email);
 }

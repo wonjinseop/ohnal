@@ -169,8 +169,8 @@ public class MemberController {
         // 처음 들어왔을 때, my-history 페이지에서
         // 작성한 글 버튼 눌렀을 때 보여지는 화면이 기본 값이다.
         List<BoardListResponseDTO> myPosts = boardService.findAllByEmail(email, page);
-        PageMaker maker = new PageMaker(page, myPosts.size());
-
+        /*PageMaker maker = new PageMaker(page, myPosts.size());*/
+        PageMaker maker = new PageMaker(page, boardService.findAllMyPostsCount(email));
         log.info("maker: {}", maker);
         log.info("내가 좋아요한 글 개수: {}", maker);
         log.info("내가 작성한 글 목록: {}", myPosts);
@@ -193,7 +193,7 @@ public class MemberController {
         // 여기서 myPosts는 내가 작성한 댓글의 글들의 정보를 담은 List컬렉션
         List<BoardListResponseDTO> myPosts = boardService.findMyComments(email, page);
 
-        PageMaker maker = new PageMaker(page, myPosts.size());
+        PageMaker maker = new PageMaker(page, boardService.findAllMyComments(email));
         log.info("maker: {}", maker);
         log.info("내가 좋아요한 글 개수: {}", maker);
         log.info("내가 작성한 댓글 목록: {}", myPosts);
@@ -216,8 +216,8 @@ public class MemberController {
 
         // 여기서 myPosts는 내가 좋아요한 글의 정보를 담은 List컬렉션
         List<BoardListResponseDTO> myPosts = boardService.findMyLikePosts(email, page);
+        PageMaker maker = new PageMaker(page, boardService.findMyLikeCount(email));
 
-        PageMaker maker = new PageMaker(page, myPosts.size());
         log.info("maker: {}", maker);
         log.info("내가 좋아요한 글 개수: {}", maker);
         log.info("내가 좋아요한 글 목록: {}", myPosts);
