@@ -139,6 +139,9 @@ $modalCard.onclick = e => {
             if ($email !== '') {
                 if ($reply.querySelector('.card-account').dataset.email == $email ||
                     document.querySelector('.card-container').dataset.auth == 'ADMIN') {
+                        if (!confirm("정말 삭제하시겠습니까?")) {
+                            return;
+                          }
                     const payLoad = {
                         bno: bno,
                         rno: replyNo,

@@ -15,7 +15,7 @@
     padding-top: 1px;
 }
 body{
-    background-image: url(../img/sign-up.gif);
+    background-image: url(../img/169443-841382814_medium.gif);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -58,7 +58,7 @@ strong{
     margin-top:200px;
 
     font-family: 'TAEBAEKmilkyway';
-    background-color: white;
+    background-color: rgb(255, 255, 255, 0.8);
     box-shadow: 2px 2px 12px #8d8383;
 }
 .form-group {
