@@ -75,7 +75,6 @@ public class BoardContoller {
         if (!rootPath.contains("/ootd")) {
             rootPath = rootPath + "/ootd";
         }
-        String nickname = requestDTO.getNickname();
         String content = requestDTO.getContent();
 
         int minTemperature = (int) weatherDTO.getMinTemperature();
@@ -86,7 +85,6 @@ public class BoardContoller {
         String weatherTag = "#최고" + maxTemperature + "최저" + minTemperature;
 
         BoardWriteDTO dto =BoardWriteDTO.builder()
-                .nickname(nickname)
                 .content(content)
                 .locationTag(locationTag)
                 .weatherTag(weatherTag)
