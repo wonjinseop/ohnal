@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 public class Board {
     
     private int boardNo;
-    private String email;
     private String nickname;
+    private String email;
     private String content;
     private String image;
     private int viewCount;
@@ -28,7 +28,6 @@ public class Board {
     private String likeEmail;
     
     public Board(BoardWriteDTO dto, String savePath) {
-        this.nickname = dto.getNickname();
         this.content = dto.getContent();
         this.image = savePath;
         this.locationTag = dto.getLocationTag();

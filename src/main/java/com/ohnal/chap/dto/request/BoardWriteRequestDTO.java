@@ -8,8 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardWriteRequestDTO {
-    
-    private String nickname;
+
     private String content;
     private MultipartFile image;
     private String valueArea1;

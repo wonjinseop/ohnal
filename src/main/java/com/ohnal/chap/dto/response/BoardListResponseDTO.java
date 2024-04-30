@@ -3,6 +3,7 @@ package com.ohnal.chap.dto.response;
 import com.ohnal.chap.entity.Board;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.Duration;
@@ -31,8 +32,8 @@ public class BoardListResponseDTO {
 
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
-        this.nickname = board.getNickname();
         this.content = board.getContent();
+        this.nickname = board.getNickname();
         this.image = board.getImage();
         this.locationTag = board.getLocationTag();
         this.weatherTag = board.getWeatherTag();
@@ -58,13 +59,14 @@ public class BoardListResponseDTO {
     // 뷰카운트 표시방식 변경
     private String makePrettierViewCount(int viewCount) {
         String result;
-        if (viewCount > 1000) {
-            double num = viewCount / 1000.0;
-            result = String.format("%.1f천", num);
-        } else if (viewCount == 1000) {
-            int num = viewCount / 1000;
-            result = String.format("%d천", num);
-        } else {
+        if (viewCount >= 1000) {
+            int count = (viewCount / 100) * 100;
+            if (count % 1000 == 0) {
+                result = String.format("%d천", count / 1000);
+            } else {
+                result = String.format("%.1f천", viewCount / 1000.0);
+            }
+        }else {
             result = String.valueOf(viewCount);
         }
         return result;
@@ -101,13 +103,14 @@ public class BoardListResponseDTO {
     // 좋아요수 표기
     public static String makePrettierLikeCount(int likeCount) {
         String result;
-        if (likeCount == 1000) {
-            int num = likeCount / 1000;
-            result = String.format("%d천", num);
-        } else if (likeCount > 1000) {
-            double num = likeCount / 1000.0;
-            result = String.format("%.1f천", num);
-        } else {
+         if (likeCount >= 1000) {
+             int i = (likeCount / 100) * 100;
+             if (i % 1000 == 0) {
+                 result = String.format("%d천", i / 1000);
+             } else {
+                 result = String.format("%.1f천", likeCount / 1000.0);
+             }
+         }else {
             result = String.valueOf(likeCount);
         }
         return result;
@@ -116,16 +119,16 @@ public class BoardListResponseDTO {
     // 댓글 수 표기
     public static String makePrettierReplyCount(int replyCount) {
         String result;
-        if (replyCount > 1000) {
-            double num = replyCount / 1000.0;
-            result = String.format("%.1f천", num);
-        } else if (replyCount == 1000) {
-            int num = replyCount / 1000;
-            result = String.format("%d천", num);
+        if (replyCount >= 1000) {
+            int count = (replyCount / 100) * 100;
+            if (count % 1000 == 0) {
+                result = String.format("%d천", count / 1000);
+            } else {
+                result = String.format("%.1f천", replyCount / 1000.0);
+            }
         } else {
             result = String.valueOf(replyCount);
         }
         return result;
     }
-
 }

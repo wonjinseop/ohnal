@@ -26,6 +26,7 @@ public class MailSenderService {
 
     public String joinEmail(String email){
         int authNum= makeRandomNumber();
+        log.info("인증번호: {}", authNum);
 
         String setFrom="ohnal2024@gmail.com";
         String toMail=email;
@@ -49,6 +50,8 @@ public class MailSenderService {
                 "인증 번호는 <strong>"+authNum+"</strong>입니다."+
                         "<br>"+
                 "인증 번호를 인증번호 확인란에 기입해 주세요.";
+        
+        
 
         mailSend(setFrom,toMail,title,content);
         return Integer.toString(authNum);

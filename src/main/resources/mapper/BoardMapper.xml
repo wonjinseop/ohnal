@@ -24,7 +24,7 @@
 
     <select id="findAll" resultType="board">
         SELECT
-            A.*, B.profile_image, C.like_no, C.like_email
+            A.*, B.profile_image, B.nickname, C.like_no, C.like_email
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
@@ -41,16 +41,16 @@
 
     <insert id="save">
         INSERT INTO tbl_board (
-            nickname, content, image, location_tag, weather_tag, email
+            content, image, location_tag, weather_tag, email
         )
         VALUES (
-            #{nickname}, #{content}, #{image}, #{locationTag}, #{weatherTag}, #{email}
+            #{content}, #{image}, #{locationTag}, #{weatherTag}, #{email}
         )
     </insert>
 
     <select id="findOne" resultType="board">
         SELECT
-            A.*, B.profile_image
+            A.*, B.nickname, B.profile_image
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
@@ -103,7 +103,7 @@
     <!--    -->
     <select id="findAllByEmail" resultType="board">
         SELECT
-        A.*, B.profile_image, C.like_no, C.like_email
+        A.*, B.profile_image, B.nickname, C.like_no, C.like_email
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
@@ -126,7 +126,7 @@
     사용되는 sql문 (내가 쓴 댓글의 게시물의 목록을 모두 조회한다. -->
     <select id="findMyComments" resultType="board">
         SELECT DISTINCT
-        b.*, m.profile_image, l.like_no, l.like_email,
+        b.*, m.profile_image, m.nickname, l.like_no, l.like_email,
         IF(l.like_email IS NOT NULL, TRUE, FALSE) AS is_liked
         FROM
         tbl_board AS b
@@ -145,7 +145,7 @@
 
     <!-- my-history 에서 내가 좋아요 누른 글 목록 조회 버튼 눌렀을 때 사용되는 sql문  -->
     <select id="findMyLikePosts" resultType="board">
-        SELECT b.*, m.profile_image, r.like_no, r.like_email,
+        SELECT b.*, m.profile_image, m.nickname, r.like_no, r.like_email,
         IF(r.like_email IS NOT NULL, TRUE, FALSE) AS is_liked
         FROM tbl_board AS b
         JOIN tbl_member AS m
@@ -206,7 +206,7 @@
 
     <select id="findBestOOTD" resultType="board">
         SELECT
-            A.*, B.profile_image, C.like_no, C.like_email
+            A.*, B.profile_image, B.nickname, C.like_no, C.like_email
         FROM tbl_board A
         LEFT OUTER JOIN tbl_member B
         ON A.email = B.email
