@@ -264,6 +264,7 @@ body {
 }
 
 .card-container .card-wrapper:hover .board-del-btn {
+    width: 15%;
     opacity: 1;
 }
 

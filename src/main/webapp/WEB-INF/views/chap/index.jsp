@@ -161,7 +161,7 @@
                                             <img src="${b.profileImage}" alt="프사">
                                         </div>
                                         <span class="card-account">${b.nickname}</span>
-                                        <c:if test="${login.email == b.email}"><button class="board-del-btn" type="button">삭제</button>
+                                        <c:if test="${login.email == b.email || login.auth == 'ADMIN'}"><button class="board-del-btn" type="button">삭제</button>
                                         </c:if>
                                     </div>
 

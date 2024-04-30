@@ -90,10 +90,10 @@
 
     <insert id="replySave">
         INSERT INTO tbl_reply (
-            email, board_no, content, nickname
+            email, board_no, content
         )
         VALUES (
-            #{email}, #{bno}, #{content}, #{nickname}
+            #{email}, #{bno}, #{content}
         )
     </insert>
 
