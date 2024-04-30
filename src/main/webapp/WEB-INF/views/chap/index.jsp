@@ -13,13 +13,35 @@
     <script src="/assets/js/weather-search.js" defer></script>
 
     <%-- swiper.js --%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/assets/js/index.js" defer></script>
 </head>
 
 <body>
     <%@include file="../include/header.jsp"%>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❄</div>
+    </div>
 
     <div id="wrap">
         <div class="top-section">
@@ -44,22 +66,28 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                    <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
                             </div>
                         </div>
                         <!-- If we need pagination -->
@@ -72,13 +100,16 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-male.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-male.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-male.png">
                             </div>
                         </div>
                         <!-- If we need pagination -->
@@ -91,13 +122,16 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-0-female.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-1-female.png">
                             </div>
                             <div class="right-down swiper-slide" data-swiper-autoplay="3000">
-                                <img class = "clothes-img" src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
+                                <img class="clothes-img"
+                                    src="/assets/img/clothes-image/range_code_${dto.styleImage}/${dto.styleImage}-2-female.png">
                             </div>
                         </div>
                         <!-- If we need pagination -->
@@ -113,8 +147,8 @@
             <h2 class="main-title">WEATHER SEARCH</h2>
 
             <form action="#">
-                <select name="h_area1" onChange="cat1_change(this.value,h_area2)"
-                 class="h_area1" style="font-family:'SejonghospitalBold';font-size:13;letter-spacing:1;">
+                <select name="h_area1" onChange="cat1_change(this.value,h_area2)" class="h_area1"
+                    style="font-family:'SejonghospitalBold';font-size:13;letter-spacing:1;">
                     <option>시, 도를 선택하세요</option>
                     <option value='1'>서울특별시</option>
                     <option value='2'>부산광역시</option>
@@ -154,55 +188,56 @@
         <div class="card-container">
             <!-- 카드 복사 -->
             <c:forEach var="b" items="${bList}">
-                            <div class="card-wrapper box">
-                                <section class="card select-card" data-bno="${b.boardNo}" data-email="${login.email}">
-                                    <div class="card-title-wrapper">
-                                        <div class="profile-box">
-                                            <img src="${b.profileImage}" alt="프사">
-                                        </div>
-                                        <span class="card-account">${b.nickname}</span>
-                                        <c:if test="${login.email == b.email || login.auth == 'ADMIN'}"><button class="board-del-btn" type="button">삭제</button>
-                                        </c:if>
-                                    </div>
-
-                                    <div class="card-picture">
-                                        <img src="/display${b.image}" alt="sample">
-                                    </div>
-
-                                    <div class="icon-wrapper">
-                                        <div class="like-icon">
-                                            <c:choose>
-                                                <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
-                                                    <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-
-                                        <span class="hashtag">${b.locationTag}</span>
-                                        <span class="hashtag">${b.weatherTag}</span>
-                                        <div class="reply-icon">
-
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="content-wrapper">
-                                        <p class="count-wrapper">
-                                            <span class="count">좋아요 ${b.likeCount}개</span>
-                                            &nbsp&nbsp&nbsp
-                                            <span class="count">댓글 ${b.replyCount}개</span>
-                                            &nbsp&nbsp&nbsp
-                                            <span class="count">조회수 ${b.viewCount}회</span>
-                                        </p>
-                                        <p class="main-content">${b.content}</p>
-                                        <a href="#modalBtn">
-                                            <p>... 더 보기</p>
-                                        </a>
-                                    </div>
-                                </section>
+                <div class="card-wrapper box">
+                    <section class="card select-card" data-bno="${b.boardNo}" data-email="${login.email}">
+                        <div class="card-title-wrapper">
+                            <div class="profile-box">
+                                <img src="${b.profileImage}" alt="프사">
                             </div>
+                            <span class="card-account">${b.nickname}</span>
+                            <c:if test="${login.email == b.email || login.auth == 'ADMIN'}"><button
+                                    class="board-del-btn" type="button">삭제</button>
+                            </c:if>
+                        </div>
+
+                        <div class="card-picture">
+                            <img src="/display${b.image}" alt="sample">
+                        </div>
+
+                        <div class="icon-wrapper">
+                            <div class="like-icon">
+                                <c:choose>
+                                    <c:when test="${b.likeNo != 0 && b.likeEmail == login.email}">
+                                        <img class="heart" src="/assets/img/fill-heart.svg" alt="좋아요 버튼">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img class="heart" src="/assets/img/heart.svg" alt="좋아요 버튼">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+
+                            <span class="hashtag">${b.locationTag}</span>
+                            <span class="hashtag">${b.weatherTag}</span>
+                            <div class="reply-icon">
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="content-wrapper">
+                            <p class="count-wrapper">
+                                <span class="count">좋아요 ${b.likeCount}개</span>
+                                &nbsp&nbsp&nbsp
+                                <span class="count">댓글 ${b.replyCount}개</span>
+                                &nbsp&nbsp&nbsp
+                                <span class="count">조회수 ${b.viewCount}회</span>
+                            </p>
+                            <p class="main-content">${b.content}</p>
+                            <a href="#modalBtn">
+                                <p>... 더 보기</p>
+                            </a>
+                        </div>
+                    </section>
+                </div>
             </c:forEach>
             <!-- 카드 복사 끝 -->
             <!-- 카드 끝 -->
@@ -290,13 +325,16 @@
 
                                 <form id="commentFrm" class="write-reply">
                                     <div class="write-wrapper">
-                                        <input name="nickname" class="nickname" value="${login.nickname}" hidden></input>
+                                        <input name="nickname" class="nickname" value="${login.nickname}"
+                                            hidden></input>
                                         <input name="email" class="email" value="${login.email}" hidden></input>
                                         <c:if test="${login != ''}">
-                                            <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."></input>
+                                            <input name="content" class="write-input"
+                                                placeholder="여기는 댓글 입력창입니다."></input>
                                         </c:if>
                                         <c:if test="${login == ''}">
-                                            <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다." readonly></input>
+                                            <input name="content" class="write-input" placeholder="여기는 댓글 입력창입니다."
+                                                readonly></input>
                                         </c:if>
                                         <button class="write-send" type="button">등록</button>
                                     </div>
@@ -314,4 +352,5 @@
 
     <%@include file="../include/footer.jsp"%>
 </body>
+
 </html>

@@ -37,6 +37,8 @@
 
             </div>
         </div>
+        <a class="refresh" href="${url}?pageNo=${maker.page.pageNo}&amount=${s.amount}" hidden></a>
+
 
         <div class="card-container" data-auth="${login.auth}">
             
@@ -143,7 +145,7 @@
                                 </li>
                             </c:if>
                             <c:if test="${maker.page.pageNo == i}">
-                                <li data-page-num="${i}" class="page-item hover">
+                                <li data-page-num="${i}" class="page-item hover current_page">
                                     <a class="page-link" href="${url}?pageNo=${i}&amount=${s.amount}">${i}</a>
                                 </li>
                             </c:if>

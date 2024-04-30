@@ -21,7 +21,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-m*{
+*{
   box-sizing: border-box;
   font-family: 'GangwonEdu_OTFBoldA';
 }
@@ -166,6 +166,7 @@ header .gnb {
   display: flex;
   flex-direction: row-reverse;
   font-weight: bold;
+  /* opacity: 0.4; */
 }
 header .gnb.on {
   top: 0;

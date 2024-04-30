@@ -19,7 +19,114 @@
 body{
   font-family:'GangwonEdu_OTFBoldA' ;
   background-color: #fff;
+  background: linear-gradient(to left bottom, #7a7979, rgb(198, 196, 209), rgb(122, 121, 122));
+  /* z-index: -150;   */
 }
+/*  */
+.wrapper {
+  /* z-index: -100; */
+  height: 2650px;
+  width: 100%;
+  background: linear-gradient(180deg, #29d145, 5%, #2e8ed3, 50%, rgb(235, 175, 222));
+  position: absolute;
+}
+
+.wrapper .bubble {
+  height: 60px;
+  width: 60px;
+  border: 4px solid rgba(150, 211, 70, 0.7);
+  border-radius: 50px;
+  position: absolute;
+  animation: animate 10s linear infinite;
+}
+
+
+.wrapper .bubble:nth-child(1) {
+  top: 20%;
+  left: 20%;
+  animation-duration: 8s;
+}
+.wrapper .bubble:nth-child(2) {
+  top: 60%;
+  left: 80%;
+  animation-duration: 10s;
+}
+.wrapper .bubble:nth-child(3) {
+  top: 40%;
+  left: 40%;
+  animation-duration: 3s;
+}
+.wrapper .bubble:nth-child(4) {
+  top: 66%;
+  left: 30%;
+  animation-duration: 7s;
+}
+.wrapper .bubble:nth-child(5) {
+  top: 90%;
+  left: 10%;
+  animation-duration: 9s;
+}
+.wrapper .bubble:nth-child(6) {
+  top: 30%;
+  left: 60%;
+  animation-duration: 5s;
+}
+.wrapper .bubble:nth-child(7) {
+  top: 70%;
+  left: 20%;
+  animation-duration: 8s;
+}
+.wrapper .bubble:nth-child(8) {
+  top: 75%;
+  left: 60%;
+  animation-duration: 10s;
+}
+.wrapper .bubble:nth-child(9) {
+  top: 50%;
+  left: 50%;
+  animation-duration: 6s;
+}
+.wrapper .bubble:nth-child(10) {
+  top: 45%;
+  left: 20%;
+  animation-duration: 10s;
+}
+.wrapper .bubble:nth-child(11) {
+  top: 10%;
+  left: 90%;
+  animation-duration: 9s;
+}
+.wrapper .bubble:nth-child(12) {
+  top: 20%;
+  left: 70%;
+  animation-duration: 7s;
+}
+.wrapper .bubble:nth-child(13) {
+  top: 20%;
+  left: 20%;
+  animation-duration: 8s;
+}
+.wrapper .bubble:nth-child(14) {
+  top: 60%;
+  left: 5%;
+  animation-duration: 6s;
+}
+.wrapper .bubble:nth-child(15) {
+  top: 90%;
+  left: 80%;
+  animation-duration: 9s;
+}
+/*  */
+
+@keyframes animate {
+  0% {
+    transform: scale(0) translateY(0) rotate(70deg);
+  }
+  100% {
+    transform: scale(1.3) translateY(-100px) rotate(360deg);
+  }
+}
+
 
 /* 상단 날씨, 의상 표현 영역 */
 .top-section {
@@ -671,4 +778,200 @@ body{
 
 .reply-mod.toggle {
     display: none;
+}
+
+/*  */
+
+.snowflake {
+  color: #fff;
+  font-size: 1em;
+  font-family: Arial;
+  text-shadow: 0 0 1px #000;
+}
+
+@-webkit-keyframes snowflakes-fall {
+  0% {
+      top: -10%
+  }
+
+  100% {
+      top: 100%
+  }
+}
+
+@-webkit-keyframes snowflakes-shake {
+
+  0%,
+  100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0)
+  }
+
+  50% {
+      -webkit-transform: translateX(80px);
+      transform: translateX(80px)
+  }
+}
+
+@keyframes snowflakes-fall {
+  0% {
+      top: -10%
+  }
+
+  100% {
+      top: 100%
+  }
+}
+
+@keyframes snowflakes-shake {
+
+  0%,
+  100% {
+      transform: translateX(0)
+  }
+
+  50% {
+      transform: translateX(80px)
+  }
+}
+
+.snowflake {
+  position: fixed;
+  top: -10%;
+  z-index: 9999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+  -webkit-animation-duration: 10s, 3s;
+  -webkit-animation-timing-function: linear, ease-in-out;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -webkit-animation-play-state: running, running;
+  animation-name: snowflakes-fall, snowflakes-shake;
+  animation-duration: 10s, 3s;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-play-state: running, running
+}
+
+.snowflake:nth-of-type(0) {
+  left: 1%;
+  -webkit-animation-delay: 0s, 0s;
+  animation-delay: 0s, 0s
+}
+
+.snowflake:nth-of-type(1) {
+  left: 5%;
+  -webkit-animation-delay: 1s, 1s;
+  animation-delay: 1s, 1s
+}
+
+.snowflake:nth-of-type(2) {
+  left: 10%;
+  -webkit-animation-delay: 6s, .5s;
+  animation-delay: 6s, .5s
+}
+
+.snowflake:nth-of-type(3) {
+  left: 15%;
+  -webkit-animation-delay: 4s, 2s;
+  animation-delay: 4s, 2s
+}
+
+.snowflake:nth-of-type(4) {
+  left: 20%;
+  -webkit-animation-delay: 2s, 2s;
+  animation-delay: 2s, 2s
+}
+
+.snowflake:nth-of-type(5) {
+  left: 25%;
+  -webkit-animation-delay: 8s, 3s;
+  animation-delay: 8s, 3s
+}
+
+.snowflake:nth-of-type(6) {
+  left: 30%;
+  -webkit-animation-delay: 6s, 2s;
+  animation-delay: 6s, 2s
+}
+
+.snowflake:nth-of-type(7) {
+  left: 35%;
+  -webkit-animation-delay: 2.5s, 1s;
+  animation-delay: 2.5s, 1s
+}
+
+.snowflake:nth-of-type(8) {
+  left: 40%;
+  -webkit-animation-delay: 1s, 0s;
+  animation-delay: 1s, 0s
+}
+
+.snowflake:nth-of-type(9) {
+  left: 45%;
+  -webkit-animation-delay: 3s, 1.5s;
+  animation-delay: 3s, 1.5s
+}
+
+.snowflake:nth-of-type(10) {
+  left: 50%;
+  -webkit-animation-delay: 0s, 0s;
+  animation-delay: 0s, 0s
+}
+
+.snowflake:nth-of-type(11) {
+  left: 55%;
+  -webkit-animation-delay: 1s, 1s;
+  animation-delay: 1s, 1s
+}
+
+.snowflake:nth-of-type(12) {
+  left: 60%;
+  -webkit-animation-delay: 6s, .5s;
+  animation-delay: 6s, .5s
+}
+
+.snowflake:nth-of-type(13) {
+  left: 65%;
+  -webkit-animation-delay: 4s, 2s;
+  animation-delay: 4s, 2s
+}
+
+.snowflake:nth-of-type(14) {
+  left: 70%;
+  -webkit-animation-delay: 2s, 2s;
+  animation-delay: 2s, 2s
+}
+
+.snowflake:nth-of-type(15) {
+  left: 75%;
+  -webkit-animation-delay: 8s, 3s;
+  animation-delay: 8s, 3s
+}
+
+.snowflake:nth-of-type(16) {
+  left: 80%;
+  -webkit-animation-delay: 6s, 2s;
+  animation-delay: 6s, 2s
+}
+
+.snowflake:nth-of-type(17) {
+  left: 85%;
+  -webkit-animation-delay: 2.5s, 1s;
+  animation-delay: 2.5s, 1s
+}
+
+.snowflake:nth-of-type(18) {
+  left: 90%;
+  -webkit-animation-delay: 1s, 0s;
+  animation-delay: 1s, 0s
+}
+
+.snowflake:nth-of-type(19) {
+  left: 95%;
+  -webkit-animation-delay: 3s, 1.5s;
+  animation-delay: 3s, 1.5s
 }
