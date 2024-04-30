@@ -22,7 +22,7 @@
           <img id="img" src="/assets/img/upload.png" alt="이미지 미리보기">
         </label>
       </div>
-      <input type="file" id="selectFile" name="image" accept="image/*" style="display: none;">
+      <input type="file" id="selectFile" name="image" accept="image/*" style="display: none;"  required>
     </div>
 
     <div class="user-info">
