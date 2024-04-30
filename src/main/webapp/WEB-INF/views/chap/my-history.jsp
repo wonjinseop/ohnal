@@ -126,38 +126,38 @@
                     <ul class="pagination pagination-lg pagination-custom">
                         <c:if test="${maker.page.pageNo != 1}">
                             <li class="page-item"><a class="page-link"
-                                    href="/members/my-history?pageNo=1&amount=${s.amount}">&lt;&lt;</a>
+                                    href="${url}?pageNo=1&amount=${s.amount}">&lt;&lt;</a>
                             </li>
                         </c:if>
 
                         <c:if test="${maker.prev}">
                             <li class="page-item"><a class="page-link"
-                                    href="/members/my-history?pageNo=${maker.begin-1}&amount=${s.amount}">prev</a>
+                                    href="${url}?pageNo=${maker.begin-1}&amount=${s.amount}">prev</a>
                             </li>
                         </c:if>
 
                         <c:forEach var="i" begin="${maker.begin}" end="${maker.end}">
                             <c:if test="${maker.page.pageNo != i}">
                                 <li data-page-num="${i}" class="page-item">
-                                    <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                                    <a class="page-link" href="${url}?pageNo=${i}&amount=${s.amount}">${i}</a>
                                 </li>
                             </c:if>
                             <c:if test="${maker.page.pageNo == i}">
                                 <li data-page-num="${i}" class="page-item hover">
-                                    <a class="page-link" href="/members/my-history?pageNo=${i}&amount=${s.amount}">${i}</a>
+                                    <a class="page-link" href="${url}?pageNo=${i}&amount=${s.amount}">${i}</a>
                                 </li>
                             </c:if>
                         </c:forEach>
 
                         <c:if test="${maker.next}">
                             <li class="page-item"><a class="page-link"
-                                    href="/members/my-history?pageNo=${maker.end+1}&amount=${s.amount}">next</a>
+                                    href="${url}?pageNo=${maker.end+1}&amount=${s.amount}">next</a>
                             </li>
                         </c:if>
 
                         <c:if test="${maker.page.pageNo != maker.finalPage}">
                             <li class="page-item"><a class="page-link"
-                                    href="/members/my-history?pageNo=${maker.finalPage}&amount=${s.amount}">&gt;&gt;</a>
+                                    href="${url}?pageNo=${maker.finalPage}&amount=${s.amount}">&gt;&gt;</a>
                             </li>
                         </c:if>
 
@@ -262,9 +262,28 @@
     <%@include file="../include/footer.jsp"%>
 
     <script>
-        const $email = '${sessionScope.login}';
-        const mp = '${mp}';
-        console.log(mp);
+        // const currentURL = window.location.href;
+        // const $ul =document.querySelector('.pagination .pagination-lg .pagination-custom');
+
+        // const $nav = document.querySelector('nav');
+        // const $a = document.querySelectorAll('.page-link');
+
+        
+
+        // $nav.addEventListener('click', e => {
+        //     if(e.target.matches('.page-link')) {
+        //         $a. = 'currentURL';
+        //     }
+        // }); -->
+
+
+
+
+
+
+
+
+
 
         const btn1 = document.getElementById('mypost1');
         const btn2 = document.getElementById('mypost2');
@@ -292,6 +311,11 @@
             // btn3.style.color = 'white';
             $changeText.textContent = '좋아요한 글';
         }
+
+        // 현재 페이지 url에 따라 페이지네이션 작동하게 하는 함수
+        const $ul = document.querySelector('.pagination .pagination-lg .pagination-custom');
+
+
 
     </script>
 </body>
