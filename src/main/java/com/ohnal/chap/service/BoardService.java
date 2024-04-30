@@ -157,9 +157,9 @@ public class BoardService {
             BoardListResponseDTO dto = new BoardListResponseDTO(board);
             dtoList.add(dto);
         }
-        log.info("내가 작성한 댓글이 작성된 게시글 목록: {}", dtoList);
-        return dtoList;
 
+        log.info("내가 좋아요한 글이 작성된 게시글 목록: {}", dtoList);
+        return dtoList;
     }
 
 
