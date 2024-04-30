@@ -60,9 +60,10 @@ $cardContainer.onclick = e => {
                 // 글 삭제
                 fetch('/board/delete/' + bno)
                     .then(res => {
-                        console.log(res);
-                        location.href = location.href;
+                    console.log(res);
+                    location.href = location.href;
                         // $cardWrapper.style.display = 'none';
+                    // 해당 페이지에 나타나는 게시물 1개 있을 때 삭제하면 그 전페이지로 넘어가게 설정이 필요
                     });
             } else {
 

@@ -30,7 +30,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
         // 비회원도 볼 수 있게 설정
         registry
                 .addInterceptor(boardInterceptor)
-                .addPathPatterns("/board/*", "/members/my-history", "/members/my-info", "/members/changePassword")
+                .addPathPatterns("/board/*", "/members/my-history", "/members/my-info", "/members/changePassword", "/members/my-history/find-my-comments", "/members/my-history/find-my-like-post")
                 .excludePathPatterns("/board/list", "/board/detail/{bno}", "/reply/{bno}");
 
         registry

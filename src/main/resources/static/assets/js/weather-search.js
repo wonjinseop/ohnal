@@ -11,7 +11,7 @@ document.getElementById('send-btn').onclick = () => {
     fetch('/weather/'+ value1 +'/' + value2)
         .then(res => res.json())
         .then(weatherInfo => {
-            console.log(weatherInfo);
+            console.log("weatherInfo:" + [...weatherInfo].forEach(e => console.log(e)));
             renderWeatherInfo(weatherInfo);
         });
     // 화면에 날씨 유관 정보를 렌더링하는 함수
