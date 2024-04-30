@@ -5,9 +5,19 @@
   font-style: normal;
 }
 
+body header {
+  background: none;
+}
+body footer {
+  background: none;
+}
+body header .inner-header .menu-open .lnr-menu {
+  display: none;
+}
 body{
-  background: linear-gradient(to left bottom, #fff7d6, pink, #fff7d6);
-  font-weight: 700;
+  background-image: url(../img/sky-22.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 button {
   font-weight: 600;

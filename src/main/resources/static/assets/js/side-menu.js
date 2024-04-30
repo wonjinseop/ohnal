@@ -8,10 +8,12 @@ const gnb = document.querySelector('.gnb');
 //클릭 이벤트 생성
 menuBtn.addEventListener('click', () => {
   gnb.classList.add('on');
+  menuBtn.classList.add('hide');
 });
 
 closeBtn.addEventListener('click', () => {
   gnb.classList.remove('on');
+  menuBtn.classList.remove('hide');
 });
 
 

@@ -5,22 +5,44 @@
     font-style: normal;
 }
 
+
+
 #signUpForm {
     letter-spacing: 3px;
-    background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6);
+    /* background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6); */
     height: 100%;
     width: 100%;
     padding-top: 1px;
 }
+body{
+    background-image: url(../img/sign-up.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+body header {
+    background: none;
+}
 
+body footer {
+    background: none;
+}
+
+body header .gnb {
+    background: rgb(201, 251, 217, 0.4);
+}
+
+body header .menu-open.hide {
+    display: none;
+}
 
 body {
     letter-spacing: 3px;
-    background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6);
+    /* background-image: linear-gradient(to left bottom, #fff7d6, white, #e1cbe5, white, #fff7d6); */
     height: 100%;
     margin: 0;
     width: 100%;
 }
+
 
 strong{
     color:black;
