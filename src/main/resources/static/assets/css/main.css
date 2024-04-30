@@ -463,18 +463,17 @@ body{
 }
 
 .modal-content .card-wrapper .card-title-wrapper .card-account {
-  font-size: 15px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  margin-left: 0px;
-
-
+    font-size: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 0px;
+    width: 60%;
 }
 
 .modal .card-title-wrapper {
   display: flex;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid lightgray
 }
 
 /* 프로필사진 영역 */

@@ -90,10 +90,10 @@
 
     <insert id="replySave">
         INSERT INTO tbl_reply (
-            email, board_no, content, nickname
+            email, board_no, content
         )
         VALUES (
-            #{email}, #{bno}, #{content}, #{nickname}
+            #{email}, #{bno}, #{content}
         )
     </insert>
 
@@ -153,19 +153,20 @@
         LEFT JOIN tbl_like AS r ON b.board_no = r.board_no
         WHERE r.like_email = #{email}
         LIMIT #{page.pageStart}, #{page.amount}
-<!--        SELECT-->
-<!--        A.*, B.profile_image, C.like_no, C.like_email-->
-<!--        FROM tbl_board A-->
-<!--        LEFT OUTER JOIN tbl_member B-->
-<!--        ON A.email = B.email-->
-<!--        LEFT OUTER JOIN tbl_like C-->
-<!--        ON A.board_no = C.board_no AND C.like_email = #{email}-->
-<!--        WHERE A.board_no = C.board_no-->
-<!--        IN (SELECT board_no-->
-<!--        FROM tbl_like WHERE like_email = #{email})-->
-<!--        ORDER BY reg_date DESC-->
-<!--        LIMIT #{page.pageStart}, #{page.amount}-->
     </select>
+    <!--        SELECT-->
+    <!--        A.*, B.profile_image, C.like_no, C.like_email-->
+    <!--        FROM tbl_board A-->
+    <!--        LEFT OUTER JOIN tbl_member B-->
+    <!--        ON A.email = B.email-->
+    <!--        LEFT OUTER JOIN tbl_like C-->
+    <!--        ON A.board_no = C.board_no AND C.like_email = #{email}-->
+    <!--        WHERE A.board_no = C.board_no-->
+    <!--        IN (SELECT board_no-->
+    <!--        FROM tbl_like WHERE like_email = #{email})-->
+    <!--        ORDER BY reg_date DESC-->
+    <!--        LIMIT #{page.pageStart}, #{page.amount}-->
+
 
     <!-- 좋아요 기능과 관련된 sql문   -->
     <delete id="delete">
