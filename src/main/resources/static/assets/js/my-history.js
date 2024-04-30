@@ -54,12 +54,15 @@ $cardContainer.onclick = e => {
 
             if (e.target.matches('button')) {
                 console.log("button click!");
-
+                if (!confirm("정말 삭제하시겠습니까?")) {
+                          return;
+                }
                 // 글 삭제
                 fetch('/board/delete/' + bno)
                     .then(res => {
                         console.log(res);
-                        $cardWrapper.style.display = 'none';
+                        location.href = location.href;
+                        // $cardWrapper.style.display = 'none';
                     });
             } else {
 
